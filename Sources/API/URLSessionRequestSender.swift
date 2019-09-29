@@ -5,11 +5,14 @@ public class URLSessionRequestSender: RequestSender {
 	let endpoint: URL
 	let session = URLSession(configuration: URLSessionConfiguration.default)
 	
+	public typealias RequestCompletionHandler = (Result<Data?, Error>) -> Void
+	
 	public init(endpoint: URL) {
 		self.endpoint = endpoint
 	}
 	
-	public func send<R>(request: R, completionHandler: @escaping ((Result<Data?, Error>) -> Void)) where R : APIRequest {
+	public func send<R>(request: R, completionHandler: @escaping RequestCompletionHandler) where R : APIRequest {
+		// Build URL Request
 		let resultURLRequest = buildURLRequest(from: request)
 		let urlRequest: URLRequest
 		
@@ -21,44 +24,57 @@ public class URLSessionRequestSender: RequestSender {
 			urlRequest = request
 		}
 		
-		let task = session.dataTask(with: urlRequest) { (data, response, error) in
-			// HTTP Errors
-			if let error = error {
-				completionHandler(.failure(error))
-				return
-			}
-
-			// If something went wrong at Swift library (we expect error is not `nil`)
-			guard let response = response else {
-				completionHandler(.failure(APIError.unexpected()))
-				return
-			}
-			
-			// We expect HTTP response
-			guard let httpResponse = response as? HTTPURLResponse else {
-				let error = APIError(description: "Unexpected server response (non-http)")
-				completionHandler(.failure(error))
-				return
-			}
-
-			// - TODO: Read more about backend's status codes
-//			guard httpResponse.statusCode >= 200, httpResponse.statusCode < 400 else {
-//
-//			}
-			
-			completionHandler(.success(data))
+		// Send a network request
+		let task = session.dataTask(with: urlRequest) { [handleDataTaskResponse] (data, response, error) in
+			handleDataTaskResponse(data, response, error, completionHandler)
 		}
 		
 		task.resume()
 		
-		// Log
-//		if #available(OSX 10.14, iOS 11, *) {
-//			#if DEBUG
-//			let method = urlRequest.httpMethod?.uppercased() ?? ""
-//			os_log(.debug, "[API] >> %s %s", method, urlRequest.url?.absoluteString)
-//			#endif
-//		} else {
-//		}
+		if #available(OSX 10.14, iOS 12, *) {
+			#if DEBUG
+			let method = urlRequest.httpMethod?.uppercased() ?? ""
+			os_log(.debug, "[API] >> %s %s", method, urlRequest.url!.absoluteString)
+			#endif
+		} else {
+		}
+	}
+	
+	// MARK: - Helper methods
+	
+	private func handleDataTaskResponse(data: Data?, response: URLResponse?, error: Error?, completionHandler: @escaping RequestCompletionHandler) {
+		// HTTP Errors
+		if let error = error {
+			completionHandler(.failure(error))
+			return
+		}
+
+		guard let response = response else {
+			completionHandler(.failure(APIError.unexpected()))
+			return
+		}
+		
+		// We expect HTTP response
+		guard let httpResponse = response as? HTTPURLResponse else {
+			let error = APIError(description: "Unexpected server response (non-http)")
+			completionHandler(.failure(error))
+			return
+		}
+
+		// - TODO: Read more about backend's status codes
+		guard httpResponse.statusCode >= 200, httpResponse.statusCode < 400 else {
+			if let data = data, let optileError = try? JSONDecoder().decode(OptileError.self, from: data) {
+				
+				completionHandler(.failure(optileError))
+			} else {
+				let error = APIError(description: "Non-OK response from a server")
+				completionHandler(.failure(error))
+			}
+			
+			return
+		}
+		
+		completionHandler(.success(data))
 	}
 	
 	/// Construct a full URL for request

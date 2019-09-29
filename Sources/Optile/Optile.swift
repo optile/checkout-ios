@@ -7,7 +7,7 @@ import API
 
 	let client: APIClient
 	
-	override init() {
+	override public init() {
 		let endpoint = URL(string: "https://api.sandbox.oscato.com")!
 		let requestSender = URLSessionRequestSender(endpoint: endpoint)
 		self.client = APIClient(requestSender: requestSender)
@@ -17,7 +17,12 @@ import API
 	public func run(longID: String) {
 		let request = GetPaymentSession(longId: longID)
 		client.send(request: request) { result in
-			print (try? result.get())
+			switch result {
+			case .failure(let error):
+				debugPrint(error)
+			case .success(let response):
+				dump(response)
+			}
 		}
 	}
 }
