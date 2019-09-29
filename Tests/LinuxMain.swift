@@ -1,7 +1,7 @@
 import XCTest
 
-import ios_sdkTests
+import OptileTests
 
 var tests = [XCTestCaseEntry]()
-tests += ios_sdkTests.allTests()
+tests += OptileTests.allTests()
 XCTMain(tests)
