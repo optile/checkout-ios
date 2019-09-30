@@ -1,0 +1,24 @@
+PODS:
+  - Optile (0.1.0):
+    - Optile/API (= 0.1.0)
+    - Optile/Core (= 0.1.0)
+    - Optile/OptileUI (= 0.1.0)
+  - Optile/API (0.1.0)
+  - Optile/Core (0.1.0):
+    - Optile/API
+  - Optile/OptileUI (0.1.0):
+    - Optile/Core
+
+DEPENDENCIES:
+  - Optile (from `../`)
+
+EXTERNAL SOURCES:
+  Optile:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  Optile: 815da3c7f86aaeff23ff1eeea0464d71a74d295c
+
+PODFILE CHECKSUM: a7d6be13c471de535c40aeec9e115935fe6a7b74
+
+COCOAPODS: 1.8.1

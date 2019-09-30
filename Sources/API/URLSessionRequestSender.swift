@@ -37,6 +37,7 @@ public class URLSessionRequestSender: RequestSender {
 			os_log(.debug, "[API] >> %s %s", method, urlRequest.url!.absoluteString)
 			#endif
 		} else {
+			// don't log anything
 		}
 	}
 	
