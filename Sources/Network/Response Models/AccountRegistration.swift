@@ -4,23 +4,14 @@ public struct AccountRegistration {
 	/// Collection of links to build the account form for this registered account and perform different actions with entered data.
 	public let links: AccountLinks
 	
-	/// The ID of this registered account.
-	public let id: String?
-	
 	/// Payment network code of the registration.
-	public let code: String?
+	public let code: String
 	
 	/// Display label of the payment network for this registration.
-	public let label: String?
+	public let label: String
 	
 	/// Masked account data of this payment operation or involved account. Sensitive fields of the account are removed, truncated, or replaced with mask characters.
 	public let maskedAccount: AccountMask
-	
-	/// Indicates that this account has at least one active one-click payment service provider registration.
-	public let registration: Bool?
-	
-	/// Indicates that this account has at least one active registration payment service provider registration.
-	public let recurrence: Bool?
 	
 	/// Time stamp of last successful `CHARGE` operation performed with this account.
 	public let lastSuccessfulChargeAt: Date?
@@ -41,5 +32,5 @@ public struct AccountRegistration {
 	public let emptyForm: Bool?
 	
 	/// Collection of form input elements. This information is only exposed if merchant indicated `jsonForms` option in the `view` query parameter.
-	public let localizedInputElements: InputElement
+	public let localizedInputElements: InputElement?
 }

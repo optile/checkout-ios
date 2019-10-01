@@ -1,10 +1,7 @@
 import Foundation
 
 /// Masked account data of this payment operation or involved account. Sensitive fields of the account are removed, truncated, or replaced with mask characters.
-public struct AccountMask {
-	/// Registration information for this account in OPG. It will contain account's registration ID of the account registered and/or used during this payment request.
-	public let registration: Registration
-	
+public struct AccountMask {	
 	/// Display label of account registration. Usually combined from several account fields.
 	public let displayLabel: String?
 	

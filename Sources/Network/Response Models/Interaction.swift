@@ -9,9 +9,6 @@ public struct Interaction: Decodable {
 	/// See list of [Interaction Codes](https://www.optile.io/opg#292619).
 	public let reason: Reason
 	
-	/// If supplied, holds recommended time for next retry. Only applicable for recurring payments.
-	public let retryAfter: Date?
-	
 	// MARK: - Enumerations
 	
 	/// Interaction code that advices further interaction with this customer or payment.

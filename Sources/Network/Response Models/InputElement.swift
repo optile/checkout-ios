@@ -1,6 +1,6 @@
 import Foundation
 
-public struct InputElement {
+public struct InputElement: Decodable {
 	/// The name of the parameter represented by this input element.
 	public let name: String
 	
@@ -12,6 +12,8 @@ public struct InputElement {
 	
 	/// Array of possible options for element of the `select` type.
 	public let options: [SelectOption]?
+	
+	// MARK: - Enumerations
 	
 	public enum Type: String, Decodable {
 		/// Ooe line of text without special restrictions
