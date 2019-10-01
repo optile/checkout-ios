@@ -2,10 +2,15 @@ import Foundation
 import os
 
 public class BackendClient {
-	public let connection: Connection
+	let connection: Connection
 
-	public init(connection: Connection) {
-		self.connection = requestSender
+	init(connection: Connection) {
+		self.connection = connection
+	}
+	
+	public convenience init(endpoint: URL) {
+		let connection = URLSessionConnection(endpoint: endpoint)
+		self.init(connection: connection)
 	}
 	
 	public func send<R>(request: R, completionHandler: @escaping ((Result<R.Response, Error>) -> Void)) where R: Request {

@@ -1,6 +1,6 @@
 import Foundation
 
-struct APIError: LocalizedError, CustomDebugStringConvertible {
+struct NetworkError: LocalizedError, CustomDebugStringConvertible {
 	var errorDescription: String?
 	var debugDescription: String
 	
@@ -9,14 +9,14 @@ struct APIError: LocalizedError, CustomDebugStringConvertible {
 		self.errorDescription = description
 	}
 	
-	static func unexpected(file: String = #file, line: Int = #line, function: String = #function) -> APIError {
+	static func unexpected(file: String = #file, line: Int = #line, function: String = #function) -> NetworkError {
 		return .init(description: "Unexpected Error")
 	}
 }
 
 /// Error returned from a server
 /// - TODO: check if all errors from the backend is returned as this type
-struct OptileError: Decodable, LocalizedError {
+struct ServerJSONError: Decodable, LocalizedError {
 	let resultInfo: String
 	let interaction: Interaction
 	var errorDescription: String? { return resultInfo }

@@ -5,7 +5,7 @@ public struct InputElement: Decodable {
 	public let name: String
 	
 	/// Input type / restrictions that can and should be enforced by the client for this input element.
-	public let type: Type
+	public let type: InputType
 	
 	/// Localized, human readable label that should be displayed for this input field.
 	public let label: String
@@ -15,7 +15,7 @@ public struct InputElement: Decodable {
 	
 	// MARK: - Enumerations
 	
-	public enum Type: String, Decodable {
+	public enum InputType: String, Decodable {
 		/// Ooe line of text without special restrictions
 		case string
 		
