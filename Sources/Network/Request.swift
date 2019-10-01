@@ -1,7 +1,7 @@
 import Foundation
 
 /// Protocol for all API requests, all requests have to conform it.
-public protocol APIRequest {
+public protocol Request {
 	associatedtype Body
 	associatedtype Response
 	
@@ -15,20 +15,20 @@ public protocol APIRequest {
 	func encodeBody() throws -> Data?
 }
 
-public extension APIRequest where Body: Encodable {
+public extension Request where Body: Encodable {
 	func encodeBody() throws -> Data? {
 		let encoder = JSONEncoder()
 		return try encoder.encode(body)
 	}
 }
 
-public extension APIRequest where Body == Void {
+public extension Request where Body == Void {
 	func encodeBody() throws -> Data? {
 		return nil
 	}
 }
 
-public extension APIRequest where Response: Decodable {
+public extension Request where Response: Decodable {
 	func decodeResponse(with data: Data?) throws -> Response {
 		guard let data = data else {
 			let error = APIError(description: "Server returned no data")
@@ -40,7 +40,7 @@ public extension APIRequest where Response: Decodable {
 	}
 }
 
-public extension APIRequest where Response == Void {
+public extension Request where Response == Void {
 	func decodeResponse(with data: Data?) throws -> Response {
 		return Void()
 	}

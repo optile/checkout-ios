@@ -6,6 +6,6 @@ import UIKit
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		
+		Payment.List.Get()
 	}
 }

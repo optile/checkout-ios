@@ -30,7 +30,7 @@ TODO: Add long description of the pod here.
     ss.source_files = 'Sources/Optile/**/*'
   end
 
-  s.subspec 'OptileUI' do |ss|
+  s.subspec 'PaymentUI' do |ss|
     ss.dependency 'Optile/Core'
     ss.source_files = 'Sources/OptileUI/**/*.swift'
   end

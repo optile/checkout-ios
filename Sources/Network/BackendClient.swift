@@ -1,15 +1,15 @@
 import Foundation
 import os
 
-public class APIClient {
-	public let requestSender: RequestSender
+public class BackendClient {
+	public let connection: Connection
 
-	public init(requestSender: RequestSender) {
-		self.requestSender = requestSender
+	public init(connection: Connection) {
+		self.connection = requestSender
 	}
 	
-	public func send<R>(request: R, completionHandler: @escaping ((Result<R.Response, Error>) -> Void)) where R: APIRequest {
-		requestSender.send(request: request) { result in
+	public func send<R>(request: R, completionHandler: @escaping ((Result<R.Response, Error>) -> Void)) where R: Request {
+		connection.send(request: request) { result in
 			switch result {
 			case .success(let data):
 				do {

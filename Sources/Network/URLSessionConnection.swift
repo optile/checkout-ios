@@ -1,7 +1,7 @@
 import Foundation
 import os
 
-public class URLSessionRequestSender: RequestSender {
+public class URLSessionConnection: Connection {
 	let endpoint: URL
 	let session = URLSession(configuration: URLSessionConfiguration.default)
 	
@@ -11,7 +11,7 @@ public class URLSessionRequestSender: RequestSender {
 		self.endpoint = endpoint
 	}
 	
-	public func send<R>(request: R, completionHandler: @escaping RequestCompletionHandler) where R : APIRequest {
+	public func send<R>(request: R, completionHandler: @escaping RequestCompletionHandler) where R : Request {
 		// Build URL Request
 		let resultURLRequest = buildURLRequest(from: request)
 		let urlRequest: URLRequest
@@ -79,7 +79,7 @@ public class URLSessionRequestSender: RequestSender {
 	}
 	
 	/// Construct a full URL for request
-	private func buildURLRequest<R>(from request: R) -> Result<URLRequest, Error> where R: APIRequest {
+	private func buildURLRequest<R>(from request: R) -> Result<URLRequest, Error> where R: Request {
 		var components = URLComponents()
 		components.scheme = endpoint.scheme
 		components.host = endpoint.host

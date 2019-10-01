@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "Optile::API"
-               BuildableName = "API.framework"
-               BlueprintName = "API"
+               BlueprintIdentifier = "Optile::Network"
+               BuildableName = "Network.framework"
+               BlueprintName = "Network"
                ReferencedContainer = "container:Optile.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,9 +28,23 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "Optile::Optile"
-               BuildableName = "Optile.framework"
-               BlueprintName = "Optile"
+               BlueprintIdentifier = "Optile::PaymentUI"
+               BuildableName = "PaymentUI.framework"
+               BlueprintName = "PaymentUI"
+               ReferencedContainer = "container:Optile.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "Optile::Payment"
+               BuildableName = "Payment.framework"
+               BlueprintName = "Payment"
                ReferencedContainer = "container:Optile.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -42,16 +56,6 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "Optile::OptileTests"
-               BuildableName = "OptileTests.xctest"
-               BlueprintName = "OptileTests"
-               ReferencedContainer = "container:Optile.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
