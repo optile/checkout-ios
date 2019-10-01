@@ -1,3 +1,5 @@
+#if canImport(UIKit)
+
 import UIKit
 
 @objc class PaymentMethodsViewContoller: UIViewController {
@@ -6,6 +8,7 @@ import UIKit
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		Payment.List.Get()
 	}
 }
+
+#endif

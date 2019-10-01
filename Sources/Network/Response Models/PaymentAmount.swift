@@ -1,6 +1,6 @@
 import Foundation
 
-public struct PaymentAmount {
+public struct PaymentAmount: Decodable {
 	/// Payment amount in major units.
 	public let amount: Double
 	

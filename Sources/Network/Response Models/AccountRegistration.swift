@@ -1,6 +1,6 @@
 import Foundation
 
-public struct AccountRegistration {
+public struct AccountRegistration: Decodable {
 	/// Collection of links to build the account form for this registered account and perform different actions with entered data.
 	public let links: AccountLinks
 	

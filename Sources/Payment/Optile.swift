@@ -28,9 +28,6 @@ import API
 	
 	
 	func test() {
-		let request = GetPaymentSession(longId: longID)
-		client.send(request: request) {
-			
-		}
+//		let request = 
 	}
 }

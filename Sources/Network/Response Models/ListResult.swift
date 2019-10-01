@@ -34,5 +34,4 @@ public struct ListResult: Decodable {
 
 	/// Allows to change default appearance of payment page.
 	public let style: Style?
-
 }
