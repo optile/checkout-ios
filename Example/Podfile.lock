@@ -1,13 +1,13 @@
 PODS:
   - Optile (0.1.0):
-    - Optile/API (= 0.1.0)
-    - Optile/Core (= 0.1.0)
-    - Optile/OptileUI (= 0.1.0)
-  - Optile/API (0.1.0)
-  - Optile/Core (0.1.0):
-    - Optile/API
-  - Optile/OptileUI (0.1.0):
-    - Optile/Core
+    - Optile/Network (= 0.1.0)
+    - Optile/Payment (= 0.1.0)
+    - Optile/PaymentUI (= 0.1.0)
+  - Optile/Network (0.1.0)
+  - Optile/Payment (0.1.0):
+    - Optile/Network
+  - Optile/PaymentUI (0.1.0):
+    - Optile/Payment
 
 DEPENDENCIES:
   - Optile (from `../`)
@@ -17,7 +17,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Optile: 815da3c7f86aaeff23ff1eeea0464d71a74d295c
+  Optile: 7259910bba8b94a935dc8999969c5b3e3b7b736f
 
 PODFILE CHECKSUM: a7d6be13c471de535c40aeec9e115935fe6a7b74
 
