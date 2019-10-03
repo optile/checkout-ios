@@ -1,0 +1,38 @@
+module: Network
+
+theme: fullwidth
+
+custom_categories:
+  - name: Requests
+    children:
+    - GetListResult
+
+  - name: Response Models
+    children:
+    - AccountFormData
+    - ExtraElement
+    - Interaction
+    - PaymentAmount
+    - AccountLinks
+    - ExtraElements
+    - ListLinks
+    - PresetAccount
+    - AccountMask
+    - FormData
+    - ListResult
+    - PresetLinks
+    - AccountRegistration
+    - InputElement
+    - NetworkLinks
+    - Redirect
+    - ApplicableNetwork
+    - InstallmentItem
+    - Networks
+    - SelectOption
+    - Checkbox
+    - Installments
+    - OperationType
+    - Style
+    - CustomerFormData
+    - InstallmentsPlan
+    - Parameter

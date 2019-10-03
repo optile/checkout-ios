@@ -21,7 +21,7 @@ public struct ApplicableNetwork: Decodable {
 	
 	/// If `true` the payment via this network will result in redirect to the PSP web-site (e.g. PayPal, Sofortüberweisung, etc.)
 	public let redirect: Bool
-	
+
 	/// Code of button-label when this network is selected.
 	public let button: String?
 	
@@ -60,5 +60,4 @@ public struct ApplicableNetwork: Decodable {
 	public enum Recurrence: String, Decodable {
 		case NONE, OPTIONAL, FORCED, OPTIONAL_PRESELECTED, FORCED_DISPLAYED
 	}
-	
 }

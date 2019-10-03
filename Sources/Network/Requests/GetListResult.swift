@@ -5,6 +5,7 @@ import Foundation
 /// Gets active LIST session details
 ///
 /// Retrieves available payment capabilities for active `LIST` session.
+/// Response model is `
 public struct GetListResult: GetRequest {
 	public var url: URL
 	let queryItems = [
