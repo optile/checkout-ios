@@ -2,21 +2,16 @@ import Foundation
 import os
 
 class URLSessionConnection: Connection {
-	let endpoint: URL
 	let session = URLSession(configuration: URLSessionConfiguration.default)
 	
 	typealias RequestCompletionHandler = (Result<Data?, Error>) -> Void
-	
-	init(endpoint: URL) {
-		self.endpoint = endpoint
-	}
 	
 	func send<R>(request: R, completionHandler: @escaping RequestCompletionHandler) where R : Request {
 		// Build URL Request
 		let urlRequest: URLRequest
 		
 		do {
-			urlRequest = try request.build(endpoint: endpoint)
+			urlRequest = try request.build()
 		} catch {
 			completionHandler(.failure(error))
 			return

@@ -2,11 +2,16 @@ import Foundation
 import Network
 
 public class PaymentService {
-	public func loadPaymentSession(from paymentSession: URL, completionHandler: @escaping ((Result<PaymentSession, Error>) -> Void)) {
-		let getListResult = GetListResult(url: paymentSession)
-		// FIXME: Change to real URL, when I know if we need it anywhere
-		let backendURL = URL(string: "http://example.com")!
-		let client = BackendClient(endpoint: backendURL)
+	public var paymentSessionURL: URL
+	public var session = ObservableObject<Loadable<PaymentSession>?>(nil)
+	
+	public init(paymentSessionURL: URL) {
+		self.paymentSessionURL = paymentSessionURL
+	}
+	
+	public func loadPaymentSession(completionHandler: @escaping ((Result<PaymentSession, Error>) -> Void)) {
+		let getListResult = GetListResult(url: paymentSessionURL)
+		let client = BackendClient()
 		client.send(request: getListResult) { result in
 			switch result {
 			case .success(let listResult):
@@ -16,6 +21,10 @@ public class PaymentService {
 				completionHandler(.failure(error))
 			}
 		}
+	}
+	
+	public func loadLogo(for paymentNetwork: PaymentNetwork, completionHandler: @escaping ((Result<Data, Error>) -> Void)) {
+		
 	}
 }
 
@@ -33,8 +42,5 @@ private extension PaymentNetwork {
 	init(importFrom applicableNetwork: ApplicableNetwork) {
 		self.label = applicableNetwork.label
 		self.logoURL = applicableNetwork.links?.logo
-		#if canImport(UIKit)
-		self.logo = nil
-		#endif
 	}
 }

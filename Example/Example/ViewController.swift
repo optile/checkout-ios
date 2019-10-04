@@ -1,23 +1,28 @@
-//
-//  ViewController.swift
-//  Example
-//
-//  Created by Vasily Ulianov on 29.09.2019.
-//  Copyright © 2019 optile GmbH. All rights reserved.
-//
-
 import UIKit
 import Optile
+import Combine
 
 class ViewController: UIViewController {
 
-	let optile = Optile()
+	let service = PaymentService(paymentSessionURL:
+		URL(string: "https://api.sandbox.oscato.com/pci/v1/5d97b993a6cd3d017d5624cclqittnr8omm09sd3e6raoomtfr")!
+	)
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view.
 		
-		optile.run(longID: "5d9119072d221101917d24a5ln8mvu7jrp9upj5vebnvh8j0ek")
+		if #available(iOS 13.0, *) {
+			let xx = service.sink(receiveCompletion: { error in
+				debugPrint(error)
+			}) { session in
+				debugPrint(session)
+			}
+			
+			let err = service.
+		} else {
+			fatalError()
+		}
 	}
 
 

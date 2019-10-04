@@ -34,4 +34,10 @@ public struct ListResult: Decodable {
 
 	/// Allows to change default appearance of payment page.
 	public let style: Style?
+	
+	// MARK: - Enumerations
+	
+	public enum OperationType: String, Decodable {
+		case CHARGE, PRESET, PAYOUT, UPDATE
+	}
 }

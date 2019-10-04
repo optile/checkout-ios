@@ -12,7 +12,7 @@ let package = Package(
         // Products define the executables and libraries produced by a package, and make them visible to other packages.
 		.library(name: "Network", targets: ["Network"]),
         .library(name: "Payment", targets: ["Payment"]),
-		.library(name: "PaymentUI", targets: ["PaymentUI"])
+		.library(name: "PaymentUI", targets: ["PaymentUI"]),
     ],
     dependencies: [
 //		.package(url: "https://github.com/shibapm/Komondor.git", from: "1.0.4"),
@@ -23,7 +23,7 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(name: "Network"),
         .target(name: "Payment", dependencies: ["Network"]),
-        .target(name: "PaymentUI", dependencies: ["Payment"]),
+        .target(name: "PaymentUI", dependencies: ["Payment"])
 //		.testTarget(name: "Tests", dependencies: ["Payment"])
     ]
 )

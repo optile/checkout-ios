@@ -9,21 +9,6 @@ public struct PaymentNetwork {
 	public let logoURL: URL?
 	
 	#if canImport(UIKit)
-	private(set) public var logoState: LoadableState<UIImage>?
-	public var logoStateDidChange: ((LoadableState<UIImage>) -> Void)?
-	
-	func setLogoState(_ logo: LoadableState<UIImage>) {
-		self.logo = logo
-		logoStateDidChange?(logo)
-	}
+	private(set) public var logo: ObservableObject<Loadable<UIImage>?> = nil
 	#endif
-	
-	init(label: String) {
-		self.label = label
-		self.logoURL = nil
-		
-		#if canImport(UIKit)
-		self.logo = nil
-		#endif
-	}
 }

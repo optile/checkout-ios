@@ -5,7 +5,7 @@ public protocol Request {
 	associatedtype Response
 
 	func decodeResponse(with data: Data?) throws -> Response
-	func build(endpoint: URL) throws -> URLRequest
+	func build() throws -> URLRequest
 }
 
 public extension Request where Response: Decodable {

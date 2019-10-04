@@ -8,8 +8,8 @@ public class BackendClient {
 		self.connection = connection
 	}
 	
-	public convenience init(endpoint: URL) {
-		let connection = URLSessionConnection(endpoint: endpoint)
+	public convenience init() {
+		let connection = URLSessionConnection()
 		self.init(connection: connection)
 	}
 	

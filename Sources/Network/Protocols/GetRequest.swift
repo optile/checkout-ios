@@ -8,7 +8,7 @@ protocol GetRequest: Request {
 }
 
 extension GetRequest {
-	public func build(endpoint: URL) throws -> URLRequest {
+	public func build() throws -> URLRequest {
 		guard var components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
 			throw NetworkError(description: "Internal error, incorrect GetRequest URL")
 		}

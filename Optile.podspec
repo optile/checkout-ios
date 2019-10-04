@@ -25,6 +25,8 @@ TODO: Add long description of the pod here.
   # s.frameworks = 'UIKit'
   # s.dependency 'API'
 
+  # spec.default_subspec = 'Optile/PaymentUI'
+
   s.subspec 'Payment' do |ss|
     ss.dependency 'Optile/Network'
     ss.source_files = 'Sources/Payment/**/*'
