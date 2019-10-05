@@ -11,7 +11,7 @@ public class PaymentService {
 	}
 	
 	public func loadPaymentSession() {
-		self.session = .loading
+		session = .loading
 		let getListResult = GetListResult(url: paymentSessionURL)
 		let client = BackendClient()
 		client.send(request: getListResult) { [weak self] result in
