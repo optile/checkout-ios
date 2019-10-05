@@ -1,7 +1,7 @@
 import Foundation
 
 /// Masked account data of this payment operation or involved account. Sensitive fields of the account are removed, truncated, or replaced with mask characters.
-public struct AccountMask: Decodable {
+public class AccountMask: NSObject, Decodable {
 	/// Display label of account registration. Usually combined from several account fields.
 	public let displayLabel: String?
 	

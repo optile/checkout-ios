@@ -1,6 +1,6 @@
 import Foundation
 
-public struct AccountRegistration: Decodable {
+public class AccountRegistration: NSObject, Decodable {
 	/// Collection of links to build the account form for this registered account and perform different actions with entered data.
 	public let links: AccountLinks
 	

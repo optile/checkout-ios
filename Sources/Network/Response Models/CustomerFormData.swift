@@ -1,6 +1,6 @@
 import Foundation
 
-public struct CustomerFormData: Decodable {
+public class CustomerFormData: NSObject, Decodable {
 	/// Customer's birthday.
 	public let birthday: String?
 }

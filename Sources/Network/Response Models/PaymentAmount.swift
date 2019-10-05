@@ -1,6 +1,6 @@
 import Foundation
 
-public struct PaymentAmount: Decodable {
+public class PaymentAmount: NSObject, Decodable {
 	/// Payment amount in major units.
 	public let amount: Double
 	

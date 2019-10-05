@@ -1,6 +1,6 @@
 import Foundation
 
-public struct FormData: Decodable {
+public class FormData: NSObject, Decodable {
 	/// Account related data to pre-fill a form.
 	public let account: AccountFormData?
 	

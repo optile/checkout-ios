@@ -1,6 +1,6 @@
 import Foundation
 
-public struct ApplicableNetwork: Decodable {
+public class ApplicableNetwork: NSObject, Decodable {
 	/// Payment network code.
 	public let code: String
 	

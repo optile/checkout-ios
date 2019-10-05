@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Interaction: Decodable {
+public class Interaction: NSObject, Decodable {
 	/// Interaction code that advices further interaction with this customer or payment.
 	/// See list of [Interaction Codes](https://www.optile.io/opg#292619).
 	public let code: Code

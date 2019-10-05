@@ -1,7 +1,7 @@
 import Foundation
 
 /// List response with possible payment networks
-public struct ListResult: Decodable {
+public class ListResult: NSObject, Decodable {
 	/// Collection of links related to this `LIST` session
 	public let links: ListLinks
 	

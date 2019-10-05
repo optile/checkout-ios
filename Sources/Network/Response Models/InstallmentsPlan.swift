@@ -1,11 +1,17 @@
 import Foundation
 
-public struct InstallmentsPlan: Decodable {
+public class InstallmentsPlan: NSObject, Decodable {
+	enum CodingKeys: String, CodingKey {
+		case planDescription = "description"
+		case id, numberOfInstallments, schedule, dueDays, currency, interestAmount, installmentSetupFee, installmentPeriodicFee, installmentFee, totalAmount, effectiveInterestRate, creditInformationUrl, dataPrivacyConsentUrl, logoUrl
+	}
+	
 	/// An ID of installments plan.
 	public let id: String?
 	
 	/// Description of the installments plan.
-	public let description: String?
+	/// - Note: renamed for Objective-C compatability, JSON original key: `description`
+	public let planDescription: String?
 	
 	/// Number of installments in the installments plan.
 	public let numberOfInstallments: Int?

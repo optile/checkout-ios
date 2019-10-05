@@ -2,8 +2,10 @@ import Foundation
 import Network
 
 @objc public protocol PaymentServiceDelegate {
-	func paymentService(_ paymentSession: PaymentService, paymentSessionDidFetch: PaymentSession)
-	func paymentService(_ paymentSession: PaymentService, paymentSessionDidFail: Error)
+	func paymentService(_ paymentService: PaymentService, paymentSessionDidFetch: PaymentSession)
+	func paymentService(_ paymentService: PaymentService, paymentSessionDidFail: Error)
+	
+	
 }
 
 @objc public class PaymentService: NSObject {

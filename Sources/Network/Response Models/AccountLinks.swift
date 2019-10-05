@@ -1,7 +1,7 @@
 import Foundation
 
 /// Collection of links to build the account form for this registered account and perform different actions with entered data.
-public struct AccountLinks: Decodable {
+public class AccountLinks: NSObject, Decodable {
 	/// URL of this registered account in the scope of current `LIST` session.
 	public let `self`: URL
 	

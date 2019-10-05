@@ -1,6 +1,6 @@
 import Foundation
 
-public struct InstallmentItem: Decodable {
+public class InstallmentItem: NSObject, Decodable {
 	/// An amount of this installment in major units.
 	public let amount: Double?
 	

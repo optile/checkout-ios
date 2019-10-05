@@ -1,6 +1,6 @@
 import Foundation
 
-public struct PresetAccount: Decodable {
+public class PresetAccount: NSObject, Decodable {
 	/// Collection of links related to this `PRESET` account.
 	public let links: PresetLinks
 	

@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Installments: Decodable {
+public class Installments: NSObject, Decodable {
 	/// An information about original payment
 	public let originalPayment: PaymentAmount?
 	

@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Parameter: Decodable {
+public class Parameter: NSObject, Decodable {
 	/// Parameter name.
 	public let name: String
 	

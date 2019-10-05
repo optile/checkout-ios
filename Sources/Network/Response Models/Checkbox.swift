@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Checkbox: Decodable {
+public class Checkbox: NSObject, Decodable {
 	/// Distinguish name of this checkbox element.
 	public let name: String
 	

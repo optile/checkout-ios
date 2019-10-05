@@ -1,6 +1,6 @@
 import Foundation
 
-public struct PresetLinks: Decodable {
+public class PresetLinks: NSObject, Decodable {
 	/// Link to 'close' initialized payment session with `CHARGE` operation.
 	public let operation: URL
 	

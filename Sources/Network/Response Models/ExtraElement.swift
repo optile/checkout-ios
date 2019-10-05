@@ -1,6 +1,6 @@
 import Foundation
 
-public struct ExtraElement: Decodable {
+public class ExtraElement: NSObject, Decodable {
 	/// Descriptive text that should be displayed for this extra element.
 	public let text: String?
 	

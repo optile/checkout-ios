@@ -1,7 +1,7 @@
 import Foundation
 
 /// Collection of URLs to build the account form for this payment network and perform different actions with entered account.
-public struct NetworkLinks: Decodable {
+public class NetworkLinks: NSObject, Decodable {
 	/// URL of this applicable network.
 	public let `self`: URL
 	

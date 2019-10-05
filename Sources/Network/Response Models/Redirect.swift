@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Redirect: Decodable {
+public class Redirect: NSObject, Decodable {
 	/// URL to redirect customer's browser (or any other client) to.
 	public let url: URL
 	

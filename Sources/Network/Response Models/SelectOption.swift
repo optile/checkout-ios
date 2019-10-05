@@ -1,6 +1,6 @@
 import Foundation
 
-public struct SelectOption: Decodable {
+public class SelectOption: NSObject, Decodable {
 	/// The value for this option.
 	public let value: String
 	

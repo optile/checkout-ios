@@ -1,6 +1,6 @@
 import Foundation
 
-public struct InputElement: Decodable {
+public class InputElement: NSObject, Decodable {
 	/// The name of the parameter represented by this input element.
 	public let name: String
 	

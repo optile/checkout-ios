@@ -9,9 +9,19 @@ import os
 		super.init()
 	}
 	
-	public convenience override init() {
+	@objc public convenience override init() {
 		let connection = URLSessionConnection()
 		self.init(connection: connection)
+	}
+	
+	@objc public func loadPaymentSession(url: URL, completionHandler: @escaping ((_ response: GetListResult.Response?, _ error: Error?) -> Void)) {
+		let request = GetListResult(url: url)
+		send(request: request) { result in
+			switch result {
+			case .success(let response): completionHandler(response, nil)
+			case .failure(let error): completionHandler(nil, error)
+			}
+		}
 	}
 	
 	public func send<R>(request: R, completionHandler: @escaping ((Result<R.Response, Error>) -> Void)) where R: Request {

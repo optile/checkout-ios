@@ -1,6 +1,6 @@
 import Foundation
 
-public struct ListLinks: Decodable {
+public class ListLinks: NSObject, Decodable {
 	/// Link to `LIST` session itself
 	public let `self`: URL
 	
