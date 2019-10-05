@@ -27,13 +27,8 @@ TODO: Add long description of the pod here.
 
   # spec.default_subspec = 'Optile/PaymentUI'
 
-  s.subspec 'Payment' do |ss|
-    ss.dependency 'Optile/Network'
-    ss.source_files = 'Sources/Payment/**/*'
-  end
-
   s.subspec 'PaymentUI' do |ss|
-    ss.dependency 'Optile/Payment'
+    ss.dependency 'Optile/Network'
     ss.source_files = 'Sources/PaymentUI/**/*.swift'
   end
 

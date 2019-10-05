@@ -1,8 +1,8 @@
 import Foundation
 import Network
 
-@propertyWrapper
-public struct CurrentValue<Output> {
+/// An object that wraps a single value and publishes a new element whenever the value changes.
+@propertyWrapper public struct CurrentValue<Output> {
 	private let publisher = BasicPublisher()
 
 	public var value: Output {
@@ -34,7 +34,7 @@ public struct CurrentValue<Output> {
 		self.value = wrappedValue
 	}
 	
-	// MARK: - Type definitions
+	// MARK: -
 	
 	public class BasicPublisher {
 		fileprivate var handler: ((Output) -> Void)?

@@ -41,7 +41,7 @@ private extension PaymentSession {
 }
 
 private extension PaymentNetwork {
-	convenience init(importFrom applicableNetwork: ApplicableNetwork) {
+	init(importFrom applicableNetwork: ApplicableNetwork) {
 		self.init(label: applicableNetwork.label, logoURL: applicableNetwork.links?.logo)
 	}
 }

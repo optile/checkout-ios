@@ -33,7 +33,9 @@ public class ListResult: NSObject, Decodable {
 	public let allowDelete: Bool?
 
 	/// Allows to change default appearance of payment page.
-	public let style: Style?
+	///
+	/// - Note: `_Style` used for Objective-C compatibility
+	public let style: _Style?
 	
 	// MARK: - Enumerations
 	
