@@ -1,32 +1,26 @@
 import Foundation
 import Network
 
-@objc public protocol PaymentServiceDelegate {
-	func paymentService(_ paymentSession: PaymentService, paymentSessionDidFetch: PaymentSession)
-	func paymentService(_ paymentSession: PaymentService, paymentSessionDidFail: Error)
-}
-
-@objc public class PaymentService: NSObject {
+public class PaymentSessionStore {
 	public var paymentSessionURL: URL
-	public weak var delegate: PaymentServiceDelegate?
+	@CurrentValue public var session: Load<PaymentSession> = .inactive
 	
 	public init(paymentSessionURL: URL) {
 		self.paymentSessionURL = paymentSessionURL
-		super.init()
+		
 	}
 	
 	public func loadPaymentSession() {
+		session = .loading
 		let getListResult = GetListResult(url: paymentSessionURL)
 		let client = BackendClient()
 		client.send(request: getListResult) { [weak self] result in
-			guard let weakSelf = self else { return }
-			
 			switch result {
 			case .success(let listResult):
 				let paymentSession = PaymentSession(importFrom: listResult)
-				weakSelf.delegate?.paymentService(weakSelf, paymentSessionDidFetch: paymentSession)
+				self?.session = .success(paymentSession)
 			case .failure(let error):
-				weakSelf.delegate?.paymentService(weakSelf, paymentSessionDidFail: error)
+				self?.session = .failure(error)
 			}
 		}
 	}
@@ -37,7 +31,7 @@ import Network
 }
 
 private extension PaymentSession {
-	convenience init(importFrom listResult: ListResult) {
+	init(importFrom listResult: ListResult) {
 		let networks = listResult.networks.applicable.map {
 			PaymentNetwork(importFrom: $0)
 		}

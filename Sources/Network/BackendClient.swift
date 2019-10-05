@@ -1,14 +1,15 @@
 import Foundation
 import os
 
-public class BackendClient {
+@objc public class BackendClient: NSObject {
 	let connection: Connection
 
 	init(connection: Connection) {
 		self.connection = connection
+		super.init()
 	}
 	
-	public convenience init() {
+	public convenience override init() {
 		let connection = URLSessionConnection()
 		self.init(connection: connection)
 	}

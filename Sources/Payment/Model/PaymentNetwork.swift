@@ -1,19 +1,14 @@
 import Foundation
 
-#if canImport(UIKit)
-import UIKit
-#endif
-
-public class PaymentNetwork {
+@objc public class PaymentNetwork: NSObject {
 	public let label: String
 	public let logoURL: URL?
-	
-	#if canImport(UIKit)
-	@CurrentValue private(set) public var logo: Load<UIImage>?
-	#endif
+	public var logoData: Data?
 	
 	public init(label: String, logoURL: URL?) {
 		self.label = label
 		self.logoURL = logoURL
+
+		super.init()
 	}
 }
