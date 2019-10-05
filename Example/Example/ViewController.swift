@@ -12,17 +12,12 @@ class ViewController: UIViewController {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view.
 		
-		if #available(iOS 13.0, *) {
-			let xx = service.sink(receiveCompletion: { error in
-				debugPrint(error)
-			}) { session in
-				debugPrint(session)
-			}
-			
-			let err = service.
-		} else {
-			fatalError()
+		print("Go")
+		service.$session.subscribe { (session) in
+			debugPrint(session)
 		}
+		
+		service.loadPaymentSession()
 	}
 
 

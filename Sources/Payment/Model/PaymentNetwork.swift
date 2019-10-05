@@ -4,11 +4,16 @@ import Foundation
 import UIKit
 #endif
 
-public struct PaymentNetwork {
+public class PaymentNetwork {
 	public let label: String
 	public let logoURL: URL?
 	
 	#if canImport(UIKit)
-	private(set) public var logo: ObservableObject<Loadable<UIImage>?> = nil
+	@CurrentValue private(set) public var logo: Load<UIImage>?
 	#endif
+	
+	public init(label: String, logoURL: URL?) {
+		self.label = label
+		self.logoURL = logoURL
+	}
 }

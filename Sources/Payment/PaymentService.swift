@@ -3,22 +3,24 @@ import Network
 
 public class PaymentService {
 	public var paymentSessionURL: URL
-	public var session = ObservableObject<Loadable<PaymentSession>?>(nil)
+	@CurrentValue public var session: Load<PaymentSession> = .inactive
 	
 	public init(paymentSessionURL: URL) {
 		self.paymentSessionURL = paymentSessionURL
+		
 	}
 	
-	public func loadPaymentSession(completionHandler: @escaping ((Result<PaymentSession, Error>) -> Void)) {
+	public func loadPaymentSession() {
+		self.session = .loading
 		let getListResult = GetListResult(url: paymentSessionURL)
 		let client = BackendClient()
-		client.send(request: getListResult) { result in
+		client.send(request: getListResult) { [weak self] result in
 			switch result {
 			case .success(let listResult):
-				let session = PaymentSession(importFrom: listResult)
-				completionHandler(.success(session))
+				let paymentSession = PaymentSession(importFrom: listResult)
+				self?.session = .success(paymentSession)
 			case .failure(let error):
-				completionHandler(.failure(error))
+				self?.session = .failure(error)
 			}
 		}
 	}
@@ -39,8 +41,7 @@ private extension PaymentSession {
 }
 
 private extension PaymentNetwork {
-	init(importFrom applicableNetwork: ApplicableNetwork) {
-		self.label = applicableNetwork.label
-		self.logoURL = applicableNetwork.links?.logo
+	convenience init(importFrom applicableNetwork: ApplicableNetwork) {
+		self.init(label: applicableNetwork.label, logoURL: applicableNetwork.links?.logo)
 	}
 }

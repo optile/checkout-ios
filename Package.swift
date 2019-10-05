@@ -25,5 +25,8 @@ let package = Package(
         .target(name: "Payment", dependencies: ["Network"]),
         .target(name: "PaymentUI", dependencies: ["Payment"])
 //		.testTarget(name: "Tests", dependencies: ["Payment"])
-    ]
+    ],
+	swiftLanguageVersions: [
+		.v5
+	]
 )
