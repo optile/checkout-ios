@@ -4,7 +4,10 @@ import UIKit
 
 @objc public class PaymentMethodsTableViewBuilder: NSObject {
 	public var configuration: PaymentMethodsTableViewConfiguration
-	let dataSource = PaymentMethodsTableViewResultsController()
+	
+	let resultsController = PaymentMethodsTableViewResultsController()
+	let tableView = UITableView(frame: CGRect.zero, style: .plain)
+	var sessionStore: PaymentSessionStore?
 	
 	public init(configuration: PaymentMethodsTableViewConfiguration = DefaultPaymentMethodsTableViewConfiguration()) {
 		self.configuration = configuration
@@ -13,14 +16,24 @@ import UIKit
 	
 	public func load(listResult: URL) {
 		let store = PaymentSessionStore(paymentSessionURL: listResult)
+		self.sessionStore = store
+		store.$session.subscribe { [weak resultsController] sessionState in
+			switch sessionState {
+			case .success(let session):
+				let group = PaymentMethodsTableViewResultsController.TableGroup(groupName: "Choose a method (localization required")
+				group.networks = session.networks
+				resultsController?.dataSource = [group]
+				fallthrough
+			default: dump(sessionState)
+			}
+		}
 		store.loadPaymentSession()
 	}
 	
 	public func build() -> UITableView {
-		let tableView = UITableView(frame: CGRect.zero, style: .plain)
+		tableView.dataSource = resultsController
 		tableView.register(PaymentMethodsTableViewCell.self)
-		dataSource.tableView = tableView
-		
+		resultsController.tableView = tableView
 		configuration.customize?(tableView: tableView)
 		return tableView
 	}

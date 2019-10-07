@@ -9,9 +9,9 @@ class PaymentMethodsTableViewResultsController: NSObject, UITableViewDataSource 
 	override init() {
 		super.init()
 		
-		$dataSource.subscribe { [weak tableView] networks in
+		$dataSource.subscribe { [weak self] networks in
 			DispatchQueue.main.async {
-				tableView?.reloadData()
+				self?.tableView?.reloadData()
 			}
 		}
 	}
@@ -20,14 +20,16 @@ class PaymentMethodsTableViewResultsController: NSObject, UITableViewDataSource 
 		return dataSource[section].networks.count
 	}
 	
+	func numberOfSections(in tableView: UITableView) -> Int {
+		return dataSource.count
+	}
+	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let network = dataSource[indexPath.section].networks[indexPath.row]
 		let cell = tableView.dequeueReusableCell(PaymentMethodsTableViewCell.self, for: indexPath)
 		cell.textLabel?.text = network.label
 		return cell
 	}
-	
-
 }
 
 // MARK: - TableGroup

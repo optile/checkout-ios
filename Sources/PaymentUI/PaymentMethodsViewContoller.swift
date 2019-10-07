@@ -5,12 +5,16 @@ import Network
 
 @objc public final class PaymentMethodsViewContoller: UIViewController {
 	public weak var methodsTableView: UITableView!
+	public var listResultURL: URL
 	
 	let tableBuilder: PaymentMethodsTableViewBuilder
 	var sessionStore: PaymentSessionStore?
 	
-	init(tableConfiguration: PaymentMethodsTableViewConfiguration = DefaultPaymentMethodsTableViewConfiguration()) {
+	/// - Parameter tableConfiguration: settings for a payment table view, if not specified defaults will be used
+	/// - Parameter listResultURL: URL that you receive after executing *Create new payment session request* request. Needed URL will be specified in `links.self`
+	public init(tableConfiguration: PaymentMethodsTableViewConfiguration = DefaultPaymentMethodsTableViewConfiguration(), listResultURL: URL) {
 		self.tableBuilder = PaymentMethodsTableViewBuilder(configuration: tableConfiguration)
+		self.listResultURL = listResultURL
 		super.init(nibName: nil, bundle: nil)
 	}
 	
@@ -23,12 +27,14 @@ import Network
 		super.viewDidLoad()
 		
 		methodsTableView = tableBuilder.build()
+		methodsTableView.translatesAutoresizingMaskIntoConstraints = false
 		view.addSubview(methodsTableView)
 		layoutMethodsTableView()
 	}
 	
-	public func load(listResult: URL) {
-		tableBuilder.load(listResult: listResult)
+	public override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		tableBuilder.load(listResult: listResultURL)
 	}
 	
 	func layoutMethodsTableView() {
@@ -48,6 +54,8 @@ import Network
 				methodsTableView.topAnchor.constraint(equalTo: view.topAnchor)
 			])
 		}
+		
+		
 	}
 }
 

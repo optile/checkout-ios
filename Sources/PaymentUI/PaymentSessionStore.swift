@@ -4,6 +4,7 @@ import Network
 public class PaymentSessionStore {
 	public var paymentSessionURL: URL
 	@CurrentValue public var session: Load<PaymentSession> = .inactive
+	let backendClient = BackendClient()
 	
 	public init(paymentSessionURL: URL) {
 		self.paymentSessionURL = paymentSessionURL
@@ -13,8 +14,7 @@ public class PaymentSessionStore {
 	public func loadPaymentSession() {
 		session = .loading
 		let getListResult = GetListResult(url: paymentSessionURL)
-		let client = BackendClient()
-		client.send(request: getListResult) { [weak self] result in
+		backendClient.send(request: getListResult) { [weak self] result in
 			switch result {
 			case .success(let listResult):
 				let paymentSession = PaymentSession(importFrom: listResult)
