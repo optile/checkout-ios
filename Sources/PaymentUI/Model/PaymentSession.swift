@@ -1,5 +1,5 @@
 import Foundation
 
 public struct PaymentSession {
-	public let networks: [PaymentNetwork]
+	public var networks: [PaymentNetwork]
 }

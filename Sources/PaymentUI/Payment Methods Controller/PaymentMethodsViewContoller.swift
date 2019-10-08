@@ -41,7 +41,7 @@ import Network
 		let store = PaymentSessionStore(paymentSessionURL: listResult)
 		self.sessionStore = store
 		
-		store.$session.subscribe { [weak self] sessionState in
+		store.$sessionState.subscribe { [weak self] sessionState in
 			dump(sessionState)
 			
 			DispatchQueue.main.async {
