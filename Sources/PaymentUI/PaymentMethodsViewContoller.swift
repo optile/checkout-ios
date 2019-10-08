@@ -4,7 +4,10 @@ import UIKit
 import Network
 
 @objc public final class PaymentMethodsViewContoller: UIViewController {
-	public weak var methodsTableView: UITableView!
+	weak var methodsTableView: UITableView?
+	weak var activityIndicator: UIActivityIndicatorView?
+	weak var errorAlertController: UIAlertController?
+	
 	public var listResultURL: URL
 	
 	let configuration: PaymentMethodsTableViewConfiguration
@@ -26,28 +29,130 @@ import Network
 	
 	override public func viewDidLoad() {
 		super.viewDidLoad()
+		view.backgroundColor = UIColor.white
 		
+		// FIXME: Localize
+		title = "Payment method"
+		
+		load(listResult: listResultURL)
 	}
-	
+		
 	private func load(listResult: URL) {
 		let store = PaymentSessionStore(paymentSessionURL: listResult)
 		self.sessionStore = store
-		store.$session.subscribe { [weak resultsController] sessionState in
-			switch sessionState {
-			case .success(let session):
-				let group = PaymentMethodsTableViewResultsController.TableGroup(groupName: "Choose a method (localization required")
-				group.networks = session.networks
-				resultsController?.dataSource = [group]
-				fallthrough
-			default: dump(sessionState)
+		
+		store.$session.subscribe { [weak self] sessionState in
+			dump(sessionState)
+			
+			DispatchQueue.main.async {
+				self?.viewSessionState = sessionState
 			}
 		}
+		
 		store.loadPaymentSession()
 	}
+
+	// MARK: - View state management
 	
-	// MARK: - Table View
+	var viewSessionState: Load<PaymentSession> = .inactive {
+		didSet {
+			switch viewSessionState {
+			case .success(let session):
+				isActivityIndicatorActive = false
+				showingPaymentMethods = session
+				showingError = nil
+			case .loading:
+				isActivityIndicatorActive = true
+				showingPaymentMethods = nil
+				showingError = nil
+			case .failure(let error):
+				isActivityIndicatorActive = true
+				showingPaymentMethods = nil
+				showingError = error
+			default: return
+			}
+		}
+	}
+
+	fileprivate var showingPaymentMethods: PaymentSession? {
+		didSet {
+			guard let session = showingPaymentMethods else {
+				// Hide payment methods
+				methodsTableView?.removeFromSuperview()
+				methodsTableView = nil
+				return
+			}
+			
+			// Show payment methods
+			let methodsTableView = self.addMethodsTableView()
+			self.layoutMethodsTableView(methodsTableView)
+			self.methodsTableView = methodsTableView
+			
+			// FIXME: Localize
+			let group = PaymentMethodsTableViewResultsController.TableGroup(groupName: "Choose a method")
+			group.networks = session.networks
+			resultsController.dataSource = [group]
+		}
+	}
 	
-	private func createMethodsTableView() -> UITableView {
+	fileprivate var isActivityIndicatorActive: Bool {
+		get {
+			return (activityIndicator != nil)
+		}
+		
+		set {
+			if newValue == false {
+				// Hide activity indicator
+				activityIndicator?.removeFromSuperview()
+				activityIndicator = nil
+				return
+			}
+			
+			// Show activity indicator
+			let activityIndicator = UIActivityIndicatorView(style: .gray)
+			activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+			view.addSubview(activityIndicator)
+			NSLayoutConstraint.activate([
+				activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+				activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+			])
+			self.activityIndicator = activityIndicator
+			activityIndicator.startAnimating()
+		}
+	}
+	
+	fileprivate var showingError: Error? {
+		didSet {
+			guard let error = showingError else {
+				// Dismiss alert controller
+				errorAlertController?.dismiss(animated: true, completion: nil)
+				return
+			}
+			
+			// Show alert
+			let controller = UIAlertController(title: error.localizedDescription, message: nil, preferredStyle: .alert)
+			
+			let retryAction = UIAlertAction(title: "Retry", style: .default) { [weak self] _ in
+				guard let weakSelf = self else { return }
+				weakSelf.load(listResult: weakSelf.listResultURL)
+				self?.showingError = nil
+			}
+			controller.addAction(retryAction)
+			
+			let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { [weak self] _ in
+				self?.dismiss(animated: true, completion: nil)
+			}
+			controller.addAction(cancelAction)
+			
+			self.present(controller, animated: true, completion: nil)
+		}
+	}
+}
+
+// MARK: - Table View
+
+extension PaymentMethodsViewContoller {
+	fileprivate func addMethodsTableView() -> UITableView {
 		let methodsTableView = UITableView(frame: CGRect.zero, style: .plain)
 		
 		configuration.customize?(tableView: methodsTableView)
@@ -58,6 +163,8 @@ import Network
 		view.addSubview(methodsTableView)
 		layoutMethodsTableView(methodsTableView)
 		resultsController.tableView = methodsTableView
+		
+		layoutMethodsTableView(methodsTableView)
 		
 		return methodsTableView
 	}

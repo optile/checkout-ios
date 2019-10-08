@@ -3,20 +3,23 @@ import Optile
 
 class ViewController: UIViewController {
 
-	let listResultURL = URL(string: "https://api.sandbox.oscato.com/pci/v1/5d9b33f7148b51017a98d4fflo5ud882vp731kf5m7tiunspi8")!
+	@IBOutlet weak var textField: UITextField!
 	
-	override func viewDidLoad() {
-		super.viewDidLoad()
-		// Do any additional setup after loading the view.
-			
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		textField.becomeFirstResponder()
 	}
 	
-	override func viewDidAppear(_ animated: Bool) {
-		super.viewDidAppear(animated)
-		let vc = PaymentMethodsViewContoller(listResultURL: listResultURL)
-		present(vc, animated: true, completion: nil)
+	@IBAction func sendRequest(_ sender: Any) {
+		guard let text = textField.text, let url = URL(string: text) else {
+			print("Invalid URL")
+			textField.text = nil
+			return
+		}
+		
+		let vc = PaymentMethodsViewContoller(listResultURL: url)
+		let navigationController = PaymentNavigationController(rootViewController: vc)
+		present(navigationController, animated: true, completion: nil)
 	}
-
-
 }
 
