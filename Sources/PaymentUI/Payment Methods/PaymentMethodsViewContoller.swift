@@ -64,7 +64,7 @@ import Network
 				showingPaymentMethods = nil
 				showingError = nil
 			case .failure(let error):
-				isActivityIndicatorActive = true
+				isActivityIndicatorActive = false
 				showingPaymentMethods = nil
 				showingError = error
 			default: return
