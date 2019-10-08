@@ -88,18 +88,14 @@ private class PaymentSessionProvider {
 		
 		return downloadOperation
 	}
-	
-	deinit {
-		print("Session provider deinited")
-	}
 }
 
 // MARK: - Import extensions
 
 private extension PaymentNetwork {
 	init?(importFrom applicableNetwork: ApplicableNetwork, localizationDictionary: Dictionary<String, String>) {
-		guard let localizedLabel = localizationDictionary["network.label"] else {
-			log(.error, "Unable to find `network.label` in localization dictionary for %@", applicableNetwork.code)
+		guard let localizedLabel = localizationDictionary[LocalizationKey.label.rawValue] else {
+			log(.error, "Unable to find `%{public}@` in localization dictionary for %@", PaymentNetwork.LocalizationKey.label.rawValue, applicableNetwork.code)
 			return nil
 		}
 		
