@@ -51,8 +51,6 @@ import Network
 		
 		store.loadPaymentSession()
 	}
-
-	// MARK: - View state management
 	
 	var viewSessionState: Load<PaymentSession> = .inactive {
 		didSet {
@@ -73,10 +71,22 @@ import Network
 			}
 		}
 	}
+}
 
+// MARK: - View state management
+
+extension PaymentMethodsViewContoller {
 	fileprivate var showingPaymentMethods: PaymentSession? {
-		didSet {
-			guard let session = showingPaymentMethods else {
+		get {
+			if case .success(let session) = viewSessionState {
+				return session
+			}
+			
+			return nil
+		}
+		
+		set {
+			guard let session = newValue else {
 				// Hide payment methods
 				methodsTableView?.removeFromSuperview()
 				methodsTableView = nil
@@ -103,6 +113,7 @@ import Network
 		set {
 			if newValue == false {
 				// Hide activity indicator
+				activityIndicator?.stopAnimating()
 				activityIndicator?.removeFromSuperview()
 				activityIndicator = nil
 				return
@@ -122,8 +133,15 @@ import Network
 	}
 	
 	fileprivate var showingError: Error? {
-		didSet {
-			guard let error = showingError else {
+		get {
+			if case .failure(let error) = viewSessionState {
+				return error
+			}
+			
+			return nil
+		}
+		set {
+			guard let error = newValue else {
 				// Dismiss alert controller
 				errorAlertController?.dismiss(animated: true, completion: nil)
 				return
