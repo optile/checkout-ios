@@ -30,6 +30,10 @@ class PaymentMethodsTableViewResultsController: NSObject, UITableViewDataSource 
 		cell.textLabel?.text = network.label
 		return cell
 	}
+	
+	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+		return dataSource[section].groupName
+	}
 }
 
 // MARK: - TableGroup

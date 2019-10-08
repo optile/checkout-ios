@@ -171,7 +171,7 @@ extension PaymentMethodsViewContoller {
 
 extension PaymentMethodsViewContoller {
 	fileprivate func addMethodsTableView() -> UITableView {
-		let methodsTableView = UITableView(frame: CGRect.zero, style: .plain)
+		let methodsTableView = UITableView(frame: CGRect.zero, style: .grouped)
 		
 		configuration.customize?(tableView: methodsTableView)
 		
@@ -179,31 +179,20 @@ extension PaymentMethodsViewContoller {
 		methodsTableView.register(PaymentMethodsTableViewCell.self)
 		methodsTableView.dataSource = resultsController
 		view.addSubview(methodsTableView)
-		layoutMethodsTableView(methodsTableView)
 		resultsController.tableView = methodsTableView
 		
-		layoutMethodsTableView(methodsTableView)
+		NSLayoutConstraint.activate([
+			methodsTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+			methodsTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+			methodsTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+			methodsTableView.topAnchor.constraint(equalTo: view.topAnchor)
+		])
 		
 		return methodsTableView
 	}
 	
 	private func layoutMethodsTableView(_ methodsTableView: UITableView) {
-		NSLayoutConstraint.activate([
-			methodsTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-			methodsTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-		])
-		
-		if #available(iOS 11.0, *) {
-			NSLayoutConstraint.activate([
-				methodsTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-				methodsTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
-			])
-		} else {
-			NSLayoutConstraint.activate([
-				methodsTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-				methodsTableView.topAnchor.constraint(equalTo: view.topAnchor)
-			])
-		}
+
 	}
 }
 
