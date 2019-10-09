@@ -2,7 +2,8 @@
 import Foundation
 import UIKit
 
-class PaymentMethodsTableViewResultsController: NSObject, UITableViewDataSource {
+/// DataSource and Publisher for table view with payment list
+class PaymentListResultsController: NSObject, UITableViewDataSource {
 	@CurrentValue public var dataSource = [TableGroup]()
 	weak var tableView: UITableView? {
 		didSet {
@@ -54,7 +55,7 @@ class PaymentMethodsTableViewResultsController: NSObject, UITableViewDataSource 
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let network = dataSource[indexPath.section].networks[indexPath.row]
-		let cell = tableView.dequeueReusableCell(PaymentMethodsTableViewCell.self, for: indexPath)
+		let cell = tableView.dequeueReusableCell(PaymentListTableViewCell.self, for: indexPath)
 		cell.textLabel?.text = network.label
 		cell.imageView?.image = network.logo
 		return cell

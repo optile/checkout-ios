@@ -1,6 +1,6 @@
 import Foundation
 
-@objc public protocol PaymentMethodsTableViewConfiguration {
+@objc public protocol PaymentListParameters {
 	
 	/// Use for other customization options
 	///
@@ -9,5 +9,5 @@ import Foundation
 	@objc optional func customize(tableView: UITableView)
 }
 
-@objc public class DefaultPaymentMethodsTableViewConfiguration: NSObject, PaymentMethodsTableViewConfiguration {
+@objc public class DefaultPaymentListParameters: NSObject, PaymentMethodsTableViewConfiguration {
 }

@@ -2,7 +2,9 @@ import Foundation
 import Network
 import UIKit
 
-class PaymentSessionStore {
+/// Service that fetches and stores PaymentSession. 
+/// Used by `PaymentListViewController`
+class PaymentSessionService {
 	@CurrentValue var sessionState: Load<PaymentSession> = .inactive
 	private let paymentSessionURL: URL
 
@@ -33,6 +35,7 @@ class PaymentSessionStore {
 
 // MARK: -
 
+/// Provider responsible for payment session fetching and localization downloading
 private class PaymentSessionProvider {
 	private let paymentSessionURL: URL
 	private var downloadedNetworks = [PaymentNetwork]()
@@ -99,6 +102,7 @@ private class PaymentSessionProvider {
 	}
 }
 
+/// Provider responsible for asynchronous image fetching
 private class ImageProvider {
 	private let operationQueue = OperationQueue()
 	

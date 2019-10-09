@@ -3,7 +3,7 @@
 import UIKit
 import Network
 
-@objc public final class PaymentMethodsViewContoller: UIViewController {
+@objc public final class PaymentListViewContoller: UIViewController {
 	weak var methodsTableView: UITableView?
 	weak var activityIndicator: UIActivityIndicatorView?
 	weak var errorAlertController: UIAlertController?
@@ -11,12 +11,12 @@ import Network
 	public var listResultURL: URL
 	
 	let configuration: PaymentMethodsTableViewConfiguration
-	let resultsController = PaymentMethodsTableViewResultsController()
-	var sessionStore: PaymentSessionStore?
+	let resultsController = PaymentListResultsController()
+	var sessionStore: PaymentSessionService?
 	
 	/// - Parameter tableConfiguration: settings for a payment table view, if not specified defaults will be used
 	/// - Parameter listResultURL: URL that you receive after executing *Create new payment session request* request. Needed URL will be specified in `links.self`
-	public init(tableConfiguration: PaymentMethodsTableViewConfiguration = DefaultPaymentMethodsTableViewConfiguration(), listResultURL: URL) {
+	public init(tableConfiguration: PaymentListParameters = DefaultPaymentListParameters(), listResultURL: URL) {
 		self.configuration = tableConfiguration
 		self.listResultURL = listResultURL
 		super.init(nibName: nil, bundle: nil)
@@ -38,7 +38,7 @@ import Network
 	}
 		
 	private func load(listResult: URL) {
-		let store = PaymentSessionStore(paymentSessionURL: listResult)
+		let store = PaymentSessionService(paymentSessionURL: listResult)
 		self.sessionStore = store
 		
 		store.$sessionState.subscribe { [weak self] (_, sessionState) in
@@ -73,7 +73,7 @@ import Network
 
 // MARK: - View state management
 
-extension PaymentMethodsViewContoller {
+extension PaymentListViewContoller {
 	fileprivate var showingPaymentMethods: PaymentSession? {
 		get {
 			if case .success(let session) = viewSessionState {
@@ -96,7 +96,7 @@ extension PaymentMethodsViewContoller {
 			self.methodsTableView = methodsTableView
 			
 			// FIXME: Localize
-			let group = PaymentMethodsTableViewResultsController.TableGroup(groupName: "Choose a method")
+			let group = PaymentListResultsController.TableGroup(groupName: "Choose a method")
 			group.networks = session.networks
 			resultsController.dataSource = [group]
 		}
@@ -166,14 +166,14 @@ extension PaymentMethodsViewContoller {
 
 // MARK: - Table View
 
-extension PaymentMethodsViewContoller {
+extension PaymentListViewContoller {
 	fileprivate func addMethodsTableView() -> UITableView {
 		let methodsTableView = UITableView(frame: CGRect.zero, style: .grouped)
 		
 		configuration.customize?(tableView: methodsTableView)
 		
 		methodsTableView.translatesAutoresizingMaskIntoConstraints = false
-		methodsTableView.register(PaymentMethodsTableViewCell.self)
+		methodsTableView.register(PaymentListTableViewCell.self)
 		methodsTableView.dataSource = resultsController
 		view.addSubview(methodsTableView)
 		resultsController.tableView = methodsTableView
