@@ -12,7 +12,7 @@ public struct DownloadLocalization: GetRequest {
 	public typealias Response = Dictionary<String, String>
 	
 	/// - Parameter url: `self` link from payment session
-	public init(url: URL) {
+	public init(from url: URL) {
 		self.url = url
 	}
 	

@@ -1,5 +1,6 @@
 import Foundation
 import Network
+import UIKit
 
 class PaymentSessionStore {
 	@CurrentValue var sessionState: Load<PaymentSession> = .inactive
@@ -15,7 +16,15 @@ class PaymentSessionStore {
 
 		sessionProvider.download { [weak self] result in
 			switch result {
-			case .success(let session): self?.sessionState = .success(session)
+			case .success(let session):
+				self?.sessionState = .success(session)
+				let imageProvider = ImageProvider()
+				
+				for network in session.networks {
+					imageProvider.downloadImage(for: network) { image in
+						network.logo = image
+					}
+				}
 			case .failure(let error): self?.sessionState = .failure(error)
 			}
 		}
@@ -71,7 +80,7 @@ private class PaymentSessionProvider {
 	}
 	
 	private func makeDownloadLocalizationOperation(for network: ApplicableNetwork, from langURL: URL) -> Operation {
-		let downloadLocalizationRequest = DownloadLocalization(url: langURL)
+		let downloadLocalizationRequest = DownloadLocalization(from: langURL)
 		let downloadOperation = DownloadOperation(request: downloadLocalizationRequest)
 		downloadOperation.downloadCompletionBlock = { result in
 			switch result {
@@ -90,15 +99,50 @@ private class PaymentSessionProvider {
 	}
 }
 
-// MARK: - Import extensions
+private class ImageProvider {
+	private let operationQueue = OperationQueue()
+	
+	func downloadImage(for network: PaymentNetwork, completion: @escaping ((UIImage?) -> Void)) {
+		guard let imageURL = network.logoURL, network.logo == nil else {
+			completion(nil)
+			return
+		}
+		
+		let downloadRequest = DownloadData(from: imageURL)
+		let downloadOperation = DownloadOperation(request: downloadRequest)
+		downloadOperation.downloadCompletionBlock = { result in
+			let image: UIImage?
+			
+			switch result {
+			case .success(let data):
+				guard let convertedImage = UIImage(data: data) else {
+					log(.error, "Unable to convert data to image")
+					image = nil
+					return
+				}
+				
+				image = convertedImage
+			case .failure(let error):
+				log(.error, "Error downloading data: %@", error.localizedDescription)
+				image = nil
+			}
+			
+			completion(image)
+		}
+		
+		operationQueue.addOperation(downloadOperation)
+	}
+}
+
+// MARK: - Extensions
 
 private extension PaymentNetwork {
-	init?(importFrom applicableNetwork: ApplicableNetwork, localizationDictionary: Dictionary<String, String>) {
+	convenience init?(importFrom applicableNetwork: ApplicableNetwork, localizationDictionary: Dictionary<String, String>) {
 		guard let localizedLabel = localizationDictionary[LocalizationKey.label.rawValue] else {
 			log(.error, "Unable to find `%{public}@` in localization dictionary for %@", PaymentNetwork.LocalizationKey.label.rawValue, applicableNetwork.code)
 			return nil
 		}
 		
-		self.init(label: localizedLabel, logoURL: applicableNetwork.links?.logo)
+		self.init(code: applicableNetwork.code, label: localizedLabel, logoURL: applicableNetwork.links?.logo)
 	}
 }

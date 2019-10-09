@@ -41,9 +41,7 @@ import Network
 		let store = PaymentSessionStore(paymentSessionURL: listResult)
 		self.sessionStore = store
 		
-		store.$sessionState.subscribe { [weak self] sessionState in
-			dump(sessionState)
-			
+		store.$sessionState.subscribe { [weak self] (_, sessionState) in
 			DispatchQueue.main.async {
 				self?.viewSessionState = sessionState
 			}
@@ -64,7 +62,7 @@ import Network
 				showingPaymentMethods = nil
 				showingError = nil
 			case .failure(let error):
-				isActivityIndicatorActive = false
+				isActivityIndicatorActive = true
 				showingPaymentMethods = nil
 				showingError = error
 			default: return
@@ -95,7 +93,6 @@ extension PaymentMethodsViewContoller {
 			
 			// Show payment methods
 			let methodsTableView = self.addMethodsTableView()
-			self.layoutMethodsTableView(methodsTableView)
 			self.methodsTableView = methodsTableView
 			
 			// FIXME: Localize
@@ -189,10 +186,6 @@ extension PaymentMethodsViewContoller {
 		])
 		
 		return methodsTableView
-	}
-	
-	private func layoutMethodsTableView(_ methodsTableView: UITableView) {
-
 	}
 }
 

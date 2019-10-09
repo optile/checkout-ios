@@ -2,16 +2,16 @@ import Foundation
 import Network
 
 /// An object that wraps a single value and publishes a new element whenever the value changes.
-@propertyWrapper public struct CurrentValue<Output> {
+@propertyWrapper struct CurrentValue<Output> {
 	private let publisher = BasicPublisher()
 
-	public var value: Output {
+	var value: Output {
 		didSet {
-			publisher.handler?(wrappedValue)
+			publisher.handler?(oldValue, wrappedValue)
 		}
 	}
 	
-	public var wrappedValue: Output {
+	var wrappedValue: Output {
 		get { value }
 		set {
 			value = newValue
@@ -20,31 +20,33 @@ import Network
 	}
 	
 	/// The property that can be accessed with the `$` syntax and allows access to the `BasicPublisher`
-	public var projectedValue: BasicPublisher {
+	var projectedValue: BasicPublisher {
 		get {
 			return publisher
 		}
 	}
 	
-    public mutating func set(_ newValue: Output) {
+	mutating func set(_ newValue: Output) {
         value = newValue
     }
 	
-	public init(wrappedValue: Output) {
+	init(wrappedValue: Output) {
 		self.value = wrappedValue
 	}
 	
 	// MARK: -
 	
-	public class BasicPublisher {
-		fileprivate var handler: ((Output) -> Void)?
+	class BasicPublisher {
+		typealias SubscriptionHandler = ((_ oldValue: Output, _ newValue: Output) -> Void)
+		
+		var handler: SubscriptionHandler?
 		
 		/// Attaches a subscriber with closure-based behavior.
 		///
 		/// - Note: only one subscriber can be active at the same moment
 		///
 		/// - parameter receiveValue: The closure to execute on receipt of a value.
-		public func subscribe(receiveValue: @escaping ((Output) -> Void)) {
+		func subscribe(receiveValue: @escaping SubscriptionHandler) {
 			handler = receiveValue
 		}
 	}

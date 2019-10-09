@@ -4,14 +4,42 @@ import UIKit
 
 class PaymentMethodsTableViewResultsController: NSObject, UITableViewDataSource {
 	@CurrentValue public var dataSource = [TableGroup]()
-	weak var tableView: UITableView?
+	weak var tableView: UITableView? {
+		didSet {
+			subscribeForDataSourceUpdate()
+		}
+	}
 	
-	override init() {
-		super.init()
-		
-		$dataSource.subscribe { [weak self] networks in
+	private func subscribeForDataSourceUpdate() {
+		// Reload table when datasource updated
+		$dataSource.subscribe { [weak self] (oldNetworks, newNetworks) in
 			DispatchQueue.main.async {
 				self?.tableView?.reloadData()
+				
+				self?.unsubscribeFromImagesUpdate(in: oldNetworks)
+				self?.subscribeForImagesUpdate(in: newNetworks)
+			}
+		}
+	}
+	
+	private func unsubscribeFromImagesUpdate(in dataSource: [TableGroup]) {
+		for group in dataSource {
+			for network in group.networks {
+				network.$logo.handler = nil
+			}
+		}
+	}
+	
+	private func subscribeForImagesUpdate(in dataSource: [TableGroup]) {
+		// Reload row when image updated
+		for (section, group) in dataSource.enumerated() {
+			for (row, network) in group.networks.enumerated() {
+				network.$logo.subscribe { (_, _) in
+					DispatchQueue.main.async {
+						let indexPath = IndexPath(row: row, section: section)
+						self.tableView?.reloadRows(at: [indexPath], with: .fade)
+					}
+				}
 			}
 		}
 	}
@@ -28,6 +56,7 @@ class PaymentMethodsTableViewResultsController: NSObject, UITableViewDataSource 
 		let network = dataSource[indexPath.section].networks[indexPath.row]
 		let cell = tableView.dequeueReusableCell(PaymentMethodsTableViewCell.self, for: indexPath)
 		cell.textLabel?.text = network.label
+		cell.imageView?.image = network.logo
 		return cell
 	}
 	

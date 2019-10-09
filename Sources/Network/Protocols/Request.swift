@@ -8,6 +8,17 @@ public protocol Request {
 	func build() throws -> URLRequest
 }
 
+public extension Request where Response == Data {
+	func decodeResponse(with data: Data?) throws -> Response {
+		guard let data = data else {
+			let error = NetworkError(description: "Server returned no data")
+			throw error
+		}
+		
+		return data
+	}
+}
+
 public extension Request where Response: Decodable {
 	func decodeResponse(with data: Data?) throws -> Response {
 		guard let data = data else {
