@@ -10,7 +10,7 @@ import Network
 	
 	public var listResultURL: URL
 	
-	let configuration: PaymentMethodsTableViewConfiguration
+	let configuration: PaymentListParameters
 	let resultsController = PaymentListResultsController()
 	var sessionStore: PaymentSessionService?
 	

@@ -9,5 +9,5 @@ import Foundation
 	@objc optional func customize(tableView: UITableView)
 }
 
-@objc public class DefaultPaymentListParameters: NSObject, PaymentMethodsTableViewConfiguration {
+@objc public class DefaultPaymentListParameters: NSObject, PaymentListParameters {
 }

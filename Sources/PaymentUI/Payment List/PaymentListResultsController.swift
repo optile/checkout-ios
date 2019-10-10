@@ -67,7 +67,7 @@ class PaymentListResultsController: NSObject, UITableViewDataSource {
 }
 
 // MARK: - TableGroup
-extension PaymentMethodsTableViewResultsController {
+extension PaymentListResultsController {
 	class TableGroup {
 		let groupName: String
 		var networks = [PaymentNetwork]()
