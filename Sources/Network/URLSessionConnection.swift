@@ -44,24 +44,24 @@ class URLSessionConnection: Connection {
 		}
 
 		guard let response = response else {
-			completionHandler(.failure(NetworkError.unexpected()))
+			completionHandler(.failure(InternalError.unexpected()))
 			return
 		}
 		
 		// We expect HTTP response
 		guard let httpResponse = response as? HTTPURLResponse else {
-			let error = NetworkError(description: "Unexpected server response (non-http)")
+			let error = InternalError(description: "Unexpected server response (non-http)")
 			completionHandler(.failure(error))
 			return
 		}
 
 		// - TODO: Read more about backend's status codes
 		guard httpResponse.statusCode >= 200, httpResponse.statusCode < 400 else {
-			if let data = data, let optileError = try? JSONDecoder().decode(ServerJSONError.self, from: data) {
+			if let data = data, let optileError = try? JSONDecoder().decode(ErrorInfo.self, from: data) {
 				
 				completionHandler(.failure(optileError))
 			} else {
-				let error = NetworkError(description: "Non-OK response from a server")
+				let error = InternalError(description: "Non-OK response from a server")
 				completionHandler(.failure(error))
 			}
 			

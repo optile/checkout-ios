@@ -23,7 +23,7 @@ extension CustomRequest {
 		components.queryItems = queryItems
 		
 		guard let url = components.url else {
-			throw NetworkError(description: "Internal error, unable to make API request URL")
+			throw InternalError(description: "Internal error, unable to make API request URL")
 		}
 		
 		var urlRequest = URLRequest(url: url)
