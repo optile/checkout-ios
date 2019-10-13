@@ -24,7 +24,9 @@ public class ListResult: NSObject, Decodable {
 	public let presetAccount: PresetAccount?
 	
 	/// Operation type for this `LIST` session
-	public let operationType: OperationType?
+	///
+	/// Possible values: `CHARGE`, `PRESET`, `PAYOUT`, `UPDATE`
+	public let operationType: String?
 	
 	/// Indicates that deletion of registered accounts is allowed in scope of this `LIST` session
 	/// * If set to `true` the deletion accounts is explicitly permitted by merchant.
@@ -36,10 +38,4 @@ public class ListResult: NSObject, Decodable {
 	///
 	/// - Note: `_Style` used for Objective-C compatibility
 	public let style: _Style?
-	
-	// MARK: - Enumerations
-	
-	public enum OperationType: String, Decodable {
-		case CHARGE, PRESET, PAYOUT, UPDATE
-	}
 }
