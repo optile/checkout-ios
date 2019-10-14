@@ -45,5 +45,5 @@ public class ApplicableNetwork: NSObject, Decodable {
 	public let localizedInputElements: [InputElement]?
 	
 	/// Collection of links related to this payment network in scope of the `LIST` session
-	public let links: NetworkLinks?
+	public let links: Dictionary<String, URL>?
 }

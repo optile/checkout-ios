@@ -44,13 +44,13 @@ class URLSessionConnection: Connection {
 		}
 
 		guard let response = response else {
-			completionHandler(.failure(InternalError.unexpected()))
+			completionHandler(.failure(NetworkInternalError.unexpected()))
 			return
 		}
 		
 		// We expect HTTP response
 		guard let httpResponse = response as? HTTPURLResponse else {
-			let error = InternalError(description: "Unexpected server response (non-http)")
+			let error = NetworkInternalError(description: "Unexpected server response (non-http)")
 			completionHandler(.failure(error))
 			return
 		}
@@ -61,7 +61,7 @@ class URLSessionConnection: Connection {
 				
 				completionHandler(.failure(optileError))
 			} else {
-				let error = InternalError(description: "Non-OK response from a server")
+				let error = NetworkInternalError(description: "Non-OK response from a server")
 				completionHandler(.failure(error))
 			}
 			

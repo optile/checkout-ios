@@ -62,7 +62,7 @@ private class PaymentSessionProvider {
 
 				// 2. Download localizations (will be added to downloadedNetworks)
 				for network in listResult.networks.applicable {
-					guard let langLink = network.links?.lang else {
+					guard let langLink = network.links?["lang"] else {
 						log(.error, "Missing a language file's link in ApplicableNetworks for '%{public}@'", network.code)
 						continue
 					}
@@ -147,6 +147,6 @@ private extension PaymentNetwork {
 			return nil
 		}
 		
-		self.init(code: applicableNetwork.code, label: localizedLabel, logoURL: applicableNetwork.links?.logo)
+		self.init(code: applicableNetwork.code, label: localizedLabel, logoURL: applicableNetwork.links?["logo"])
 	}
 }

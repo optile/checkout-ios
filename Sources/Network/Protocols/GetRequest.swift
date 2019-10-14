@@ -10,12 +10,12 @@ protocol GetRequest: Request {
 extension GetRequest {
 	public func build() throws -> URLRequest {
 		guard var components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
-			throw InternalError(description: "Internal error, incorrect GetRequest URL")
+			throw NetworkInternalError(description: "Internal error, incorrect GetRequest URL")
 		}
 		components.queryItems = queryItems
 		
 		guard let url = components.url else {
-			throw InternalError(description: "Internal error, unable to make API request URL")
+			throw NetworkInternalError(description: "Internal error, unable to make API request URL")
 		}
 		
 		var urlRequest = URLRequest(url: url)

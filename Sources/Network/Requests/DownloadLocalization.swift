@@ -18,11 +18,11 @@ public struct DownloadLocalization: GetRequest {
 	
 	public func decodeResponse(with data: Data?) throws -> Response {
 		guard let data = data else {
-			throw InternalError(description: "Localization file download error", debugDescription: "No data was in a response")
+			throw NetworkInternalError(description: "Localization file download error", debugDescription: "No data was in a response")
 		}
 		
 		guard let text = String(data: data, encoding: .isoLatin1) else {
-			throw InternalError(description: "Unable to decode localization file", debugDescription: "Unable to decode data")
+			throw NetworkInternalError(description: "Unable to decode localization file", debugDescription: "Unable to decode data")
 		}
 		
 		var localization = Dictionary<String, String>()

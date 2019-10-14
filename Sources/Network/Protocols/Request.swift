@@ -11,7 +11,7 @@ public protocol Request {
 public extension Request where Response == Data {
 	func decodeResponse(with data: Data?) throws -> Response {
 		guard let data = data else {
-			let error = InternalError(description: "Server returned no data")
+			let error = NetworkInternalError(description: "Server returned no data")
 			throw error
 		}
 		
@@ -22,7 +22,7 @@ public extension Request where Response == Data {
 public extension Request where Response: Decodable {
 	func decodeResponse(with data: Data?) throws -> Response {
 		guard let data = data else {
-			let error = InternalError(description: "Server returned no data")
+			let error = NetworkInternalError(description: "Server returned no data")
 			throw error
 		}
 		

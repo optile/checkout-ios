@@ -1,6 +1,6 @@
 import Foundation
 
-struct InternalError: LocalizedError, CustomDebugStringConvertible {
+struct PaymentInternalError: LocalizedError, CustomDebugStringConvertible {
 	var errorDescription: String?
 	var debugDescription: String
 	
@@ -9,7 +9,7 @@ struct InternalError: LocalizedError, CustomDebugStringConvertible {
 		self.errorDescription = description
 	}
 	
-	static func unexpected(file: String = #file, line: Int = #line, function: String = #function) -> InternalError {
+	static func unexpected(file: String = #file, line: Int = #line, function: String = #function) -> PaymentInternalError {
 		return .init(description: "Unexpected Error")
 	}
 }
