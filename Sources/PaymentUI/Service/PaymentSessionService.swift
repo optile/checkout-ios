@@ -64,6 +64,7 @@ private class PaymentSessionProvider {
 				for network in listResult.networks.applicable {
 					guard let langLink = network.links?["lang"] else {
 						log(.error, "Missing a language file's link in ApplicableNetworks for '%{public}@'", network.code)
+						// FIXME: Show a generic error
 						continue
 					}
 					
@@ -82,24 +83,7 @@ private class PaymentSessionProvider {
 		operationQueue.addOperation(sendBackendRequestOperation)
 	}
 	
-	private func makeDownloadLocalizationOperation(for network: ApplicableNetwork, from langURL: URL) -> Operation {
-		let downloadLocalizationRequest = DownloadLocalization(from: langURL)
-		let downloadOperation = DownloadOperation(request: downloadLocalizationRequest)
-		downloadOperation.downloadCompletionBlock = { result in
-			switch result {
-			case .success(let languageDictionary):
-				guard let paymentNetwork = PaymentNetwork(importFrom: network, localizationDictionary: languageDictionary) else {
-					return
-				}
-				
-				self.downloadedNetworks.append(paymentNetwork)
-			case .failure(let error):
-				log(.error, "Error downloading localization file for '%{public}@': %@", network.code, error.localizedDescription)
-			}
-		}
-		
-		return downloadOperation
-	}
+
 }
 
 /// Provider responsible for asynchronous image fetching
