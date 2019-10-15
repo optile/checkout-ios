@@ -1,21 +1,37 @@
 import Foundation
 
-/// Service responsible for translation. Localization dictionaries must be passed
+/// Service responsible for translation.
 class LocalizationService {
-	var defaultLocalizations: [Dictionary<String, String>]
+	let provider: LocalizationProvider
 	
-	init(defaultLocalizations: [Dictionary<String, String>]) {
-		self.defaultLocalizations = defaultLocalizations
+	init(provider: LocalizationProvider) {
+		self.provider = provider
 	}
 	
-	func localize<Model>(model: inout Model, using priorityLocalization: Dictionary<String, String>) where Model: Localizable {
-		var localizations = defaultLocalizations
-		localizations.insert(priorityLocalization, at: 0)
-		
-		for localizationKey in model.localizableFields {
-			guard let translation = findTranslation(forKey: localizationKey.key, in: localizations) else { continue }
-			model[keyPath: localizationKey.field] = translation
+	func localize<Model>(model: Model, completion: @escaping ((Model) -> Void)) where Model: Localizable {
+		if let localeURL = model.localeURL {
+			// Model has localization URL, download and localize using it and other localization dictionaries
+			provider.getLocalizations(additionalLocalizationURL: localeURL) { localizations in
+				let localizedModel = self.localize(model: model, using: localizations)
+				completion(localizedModel)
+			}
+		} else {
+			// Model doesn't have a localization URL, fallback using shared and local translations
+			let localizedModel = localize(model: model, using: provider.combinedLocalizations)
+			completion(localizedModel)
 		}
+
+	}
+	
+	private func localize<Model>(model: Model, using localizations: [Dictionary<String, String>]) -> Model where Model: Localizable {
+		var localizedModel = model
+		
+		for localizationKey in localizedModel.localizableFields {
+			guard let translation = findTranslation(forKey: localizationKey.key, in: localizations) else { continue }
+			localizedModel[keyPath: localizationKey.field] = translation
+		}
+		
+		return localizedModel
 	}
 	
 	private func findTranslation(forKey key: String, in localizations: [Dictionary<String, String>]) -> String? {

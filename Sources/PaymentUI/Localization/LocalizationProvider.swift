@@ -2,21 +2,22 @@ import Foundation
 
 /// Provider responsible for localizations storage and downloading
 class LocalizationProvider {
-	private let combinedLocalizations: [Dictionary<String, String>]
+	/// Shared and local localizations
+	let combinedLocalizations: [Dictionary<String, String>]
 
-	init(sharedTranslation: Dictionary<String, String>?) {
+	private init(sharedLocalization: Dictionary<String, String>?) {
 		var localizations = [Dictionary<String, String>]()
 		
-		if let sharedTranslation = sharedTranslation {
-			localizations.append(sharedTranslation)
+		if let sharedLocalization = sharedLocalization {
+			localizations.append(sharedLocalization)
 		}
 		localizations.append(LocalizationProvider.localTranslations)
 		
 		self.combinedLocalizations = localizations
 	}
 	
-	func add(localizationURL: URL, completion: @escaping (([Dictionary<String, String>]) -> Void)) {
-		LocalizationProvider.download(from: localizationURL) { [combinedLocalizations] result in
+	func getLocalizations(additionalLocalizationURL: URL, completion: @escaping (([Dictionary<String, String>]) -> Void)) {
+		LocalizationProvider.download(from: additionalLocalizationURL) { [combinedLocalizations] result in
 			switch result {
 			case .success(let localization):
 				var localizations = combinedLocalizations
@@ -31,21 +32,21 @@ class LocalizationProvider {
 	
 	// MARK: - Static methods
 	
-	static func download(from localizationURL: URL, completion: @escaping ((Result<Dictionary<String, String>, Error>) -> Void)) {
+	private static func download(from localizationURL: URL, completion: @escaping ((Result<Dictionary<String, String>, Error>) -> Void)) {
 		let downloadLocalizationRequest = DownloadLocalization(from: localizationURL)
 		let downloadOperation = DownloadOperation(request: downloadLocalizationRequest)
 		downloadOperation.downloadCompletionBlock = completion
 		downloadOperation.start() // we could start without async because operation is already asynchronous
 	}
 	
-	static func prepare(anyApplicableNetworkLangURL: URL, completion: @escaping ((LocalizationProvider) -> Void)) {
+	static func initalize(anyApplicableNetworkLangURL: URL, completion: @escaping ((LocalizationProvider) -> Void)) {
 		let paymentPageLocalizationURL: URL
 		
 		do {
 			paymentPageLocalizationURL = try anyApplicableNetworkLangURL.paymentPageLocalizationURL()
 		} catch {
 			log(.error, "Failed to make a correct payment page url: %@", error.localizedDescription)
-			completion(LocalizationProvider(sharedTranslation: nil))
+			completion(LocalizationProvider(sharedLocalization: nil))
 			return
 		}
 		
@@ -54,10 +55,10 @@ class LocalizationProvider {
 			
 			switch result {
 			case .success(let translation):
-				provider = .init(sharedTranslation: translation)
+				provider = .init(sharedLocalization: translation)
 			case .failure(let error):
 				log(.error, "Failed to download shared localization: %@", error.localizedDescription)
-				provider = .init(sharedTranslation: nil)
+				provider = .init(sharedLocalization: nil)
 			}
 			
 			completion(provider)
