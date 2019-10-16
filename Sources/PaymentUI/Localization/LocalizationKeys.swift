@@ -1,4 +1,5 @@
 import Foundation
+import Network
 
 extension PaymentNetwork: Localizable {
 	var localizableFields: [LocalizationKey<PaymentNetwork>] {

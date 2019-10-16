@@ -11,7 +11,7 @@ let package = Package(
     products: [
         // Products define the executables and libraries produced by a package, and make them visible to other packages.
 		.library(name: "Network", targets: ["Network"]),
-		.library(name: "PaymentUI", targets: ["Network"]),
+		.library(name: "PaymentUI", targets: ["PaymentUI"]),
     ],
     dependencies: [
 //		.package(url: "https://github.com/shibapm/Komondor.git", from: "1.0.4"),

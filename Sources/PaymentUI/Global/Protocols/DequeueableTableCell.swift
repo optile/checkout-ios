@@ -1,3 +1,5 @@
+#if canImport(UIKit)
+
 import UIKit
 
 protocol DequeueableTableCell where Self: UITableViewCell {
@@ -51,3 +53,5 @@ extension UITableView {
 		self.register(Cell.self, forCellReuseIdentifier: Cell.identifier)
 	}
 }
+
+#endif

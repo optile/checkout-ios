@@ -1,12 +1,19 @@
 import Foundation
 import Network
 
+#if canImport(UIKit)
+import UIKit
+#endif
+
 public final class PaymentNetwork {
 	internal let applicableNetwork: ApplicableNetwork
 	
 	public let code: String
 	public var label: String
+	
+	#if canImport(UIKit)
 	@CurrentValue var logo: UIImage? = nil
+	#endif
 	
 	init(from applicableNetwork: ApplicableNetwork) {
 		self.applicableNetwork = applicableNetwork

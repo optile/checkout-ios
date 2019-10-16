@@ -8,7 +8,7 @@ class LocalizationService {
 		self.provider = provider
 	}
 	
-	func localize<Model>(model: Model, completion: @escaping ((Model) -> Void)) where Model: Localizable {
+	private func localize<Model>(model: Model, completion: @escaping ((Model) -> Void)) where Model: Localizable {
 		if let localeURL = model.localeURL {
 			// Model has localization URL, download and localize using it and other localization dictionaries
 			provider.getLocalizations(additionalLocalizationURL: localeURL) { localizations in

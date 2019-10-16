@@ -1,6 +1,7 @@
+#if canImport(UIKit)
+
 import Foundation
 import Network
-import UIKit
 
 /// Service that fetches and stores PaymentSession.
 /// Used by `PaymentListViewController`
@@ -102,3 +103,5 @@ private class ImageProvider {
 		operationQueue.addOperation(downloadOperation)
 	}
 }
+
+#endif

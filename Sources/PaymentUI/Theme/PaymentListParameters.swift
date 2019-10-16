@@ -1,4 +1,6 @@
-import Foundation
+#if canImport(UIKit)
+
+import UIKit
 
 @objc public protocol PaymentListParameters {
 	
@@ -11,3 +13,5 @@ import Foundation
 
 @objc public class DefaultPaymentListParameters: NSObject, PaymentListParameters {
 }
+
+#endif
