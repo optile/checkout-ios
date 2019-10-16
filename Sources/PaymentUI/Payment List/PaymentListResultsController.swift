@@ -5,6 +5,7 @@ import UIKit
 /// DataSource and Publisher for table view with payment list
 class PaymentListResultsController: NSObject, UITableViewDataSource {
 	@CurrentValue public var dataSource = [TableGroup]()
+	
 	weak var tableView: UITableView? {
 		didSet {
 			subscribeForDataSourceUpdate()

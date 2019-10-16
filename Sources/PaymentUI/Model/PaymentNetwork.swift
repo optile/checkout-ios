@@ -12,7 +12,7 @@ public final class PaymentNetwork {
 		self.applicableNetwork = applicableNetwork
 		
 		self.code = applicableNetwork.code
-		self.label = applicableNetwork.label
+		self.label = String()
 	}
 }
 

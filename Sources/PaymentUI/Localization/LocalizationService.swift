@@ -20,8 +20,22 @@ class LocalizationService {
 			let localizedModel = localize(model: model, using: provider.combinedLocalizations)
 			completion(localizedModel)
 		}
-
 	}
+	
+	func localize<Model>(models: [Model], completion: @escaping (([Model]) -> Void)) where Model: Localizable {
+		var localizedModels = [Model]()
+		for model in models {
+			localize(model: model) { localizedModel in
+				localizedModels.append(localizedModel)
+				// TODO: Change to Operation to limit concurrent connections count
+				if localizedModels.count == models.count {
+					completion(localizedModels)
+				}
+			}
+		}
+	}
+	
+	// MARK: - Private methods
 	
 	private func localize<Model>(model: Model, using localizations: [Dictionary<String, String>]) -> Model where Model: Localizable {
 		var localizedModel = model

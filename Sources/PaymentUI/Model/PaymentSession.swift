@@ -1,6 +1,6 @@
 import Foundation
 
-public class PaymentSession {
+public final class PaymentSession {
 	public var networks: [PaymentNetwork]
 	
 	public init(networks: [PaymentNetwork]) {

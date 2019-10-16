@@ -2,96 +2,77 @@ import Foundation
 import Network
 import UIKit
 
-/// Service that fetches and stores PaymentSession. 
+/// Service that fetches and stores PaymentSession.
 /// Used by `PaymentListViewController`
 class PaymentSessionService {
 	@CurrentValue var sessionState: Load<PaymentSession> = .inactive
 	private let paymentSessionURL: URL
+	
+	private var localizedNetworks = [PaymentNetwork]()
+	private var localizationProvider: LocalizationProvider?
 
 	init(paymentSessionURL: URL) {
 		self.paymentSessionURL = paymentSessionURL
 	}
 	
 	func loadPaymentSession() {
-		let sessionProvider = PaymentSessionProvider(paymentSessionURL: paymentSessionURL)
+		localizedNetworks = [PaymentNetwork]()
 		sessionState = .loading
-
-		sessionProvider.download { [weak self] result in
+		
+		// Get list result
+		let getListResult = GetListResult(url: paymentSessionURL)
+		let getListResultOperation = DownloadOperation(request: getListResult)
+		getListResultOperation.downloadCompletionBlock = { [weak self] result in
+			let listResult: ListResult
 			switch result {
-			case .success(let session):
-				self?.sessionState = .success(session)
-				let imageProvider = ImageProvider()
+			case .success(let successListResult): listResult = successListResult
+			case .failure(let error):
+				self?.sessionState = .failure(error)
+				return
+			}
+			
+			// Prepare localization provider
+			let languageLink = listResult.networks.applicable.first?.links?["lang"]
+			guard let url = languageLink else {
+				let error = PaymentInternalError(description: "Applicable network language URL wasn't provided to localization provider")
+				self?.sessionState = .failure(error)
+				return
+			}
+			
+			// Download shared localization
+			LocalizationProvider.initalize(anyApplicableNetworkLangURL: url) { provider in
+				let paymentNetworks = listResult.networks.applicable.map { PaymentNetwork(from: $0) }
 				
-				for network in session.networks {
-					imageProvider.downloadImage(for: network) { image in
-						network.logo = image
+				// Localize each network
+				let service = LocalizationService(provider: provider)
+				service.localize(models: paymentNetworks) { localizedPaymentNetworks in
+					let session = PaymentSession(networks: localizedPaymentNetworks)
+					self?.sessionState = .success(session)
+					
+					// Download images
+					let imageProvider = ImageProvider()
+	
+					for network in localizedPaymentNetworks {
+						imageProvider.downloadImage(for: network) { image in
+							network.logo = image
+						}
 					}
 				}
-			case .failure(let error): self?.sessionState = .failure(error)
 			}
 		}
+		
+		getListResultOperation.start()
 	}
 }
 
 // MARK: -
-
-/// Provider responsible for payment session fetching and localization downloading
-private class PaymentSessionProvider {
-	private let paymentSessionURL: URL
-	private var downloadedNetworks = [PaymentNetwork]()
-	private let operationQueue = OperationQueue()
-	
-	init(paymentSessionURL: URL) {
-		self.paymentSessionURL = paymentSessionURL
-	}
-	
-	public func download(completion: @escaping ((Result<PaymentSession, Error>) -> Void)) {
-		// 1. Download session
-		let getListResult = GetListResult(url: paymentSessionURL)
-		let sendBackendRequestOperation = DownloadOperation(request: getListResult)
-		
-		sendBackendRequestOperation.downloadCompletionBlock = { [self] result in
-			switch result {
-			case .success(let listResult):
-				// 3. Exit the method (send completion with localized PaymentSession)
-				let sendCompletionBlockOperation = BlockOperation {
-					let paymentSession = PaymentSession(networks: self.downloadedNetworks)
-					completion(.success(paymentSession))
-					self.downloadedNetworks = [PaymentNetwork]()
-				}
-
-				// 2. Download localizations (will be added to downloadedNetworks)
-				for network in listResult.networks.applicable {
-					guard let langLink = network.links?["lang"] else {
-						log(.error, "Missing a language file's link in ApplicableNetworks for '%{public}@'", network.code)
-						// FIXME: Show a generic error
-						continue
-					}
-					
-					let downloadLocalization = self.makeDownloadLocalizationOperation(for: network, from: langLink)
-					sendCompletionBlockOperation.addDependency(downloadLocalization)
-					self.operationQueue.addOperation(downloadLocalization)
-				}
-				
-				// Add pre-created finish operation
-				self.operationQueue.addOperation(sendCompletionBlockOperation)
-			case .failure(let error):
-				completion(.failure(error))
-			}
-		}
-		
-		operationQueue.addOperation(sendBackendRequestOperation)
-	}
-	
-
-}
 
 /// Provider responsible for asynchronous image fetching
 private class ImageProvider {
 	private let operationQueue = OperationQueue()
 	
 	func downloadImage(for network: PaymentNetwork, completion: @escaping ((UIImage?) -> Void)) {
-		guard let imageURL = network.logoURL, network.logo == nil else {
+		guard let imageURL = network.applicableNetwork.links?["logo"], network.logo == nil else {
 			completion(nil)
 			return
 		}
@@ -119,18 +100,5 @@ private class ImageProvider {
 		}
 		
 		operationQueue.addOperation(downloadOperation)
-	}
-}
-
-// MARK: - Extensions
-
-private extension PaymentNetwork {
-	convenience init?(importFrom applicableNetwork: ApplicableNetwork, localizationDictionary: Dictionary<String, String>) {
-		guard let localizedLabel = localizationDictionary[LocalizationKey.label.rawValue] else {
-			log(.error, "Unable to find `%{public}@` in localization dictionary for %@", PaymentNetwork.LocalizationKey.label.rawValue, applicableNetwork.code)
-			return nil
-		}
-		
-		self.init(code: applicableNetwork.code, label: localizedLabel, logoURL: applicableNetwork.links?["logo"])
 	}
 }

@@ -16,7 +16,15 @@ class LocalizationProvider {
 		self.combinedLocalizations = localizations
 	}
 	
-	func getLocalizations(additionalLocalizationURL: URL, completion: @escaping (([Dictionary<String, String>]) -> Void)) {
+	/// Download (if specified) localization for that model and localize it.
+	///
+	/// Fallback will be used if localizaion value is not found somewhere. Flow: specified localization -> shared -> local
+	func getLocalizations(additionalLocalizationURL: URL?, completion: @escaping (([Dictionary<String, String>]) -> Void)) {
+		guard let additionalLocalizationURL = additionalLocalizationURL else {
+			completion(combinedLocalizations)
+			return
+		}
+		
 		LocalizationProvider.download(from: additionalLocalizationURL) { [combinedLocalizations] result in
 			switch result {
 			case .success(let localization):
@@ -86,7 +94,7 @@ private extension URL {
 		}
 		
 		var updatedComponents = components
-		updatedComponents.path = components.path.replacingOccurrences(of: lastPathComponent, with: "paymentpage")
+		updatedComponents.path = components.path.replacingOccurrences(of: lastPathComponent, with: "paymentpage.properties")
 		
 		guard let paymentPageURL = updatedComponents.url else {
 			let error = NetworkInternalError(description: "Unable for form a url from URLComponents: \(updatedComponents)")

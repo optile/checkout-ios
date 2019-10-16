@@ -12,7 +12,7 @@ import Network
 	
 	let configuration: PaymentListParameters
 	let resultsController = PaymentListResultsController()
-	var sessionStore: PaymentSessionService?
+	var sessionService: PaymentSessionService?
 	
 	/// - Parameter tableConfiguration: settings for a payment table view, if not specified defaults will be used
 	/// - Parameter listResultURL: URL that you receive after executing *Create new payment session request* request. Needed URL will be specified in `links.self`
@@ -38,16 +38,16 @@ import Network
 	}
 		
 	private func load(listResult: URL) {
-		let store = PaymentSessionService(paymentSessionURL: listResult)
-		self.sessionStore = store
+		let service = PaymentSessionService(paymentSessionURL: listResult)
+		self.sessionService = service
 		
-		store.$sessionState.subscribe { [weak self] (_, sessionState) in
+		service.$sessionState.subscribe { [weak self] (_, sessionState) in
 			DispatchQueue.main.async {
 				self?.viewSessionState = sessionState
 			}
 		}
 		
-		store.loadPaymentSession()
+		service.loadPaymentSession()
 	}
 	
 	var viewSessionState: Load<PaymentSession> = .inactive {
