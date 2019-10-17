@@ -43,9 +43,9 @@ class LocalizationProvider {
 	
 	private static func download(from localizationURL: URL, completion: @escaping ((Result<Dictionary<String, String>, Error>) -> Void)) {
 		let downloadLocalizationRequest = DownloadLocalization(from: localizationURL)
-		let downloadOperation = DownloadOperation(request: downloadLocalizationRequest)
-		downloadOperation.downloadCompletionBlock = completion
-		downloadOperation.start() // we could start without async because operation is already asynchronous
+		let sendRequestOperation = SendRequestOperation(request: downloadLocalizationRequest)
+		sendRequestOperation.downloadCompletionBlock = completion
+		sendRequestOperation.start() // we could start without async because operation is already asynchronous
 	}
 	
 	static func initalize(anyApplicableNetworkLangURL: URL, completion: @escaping ((LocalizationProvider) -> Void)) {

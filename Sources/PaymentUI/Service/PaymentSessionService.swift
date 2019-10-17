@@ -22,7 +22,7 @@ class PaymentSessionService {
 		
 		// Get list result
 		let getListResult = GetListResult(url: paymentSessionURL)
-		let getListResultOperation = DownloadOperation(request: getListResult)
+		let getListResultOperation = SendRequestOperation(request: getListResult)
 		getListResultOperation.downloadCompletionBlock = { [weak self] result in
 			let listResult: ListResult
 			switch result {
@@ -79,8 +79,8 @@ private class ImageProvider {
 		}
 		
 		let downloadRequest = DownloadData(from: imageURL)
-		let downloadOperation = DownloadOperation(request: downloadRequest)
-		downloadOperation.downloadCompletionBlock = { result in
+		let sendRequestOperation = SendRequestOperation(request: downloadRequest)
+		sendRequestOperation.downloadCompletionBlock = { result in
 			let image: UIImage?
 			
 			switch result {
@@ -100,7 +100,7 @@ private class ImageProvider {
 			completion(image)
 		}
 		
-		operationQueue.addOperation(downloadOperation)
+		operationQueue.addOperation(sendRequestOperation)
 	}
 }
 

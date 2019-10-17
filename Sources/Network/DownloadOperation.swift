@@ -1,6 +1,6 @@
 import Foundation
 
-public class DownloadOperation<T>: AsynchronousOperation where T: Request {
+public class SendRequestOperation<T>: AsynchronousOperation where T: Request {
 	let connection: Connection
 	public let request: T
 	
