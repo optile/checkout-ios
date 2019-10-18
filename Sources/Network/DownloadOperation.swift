@@ -18,8 +18,6 @@ public class SendRequestOperation<T>: AsynchronousOperation where T: Request {
 	}
 	
 	public override func main() {
-		super.main()
-		
 		connection.send(request: request) { result in
 			switch result {
 			case .success(let data):
@@ -33,7 +31,7 @@ public class SendRequestOperation<T>: AsynchronousOperation where T: Request {
 				self.downloadCompletionBlock?(.failure(error))
 			}
 			
-			self.state = .finished
+			self.finish()
 		}
 	}
 }

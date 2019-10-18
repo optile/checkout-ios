@@ -1,7 +1,7 @@
 import Foundation
 import Network
 
-public final class PaymentSession {
+public struct PaymentSession {
 	public var networks: [PaymentNetwork]
 	
 	public init(networks: [PaymentNetwork]) {

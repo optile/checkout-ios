@@ -4,7 +4,7 @@ import Network
 extension PaymentNetwork: Localizable {
 	var localizableFields: [LocalizationKey<PaymentNetwork>] {
 		return [
-			.init(\.label, key: "network.label")
+			.init(\.label, key: "network.label"),
 		]
 	}
 	

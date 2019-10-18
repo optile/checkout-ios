@@ -5,15 +5,13 @@ import Network
 import UIKit
 #endif
 
-public final class PaymentNetwork {
+public struct PaymentNetwork {
 	internal let applicableNetwork: ApplicableNetwork
 	
 	public let code: String
 	public var label: String
 	
-	#if canImport(UIKit)
-	@CurrentValue var logo: UIImage? = nil
-	#endif
+	@CurrentValue var logoData: Data? = nil
 	
 	init(from applicableNetwork: ApplicableNetwork) {
 		self.applicableNetwork = applicableNetwork
