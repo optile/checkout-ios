@@ -1,5 +1,5 @@
 import Foundation
-import PaymentNetwork
+
 
 class LocalizeModelOperation<Model>: AsynchronousOperation where Model: Localizable {
 	var sharedLocalizations: [Dictionary<String, String>] = []

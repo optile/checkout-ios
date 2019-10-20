@@ -1,10 +1,5 @@
 PODS:
-  - Optile (0.1.0):
-    - Optile/Network (= 0.1.0)
-    - Optile/PaymentUI (= 0.1.0)
-  - Optile/Network (0.1.0)
-  - Optile/PaymentUI (0.1.0):
-    - Optile/Network
+  - Optile (0.1.0)
 
 DEPENDENCIES:
   - Optile (from `../`)
@@ -14,8 +9,8 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Optile: 33d6814e668343ef4bf72080696e50070f2d1c9c
+  Optile: 12cca17dffbcb45cde7513c5bb3537671c97db6f
 
-PODFILE CHECKSUM: a7d6be13c471de535c40aeec9e115935fe6a7b74
+PODFILE CHECKSUM: 6afe5e5b93e3e4b46e6a58557956be3836dc9a27
 
 COCOAPODS: 1.8.1

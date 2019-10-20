@@ -1,5 +1,5 @@
 import Foundation
-import PaymentNetwork
+
 
 class SharedLocalizationProvider {
 	typealias Localization = Dictionary<String, String>

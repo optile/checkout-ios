@@ -1,5 +1,5 @@
 import XCTest
-@testable import PaymentNetwork
+@testable import Payment
 
 final class NetworkTests: XCTestCase {
     func testExample() {

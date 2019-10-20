@@ -1,5 +1,5 @@
 import Foundation
-import PaymentNetwork
+
 
 class NetworkDownloadProvider {
 	let operationQueue = OperationQueue()
