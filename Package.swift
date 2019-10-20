@@ -16,8 +16,8 @@ let package = Package(
 //		.package(url: "https://github.com/Realm/SwiftLint", from: "0.35.0"),
 	],
     targets: [
-		.target(name: "Payment", dependencies: ["Sources"]),
-		.testTarget(name: "PaymetTests", dependencies: ["Payment"])
+		.target(name: "Payment", path: "Sources"),
+		.testTarget(name: "Network", dependencies: ["Payment"])
     ],
 	swiftLanguageVersions: [
 		.v5
