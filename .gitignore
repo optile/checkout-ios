@@ -28,4 +28,4 @@ DerivedData/
 /.build
 /Packages
 xcuserdata/
-/*.xcodeproj
+# /*.xcodeproj
