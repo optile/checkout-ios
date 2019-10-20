@@ -6,7 +6,7 @@ public class SendRequestOperation<T>: AsynchronousOperation where T: Request {
 	
 	public var downloadCompletionBlock: ((Result<T.Response, Error>) -> Void)?
 	
-	init(connection: Connection, request: T) {
+	public init(connection: Connection, request: T) {
 		self.connection = connection
 		self.request = request
 		super.init()

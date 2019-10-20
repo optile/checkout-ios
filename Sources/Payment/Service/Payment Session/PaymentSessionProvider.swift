@@ -1,5 +1,5 @@
 import Foundation
-import Network
+import PaymentNetwork
 
 class PaymentSessionProvider {
 	private let paymentSessionURL: URL

@@ -1,7 +1,7 @@
 #if canImport(UIKit)
 
 import UIKit
-import Network
+import PaymentNetwork
 
 @objc public final class PaymentListViewContoller: UIViewController {
 	weak var methodsTableView: UITableView?

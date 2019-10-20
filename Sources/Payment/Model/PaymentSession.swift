@@ -1,5 +1,5 @@
 import Foundation
-import Network
+import PaymentNetwork
 
 public struct PaymentSession {
 	public var networks: [PaymentNetwork]

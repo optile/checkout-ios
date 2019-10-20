@@ -10,8 +10,8 @@ let package = Package(
 	],
     products: [
         // Products define the executables and libraries produced by a package, and make them visible to other packages.
-		.library(name: "Network", targets: ["Network"]),
-		.library(name: "PaymentUI", targets: ["PaymentUI"]),
+		.library(name: "PaymentNetwork", targets: ["PaymentNetwork"]),
+		.library(name: "PaymentUI", targets: ["PaymentUI"])
     ],
     dependencies: [
 //		.package(url: "https://github.com/shibapm/Komondor.git", from: "1.0.4"),
@@ -20,9 +20,11 @@ let package = Package(
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
-        .target(name: "Network"),
-        .target(name: "PaymentUI", dependencies: ["Network"])
-//		.testTarget(name: "Tests", dependencies: ["Payment"])
+		.target(name: "PaymentNetwork", path: "Sources/Network"),
+		.target(name: "Payment", dependencies: ["PaymentNetwork"]),
+		.target(name: "PaymentUI", dependencies: ["Payment"]),
+
+		.testTarget(name: "NetworkTests", dependencies: ["PaymentNetwork"])
     ],
 	swiftLanguageVersions: [
 		.v5

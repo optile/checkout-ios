@@ -1,5 +1,5 @@
 import Foundation
-import Network
+import PaymentNetwork
 
 #if canImport(UIKit)
 import UIKit

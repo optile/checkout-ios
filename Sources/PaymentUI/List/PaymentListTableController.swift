@@ -1,7 +1,7 @@
 #if canImport(UIKit)
 
 import Foundation
-import Network
+import PaymentNetwork
 import UIKit
 
 class PaymentListTableController: NSObject {

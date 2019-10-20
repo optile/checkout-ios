@@ -1,7 +1,6 @@
 import XCTest
-
-import OptileTests
+import NetworkTests
 
 var tests = [XCTestCaseEntry]()
-tests += OptileTests.allTests()
+tests += NetworkTests.allTests()
 XCTMain(tests)
