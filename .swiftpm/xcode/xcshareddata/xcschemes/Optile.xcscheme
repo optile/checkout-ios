@@ -28,9 +28,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "NetworkTests"
-               BuildableName = "NetworkTests"
-               BlueprintName = "NetworkTests"
+               BlueprintIdentifier = "PaymentTests"
+               BuildableName = "PaymentTests"
+               BlueprintName = "PaymentTests"
                ReferencedContainer = "container:">
             </BuildableReference>
          </BuildActionEntry>
@@ -40,15 +40,26 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      codeCoverageEnabled = "YES"
+      onlyGenerateCoverageForSpecifiedTargets = "YES">
+      <CodeCoverageTargets>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "Payment"
+            BuildableName = "Payment"
+            BlueprintName = "Payment"
+            ReferencedContainer = "container:">
+         </BuildableReference>
+      </CodeCoverageTargets>
       <Testables>
          <TestableReference
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "NetworkTests"
-               BuildableName = "NetworkTests"
-               BlueprintName = "NetworkTests"
+               BlueprintIdentifier = "PaymentTests"
+               BuildableName = "PaymentTests"
+               BlueprintName = "PaymentTests"
                ReferencedContainer = "container:">
             </BuildableReference>
          </TestableReference>
