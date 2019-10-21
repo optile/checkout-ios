@@ -17,7 +17,8 @@ let package = Package(
 	],
     targets: [
 		.target(name: "Payment", path: "Sources"),
-		.testTarget(name: "Network", dependencies: ["Payment"])
+		
+		.testTarget(name: "PaymentTests", dependencies: ["Payment"], path: "Tests")
     ],
 	swiftLanguageVersions: [
 		.v5

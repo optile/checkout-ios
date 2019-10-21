@@ -1,8 +1,17 @@
 import Foundation
 
-
 class SharedLocalizationProvider {
 	typealias Localization = Dictionary<String, String>
+	
+	let connection: Connection
+	
+	init(connection: Connection) {
+		self.connection = connection
+	}
+	
+	convenience init() {
+		self.init(connection: URLSessionConnection())
+	}
 	
 	func download(using url: URL, completion: @escaping ((Result<[Dictionary<String, String>], Error>) -> Void)) {
 		let downloadLocalizationRequest = DownloadLocalization(from: url)
