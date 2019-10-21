@@ -4,17 +4,19 @@ class LocalizeModelOperation<Model>: AsynchronousOperation where Model: Localiza
 	var sharedLocalizations: [Dictionary<String, String>] = []
 	
 	let modelToLocalize: Model
-		
+	let connection: Connection
+	
 	private(set) var localizedModel: Model?
 
-	init(_ model: Model) {
+	init(_ model: Model, use connection: Connection) {
 		self.modelToLocalize = model
+		self.connection = connection
 	}
 	
 	override func main() {
 		if let localizationFileURL = modelToLocalize.localeURL {
 			let downloadLocalizationRequest = DownloadLocalization(from: localizationFileURL)
-			let sendRequestOperation = SendRequestOperation(request: downloadLocalizationRequest)
+			let sendRequestOperation = SendRequestOperation(connection: connection, request: downloadLocalizationRequest)
 			sendRequestOperation.downloadCompletionBlock = {
 				self.downloadAdditionalLocalizationHandler(model: self.modelToLocalize, otherTranslations: self.sharedLocalizations, downloadLocalizationResult: $0)
 			}

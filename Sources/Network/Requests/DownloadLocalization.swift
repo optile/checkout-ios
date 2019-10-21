@@ -27,7 +27,8 @@ public struct DownloadLocalization: GetRequest {
 		
 		var localization = Dictionary<String, String>()
 		for line in text.components(separatedBy: .newlines) {
-			let keyValueLine = line.components(separatedBy: "=")
+			let trimmedLine = line.trimmingCharacters(in: .whitespaces)
+			let keyValueLine = trimmedLine.components(separatedBy: "=")
 			guard keyValueLine.count == 2 else { continue }
 			localization[keyValueLine[0]] = keyValueLine[1]
 		}

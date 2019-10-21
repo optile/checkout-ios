@@ -3,22 +3,72 @@ import XCTest
 
 class SharedLocalizationProviderTests: XCTestCase {
 	func testSuccessDownload() {
-		let provider = SharedLocalizationProvider(connection: SuccessConnection())
+		let localTranslation = ["test1": "value1", "test2": "value2"]
+		
+		let connection = SuccessConnection()
+		let provider = SharedLocalizationProvider(connection: connection, localTranslations: localTranslation)
 		let promise = expectation(description: "SharedLocalizationProvider response")
 		provider.download(using: URL.example) { result in
+			let dictionaries: [Dictionary<String, String>]
+			
 			switch result {
-			case .success(let dictionary):
-				let attachment = XCTAttachment(plistObject: dictionary)
-				self.add(attachment)
-				XCTAssert(dictionary.first?["account.holderName.label"] == "Holder Name")
+			case .success(let resultDictionaries): dictionaries = resultDictionaries
 			case .failure(let error):
 				XCTFail(error.localizedDescription)
+				return
 			}
+			
+			let attachment = XCTAttachment(plistObject: dictionaries)
+			self.add(attachment)
+			
+			XCTAssertEqual(dictionaries.count, 2)
+			
+			XCTAssertEqual(dictionaries[0]["account.holderName.label"], "Holder Name")
+			XCTAssertEqual(dictionaries[0].count, 61)
+			
+			XCTAssertEqual(dictionaries[1], localTranslation)
+			
 			promise.fulfill()
 		}
 		wait(for: [promise], timeout: 1)
 	}
+	
+	func testFailedDownload() {
+		let testError = TestError(errorDescription: "Test error")
+		let connection = FailedConnection(error: testError)
+		let provider = SharedLocalizationProvider(connection: connection)
+		
+		let promise = expectation(description: "SharedLocalizationProvider response")
+		
+		provider.download(using: URL.example) { result in
+			switch result {
+			case .failure(let error):
+				XCTAssertEqual(error.localizedDescription, testError.localizedDescription)
+			case .success:
+				XCTFail("Expected failure because framework is not intended to work without downloaded shared dictionary")
+			}
+
+			promise.fulfill()
+		}
+		wait(for: [promise], timeout: 1)
+	}
+	
+	func testURLTransformation() {
+		let applicableNetworkLangURL = URL(string: "https://resources.sandbox.oscato.com/resource/lang/VASILY_DEMO/en_US/VISAELECTRON.properties")!
+		let connection = TestURLConnection()
+		let provider = SharedLocalizationProvider(connection: connection)
+		
+		let promise = expectation(description: "SharedLocalizationProvider response")
+		provider.download(using: applicableNetworkLangURL) { result in
+			promise.fulfill()
+		}
+		wait(for: [promise], timeout: 1)
+		
+		XCTAssertEqual(connection.requestedURL, URL(string: "https://resources.sandbox.oscato.com/resource/lang/VASILY_DEMO/en_US/paymentpage.properties?")!)
+	}
 }
+
+// MARK: - Connections
 
 private class SuccessConnection: FakeConnection {
 	func fakeData(for request: URLRequest) -> Result<Data?, Error> {
@@ -95,5 +145,23 @@ private class SuccessConnection: FakeConnection {
 		"""
 		
 		return properties.data(using: .utf8)!
+	}
+}
+
+private struct FailedConnection: FakeConnection {
+	let error: Error
+	
+	func fakeData(for request: URLRequest) -> Result<Data?, Error> {
+		let error = TestError(errorDescription: "Test error")
+		return .failure(error)
+	}
+}
+
+private class TestURLConnection: FakeConnection {
+	private(set) var requestedURL: URL? = nil
+	
+	func fakeData(for request: URLRequest) -> Result<Data?, Error> {
+		requestedURL = request.url
+		return .success(nil)
 	}
 }

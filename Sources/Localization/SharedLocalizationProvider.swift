@@ -4,22 +4,33 @@ class SharedLocalizationProvider {
 	typealias Localization = Dictionary<String, String>
 	
 	let connection: Connection
+	let localTranslations: Dictionary<String, String>
 	
-	init(connection: Connection) {
+	init(connection: Connection, localTranslations: Dictionary<String, String>) {
 		self.connection = connection
+		self.localTranslations = localTranslations
 	}
 	
-	convenience init() {
-		self.init(connection: URLSessionConnection())
+	convenience init(connection: Connection) {
+		self.init(connection: connection, localTranslations: SharedLocalizationProvider.localTranslations)
 	}
 	
 	func download(using url: URL, completion: @escaping ((Result<[Dictionary<String, String>], Error>) -> Void)) {
-		let downloadLocalizationRequest = DownloadLocalization(from: url)
-		let sendRequestOperation = SendRequestOperation(request: downloadLocalizationRequest)
-		sendRequestOperation.downloadCompletionBlock = { result in
+		let paymentPageURL: URL
+		
+		do {
+			paymentPageURL = try url.transformToPaymentPageLocalizationURL()
+		} catch {
+			completion(.failure(error))
+			return
+		}
+		
+		let downloadLocalizationRequest = DownloadLocalization(from: paymentPageURL)
+		let sendRequestOperation = SendRequestOperation(connection: connection, request: downloadLocalizationRequest)
+		sendRequestOperation.downloadCompletionBlock = { [localTranslations] result in
 			switch result {
 			case .success(let translation):
-				let allLocalizations = [translation, SharedLocalizationProvider.localTranslations]
+				let allLocalizations = [translation, localTranslations]
 				completion(.success(allLocalizations))
 			case .failure(let error):
 				completion(.failure(error))
@@ -36,7 +47,7 @@ private extension URL {
 	/// Example:
 	/// - From: `https://resources.sandbox.oscato.com/resource/lang/VASILY_DEMO/en_US/VISAELECTRON.properties`
 	/// - To: `https://resources.sandbox.oscato.com/resource/lang/VASILY_DEMO/en_US/paymentpage.properties`
-	func paymentPageLocalizationURL() throws -> URL {
+	func transformToPaymentPageLocalizationURL() throws -> URL {
 		guard let components = URLComponents(url: self, resolvingAgainstBaseURL: false) else {
 			let error = PaymentInternalError(description: "Incorrect shared translation URL: " + self.absoluteString)
 			throw error

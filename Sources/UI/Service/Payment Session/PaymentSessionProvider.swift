@@ -6,8 +6,11 @@ class PaymentSessionProvider {
 	private let localizationQueue = OperationQueue()
 	private var sharedLocalizations: [Dictionary<String, String>] = []
 	
-	init(paymentSessionURL: URL) {
+	let connection: Connection
+	
+	init(paymentSessionURL: URL, connection: Connection) {
 		self.paymentSessionURL = paymentSessionURL
+		self.connection = connection
 	}
 	
 	func loadPaymentSession(completion: @escaping ((Load<PaymentSession>) -> Void)) {
@@ -27,7 +30,7 @@ class PaymentSessionProvider {
 	
 	private func getListResult(from url: URL, completion: @escaping ((Result<ListResult, Error>) -> Void)) {
 		let getListResult = GetListResult(url: url)
-		let getListResultOperation = SendRequestOperation(request: getListResult)
+		let getListResultOperation = SendRequestOperation(connection: connection, request: getListResult)
 		getListResultOperation.downloadCompletionBlock = completion
 		getListResultOperation.start()
 	}
@@ -49,7 +52,7 @@ class PaymentSessionProvider {
 			return
 		}
 		
-		let provider = SharedLocalizationProvider()
+		let provider = SharedLocalizationProvider(connection: connection)
 		
 		provider.download(using: localeURL) { result in
 			switch result {
@@ -73,7 +76,7 @@ class PaymentSessionProvider {
 		}
 		
 		for network in session.networks {
-			let operation = LocalizeModelOperation(network)
+			let operation = LocalizeModelOperation(network, use: connection)
 			operation.sharedLocalizations = sharedLocalizations
 			
 			allOperations.append(operation)

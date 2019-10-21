@@ -1,5 +1,5 @@
 import Foundation
 
-struct TestError: Error {
-	var localizedDescription: String
+struct TestError: LocalizedError {
+	var errorDescription: String
 }

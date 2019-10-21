@@ -12,10 +12,10 @@ public class SendRequestOperation<T>: AsynchronousOperation where T: Request {
 		super.init()
 	}
 	
-	public convenience init(request: T) {
-		let connection = URLSessionConnection()
-		self.init(connection: connection, request: request)
-	}
+//	public convenience init(request: T) {
+//		let connection = URLSessionConnection()
+//		self.init(connection: connection, request: request)
+//	}
 	
 	public override func main() {
 		let urlRequest: URLRequest
