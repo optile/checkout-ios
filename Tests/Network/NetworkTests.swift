@@ -31,13 +31,8 @@ final class NetworkTests: XCTestCase {
 // MARK: - Fake DataSource
 
 private class SuccessConnection: FakeConnection {
-	func fakeData<R>(for request: R) -> Result<Data?, Error> where R: Request {
-		switch R.self {
-		case is GetListResult.Type: return .success(getListResultResponse)
-		default:
-			XCTFail("Unexpected request")
-			return .success(nil)
-		}
+	func fakeData(for request: URLRequest) -> Result<Data?, Error> {
+		return .success(getListResultResponse)
 	}
 	
 	var getListResultResponse: Data {

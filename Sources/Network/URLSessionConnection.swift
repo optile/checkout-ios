@@ -4,30 +4,23 @@ import os
 class URLSessionConnection: Connection {
 	let session = URLSession(configuration: URLSessionConfiguration.default)
 	
+	private var task: URLSessionDataTask?
+	
 	typealias RequestCompletionHandler = (Result<Data?, Error>) -> Void
 	
-	func send<R>(request: R, completionHandler: @escaping RequestCompletionHandler) where R : Request {
-		// Build URL Request
-		let urlRequest: URLRequest
-		
-		do {
-			urlRequest = try request.build()
-		} catch {
-			completionHandler(.failure(error))
-			return
-		}
-		
+	func send(request: URLRequest, completionHandler: @escaping ((Result<Data?, Error>) -> Void)) {
 		// Send a network request
-		let task = session.dataTask(with: urlRequest) { [handleDataTaskResponse] (data, response, error) in
+		let task = session.dataTask(with: request) { [handleDataTaskResponse] (data, response, error) in
 			handleDataTaskResponse(data, response, error, completionHandler)
 		}
 		
+		self.task = task
 		task.resume()
 		
 		if #available(OSX 10.14, iOS 12, *) {
 			#if DEBUG
-			let method = urlRequest.httpMethod?.uppercased() ?? ""
-			os_log(.debug, "[API] >> %s %s", method, urlRequest.url!.absoluteString)
+			let method = request.httpMethod?.uppercased() ?? ""
+			os_log(.debug, "[API] >> %s %s", method, request.url!.absoluteString)
 			#endif
 		} else {
 			// don't log anything
@@ -69,5 +62,11 @@ class URLSessionConnection: Connection {
 		}
 		
 		completionHandler(.success(data))
+		task = nil
+	}
+	
+	func cancel() {
+		task?.cancel()
+		task = nil
 	}
 }

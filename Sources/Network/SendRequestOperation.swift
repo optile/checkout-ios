@@ -18,7 +18,16 @@ public class SendRequestOperation<T>: AsynchronousOperation where T: Request {
 	}
 	
 	public override func main() {
-		connection.send(request: request) { result in
+		let urlRequest: URLRequest
+		do {
+			urlRequest = try request.build()
+		} catch {
+			downloadCompletionBlock?(.failure(error))
+			finish()
+			return
+		}
+		
+		connection.send(request: urlRequest) { result in
 			switch result {
 			case .success(let data):
 				do {
@@ -33,5 +42,10 @@ public class SendRequestOperation<T>: AsynchronousOperation where T: Request {
 			
 			self.finish()
 		}
+	}
+	
+	public override func cancel() {
+		connection.cancel()
+		super.cancel()
 	}
 }
