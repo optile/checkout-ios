@@ -32,9 +32,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "Optile::NetworkTests"
-               BuildableName = "NetworkTests.xctest"
-               BlueprintName = "NetworkTests"
+               BlueprintIdentifier = "Optile::PaymentTests"
+               BuildableName = "PaymentTests.xctest"
+               BlueprintName = "PaymentTests"
                ReferencedContainer = "container:Optile.xcodeproj">
             </BuildableReference>
          </TestableReference>
