@@ -7,6 +7,7 @@ class LocalizeModelOperation<Model>: AsynchronousOperation where Model: Localiza
 	let connection: Connection
 	
 	private(set) var localizedModel: Model?
+	private(set) var remoteLocalizationError: Error?
 
 	init(_ model: Model, use connection: Connection) {
 		self.modelToLocalize = model
@@ -38,11 +39,13 @@ class LocalizeModelOperation<Model>: AsynchronousOperation where Model: Localiza
 		
 		switch downloadLocalizationResult {
 		case .success(let specificTranslation):
-			var allTranslations = otherTranslations
-			allTranslations += [specificTranslation]
+			var allTranslations = [specificTranslation]
+			allTranslations.append(contentsOf: otherTranslations)
 			localizedModel = localize(model: model, using: allTranslations)
 		case .failure(let error):
 			log(.error, "Downloading specific localization failed with error: %@, using only shared localizations", error.localizedDescription)
+			
+			self.remoteLocalizationError = error
 			localizedModel = localize(model: model, using: otherTranslations)
 		}
 		
@@ -53,8 +56,17 @@ class LocalizeModelOperation<Model>: AsynchronousOperation where Model: Localiza
 		var localizedModel = model
 		
 		for localizationKey in localizedModel.localizableFields {
-			guard let translation = findTranslation(forKey: localizationKey.key, in: localizations) else { continue }
-			localizedModel[keyPath: localizationKey.field] = translation
+			let localized: String
+			
+			if let translation = findTranslation(forKey: localizationKey.key, in: localizations) {
+				 localized = translation
+			} else {
+				// TODO: @siebe approach to nullify string that has not localization
+				localized = String()
+			}
+			
+			localizedModel[keyPath: localizationKey.field] = localized
+			
 		}
 		
 		return localizedModel

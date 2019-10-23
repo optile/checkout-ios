@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "9999"
+   LastUpgradeVersion = "1110"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,10 +14,24 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "Optile::Payment"
-               BuildableName = "Payment.framework"
+               BlueprintIdentifier = "Payment"
+               BuildableName = "Payment"
                BlueprintName = "Payment"
-               ReferencedContainer = "container:Optile.xcodeproj">
+               ReferencedContainer = "container:">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "PaymentTests"
+               BuildableName = "PaymentTests"
+               BlueprintName = "PaymentTests"
+               ReferencedContainer = "container:">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,10 +47,10 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "Optile::PaymentTests"
-               BuildableName = "PaymentTests.xctest"
+               BlueprintIdentifier = "PaymentTests"
+               BuildableName = "PaymentTests"
                BlueprintName = "PaymentTests"
-               ReferencedContainer = "container:Optile.xcodeproj">
+               ReferencedContainer = "container:">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -58,6 +72,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "Payment"
+            BuildableName = "Payment"
+            BlueprintName = "Payment"
+            ReferencedContainer = "container:">
+         </BuildableReference>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

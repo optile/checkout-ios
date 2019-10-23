@@ -5,7 +5,7 @@ class SharedLocalizationProviderTests: XCTestCase {
 	func testSuccessDownload() {
 		let localTranslation = ["test1": "value1", "test2": "value2"]
 		
-		let connection = MockConnection(dataSource: MockFactory.paymentNetworkLocalization)
+		let connection = MockConnection(dataSource: MockFactory.Localization.paymentPage)
 		let provider = SharedLocalizationProvider(connection: connection, localTranslations: localTranslation)
 		let promise = expectation(description: "SharedLocalizationProvider response")
 		let paymentNetworkLangURL = URL(string: "https://resources.sandbox.oscato.com/resource/lang/VASILY_DEMO/en_US/VISAELECTRON.properties")!
@@ -24,18 +24,18 @@ class SharedLocalizationProviderTests: XCTestCase {
 			
 			XCTAssertEqual(dictionaries.count, 2)
 			
-			XCTAssertEqual(dictionaries[0]["account.holderName.label"], "Holder Name")
-			XCTAssertEqual(dictionaries[0].count, 61)
+			XCTAssertEqual(dictionaries[0]["deleteRegistrationTooltip"], "Delete payment account")
+			XCTAssertEqual(dictionaries[0].count, 54)
 			
 			XCTAssertEqual(dictionaries[1], localTranslation)
 			
 			promise.fulfill()
 		}
 		wait(for: [promise], timeout: 1)
-		
+				
 		XCTAssertEqual(
 			connection.requestedURL,
-			URL(string: "https://resources.sandbox.oscato.com/resource/lang/VASILY_DEMO/en_US/paymentpage.properties?")!
+			URL(string: "https://resources.sandbox.oscato.com/resource/lang/VASILY_DEMO/en_US/paymentpage.properties")!
 		)
 	}
 	
@@ -57,19 +57,5 @@ class SharedLocalizationProviderTests: XCTestCase {
 			promise.fulfill()
 		}
 		wait(for: [promise], timeout: 1)
-	}
-	
-	func testURLTransformation() {
-		let applicableNetworkLangURL = URL(string: "https://resources.sandbox.oscato.com/resource/lang/VASILY_DEMO/en_US/VISAELECTRON.properties")!
-		let connection = MockConnection(dataSource: "")
-		let provider = SharedLocalizationProvider(connection: connection)
-		
-		let promise = expectation(description: "SharedLocalizationProvider response")
-		provider.download(using: applicableNetworkLangURL) { result in
-			promise.fulfill()
-		}
-		wait(for: [promise], timeout: 1)
-		
-		XCTAssertEqual(connection.requestedURL, URL(string: "https://resources.sandbox.oscato.com/resource/lang/VASILY_DEMO/en_US/paymentpage.properties?")!)
 	}
 }

@@ -12,7 +12,10 @@ extension GetRequest {
 		guard var components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
 			throw NetworkInternalError(description: "Internal error, incorrect GetRequest URL")
 		}
-		components.queryItems = queryItems
+		
+		if !queryItems.isEmpty {
+			components.queryItems = queryItems
+		}
 		
 		guard let url = components.url else {
 			throw NetworkInternalError(description: "Internal error, unable to make API request URL")

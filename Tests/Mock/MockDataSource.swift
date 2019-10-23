@@ -6,7 +6,7 @@ protocol MockDataSource {
 
 extension String: MockDataSource {
 	var fakeData: Result<Data?, Error> {
-		return .success(self.data(using: .utf8)!)
+		return .success(self.data(using: .isoLatin1)!)
 	}
 }
 
