@@ -1,7 +1,5 @@
 #if canImport(UIKit)
-
 import UIKit
-
 
 @objc public final class PaymentListViewContoller: UIViewController {
 	weak var methodsTableView: UITableView?
@@ -15,8 +13,9 @@ import UIKit
 	/// - Parameter tableConfiguration: settings for a payment table view, if not specified defaults will be used
 	/// - Parameter listResultURL: URL that you receive after executing *Create new payment session request* request. Needed URL will be specified in `links.self`
 	@objc public convenience init(tableConfiguration: PaymentListParameters = DefaultPaymentListParameters(), listResultURL: URL) {
-		let downloadProvider = NetworkDownloadProvider()
-		let paymentSessionProvider = PaymentSessionProvider(paymentSessionURL: listResultURL)
+		let connection = URLSessionConnection()
+		let downloadProvider = NetworkDownloadProvider(connection: connection)
+		let paymentSessionProvider = PaymentSessionProvider(paymentSessionURL: listResultURL, connection: connection)
 		let sessionService = PaymentSessionService(paymentSessionProvider: paymentSessionProvider, downloadProvider: downloadProvider)
 		
 		self.init(tableConfiguration: tableConfiguration, service: sessionService)

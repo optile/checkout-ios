@@ -1,6 +1,5 @@
 import Foundation
 
-
 class PaymentSessionProvider {
 	private let paymentSessionURL: URL
 	private let localizationQueue = OperationQueue()
