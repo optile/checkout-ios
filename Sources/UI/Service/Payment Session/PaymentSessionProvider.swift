@@ -3,12 +3,12 @@ import Foundation
 class PaymentSessionProvider {
 	private let paymentSessionURL: URL
 	private let localizationQueue = OperationQueue()
-	private let localizationsProvider: SharedLocalizationsProvider
+	private let localizationsProvider: SharedTranslationProvider
 	private let localizer: Localizer
 	
 	let connection: Connection
 	
-	init(paymentSessionURL: URL, connection: Connection, localizationsProvider: SharedLocalizationsProvider) {
+	init(paymentSessionURL: URL, connection: Connection, localizationsProvider: SharedTranslationProvider) {
 		self.paymentSessionURL = paymentSessionURL
 		self.connection = connection
 		self.localizationsProvider = localizationsProvider

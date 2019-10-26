@@ -1,9 +1,9 @@
 import Foundation
 
 class Localizer {
-	let provider: LocalizationsProvider
+	let provider: TranslationProvider
 	
-	init(provider: LocalizationsProvider) {
+	init(provider: TranslationProvider) {
 		self.provider = provider
 	}
 	

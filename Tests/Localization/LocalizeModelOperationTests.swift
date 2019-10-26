@@ -3,8 +3,7 @@ import XCTest
 
 class LocalizeModelOperationTests: XCTestCase {
 	private let remoteTranslationString = "some.key=remote\n"
-	private let sharedTranslation = ["some.key": "shared"]
-	private let localTranslation = ["some.key": "local", "some2.key": "local2"]
+	private let provider = MockTranslationProvider()
 	
 	func testHasRemote() {
 		let expectation = MockModel(testValue: "remote", otherValue: "local2", notFoundKey: "")
@@ -20,17 +19,16 @@ class LocalizeModelOperationTests: XCTestCase {
 	
 	// Should fallback to shared and local, no errors will be logged
 	func testNoRemote() {
-		let model = MockModel(localeURL: nil)
+		let model = MockModel()
 		let expectation = MockModel(testValue: "shared", otherValue: "local2", notFoundKey: "")
 		invokeLocalizeOperation(model: model, remote: remoteTranslationString, expected: expectation, isErrorExpected: false)
 	}
 	
 	fileprivate func invokeLocalizeOperation(model: MockModel, remote: MockDataSource, expected: MockModel, isErrorExpected: Bool) {
 		let connection = MockConnection(dataSource: remote)
-		
-		let operation = LocalizeOperation(model, use: connection)
-		operation.sharedLocalizations = [sharedTranslation, localTranslation]
+
 		let promise = expectation(description: "LocalizeModelOperation completed")
+		let operation = LocalizeModelOperation(model, downloadFrom: URL.example, using: connection, additionalProvider: provider)
 		operation.completionBlock = { promise.fulfill() }
 		operation.start()
 		wait(for: [promise], timeout: 1)
@@ -41,7 +39,7 @@ class LocalizeModelOperationTests: XCTestCase {
 		XCTAssertEqual(operation.localizedModel!.otherValue, expected.otherValue)
 		XCTAssertEqual(operation.localizedModel!.notFoundKey, expected.notFoundKey)
 
-		XCTAssertEqual(connection.requestedURL, model.localeURL)
+		XCTAssertEqual(connection.requestedURL, URL.example)
 		
 		if isErrorExpected {
 			XCTAssertNotNil(operation.remoteLocalizationError)
@@ -49,12 +47,9 @@ class LocalizeModelOperationTests: XCTestCase {
 			XCTAssertNil(operation.remoteLocalizationError)
 		}
 	}
-	
-
 }
 
 private struct MockModel: Localizable {
-	let localeURL: URL?
 	var testValue: String
 	var otherValue: String
 	var notFoundKey: String
@@ -65,10 +60,16 @@ private struct MockModel: Localizable {
 		.init(\.notFoundKey, key: "no.key")
 	]
 	
-	init(testValue: String = "original", localeURL: URL? = URL.example, otherValue: String = "original2", notFoundKey: String = "original") {
+	init(testValue: String = "original", otherValue: String = "original2", notFoundKey: String = "original") {
 		self.testValue = testValue
-		self.localeURL = localeURL
 		self.otherValue = otherValue
 		self.notFoundKey = notFoundKey
 	}
+}
+
+private class MockTranslationProvider: TranslationProvider {
+	let sharedTranslation = ["some.key": "shared"]
+	let localTranslation = ["some.key": "local", "some2.key": "local2"]
+	
+	var translations: [Dictionary<String, String>] { [sharedTranslation, localTranslation] }
 }

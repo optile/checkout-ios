@@ -9,18 +9,18 @@ import UIKit
 	let configuration: PaymentListParameters
 	let sessionService: PaymentSessionService
 	fileprivate(set) var tableController: PaymentListTableController?
-	let localizationsProvider: SharedLocalizationsProvider
+	let localizationsProvider: SharedTranslationProvider
 	
 	/// - Parameter tableConfiguration: settings for a payment table view, if not specified defaults will be used
 	/// - Parameter listResultURL: URL that you receive after executing *Create new payment session request* request. Needed URL will be specified in `links.self`
 	@objc public convenience init(tableConfiguration: PaymentListParameters = DefaultPaymentListParameters(), listResultURL: URL) {
-		let localizationsProvider = SharedLocalizationsProvider()
+		let localizationsProvider = SharedTranslationProvider()
 		let connection = URLSessionConnection()
 		
 		self.init(tableConfiguration: tableConfiguration, listResultURL: listResultURL, connection: connection, localizationsProvider: localizationsProvider)
 	}
 	
-	init(tableConfiguration: PaymentListParameters, listResultURL: URL, connection: Connection, localizationsProvider: SharedLocalizationsProvider) {
+	init(tableConfiguration: PaymentListParameters, listResultURL: URL, connection: Connection, localizationsProvider: SharedTranslationProvider) {
 		let downloadProvider = NetworkDownloadProvider(connection: connection)
 		let paymentSessionProvider = PaymentSessionProvider(paymentSessionURL: listResultURL, connection: connection, localizationsProvider: localizationsProvider)
 		

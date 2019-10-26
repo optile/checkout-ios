@@ -1,7 +1,7 @@
 import Foundation
 
 class LocalizeModelOperation<Model>: AsynchronousOperation where Model: Localizable {
-	let additionalProvider: LocalizationsProvider
+	let additionalProvider: TranslationProvider
 	let modelToLocalize: Model
 	let connection: Connection
 	let localeURL: URL?
@@ -11,7 +11,7 @@ class LocalizeModelOperation<Model>: AsynchronousOperation where Model: Localiza
 	
 	var localizationCompletionBlock: ((Model) -> Void)?
 
-	init(_ model: Model, downloadFrom url: URL?, using connection: Connection, additionalProvider: LocalizationsProvider) {
+	init(_ model: Model, downloadFrom url: URL?, using connection: Connection, additionalProvider: TranslationProvider) {
 		self.modelToLocalize = model
 		self.connection = connection
 		self.additionalProvider = additionalProvider
@@ -20,7 +20,7 @@ class LocalizeModelOperation<Model>: AsynchronousOperation where Model: Localiza
 	
 	override func main() {
 		if let localizationFileURL = localeURL {
-			let provider = RemoteLocalizationsProvider(otherTranslations: additionalProvider.translations)
+			let provider = DownloadableTranslationProvider(otherTranslations: additionalProvider.translations)
 			provider.downloadTranslation(from: localizationFileURL, using: connection) { [modelToLocalize] in
 				let localizer = Localizer(provider: provider)
 				let localizedModel = localizer.localize(model: modelToLocalize)
@@ -42,7 +42,7 @@ class LocalizeModelOperation<Model>: AsynchronousOperation where Model: Localiza
 	}
 }
 
-private class RemoteLocalizationsProvider: LocalizationsProvider {
+private class DownloadableTranslationProvider: TranslationProvider {
 	var translations: [Dictionary<String, String>] {
 		var resultingArray = [remoteTranslation]
 		resultingArray.append(contentsOf: otherTranslations)

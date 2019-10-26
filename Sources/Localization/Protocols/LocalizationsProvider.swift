@@ -1,5 +1,5 @@
 import Foundation
 
-protocol LocalizationsProvider {
+protocol TranslationProvider {
 	var translations: [Dictionary<String, String>] { get }
 }

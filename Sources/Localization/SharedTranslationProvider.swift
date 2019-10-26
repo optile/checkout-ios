@@ -1,6 +1,6 @@
 import Foundation
 
-class SharedLocalizationsProvider: LocalizationsProvider {
+class SharedTranslationProvider: TranslationProvider {
 	private let localTranslations: Dictionary<String, String>
 	private var remoteSharedTranslations: Dictionary<String, String> = [:]
 	
