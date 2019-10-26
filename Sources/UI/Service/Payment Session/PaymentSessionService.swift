@@ -1,6 +1,5 @@
 import Foundation
 
-
 /// Service that fetches and stores PaymentSession.
 /// Used by `PaymentListViewController`
 class PaymentSessionService {

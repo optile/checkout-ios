@@ -1,39 +1,36 @@
 import Foundation
 
-class SharedLocalizationProvider {
-	typealias Localization = Dictionary<String, String>
+class SharedLocalizationsProvider: LocalizationsProvider {
+	private let localTranslations: Dictionary<String, String>
+	private var remoteSharedTranslations: Dictionary<String, String> = [:]
 	
-	let connection: Connection
-	let localTranslations: Dictionary<String, String>
+	var translations: [Dictionary<String, String>] {
+		return [remoteSharedTranslations, localTranslations]
+	}
 	
-	init(connection: Connection, localTranslations: Dictionary<String, String>) {
-		self.connection = connection
+	init(localTranslations: Dictionary<String, String> = LocalTranslation.allCasesAsDictionary) {
 		self.localTranslations = localTranslations
 	}
 	
-	convenience init(connection: Connection) {
-		self.init(connection: connection, localTranslations: SharedLocalizationProvider.localTranslations)
-	}
-	
-	func download(using url: URL, completion: @escaping ((Result<[Dictionary<String, String>], Error>) -> Void)) {
+	func download(from url: URL, using connection: Connection, completion: @escaping ((Error?) -> Void)) {
 		let paymentPageURL: URL
 		
 		do {
 			paymentPageURL = try url.transformToPaymentPageLocalizationURL()
 		} catch {
-			completion(.failure(error))
+			completion(error)
 			return
 		}
 		
 		let downloadLocalizationRequest = DownloadLocalization(from: paymentPageURL)
 		let sendRequestOperation = SendRequestOperation(connection: connection, request: downloadLocalizationRequest)
-		sendRequestOperation.downloadCompletionBlock = { [localTranslations] result in
+		sendRequestOperation.downloadCompletionBlock = { result in
 			switch result {
 			case .success(let translation):
-				let allLocalizations = [translation, localTranslations]
-				completion(.success(allLocalizations))
+				self.remoteSharedTranslations = translation
+				completion(nil)
 			case .failure(let error):
-				completion(.failure(error))
+				completion(error)
 			}
 		}
 		
@@ -67,5 +64,17 @@ private extension URL {
 		}
 		
 		return paymentPageURL
+	}
+}
+
+private extension LocalTranslation {
+	static var allCasesAsDictionary: Dictionary<String, String> {
+		var dictionary = Dictionary<String, String>()
+		
+		for translation in LocalTranslation.allCases {
+			dictionary[translation.rawValue] = translation.localizedString
+		}
+		
+		return dictionary
 	}
 }

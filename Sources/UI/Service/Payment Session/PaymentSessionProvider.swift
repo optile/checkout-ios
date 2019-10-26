@@ -3,20 +3,23 @@ import Foundation
 class PaymentSessionProvider {
 	private let paymentSessionURL: URL
 	private let localizationQueue = OperationQueue()
-	private var sharedLocalizations: [Dictionary<String, String>] = []
+	private let localizationsProvider: SharedLocalizationsProvider
+	private let localizer: Localizer
 	
 	let connection: Connection
 	
-	init(paymentSessionURL: URL, connection: Connection) {
+	init(paymentSessionURL: URL, connection: Connection, localizationsProvider: SharedLocalizationsProvider) {
 		self.paymentSessionURL = paymentSessionURL
 		self.connection = connection
+		self.localizationsProvider = localizationsProvider
+		self.localizer = Localizer(provider: localizationsProvider)
 	}
 	
 	func loadPaymentSession(completion: @escaping ((Load<PaymentSession>) -> Void)) {
 		completion(.loading)
 
-		let job = getListResult ->> transformToUIModel ->> downloadSharedLocalization ->> downloadLocalizations
-				
+		let job = getListResult ->> downloadSharedLocalization ->> checkInteractionCode ->> filterUnsupportedNetworks ->> downloadLocalizations
+
 		job(paymentSessionURL) { result in
 			switch result {
 			case .success(let session): completion(.success(session))
@@ -27,56 +30,85 @@ class PaymentSessionProvider {
 	
 	// MARK: - Closures
 	
-	private func getListResult(from url: URL, completion: @escaping ((Result<ListResult, Error>) -> Void)) {
-		let getListResult = GetListResult(url: url)
+	func getListResult(from url: URL, completion: @escaping ((Result<ListResult, Error>) -> Void)) {
+		let getListResult = GetListResult(url: paymentSessionURL)
 		let getListResultOperation = SendRequestOperation(connection: connection, request: getListResult)
-		getListResultOperation.downloadCompletionBlock = completion
+		getListResultOperation.downloadCompletionBlock = { [localizer] result in
+			switch result {
+			case .success(let listResult): completion(.success(listResult))
+			case .failure(let error):
+				log(.error, "getListResultOperation failed: %@", error.localizedDescription)
+
+				var error = LocalizableError(localizationKey: .errorConnection, isRetryable: true)
+				error.underlyingError = error
+				localizer.localize(model: &error)
+
+				completion(.failure(error))
+			}
+		}
 		getListResultOperation.start()
 	}
 	
-	private func transformToUIModel(listResult: ListResult, completion: ((PaymentSession) -> Void)) {
-		let supportedCodes = ["AMEX", "CASTORAMA", "DINERS", "DISCOVER", "MASTERCARD", "UNIONPAY", "VISA", "VISA_DANKORT", "VISAELECTRON", "CARTEBANCAIRE", "MAESTRO", "MAESTROUK", "POSTEPAY", "SEPADD", "JCB"]
+	func downloadSharedLocalization(for listResult: ListResult, completion: @escaping ((Result<ListResult, Error>) -> Void)) {
+		guard let localeURL = listResult.networks.applicable.first?.links?[
+			"lang"] else {
+			log(.fault, "Applicable network language URL wasn't provided to a localization provider")
+			
+			var error = LocalizableError(localizationKey: .errorDefault)
+			localizer.localize(model: &error)
 
-		let filteredPaymentNetworks = listResult.networks.applicable
-										.filter { supportedCodes.contains($0.code) }
-										.map { PaymentNetwork(from: $0) }
-		
-		completion(PaymentSession(networks: filteredPaymentNetworks))
-	}
-	
-	private func downloadSharedLocalization(for session: PaymentSession, completion: @escaping ((Result<PaymentSession, Error>) -> Void)) {
-		guard let localeURL = session.networks.first?.localeURL else {
-			let error = PaymentInternalError(description: "Applicable network language URL wasn't provided to localization provider")
 			completion(.failure(error))
 			return
 		}
 		
-		let provider = SharedLocalizationProvider(connection: connection)
-		
-		provider.download(using: localeURL) { result in
-			switch result {
-			case .success(let localizations):
-				self.sharedLocalizations = localizations
-				completion(.success(session))
-			case .failure(let error):
+		localizationsProvider.download(from: localeURL, using: connection) { error in
+			if let error = error {
 				completion(.failure(error))
+				return
 			}
+			
+			// Just bypass in to out
+			completion(.success(listResult))
 		}
 	}
 	
-	private func downloadLocalizations(for session: PaymentSession, completion: @escaping ((PaymentSession) -> Void)) {
+	private func checkInteractionCode(listResult: ListResult, completion: ((Result<ListResult, Error>) -> Void)) {
+		if listResult.interaction.code == "PROCEED" {
+			completion(.success(listResult))
+			return
+		}
+		let localizedInteraction =
+			localizer.localize(model: listResult.interaction.localizable)
+		let error = PaymentError(localizedDescription: localizedInteraction.localizedDescription)
+		completion(.failure(error))
+	}
+	
+	private func filterUnsupportedNetworks(listResult: ListResult, completion: (([ApplicableNetwork]) -> Void)) {
+		let supportedCodes = ["AMEX", "CASTORAMA", "DINERS", "DISCOVER", "MASTERCARD", "UNIONPAY", "VISA", "VISA_DANKORT", "VISAELECTRON", "CARTEBANCAIRE", "MAESTRO", "MAESTROUK", "POSTEPAY", "SEPADD", "JCB"]
+
+		let filteredPaymentNetworks = listResult.networks.applicable
+										.filter { supportedCodes.contains($0.code) }
+		
+		completion(filteredPaymentNetworks)
+	}
+	
+	private func downloadLocalizations(for applicableNetworks: [ApplicableNetwork], completion: @escaping ((PaymentSession) -> Void)) {
 		var allOperations: [LocalizeModelOperation<PaymentNetwork>] = []
 		
 		let completionOperation = BlockOperation {
 			let localizedModels = allOperations.compactMap { $0.localizedModel }
-			var localizedSession = session
-			localizedSession.networks = localizedModels
-			completion(localizedSession)
+			let session = PaymentSession(networks: localizedModels)
+			completion(session)
 		}
 		
-		for network in session.networks {
-			let operation = LocalizeModelOperation(network, use: connection)
-			operation.sharedLocalizations = sharedLocalizations
+		for applicableNetwork in applicableNetworks {
+			let network = PaymentNetwork(from: applicableNetwork)
+			let operation = LocalizeModelOperation(
+				network,
+				downloadFrom: applicableNetwork.links?["lang"],
+				using: connection,
+				additionalProvider: localizationsProvider
+			)
 			
 			allOperations.append(operation)
 			completionOperation.addDependency(operation)

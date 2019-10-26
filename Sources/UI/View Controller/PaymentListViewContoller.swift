@@ -9,21 +9,25 @@ import UIKit
 	let configuration: PaymentListParameters
 	let sessionService: PaymentSessionService
 	fileprivate(set) var tableController: PaymentListTableController?
+	let localizationsProvider: SharedLocalizationsProvider
 	
 	/// - Parameter tableConfiguration: settings for a payment table view, if not specified defaults will be used
 	/// - Parameter listResultURL: URL that you receive after executing *Create new payment session request* request. Needed URL will be specified in `links.self`
 	@objc public convenience init(tableConfiguration: PaymentListParameters = DefaultPaymentListParameters(), listResultURL: URL) {
+		let localizationsProvider = SharedLocalizationsProvider()
 		let connection = URLSessionConnection()
-		let downloadProvider = NetworkDownloadProvider(connection: connection)
-		let paymentSessionProvider = PaymentSessionProvider(paymentSessionURL: listResultURL, connection: connection)
-		let sessionService = PaymentSessionService(paymentSessionProvider: paymentSessionProvider, downloadProvider: downloadProvider)
 		
-		self.init(tableConfiguration: tableConfiguration, service: sessionService)
+		self.init(tableConfiguration: tableConfiguration, listResultURL: listResultURL, connection: connection, localizationsProvider: localizationsProvider)
 	}
 	
-	init(tableConfiguration: PaymentListParameters, service: PaymentSessionService) {
-		self.configuration = tableConfiguration
-		self.sessionService = service
+	init(tableConfiguration: PaymentListParameters, listResultURL: URL, connection: Connection, localizationsProvider: SharedLocalizationsProvider) {
+		let downloadProvider = NetworkDownloadProvider(connection: connection)
+		let paymentSessionProvider = PaymentSessionProvider(paymentSessionURL: listResultURL, connection: connection, localizationsProvider: localizationsProvider)
+		
+		sessionService = PaymentSessionService(paymentSessionProvider: paymentSessionProvider, downloadProvider: downloadProvider)
+		configuration = tableConfiguration
+		self.localizationsProvider = localizationsProvider
+		
 		super.init(nibName: nil, bundle: nil)
 	}
 	
@@ -122,17 +126,30 @@ extension PaymentListViewContoller {
 			errorAlertController?.dismiss(animated: true, completion: nil)
 			return
 		}
+
+		let controller = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
 		
-		// Show alert
-		let controller = UIAlertController(title: error.localizedDescription, message: nil, preferredStyle: .alert)
-		
-		let retryAction = UIAlertAction(title: "Retry", style: .default) { [weak self] _ in
-			guard let weakSelf = self else { return }
-			weakSelf.load()
+		// Show localized text
+		let message: String
+
+		if let localized = error as? LocalizedError {
+			message = localized.errorDescription ?? LocalTranslation.errorDefault.localizedString
+		} else {
+			message = LocalTranslation.errorDefault.localizedString
 		}
-		controller.addAction(retryAction)
 		
-		let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { [weak self] _ in
+		controller.message = message
+
+		// Add retry button if needed
+		if let retryable = error as? Retryable, retryable.isRetryable {
+			let retryAction = UIAlertAction(title: "Retry", style: .default) { [weak self] _ in
+				self?.load()
+			}
+			controller.addAction(retryAction)
+		}
+		
+		// Cancel
+		let cancelAction = UIAlertAction(title: "Dismiss", style: .cancel) { [weak self] _ in
 			self?.dismiss(animated: true, completion: nil)
 		}
 		controller.addAction(cancelAction)

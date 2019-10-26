@@ -1,83 +1,73 @@
 import Foundation
 
 class LocalizeModelOperation<Model>: AsynchronousOperation where Model: Localizable {
-	var sharedLocalizations: [Dictionary<String, String>] = []
-	
+	let additionalProvider: LocalizationsProvider
 	let modelToLocalize: Model
 	let connection: Connection
+	let localeURL: URL?
 	
 	private(set) var localizedModel: Model?
 	private(set) var remoteLocalizationError: Error?
+	
+	var localizationCompletionBlock: ((Model) -> Void)?
 
-	init(_ model: Model, use connection: Connection) {
+	init(_ model: Model, downloadFrom url: URL?, using connection: Connection, additionalProvider: LocalizationsProvider) {
 		self.modelToLocalize = model
 		self.connection = connection
+		self.additionalProvider = additionalProvider
+		self.localeURL = url
 	}
 	
 	override func main() {
-		if let localizationFileURL = modelToLocalize.localeURL {
-			let downloadLocalizationRequest = DownloadLocalization(from: localizationFileURL)
-			let sendRequestOperation = SendRequestOperation(connection: connection, request: downloadLocalizationRequest)
-			sendRequestOperation.downloadCompletionBlock = {
-				self.downloadAdditionalLocalizationHandler(model: self.modelToLocalize, otherTranslations: self.sharedLocalizations, downloadLocalizationResult: $0)
+		if let localizationFileURL = localeURL {
+			let provider = RemoteLocalizationsProvider(otherTranslations: additionalProvider.translations)
+			provider.downloadTranslation(from: localizationFileURL, using: connection) { [modelToLocalize] in
+				let localizer = Localizer(provider: provider)
+				let localizedModel = localizer.localize(model: modelToLocalize)
+
+				self.finish(with: localizedModel)
 			}
-			sendRequestOperation.start()
 		} else {
-			let localizedModel = localize(model: modelToLocalize, using: sharedLocalizations)
-			
+			let localizer = Localizer(provider: additionalProvider)
+			let localizedModel = localizer.localize(model: modelToLocalize)
+
 			finish(with: localizedModel)
 		}
 	}
 	
 	private func finish(with model: Model) {
 		self.localizedModel = model
+		localizationCompletionBlock?(model)
 		finish()
 	}
-	
-	private func downloadAdditionalLocalizationHandler(model: Model, otherTranslations: [Dictionary<String, String>], downloadLocalizationResult: Result<Dictionary<String, String>, Error>) {
-		let localizedModel: Model
-		
-		switch downloadLocalizationResult {
-		case .success(let specificTranslation):
-			var allTranslations = [specificTranslation]
-			allTranslations.append(contentsOf: otherTranslations)
-			localizedModel = localize(model: model, using: allTranslations)
-		case .failure(let error):
-			log(.error, "Downloading specific localization failed with error: %@, using only shared localizations", error.localizedDescription)
-			
-			self.remoteLocalizationError = error
-			localizedModel = localize(model: model, using: otherTranslations)
-		}
-		
-		finish(with: localizedModel)
+}
+
+private class RemoteLocalizationsProvider: LocalizationsProvider {
+	var translations: [Dictionary<String, String>] {
+		var resultingArray = [remoteTranslation]
+		resultingArray.append(contentsOf: otherTranslations)
+		return resultingArray
 	}
 	
-	private func localize(model: Model, using localizations: [Dictionary<String, String>]) -> Model {
-		var localizedModel = model
-		
-		for localizationKey in localizedModel.localizableFields {
-			let localized: String
-			
-			if let translation = findTranslation(forKey: localizationKey.key, in: localizations) {
-				 localized = translation
-			} else {
-				// TODO: @siebe approach to nullify string that has not localization
-				localized = String()
+	private let otherTranslations: [Dictionary<String, String>]
+	private var remoteTranslation = Dictionary<String, String>()
+	
+	init(otherTranslations: [Dictionary<String, String>]) {
+		self.otherTranslations = otherTranslations
+	}
+	
+	func downloadTranslation(from url: URL, using connection: Connection, completion: @escaping (() -> Void)) {
+		let downloadLocalizationRequest = DownloadLocalization(from: url)
+		let sendRequestOperation = SendRequestOperation(connection: connection, request: downloadLocalizationRequest)
+		sendRequestOperation.downloadCompletionBlock = { result in
+			switch result {
+			case .success(let remoteTranslation): self.remoteTranslation = remoteTranslation
+			case .failure(let error):
+				log(.error, "Downloading specific localization failed with error: %@", error.localizedDescription)
 			}
 			
-			localizedModel[keyPath: localizationKey.field] = localized
-			
+			completion()
 		}
-		
-		return localizedModel
-	}
-	
-	private func findTranslation(forKey key: String, in localizations: [Dictionary<String, String>]) -> String? {
-		for localization in localizations {
-			guard let translation = localization[key] else { continue }
-			return translation
-		}
-		
-		return nil
+		sendRequestOperation.start()
 	}
 }

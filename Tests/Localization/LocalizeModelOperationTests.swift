@@ -28,7 +28,7 @@ class LocalizeModelOperationTests: XCTestCase {
 	fileprivate func invokeLocalizeOperation(model: MockModel, remote: MockDataSource, expected: MockModel, isErrorExpected: Bool) {
 		let connection = MockConnection(dataSource: remote)
 		
-		let operation = LocalizeModelOperation(model, use: connection)
+		let operation = LocalizeOperation(model, use: connection)
 		operation.sharedLocalizations = [sharedTranslation, localTranslation]
 		let promise = expectation(description: "LocalizeModelOperation completed")
 		operation.completionBlock = { promise.fulfill() }
