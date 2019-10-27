@@ -21,14 +21,14 @@ class LocalizeModelOperationTests: XCTestCase {
 	func testNoRemote() {
 		let model = MockModel()
 		let expectation = MockModel(testValue: "shared", otherValue: "local2", notFoundKey: "")
-		invokeLocalizeOperation(model: model, remote: remoteTranslationString, expected: expectation, isErrorExpected: false)
+		invokeLocalizeOperation(model: model, url: nil, remote: remoteTranslationString, expected: expectation, isErrorExpected: false)
 	}
 	
-	fileprivate func invokeLocalizeOperation(model: MockModel, remote: MockDataSource, expected: MockModel, isErrorExpected: Bool) {
+	fileprivate func invokeLocalizeOperation(model: MockModel, url: URL? = URL.example, remote: MockDataSource, expected: MockModel, isErrorExpected: Bool) {
 		let connection = MockConnection(dataSource: remote)
 
 		let promise = expectation(description: "LocalizeModelOperation completed")
-		let operation = LocalizeModelOperation(model, downloadFrom: URL.example, using: connection, additionalProvider: provider)
+		let operation = LocalizeModelOperation(model, downloadFrom: url, using: connection, additionalProvider: provider)
 		operation.completionBlock = { promise.fulfill() }
 		operation.start()
 		wait(for: [promise], timeout: 1)
@@ -39,7 +39,7 @@ class LocalizeModelOperationTests: XCTestCase {
 		XCTAssertEqual(operation.localizedModel!.otherValue, expected.otherValue)
 		XCTAssertEqual(operation.localizedModel!.notFoundKey, expected.notFoundKey)
 
-		XCTAssertEqual(connection.requestedURL, URL.example)
+		XCTAssertEqual(connection.requestedURL, url)
 		
 		if isErrorExpected {
 			XCTAssertNotNil(operation.remoteLocalizationError)

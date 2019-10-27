@@ -21,7 +21,8 @@ class LocalizeModelOperation<Model>: AsynchronousOperation where Model: Localiza
 	override func main() {
 		if let localizationFileURL = localeURL {
 			let provider = DownloadableTranslationProvider(otherTranslations: additionalProvider.translations)
-			provider.downloadTranslation(from: localizationFileURL, using: connection) { [modelToLocalize] in
+			provider.downloadTranslation(from: localizationFileURL, using: connection) { [modelToLocalize] error in
+				self.remoteLocalizationError = error
 				let localizer = Localizer(provider: provider)
 				let localizedModel = localizer.localize(model: modelToLocalize)
 
@@ -56,17 +57,18 @@ private class DownloadableTranslationProvider: TranslationProvider {
 		self.otherTranslations = otherTranslations
 	}
 	
-	func downloadTranslation(from url: URL, using connection: Connection, completion: @escaping (() -> Void)) {
+	func downloadTranslation(from url: URL, using connection: Connection, completion: @escaping ((Error?) -> Void)) {
 		let downloadLocalizationRequest = DownloadLocalization(from: url)
 		let sendRequestOperation = SendRequestOperation(connection: connection, request: downloadLocalizationRequest)
 		sendRequestOperation.downloadCompletionBlock = { result in
 			switch result {
-			case .success(let remoteTranslation): self.remoteTranslation = remoteTranslation
+			case .success(let remoteTranslation):
+				self.remoteTranslation = remoteTranslation
+				completion(nil)
 			case .failure(let error):
 				log(.error, "Downloading specific localization failed with error: %@", error.localizedDescription)
+				completion(error)
 			}
-			
-			completion()
 		}
 		sendRequestOperation.start()
 	}
