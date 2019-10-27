@@ -6,7 +6,7 @@ public struct PaymentNetwork {
 	public let code: String
 	public var label: String
 	
-	@CurrentValue var logoData: Data? = nil
+	var logoData: Data? = nil
 	
 	init(from applicableNetwork: ApplicableNetwork) {
 		self.applicableNetwork = applicableNetwork
