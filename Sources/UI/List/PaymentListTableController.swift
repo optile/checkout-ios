@@ -11,7 +11,8 @@ class PaymentListTableController: NSObject {
 	var loadLogo: ((PaymentNetwork, @escaping (((Data?) -> Void))) -> Void)?
 	
 	init(session: PaymentSession) {
-		var group = TableGroup(groupName: "Choose a method")
+		// FIXME: Use localization provider
+		var group = TableGroup(groupName: LocalTranslation.listHeaderNetworks.localizedString)
 		group.networks = session.networks
 		dataSource = [group]
 	}

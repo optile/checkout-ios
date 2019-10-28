@@ -36,7 +36,7 @@ class SharedTranslationProviderTests: XCTestCase {
 	}
 	
 	func testFailedDownload() {
-		let testError = TestError(errorDescription: "Test error")
+		let testError = TestError(description: "Test error")
 		let connection = MockConnection(dataSource: testError)
 		let provider = SharedTranslationProvider()
 		

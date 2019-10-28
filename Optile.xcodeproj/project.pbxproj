@@ -9,11 +9,11 @@
 /* Begin PBXAggregateTarget section */
 		"Optile::OptilePackageTests::ProductTarget" /* OptilePackageTests */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = OBJ_127 /* Build configuration list for PBXAggregateTarget "OptilePackageTests" */;
+			buildConfigurationList = OBJ_125 /* Build configuration list for PBXAggregateTarget "OptilePackageTests" */;
 			buildPhases = (
 			);
 			dependencies = (
-				OBJ_130 /* PBXTargetDependency */,
+				OBJ_128 /* PBXTargetDependency */,
 			);
 			name = OptilePackageTests;
 			productName = OptilePackageTests;
@@ -21,94 +21,94 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		OBJ_125 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
-		OBJ_137 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* Errors.swift */; };
-		OBJ_138 /* PaymentInternalError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* PaymentInternalError.swift */; };
-		OBJ_139 /* LocalizableInteraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* LocalizableInteraction.swift */; };
-		OBJ_140 /* PaymentNetwork+Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* PaymentNetwork+Localizable.swift */; };
-		OBJ_141 /* LocalizeModelOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* LocalizeModelOperation.swift */; };
-		OBJ_142 /* Localizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* Localizer.swift */; };
-		OBJ_143 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_18 /* Localizable.swift */; };
-		OBJ_144 /* LocalizationsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_19 /* LocalizationsProvider.swift */; };
-		OBJ_145 /* SharedTranslationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_20 /* SharedTranslationProvider.swift */; };
-		OBJ_146 /* LocalTranslation.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* LocalTranslation.swift */; };
-		OBJ_147 /* AccountFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_24 /* AccountFormData.swift */; };
-		OBJ_148 /* AccountMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* AccountMask.swift */; };
-		OBJ_149 /* AccountRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_26 /* AccountRegistration.swift */; };
-		OBJ_150 /* ApplicableNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* ApplicableNetwork.swift */; };
-		OBJ_151 /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* Checkbox.swift */; };
-		OBJ_152 /* CustomerFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* CustomerFormData.swift */; };
-		OBJ_153 /* ExtraElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_30 /* ExtraElement.swift */; };
-		OBJ_154 /* ExtraElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_31 /* ExtraElements.swift */; };
-		OBJ_155 /* FormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_32 /* FormData.swift */; };
-		OBJ_156 /* InputElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_33 /* InputElement.swift */; };
-		OBJ_157 /* InstallmentItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_34 /* InstallmentItem.swift */; };
-		OBJ_158 /* Installments.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_35 /* Installments.swift */; };
-		OBJ_159 /* InstallmentsPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_36 /* InstallmentsPlan.swift */; };
-		OBJ_160 /* Interaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_37 /* Interaction.swift */; };
-		OBJ_161 /* ListLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_38 /* ListLinks.swift */; };
-		OBJ_162 /* ListResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_39 /* ListResult.swift */; };
-		OBJ_163 /* Networks.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_40 /* Networks.swift */; };
-		OBJ_164 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_42 /* HTTPMethod.swift */; };
-		OBJ_165 /* Parameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_43 /* Parameter.swift */; };
-		OBJ_166 /* PaymentAmount.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_44 /* PaymentAmount.swift */; };
-		OBJ_167 /* PresetAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_45 /* PresetAccount.swift */; };
-		OBJ_168 /* PresetLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_46 /* PresetLinks.swift */; };
-		OBJ_169 /* Redirect.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_47 /* Redirect.swift */; };
-		OBJ_170 /* SelectOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_48 /* SelectOption.swift */; };
-		OBJ_171 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_49 /* Style.swift */; };
-		OBJ_172 /* AsynchronousOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_51 /* AsynchronousOperation.swift */; };
-		OBJ_173 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_53 /* Connection.swift */; };
-		OBJ_174 /* CustomRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_54 /* CustomRequest.swift */; };
-		OBJ_175 /* GetRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_55 /* GetRequest.swift */; };
-		OBJ_176 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_56 /* Request.swift */; };
-		OBJ_177 /* DownloadData.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_58 /* DownloadData.swift */; };
-		OBJ_178 /* DownloadLocalization.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_59 /* DownloadLocalization.swift */; };
-		OBJ_179 /* GetListResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_60 /* GetListResult.swift */; };
-		OBJ_180 /* SendRequestOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_61 /* SendRequestOperation.swift */; };
-		OBJ_181 /* URLSessionConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_62 /* URLSessionConnection.swift */; };
-		OBJ_182 /* mergeClosures.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_66 /* mergeClosures.swift */; };
-		OBJ_184 /* log.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_69 /* log.swift */; };
-		OBJ_185 /* PaymentListTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_71 /* PaymentListTableController.swift */; };
-		OBJ_186 /* PaymentListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_72 /* PaymentListTableViewCell.swift */; };
-		OBJ_187 /* LocalizableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_74 /* LocalizableError.swift */; };
-		OBJ_188 /* PaymentError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_75 /* PaymentError.swift */; };
-		OBJ_189 /* PaymentNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_76 /* PaymentNetwork.swift */; };
-		OBJ_190 /* PaymentSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_77 /* PaymentSession.swift */; };
-		OBJ_191 /* DequeueableTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_79 /* DequeueableTableCell.swift */; };
-		OBJ_192 /* Load.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_80 /* Load.swift */; };
-		OBJ_193 /* NetworkDownloadProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_83 /* NetworkDownloadProvider.swift */; };
-		OBJ_194 /* PaymentSessionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_84 /* PaymentSessionProvider.swift */; };
-		OBJ_195 /* PaymentSessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_85 /* PaymentSessionService.swift */; };
-		OBJ_196 /* PaymentListParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_87 /* PaymentListParameters.swift */; };
-		OBJ_197 /* PaymentListViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_89 /* PaymentListViewContoller.swift */; };
-		OBJ_198 /* PaymentNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_90 /* PaymentNavigationController.swift */; };
-		OBJ_204 /* URL+Example.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_93 /* URL+Example.swift */; };
-		OBJ_205 /* XCTFail+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_94 /* XCTFail+Error.swift */; };
-		OBJ_206 /* LocalizeModelOperationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_96 /* LocalizeModelOperationTests.swift */; };
-		OBJ_207 /* SharedTranslationProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_97 /* SharedTranslationProviderTests.swift */; };
-		OBJ_208 /* MockFactory.ListResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_100 /* MockFactory.ListResult.swift */; };
-		OBJ_209 /* MockFactory.Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_101 /* MockFactory.Localization.swift */; };
-		OBJ_210 /* MockFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_102 /* MockFactory.swift */; };
-		OBJ_211 /* MockConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_103 /* MockConnection.swift */; };
-		OBJ_212 /* MockDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_104 /* MockDataSource.swift */; };
-		OBJ_213 /* TestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_105 /* TestError.swift */; };
-		OBJ_214 /* NetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_107 /* NetworkTests.swift */; };
-		OBJ_215 /* XCTestManifests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_108 /* XCTestManifests.swift */; };
-		OBJ_216 /* NetworkDownloadProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_112 /* NetworkDownloadProviderTests.swift */; };
-		OBJ_217 /* PaymentSessionServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_113 /* PaymentSessionServiceTests.swift */; };
-		OBJ_219 /* Payment.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Optile::Payment::Product" /* Payment.framework */; };
+		D9C9D3E523672C5000CBB092 /* XCTAttachment+subject.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C9D3E323672BAB00CBB092 /* XCTAttachment+subject.swift */; };
+		OBJ_123 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
+		OBJ_135 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* Errors.swift */; };
+		OBJ_137 /* LocalizableInteraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* LocalizableInteraction.swift */; };
+		OBJ_138 /* PaymentNetwork+Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* PaymentNetwork+Localizable.swift */; };
+		OBJ_139 /* LocalizeModelOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* LocalizeModelOperation.swift */; };
+		OBJ_140 /* Localizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* Localizer.swift */; };
+		OBJ_141 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_18 /* Localizable.swift */; };
+		OBJ_142 /* LocalizationsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_19 /* LocalizationsProvider.swift */; };
+		OBJ_143 /* SharedTranslationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_20 /* SharedTranslationProvider.swift */; };
+		OBJ_144 /* LocalTranslation.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* LocalTranslation.swift */; };
+		OBJ_145 /* AccountFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_24 /* AccountFormData.swift */; };
+		OBJ_146 /* AccountMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* AccountMask.swift */; };
+		OBJ_147 /* AccountRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_26 /* AccountRegistration.swift */; };
+		OBJ_148 /* ApplicableNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* ApplicableNetwork.swift */; };
+		OBJ_149 /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* Checkbox.swift */; };
+		OBJ_150 /* CustomerFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* CustomerFormData.swift */; };
+		OBJ_151 /* ExtraElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_30 /* ExtraElement.swift */; };
+		OBJ_152 /* ExtraElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_31 /* ExtraElements.swift */; };
+		OBJ_153 /* FormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_32 /* FormData.swift */; };
+		OBJ_154 /* InputElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_33 /* InputElement.swift */; };
+		OBJ_155 /* InstallmentItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_34 /* InstallmentItem.swift */; };
+		OBJ_156 /* Installments.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_35 /* Installments.swift */; };
+		OBJ_157 /* InstallmentsPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_36 /* InstallmentsPlan.swift */; };
+		OBJ_158 /* Interaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_37 /* Interaction.swift */; };
+		OBJ_159 /* ListLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_38 /* ListLinks.swift */; };
+		OBJ_160 /* ListResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_39 /* ListResult.swift */; };
+		OBJ_161 /* Networks.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_40 /* Networks.swift */; };
+		OBJ_162 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_42 /* HTTPMethod.swift */; };
+		OBJ_163 /* Parameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_43 /* Parameter.swift */; };
+		OBJ_164 /* PaymentAmount.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_44 /* PaymentAmount.swift */; };
+		OBJ_165 /* PresetAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_45 /* PresetAccount.swift */; };
+		OBJ_166 /* PresetLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_46 /* PresetLinks.swift */; };
+		OBJ_167 /* Redirect.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_47 /* Redirect.swift */; };
+		OBJ_168 /* SelectOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_48 /* SelectOption.swift */; };
+		OBJ_169 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_49 /* Style.swift */; };
+		OBJ_170 /* AsynchronousOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_51 /* AsynchronousOperation.swift */; };
+		OBJ_171 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_53 /* Connection.swift */; };
+		OBJ_172 /* CustomRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_54 /* CustomRequest.swift */; };
+		OBJ_173 /* GetRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_55 /* GetRequest.swift */; };
+		OBJ_174 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_56 /* Request.swift */; };
+		OBJ_175 /* DownloadData.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_58 /* DownloadData.swift */; };
+		OBJ_176 /* DownloadLocalization.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_59 /* DownloadLocalization.swift */; };
+		OBJ_177 /* GetListResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_60 /* GetListResult.swift */; };
+		OBJ_178 /* SendRequestOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_61 /* SendRequestOperation.swift */; };
+		OBJ_179 /* URLSessionConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_62 /* URLSessionConnection.swift */; };
+		OBJ_180 /* mergeClosures.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_66 /* mergeClosures.swift */; };
+		OBJ_181 /* log.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_67 /* log.swift */; };
+		OBJ_182 /* PaymentListTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_69 /* PaymentListTableController.swift */; };
+		OBJ_183 /* PaymentListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_70 /* PaymentListTableViewCell.swift */; };
+		OBJ_184 /* LocalizableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_72 /* LocalizableError.swift */; };
+		OBJ_185 /* PaymentError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_73 /* PaymentError.swift */; };
+		OBJ_186 /* PaymentNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_74 /* PaymentNetwork.swift */; };
+		OBJ_187 /* PaymentSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_75 /* PaymentSession.swift */; };
+		OBJ_188 /* DequeueableTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_77 /* DequeueableTableCell.swift */; };
+		OBJ_189 /* Load.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_78 /* Load.swift */; };
+		OBJ_190 /* NetworkDownloadProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_81 /* NetworkDownloadProvider.swift */; };
+		OBJ_191 /* PaymentSessionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_82 /* PaymentSessionProvider.swift */; };
+		OBJ_192 /* PaymentSessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_83 /* PaymentSessionService.swift */; };
+		OBJ_193 /* PaymentListParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_85 /* PaymentListParameters.swift */; };
+		OBJ_194 /* PaymentListViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_87 /* PaymentListViewContoller.swift */; };
+		OBJ_195 /* PaymentNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_88 /* PaymentNavigationController.swift */; };
+		OBJ_201 /* URL+Example.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_91 /* URL+Example.swift */; };
+		OBJ_202 /* XCTFail+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_92 /* XCTFail+Error.swift */; };
+		OBJ_203 /* LocalizeModelOperationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_94 /* LocalizeModelOperationTests.swift */; };
+		OBJ_204 /* SharedTranslationProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_95 /* SharedTranslationProviderTests.swift */; };
+		OBJ_205 /* MockFactory.ListResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_98 /* MockFactory.ListResult.swift */; };
+		OBJ_206 /* MockFactory.Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_99 /* MockFactory.Localization.swift */; };
+		OBJ_207 /* MockFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_100 /* MockFactory.swift */; };
+		OBJ_208 /* MockConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_101 /* MockConnection.swift */; };
+		OBJ_209 /* MockDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_102 /* MockDataSource.swift */; };
+		OBJ_210 /* TestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_103 /* TestError.swift */; };
+		OBJ_211 /* NetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_105 /* NetworkTests.swift */; };
+		OBJ_212 /* XCTestManifests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_106 /* XCTestManifests.swift */; };
+		OBJ_213 /* NetworkDownloadProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_110 /* NetworkDownloadProviderTests.swift */; };
+		OBJ_214 /* PaymentSessionProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_111 /* PaymentSessionProviderTests.swift */; };
+		OBJ_216 /* Payment.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Optile::Payment::Product" /* Payment.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		D9D4D4162364FBC9002C3B31 /* PBXContainerItemProxy */ = {
+		D9C9D3E12367216100CBB092 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "Optile::Payment";
 			remoteInfo = Payment;
 		};
-		D9D4D4172364FBCA002C3B31 /* PBXContainerItemProxy */ = {
+		D9C9D3E22367216200CBB092 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
@@ -118,20 +118,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		OBJ_10 /* PaymentInternalError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentInternalError.swift; sourceTree = "<group>"; };
-		OBJ_100 /* MockFactory.ListResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFactory.ListResult.swift; sourceTree = "<group>"; };
-		OBJ_101 /* MockFactory.Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFactory.Localization.swift; sourceTree = "<group>"; };
-		OBJ_102 /* MockFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFactory.swift; sourceTree = "<group>"; };
-		OBJ_103 /* MockConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockConnection.swift; sourceTree = "<group>"; };
-		OBJ_104 /* MockDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDataSource.swift; sourceTree = "<group>"; };
-		OBJ_105 /* TestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestError.swift; sourceTree = "<group>"; };
-		OBJ_107 /* NetworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTests.swift; sourceTree = "<group>"; };
-		OBJ_108 /* XCTestManifests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestManifests.swift; sourceTree = "<group>"; };
-		OBJ_112 /* NetworkDownloadProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDownloadProviderTests.swift; sourceTree = "<group>"; };
-		OBJ_113 /* PaymentSessionServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentSessionServiceTests.swift; sourceTree = "<group>"; };
-		OBJ_117 /* Example */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Example; sourceTree = SOURCE_ROOT; };
-		OBJ_118 /* Optile.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = Optile.podspec; sourceTree = "<group>"; };
-		OBJ_119 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		D9C9D3E323672BAB00CBB092 /* XCTAttachment+subject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTAttachment+subject.swift"; sourceTree = "<group>"; };
+		OBJ_100 /* MockFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFactory.swift; sourceTree = "<group>"; };
+		OBJ_101 /* MockConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockConnection.swift; sourceTree = "<group>"; };
+		OBJ_102 /* MockDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDataSource.swift; sourceTree = "<group>"; };
+		OBJ_103 /* TestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestError.swift; sourceTree = "<group>"; };
+		OBJ_105 /* NetworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTests.swift; sourceTree = "<group>"; };
+		OBJ_106 /* XCTestManifests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestManifests.swift; sourceTree = "<group>"; };
+		OBJ_110 /* NetworkDownloadProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDownloadProviderTests.swift; sourceTree = "<group>"; };
+		OBJ_111 /* PaymentSessionProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentSessionProviderTests.swift; sourceTree = "<group>"; };
+		OBJ_115 /* Example */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Example; sourceTree = SOURCE_ROOT; };
+		OBJ_116 /* Optile.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = Optile.podspec; sourceTree = "<group>"; };
+		OBJ_117 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		OBJ_13 /* LocalizableInteraction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizableInteraction.swift; sourceTree = "<group>"; };
 		OBJ_14 /* PaymentNetwork+Localizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PaymentNetwork+Localizable.swift"; sourceTree = "<group>"; };
 		OBJ_15 /* LocalizeModelOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizeModelOperation.swift; sourceTree = "<group>"; };
@@ -177,64 +175,83 @@
 		OBJ_61 /* SendRequestOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendRequestOperation.swift; sourceTree = "<group>"; };
 		OBJ_62 /* URLSessionConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionConnection.swift; sourceTree = "<group>"; };
 		OBJ_66 /* mergeClosures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mergeClosures.swift; sourceTree = "<group>"; };
-		OBJ_69 /* log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = log.swift; sourceTree = "<group>"; };
-		OBJ_71 /* PaymentListTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentListTableController.swift; sourceTree = "<group>"; };
-		OBJ_72 /* PaymentListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentListTableViewCell.swift; sourceTree = "<group>"; };
-		OBJ_74 /* LocalizableError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizableError.swift; sourceTree = "<group>"; };
-		OBJ_75 /* PaymentError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentError.swift; sourceTree = "<group>"; };
-		OBJ_76 /* PaymentNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentNetwork.swift; sourceTree = "<group>"; };
-		OBJ_77 /* PaymentSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentSession.swift; sourceTree = "<group>"; };
-		OBJ_79 /* DequeueableTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DequeueableTableCell.swift; sourceTree = "<group>"; };
-		OBJ_80 /* Load.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Load.swift; sourceTree = "<group>"; };
-		OBJ_83 /* NetworkDownloadProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDownloadProvider.swift; sourceTree = "<group>"; };
-		OBJ_84 /* PaymentSessionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentSessionProvider.swift; sourceTree = "<group>"; };
-		OBJ_85 /* PaymentSessionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentSessionService.swift; sourceTree = "<group>"; };
-		OBJ_87 /* PaymentListParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentListParameters.swift; sourceTree = "<group>"; };
-		OBJ_89 /* PaymentListViewContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentListViewContoller.swift; sourceTree = "<group>"; };
+		OBJ_67 /* log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = log.swift; sourceTree = "<group>"; };
+		OBJ_69 /* PaymentListTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentListTableController.swift; sourceTree = "<group>"; };
+		OBJ_70 /* PaymentListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentListTableViewCell.swift; sourceTree = "<group>"; };
+		OBJ_72 /* LocalizableError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizableError.swift; sourceTree = "<group>"; };
+		OBJ_73 /* PaymentError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentError.swift; sourceTree = "<group>"; };
+		OBJ_74 /* PaymentNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentNetwork.swift; sourceTree = "<group>"; };
+		OBJ_75 /* PaymentSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentSession.swift; sourceTree = "<group>"; };
+		OBJ_77 /* DequeueableTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DequeueableTableCell.swift; sourceTree = "<group>"; };
+		OBJ_78 /* Load.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Load.swift; sourceTree = "<group>"; };
+		OBJ_81 /* NetworkDownloadProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDownloadProvider.swift; sourceTree = "<group>"; };
+		OBJ_82 /* PaymentSessionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentSessionProvider.swift; sourceTree = "<group>"; };
+		OBJ_83 /* PaymentSessionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentSessionService.swift; sourceTree = "<group>"; };
+		OBJ_85 /* PaymentListParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentListParameters.swift; sourceTree = "<group>"; };
+		OBJ_87 /* PaymentListViewContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentListViewContoller.swift; sourceTree = "<group>"; };
+		OBJ_88 /* PaymentNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentNavigationController.swift; sourceTree = "<group>"; };
 		OBJ_9 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
-		OBJ_90 /* PaymentNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentNavigationController.swift; sourceTree = "<group>"; };
-		OBJ_93 /* URL+Example.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Example.swift"; sourceTree = "<group>"; };
-		OBJ_94 /* XCTFail+Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTFail+Error.swift"; sourceTree = "<group>"; };
-		OBJ_96 /* LocalizeModelOperationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizeModelOperationTests.swift; sourceTree = "<group>"; };
-		OBJ_97 /* SharedTranslationProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTranslationProviderTests.swift; sourceTree = "<group>"; };
+		OBJ_91 /* URL+Example.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Example.swift"; sourceTree = "<group>"; };
+		OBJ_92 /* XCTFail+Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTFail+Error.swift"; sourceTree = "<group>"; };
+		OBJ_94 /* LocalizeModelOperationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizeModelOperationTests.swift; sourceTree = "<group>"; };
+		OBJ_95 /* SharedTranslationProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTranslationProviderTests.swift; sourceTree = "<group>"; };
+		OBJ_98 /* MockFactory.ListResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFactory.ListResult.swift; sourceTree = "<group>"; };
+		OBJ_99 /* MockFactory.Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFactory.Localization.swift; sourceTree = "<group>"; };
 		"Optile::Payment::Product" /* Payment.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Payment.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Optile::PaymentTests::Product" /* PaymentTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = PaymentTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		OBJ_199 /* Frameworks */ = {
+		OBJ_196 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_218 /* Frameworks */ = {
+		OBJ_215 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_219 /* Payment.framework in Frameworks */,
+				OBJ_216 /* Payment.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		OBJ_106 /* Network */ = {
+		OBJ_104 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_107 /* NetworkTests.swift */,
-				OBJ_108 /* XCTestManifests.swift */,
+				OBJ_105 /* NetworkTests.swift */,
+				OBJ_106 /* XCTestManifests.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
 		};
-		OBJ_109 /* UI */ = {
+		OBJ_107 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_110 /* Service */,
+				OBJ_108 /* Service */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		OBJ_108 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_109 /* Payment Session */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		OBJ_109 /* Payment Session */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_110 /* NetworkDownloadProviderTests.swift */,
+				OBJ_111 /* PaymentSessionProviderTests.swift */,
+			);
+			path = "Payment Session";
 			sourceTree = "<group>";
 		};
 		OBJ_11 /* Localization */ = {
@@ -250,24 +267,7 @@
 			path = Localization;
 			sourceTree = "<group>";
 		};
-		OBJ_110 /* Service */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_111 /* Payment Session */,
-			);
-			path = Service;
-			sourceTree = "<group>";
-		};
-		OBJ_111 /* Payment Session */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_112 /* NetworkDownloadProviderTests.swift */,
-				OBJ_113 /* PaymentSessionServiceTests.swift */,
-			);
-			path = "Payment Session";
-			sourceTree = "<group>";
-		};
-		OBJ_114 /* Products */ = {
+		OBJ_112 /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				"Optile::Payment::Product" /* Payment.framework */,
@@ -347,11 +347,11 @@
 			children = (
 				OBJ_6 /* Package.swift */,
 				OBJ_7 /* Sources */,
-				OBJ_91 /* Tests */,
-				OBJ_114 /* Products */,
-				OBJ_117 /* Example */,
-				OBJ_118 /* Optile.podspec */,
-				OBJ_119 /* README.md */,
+				OBJ_89 /* Tests */,
+				OBJ_112 /* Products */,
+				OBJ_115 /* Example */,
+				OBJ_116 /* Optile.podspec */,
+				OBJ_117 /* README.md */,
 			);
 			name = "";
 			sourceTree = "<group>";
@@ -393,12 +393,12 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_64 /* Core */,
-				OBJ_70 /* List */,
-				OBJ_73 /* Model */,
-				OBJ_78 /* Protocols */,
-				OBJ_81 /* Service */,
-				OBJ_86 /* Theme */,
-				OBJ_88 /* View Controller */,
+				OBJ_68 /* List */,
+				OBJ_71 /* Model */,
+				OBJ_76 /* Protocols */,
+				OBJ_79 /* Service */,
+				OBJ_84 /* Theme */,
+				OBJ_86 /* View Controller */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -407,7 +407,7 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_65 /* Infix */,
-				OBJ_69 /* log.swift */,
+				OBJ_67 /* log.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -418,6 +418,15 @@
 				OBJ_66 /* mergeClosures.swift */,
 			);
 			path = Infix;
+			sourceTree = "<group>";
+		};
+		OBJ_68 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_69 /* PaymentListTableController.swift */,
+				OBJ_70 /* PaymentListTableViewCell.swift */,
+			);
+			path = List;
 			sourceTree = "<group>";
 		};
 		OBJ_7 /* Sources */ = {
@@ -432,126 +441,117 @@
 			path = Sources;
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_70 /* List */ = {
+		OBJ_71 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_71 /* PaymentListTableController.swift */,
-				OBJ_72 /* PaymentListTableViewCell.swift */,
-			);
-			path = List;
-			sourceTree = "<group>";
-		};
-		OBJ_73 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_74 /* LocalizableError.swift */,
-				OBJ_75 /* PaymentError.swift */,
-				OBJ_76 /* PaymentNetwork.swift */,
-				OBJ_77 /* PaymentSession.swift */,
+				OBJ_72 /* LocalizableError.swift */,
+				OBJ_73 /* PaymentError.swift */,
+				OBJ_74 /* PaymentNetwork.swift */,
+				OBJ_75 /* PaymentSession.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
 		};
-		OBJ_78 /* Protocols */ = {
+		OBJ_76 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_79 /* DequeueableTableCell.swift */,
-				OBJ_80 /* Load.swift */,
+				OBJ_77 /* DequeueableTableCell.swift */,
+				OBJ_78 /* Load.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		OBJ_79 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_80 /* Payment Session */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		OBJ_8 /* Core */ = {
 			isa = PBXGroup;
 			children = (
 				OBJ_9 /* Errors.swift */,
-				OBJ_10 /* PaymentInternalError.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
 		};
-		OBJ_81 /* Service */ = {
+		OBJ_80 /* Payment Session */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_82 /* Payment Session */,
-			);
-			path = Service;
-			sourceTree = "<group>";
-		};
-		OBJ_82 /* Payment Session */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_83 /* NetworkDownloadProvider.swift */,
-				OBJ_84 /* PaymentSessionProvider.swift */,
-				OBJ_85 /* PaymentSessionService.swift */,
+				OBJ_81 /* NetworkDownloadProvider.swift */,
+				OBJ_82 /* PaymentSessionProvider.swift */,
+				OBJ_83 /* PaymentSessionService.swift */,
 			);
 			path = "Payment Session";
 			sourceTree = "<group>";
 		};
-		OBJ_86 /* Theme */ = {
+		OBJ_84 /* Theme */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_87 /* PaymentListParameters.swift */,
+				OBJ_85 /* PaymentListParameters.swift */,
 			);
 			path = Theme;
 			sourceTree = "<group>";
 		};
-		OBJ_88 /* View Controller */ = {
+		OBJ_86 /* View Controller */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_89 /* PaymentListViewContoller.swift */,
-				OBJ_90 /* PaymentNavigationController.swift */,
+				OBJ_87 /* PaymentListViewContoller.swift */,
+				OBJ_88 /* PaymentNavigationController.swift */,
 			);
 			path = "View Controller";
 			sourceTree = "<group>";
 		};
-		OBJ_91 /* Tests */ = {
+		OBJ_89 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_92 /* Helpers */,
-				OBJ_95 /* Localization */,
-				OBJ_98 /* Mock */,
-				OBJ_106 /* Network */,
-				OBJ_109 /* UI */,
+				OBJ_90 /* Helpers */,
+				OBJ_93 /* Localization */,
+				OBJ_96 /* Mock */,
+				OBJ_104 /* Network */,
+				OBJ_107 /* UI */,
 			);
 			path = Tests;
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_92 /* Helpers */ = {
+		OBJ_90 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_93 /* URL+Example.swift */,
-				OBJ_94 /* XCTFail+Error.swift */,
+				OBJ_91 /* URL+Example.swift */,
+				D9C9D3E323672BAB00CBB092 /* XCTAttachment+subject.swift */,
+				OBJ_92 /* XCTFail+Error.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
 		};
-		OBJ_95 /* Localization */ = {
+		OBJ_93 /* Localization */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_96 /* LocalizeModelOperationTests.swift */,
-				OBJ_97 /* SharedTranslationProviderTests.swift */,
+				OBJ_94 /* LocalizeModelOperationTests.swift */,
+				OBJ_95 /* SharedTranslationProviderTests.swift */,
 			);
 			path = Localization;
 			sourceTree = "<group>";
 		};
-		OBJ_98 /* Mock */ = {
+		OBJ_96 /* Mock */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_99 /* Factory */,
-				OBJ_103 /* MockConnection.swift */,
-				OBJ_104 /* MockDataSource.swift */,
-				OBJ_105 /* TestError.swift */,
+				OBJ_97 /* Factory */,
+				OBJ_101 /* MockConnection.swift */,
+				OBJ_102 /* MockDataSource.swift */,
+				OBJ_103 /* TestError.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
 		};
-		OBJ_99 /* Factory */ = {
+		OBJ_97 /* Factory */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_100 /* MockFactory.ListResult.swift */,
-				OBJ_101 /* MockFactory.Localization.swift */,
-				OBJ_102 /* MockFactory.swift */,
+				OBJ_98 /* MockFactory.ListResult.swift */,
+				OBJ_99 /* MockFactory.Localization.swift */,
+				OBJ_100 /* MockFactory.swift */,
 			);
 			path = Factory;
 			sourceTree = "<group>";
@@ -561,10 +561,10 @@
 /* Begin PBXNativeTarget section */
 		"Optile::Payment" /* Payment */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_133 /* Build configuration list for PBXNativeTarget "Payment" */;
+			buildConfigurationList = OBJ_131 /* Build configuration list for PBXNativeTarget "Payment" */;
 			buildPhases = (
-				OBJ_136 /* Sources */,
-				OBJ_199 /* Frameworks */,
+				OBJ_134 /* Sources */,
+				OBJ_196 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -577,15 +577,15 @@
 		};
 		"Optile::PaymentTests" /* PaymentTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_200 /* Build configuration list for PBXNativeTarget "PaymentTests" */;
+			buildConfigurationList = OBJ_197 /* Build configuration list for PBXNativeTarget "PaymentTests" */;
 			buildPhases = (
-				OBJ_203 /* Sources */,
-				OBJ_218 /* Frameworks */,
+				OBJ_200 /* Sources */,
+				OBJ_215 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				OBJ_220 /* PBXTargetDependency */,
+				OBJ_217 /* PBXTargetDependency */,
 			);
 			name = PaymentTests;
 			productName = PaymentTests;
@@ -594,9 +594,9 @@
 		};
 		"Optile::SwiftPMPackageDescription" /* OptilePackageDescription */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_121 /* Build configuration list for PBXNativeTarget "OptilePackageDescription" */;
+			buildConfigurationList = OBJ_119 /* Build configuration list for PBXNativeTarget "OptilePackageDescription" */;
 			buildPhases = (
-				OBJ_124 /* Sources */,
+				OBJ_122 /* Sources */,
 			);
 			buildRules = (
 			);
@@ -623,7 +623,7 @@
 				en,
 			);
 			mainGroup = OBJ_5 /*  */;
-			productRefGroup = OBJ_114 /* Products */;
+			productRefGroup = OBJ_112 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -636,120 +636,120 @@
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		OBJ_124 /* Sources */ = {
+		OBJ_122 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_125 /* Package.swift in Sources */,
+				OBJ_123 /* Package.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_136 /* Sources */ = {
+		OBJ_134 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_137 /* Errors.swift in Sources */,
-				OBJ_138 /* PaymentInternalError.swift in Sources */,
-				OBJ_139 /* LocalizableInteraction.swift in Sources */,
-				OBJ_140 /* PaymentNetwork+Localizable.swift in Sources */,
-				OBJ_141 /* LocalizeModelOperation.swift in Sources */,
-				OBJ_142 /* Localizer.swift in Sources */,
-				OBJ_143 /* Localizable.swift in Sources */,
-				OBJ_144 /* LocalizationsProvider.swift in Sources */,
-				OBJ_145 /* SharedTranslationProvider.swift in Sources */,
-				OBJ_146 /* LocalTranslation.swift in Sources */,
-				OBJ_147 /* AccountFormData.swift in Sources */,
-				OBJ_148 /* AccountMask.swift in Sources */,
-				OBJ_149 /* AccountRegistration.swift in Sources */,
-				OBJ_150 /* ApplicableNetwork.swift in Sources */,
-				OBJ_151 /* Checkbox.swift in Sources */,
-				OBJ_152 /* CustomerFormData.swift in Sources */,
-				OBJ_153 /* ExtraElement.swift in Sources */,
-				OBJ_154 /* ExtraElements.swift in Sources */,
-				OBJ_155 /* FormData.swift in Sources */,
-				OBJ_156 /* InputElement.swift in Sources */,
-				OBJ_157 /* InstallmentItem.swift in Sources */,
-				OBJ_158 /* Installments.swift in Sources */,
-				OBJ_159 /* InstallmentsPlan.swift in Sources */,
-				OBJ_160 /* Interaction.swift in Sources */,
-				OBJ_161 /* ListLinks.swift in Sources */,
-				OBJ_162 /* ListResult.swift in Sources */,
-				OBJ_163 /* Networks.swift in Sources */,
-				OBJ_164 /* HTTPMethod.swift in Sources */,
-				OBJ_165 /* Parameter.swift in Sources */,
-				OBJ_166 /* PaymentAmount.swift in Sources */,
-				OBJ_167 /* PresetAccount.swift in Sources */,
-				OBJ_168 /* PresetLinks.swift in Sources */,
-				OBJ_169 /* Redirect.swift in Sources */,
-				OBJ_170 /* SelectOption.swift in Sources */,
-				OBJ_171 /* Style.swift in Sources */,
-				OBJ_172 /* AsynchronousOperation.swift in Sources */,
-				OBJ_173 /* Connection.swift in Sources */,
-				OBJ_174 /* CustomRequest.swift in Sources */,
-				OBJ_175 /* GetRequest.swift in Sources */,
-				OBJ_176 /* Request.swift in Sources */,
-				OBJ_177 /* DownloadData.swift in Sources */,
-				OBJ_178 /* DownloadLocalization.swift in Sources */,
-				OBJ_179 /* GetListResult.swift in Sources */,
-				OBJ_180 /* SendRequestOperation.swift in Sources */,
-				OBJ_181 /* URLSessionConnection.swift in Sources */,
-				OBJ_182 /* mergeClosures.swift in Sources */,
-				OBJ_184 /* log.swift in Sources */,
-				OBJ_185 /* PaymentListTableController.swift in Sources */,
-				OBJ_186 /* PaymentListTableViewCell.swift in Sources */,
-				OBJ_187 /* LocalizableError.swift in Sources */,
-				OBJ_188 /* PaymentError.swift in Sources */,
-				OBJ_189 /* PaymentNetwork.swift in Sources */,
-				OBJ_190 /* PaymentSession.swift in Sources */,
-				OBJ_191 /* DequeueableTableCell.swift in Sources */,
-				OBJ_192 /* Load.swift in Sources */,
-				OBJ_193 /* NetworkDownloadProvider.swift in Sources */,
-				OBJ_194 /* PaymentSessionProvider.swift in Sources */,
-				OBJ_195 /* PaymentSessionService.swift in Sources */,
-				OBJ_196 /* PaymentListParameters.swift in Sources */,
-				OBJ_197 /* PaymentListViewContoller.swift in Sources */,
-				OBJ_198 /* PaymentNavigationController.swift in Sources */,
+				OBJ_135 /* Errors.swift in Sources */,
+				OBJ_137 /* LocalizableInteraction.swift in Sources */,
+				OBJ_138 /* PaymentNetwork+Localizable.swift in Sources */,
+				OBJ_139 /* LocalizeModelOperation.swift in Sources */,
+				OBJ_140 /* Localizer.swift in Sources */,
+				OBJ_141 /* Localizable.swift in Sources */,
+				OBJ_142 /* LocalizationsProvider.swift in Sources */,
+				OBJ_143 /* SharedTranslationProvider.swift in Sources */,
+				OBJ_144 /* LocalTranslation.swift in Sources */,
+				OBJ_145 /* AccountFormData.swift in Sources */,
+				OBJ_146 /* AccountMask.swift in Sources */,
+				OBJ_147 /* AccountRegistration.swift in Sources */,
+				OBJ_148 /* ApplicableNetwork.swift in Sources */,
+				OBJ_149 /* Checkbox.swift in Sources */,
+				OBJ_150 /* CustomerFormData.swift in Sources */,
+				OBJ_151 /* ExtraElement.swift in Sources */,
+				OBJ_152 /* ExtraElements.swift in Sources */,
+				OBJ_153 /* FormData.swift in Sources */,
+				OBJ_154 /* InputElement.swift in Sources */,
+				OBJ_155 /* InstallmentItem.swift in Sources */,
+				OBJ_156 /* Installments.swift in Sources */,
+				OBJ_157 /* InstallmentsPlan.swift in Sources */,
+				OBJ_158 /* Interaction.swift in Sources */,
+				OBJ_159 /* ListLinks.swift in Sources */,
+				OBJ_160 /* ListResult.swift in Sources */,
+				OBJ_161 /* Networks.swift in Sources */,
+				OBJ_162 /* HTTPMethod.swift in Sources */,
+				OBJ_163 /* Parameter.swift in Sources */,
+				OBJ_164 /* PaymentAmount.swift in Sources */,
+				OBJ_165 /* PresetAccount.swift in Sources */,
+				OBJ_166 /* PresetLinks.swift in Sources */,
+				OBJ_167 /* Redirect.swift in Sources */,
+				OBJ_168 /* SelectOption.swift in Sources */,
+				OBJ_169 /* Style.swift in Sources */,
+				OBJ_170 /* AsynchronousOperation.swift in Sources */,
+				OBJ_171 /* Connection.swift in Sources */,
+				OBJ_172 /* CustomRequest.swift in Sources */,
+				OBJ_173 /* GetRequest.swift in Sources */,
+				OBJ_174 /* Request.swift in Sources */,
+				OBJ_175 /* DownloadData.swift in Sources */,
+				OBJ_176 /* DownloadLocalization.swift in Sources */,
+				OBJ_177 /* GetListResult.swift in Sources */,
+				OBJ_178 /* SendRequestOperation.swift in Sources */,
+				OBJ_179 /* URLSessionConnection.swift in Sources */,
+				OBJ_180 /* mergeClosures.swift in Sources */,
+				OBJ_181 /* log.swift in Sources */,
+				OBJ_182 /* PaymentListTableController.swift in Sources */,
+				OBJ_183 /* PaymentListTableViewCell.swift in Sources */,
+				OBJ_184 /* LocalizableError.swift in Sources */,
+				OBJ_185 /* PaymentError.swift in Sources */,
+				OBJ_186 /* PaymentNetwork.swift in Sources */,
+				OBJ_187 /* PaymentSession.swift in Sources */,
+				OBJ_188 /* DequeueableTableCell.swift in Sources */,
+				OBJ_189 /* Load.swift in Sources */,
+				OBJ_190 /* NetworkDownloadProvider.swift in Sources */,
+				OBJ_191 /* PaymentSessionProvider.swift in Sources */,
+				OBJ_192 /* PaymentSessionService.swift in Sources */,
+				OBJ_193 /* PaymentListParameters.swift in Sources */,
+				OBJ_194 /* PaymentListViewContoller.swift in Sources */,
+				OBJ_195 /* PaymentNavigationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_203 /* Sources */ = {
+		OBJ_200 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_204 /* URL+Example.swift in Sources */,
-				OBJ_205 /* XCTFail+Error.swift in Sources */,
-				OBJ_206 /* LocalizeModelOperationTests.swift in Sources */,
-				OBJ_207 /* SharedTranslationProviderTests.swift in Sources */,
-				OBJ_208 /* MockFactory.ListResult.swift in Sources */,
-				OBJ_209 /* MockFactory.Localization.swift in Sources */,
-				OBJ_210 /* MockFactory.swift in Sources */,
-				OBJ_211 /* MockConnection.swift in Sources */,
-				OBJ_212 /* MockDataSource.swift in Sources */,
-				OBJ_213 /* TestError.swift in Sources */,
-				OBJ_214 /* NetworkTests.swift in Sources */,
-				OBJ_215 /* XCTestManifests.swift in Sources */,
-				OBJ_216 /* NetworkDownloadProviderTests.swift in Sources */,
-				OBJ_217 /* PaymentSessionServiceTests.swift in Sources */,
+				OBJ_201 /* URL+Example.swift in Sources */,
+				OBJ_202 /* XCTFail+Error.swift in Sources */,
+				OBJ_203 /* LocalizeModelOperationTests.swift in Sources */,
+				OBJ_204 /* SharedTranslationProviderTests.swift in Sources */,
+				OBJ_205 /* MockFactory.ListResult.swift in Sources */,
+				OBJ_206 /* MockFactory.Localization.swift in Sources */,
+				D9C9D3E523672C5000CBB092 /* XCTAttachment+subject.swift in Sources */,
+				OBJ_207 /* MockFactory.swift in Sources */,
+				OBJ_208 /* MockConnection.swift in Sources */,
+				OBJ_209 /* MockDataSource.swift in Sources */,
+				OBJ_210 /* TestError.swift in Sources */,
+				OBJ_211 /* NetworkTests.swift in Sources */,
+				OBJ_212 /* XCTestManifests.swift in Sources */,
+				OBJ_213 /* NetworkDownloadProviderTests.swift in Sources */,
+				OBJ_214 /* PaymentSessionProviderTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		OBJ_130 /* PBXTargetDependency */ = {
+		OBJ_128 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "Optile::PaymentTests" /* PaymentTests */;
-			targetProxy = D9D4D4172364FBCA002C3B31 /* PBXContainerItemProxy */;
+			targetProxy = D9C9D3E22367216200CBB092 /* PBXContainerItemProxy */;
 		};
-		OBJ_220 /* PBXTargetDependency */ = {
+		OBJ_217 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "Optile::Payment" /* Payment */;
-			targetProxy = D9D4D4162364FBC9002C3B31 /* PBXContainerItemProxy */;
+			targetProxy = D9C9D3E12367216100CBB092 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		OBJ_122 /* Debug */ = {
+		OBJ_120 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				LD = /usr/bin/true;
@@ -758,7 +758,7 @@
 			};
 			name = Debug;
 		};
-		OBJ_123 /* Release */ = {
+		OBJ_121 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				LD = /usr/bin/true;
@@ -767,19 +767,19 @@
 			};
 			name = Release;
 		};
-		OBJ_128 /* Debug */ = {
+		OBJ_126 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 			};
 			name = Debug;
 		};
-		OBJ_129 /* Release */ = {
+		OBJ_127 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 			};
 			name = Release;
 		};
-		OBJ_134 /* Debug */ = {
+		OBJ_132 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ENABLE_TESTABILITY = YES;
@@ -807,7 +807,7 @@
 			};
 			name = Debug;
 		};
-		OBJ_135 /* Release */ = {
+		OBJ_133 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ENABLE_TESTABILITY = YES;
@@ -835,7 +835,7 @@
 			};
 			name = Release;
 		};
-		OBJ_201 /* Debug */ = {
+		OBJ_198 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
@@ -860,7 +860,7 @@
 			};
 			name = Debug;
 		};
-		OBJ_202 /* Release */ = {
+		OBJ_199 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
@@ -939,29 +939,38 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		OBJ_121 /* Build configuration list for PBXNativeTarget "OptilePackageDescription" */ = {
+		OBJ_119 /* Build configuration list for PBXNativeTarget "OptilePackageDescription" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_122 /* Debug */,
-				OBJ_123 /* Release */,
+				OBJ_120 /* Debug */,
+				OBJ_121 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		OBJ_127 /* Build configuration list for PBXAggregateTarget "OptilePackageTests" */ = {
+		OBJ_125 /* Build configuration list for PBXAggregateTarget "OptilePackageTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_128 /* Debug */,
-				OBJ_129 /* Release */,
+				OBJ_126 /* Debug */,
+				OBJ_127 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		OBJ_133 /* Build configuration list for PBXNativeTarget "Payment" */ = {
+		OBJ_131 /* Build configuration list for PBXNativeTarget "Payment" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_134 /* Debug */,
-				OBJ_135 /* Release */,
+				OBJ_132 /* Debug */,
+				OBJ_133 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_197 /* Build configuration list for PBXNativeTarget "PaymentTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_198 /* Debug */,
+				OBJ_199 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -971,15 +980,6 @@
 			buildConfigurations = (
 				OBJ_3 /* Debug */,
 				OBJ_4 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		OBJ_200 /* Build configuration list for PBXNativeTarget "PaymentTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				OBJ_201 /* Debug */,
-				OBJ_202 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -10,7 +10,7 @@ class NetworkDownloadProviderTests: XCTestCase {
 		provider.downloadData(from: URL.example) { result in
 			switch result {
 			case .success(let data):
-				XCTAssertEqual(data, try! connection.dataSource.fakeData.get())
+				XCTAssertEqual(data, "test42".data(using: .isoLatin1))
 			case .failure(let error):
 				XCTFail(error.localizedDescription)
 			}

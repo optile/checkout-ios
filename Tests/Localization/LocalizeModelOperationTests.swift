@@ -12,7 +12,7 @@ class LocalizeModelOperationTests: XCTestCase {
 	
 	// Should fallback to shared and local, error will be logged
 	func testFailedRemote() {
-		let error = TestError(errorDescription: "No connection")
+		let error = TestError(description: "No connection")
 		let expectation = MockModel(testValue: "shared", otherValue: "local2", notFoundKey: "")
 		invokeLocalizeOperation(model: MockModel(), remote: error, expected: expectation, isErrorExpected: true)
 	}

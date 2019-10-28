@@ -12,16 +12,26 @@ struct ErrorInfo: Decodable, LocalizedError {
 	}
 }
 
-struct NetworkInternalError: LocalizedError, CustomDebugStringConvertible {
-	var errorDescription: String?
+struct NetworkInternalError: Error, CustomDebugStringConvertible {
 	var debugDescription: String
 	
 	public init(description: String, debugDescription: String? = nil, file: String = #file, line: Int = #line, function: String = #function) {
-		self.debugDescription = "Called from the file: " + file + "#" + String(line) + ", method: " + function
-		self.errorDescription = description
+		self.debugDescription = description + ". Called from the file: " + file + "#" + String(line) + ", method: " + function
 	}
 	
 	static func unexpected(file: String = #file, line: Int = #line, function: String = #function) -> NetworkInternalError {
+		return .init(description: "Unexpected Error")
+	}
+}
+
+struct PaymentInternalError: Error, CustomDebugStringConvertible {
+	var debugDescription: String
+	
+	public init(description: String, debugDescription: String? = nil, file: String = #file, line: Int = #line, function: String = #function) {
+		self.debugDescription = description + ". Called from the file: " + file + "#" + String(line) + ", method: " + function
+	}
+	
+	static func unexpected(file: String = #file, line: Int = #line, function: String = #function) -> PaymentInternalError {
 		return .init(description: "Unexpected Error")
 	}
 }

@@ -1,5 +1,9 @@
 import Foundation
 
-struct TestError: LocalizedError {
-	var errorDescription: String
+struct TestError: Error, CustomDebugStringConvertible {
+	var debugDescription: String
+	
+	init(description: String) {
+		self.debugDescription = description
+	}
 }

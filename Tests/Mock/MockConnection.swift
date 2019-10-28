@@ -9,13 +9,9 @@ class MockConnection: Connection {
 		self.dataSource = dataSource
 	}
 	
-	func fakeData(for request: URLRequest) -> Result<Data?, Error> {
-		return dataSource.fakeData
-	}
-	
 	func send(request: URLRequest, completionHandler: @escaping ((Result<Data?, Error>) -> Void)) {
 		self.requestedURL = request.url!
-		completionHandler(fakeData(for: request))
+		completionHandler(dataSource.fakeData(for: request))
 	}
 	
 	func cancel() {}

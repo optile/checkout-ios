@@ -18,7 +18,7 @@ class PaymentSessionProvider {
 	func loadPaymentSession(completion: @escaping ((Load<PaymentSession>) -> Void)) {
 		completion(.loading)
 
-		let job = getListResult ->> downloadSharedLocalization ->> checkInteractionCode ->> filterUnsupportedNetworks ->> downloadLocalizations
+		let job = getListResult ->> downloadSharedLocalization ->> checkInteractionCode ->> filterUnsupportedNetworks ->> downloadLocalizations ->>
 
 		job(paymentSessionURL) { result in
 			switch result {
@@ -30,7 +30,7 @@ class PaymentSessionProvider {
 	
 	// MARK: - Closures
 	
-	func getListResult(from url: URL, completion: @escaping ((Result<ListResult, Error>) -> Void)) {
+	private func getListResult(from url: URL, completion: @escaping ((Result<ListResult, Error>) -> Void)) {
 		let getListResult = GetListResult(url: paymentSessionURL)
 		let getListResultOperation = SendRequestOperation(connection: connection, request: getListResult)
 		getListResultOperation.downloadCompletionBlock = { [localizer] result in
@@ -49,7 +49,7 @@ class PaymentSessionProvider {
 		getListResultOperation.start()
 	}
 	
-	func downloadSharedLocalization(for listResult: ListResult, completion: @escaping ((Result<ListResult, Error>) -> Void)) {
+	private func downloadSharedLocalization(for listResult: ListResult, completion: @escaping ((Result<ListResult, Error>) -> Void)) {
 		guard let localeURL = listResult.networks.applicable.first?.links?[
 			"lang"] else {
 			log(.fault, "Applicable network language URL wasn't provided to a localization provider")
@@ -118,4 +118,5 @@ class PaymentSessionProvider {
 		
 		localizationQueue.addOperation(completionOperation)
 	}
+
 }
