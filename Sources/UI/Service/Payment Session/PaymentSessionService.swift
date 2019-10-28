@@ -5,14 +5,24 @@ import Foundation
 class PaymentSessionService {
 	private let paymentSessionProvider: PaymentSessionProvider
 	private let downloadProvider: NetworkDownloadProvider
+	private let localizationProvider: TranslationProvider
 	
-	init(paymentSessionProvider: PaymentSessionProvider, downloadProvider: NetworkDownloadProvider) {
-		self.paymentSessionProvider = paymentSessionProvider
-		self.downloadProvider = downloadProvider
+	init(paymentSessionURL: URL, connection: Connection, localizationProvider: SharedTranslationProvider) {
+		downloadProvider = NetworkDownloadProvider(connection: connection)
+		paymentSessionProvider = PaymentSessionProvider(paymentSessionURL: paymentSessionURL, connection: connection, localizationsProvider: localizationProvider)
+		self.localizationProvider = localizationProvider
 	}
 	
 	func loadPaymentSession(completion: @escaping ((Load<PaymentSession>) -> Void)) {
-		paymentSessionProvider.loadPaymentSession(completion: completion)
+		paymentSessionProvider.loadPaymentSession { [localize] result in
+			// TODO: Return `LocalizedError`, not `Error`
+			switch result {
+			case .failure(let error):
+				let localizedError = localize(error)
+				completion(.failure(localizedError))
+			default: completion(result)
+			}
+		}
 	}
 	
 	func loadLogo(for network: PaymentNetwork, completion: @escaping ((Data?) -> Void)) {
@@ -31,5 +41,17 @@ class PaymentSessionService {
 			}
 		}
 	}
+	
+	private func localize(error: Error) -> LocalizedError {
+		let localizer = Localizer(provider: localizationProvider)
+		
+		switch error {
+		case let localized as LocalizedError: return localized
+		case let localizable as LocalizableError: return localizer.localize(model: localizable)
+		default:
+			var defaultError = LocalizableError(localizationKey: .errorDefault)
+			defaultError.underlyingError = error
+			return localizer.localize(model: defaultError)
+		}
+	}
 }
-

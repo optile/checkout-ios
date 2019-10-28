@@ -1,7 +1,7 @@
 import XCTest
 @testable import Payment
 
-class PaymentSessionProviderTests: XCTestCase {
+class PaymentSessionServiceTests: XCTestCase {
 	func testPaymentPageUnavailable() {
 		let result = syncLoadPaymentSession(using: PaymentPageFailureDataSource())
 		let attachment = XCTAttachment(subject: result)
@@ -27,7 +27,7 @@ class PaymentSessionProviderTests: XCTestCase {
 	
 	private func syncLoadPaymentSession(using dataSource: MockDataSource) -> Load<PaymentSession> {
 		let connection = MockConnection(dataSource: dataSource)
-		let provider = PaymentSessionProvider(paymentSessionURL: URL.example, connection: connection, localizationsProvider: SharedTranslationProvider())
+		let provider = PaymentSessionService(paymentSessionURL: URL.example, connection: connection, localizationProvider: SharedTranslationProvider())
 		
 		let loadingPromise = expectation(description: "PaymentSessionProvider: loading")
 		let resultPromise = expectation(description: "PaymentSessionProvider: completed")

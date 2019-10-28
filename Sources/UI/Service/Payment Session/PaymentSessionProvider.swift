@@ -18,7 +18,7 @@ class PaymentSessionProvider {
 	func loadPaymentSession(completion: @escaping ((Load<PaymentSession>) -> Void)) {
 		completion(.loading)
 
-		let job = getListResult ->> downloadSharedLocalization ->> checkInteractionCode ->> filterUnsupportedNetworks ->> downloadLocalizations ->>
+		let job = getListResult ->> downloadSharedLocalization ->> checkInteractionCode ->> filterUnsupportedNetworks ->> downloadLocalizations
 
 		job(paymentSessionURL) { result in
 			switch result {
@@ -33,7 +33,7 @@ class PaymentSessionProvider {
 	private func getListResult(from url: URL, completion: @escaping ((Result<ListResult, Error>) -> Void)) {
 		let getListResult = GetListResult(url: paymentSessionURL)
 		let getListResultOperation = SendRequestOperation(connection: connection, request: getListResult)
-		getListResultOperation.downloadCompletionBlock = { [localizer] result in
+		getListResultOperation.downloadCompletionBlock = { result in
 			switch result {
 			case .success(let listResult): completion(.success(listResult))
 			case .failure(let error):
@@ -41,7 +41,6 @@ class PaymentSessionProvider {
 
 				var error = LocalizableError(localizationKey: .errorConnection, isRetryable: true)
 				error.underlyingError = error
-				localizer.localize(model: &error)
 
 				completion(.failure(error))
 			}
@@ -52,11 +51,7 @@ class PaymentSessionProvider {
 	private func downloadSharedLocalization(for listResult: ListResult, completion: @escaping ((Result<ListResult, Error>) -> Void)) {
 		guard let localeURL = listResult.networks.applicable.first?.links?[
 			"lang"] else {
-			log(.fault, "Applicable network language URL wasn't provided to a localization provider")
-			
-			var error = LocalizableError(localizationKey: .errorDefault)
-			localizer.localize(model: &error)
-
+			let error = PaymentInternalError(description: "Applicable network language URL wasn't provided to a localization provider")
 			completion(.failure(error))
 			return
 		}

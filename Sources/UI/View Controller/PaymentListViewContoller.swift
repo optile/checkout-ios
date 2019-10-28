@@ -21,10 +21,7 @@ import UIKit
 	}
 	
 	init(tableConfiguration: PaymentListParameters, listResultURL: URL, connection: Connection, localizationsProvider: SharedTranslationProvider) {
-		let downloadProvider = NetworkDownloadProvider(connection: connection)
-		let paymentSessionProvider = PaymentSessionProvider(paymentSessionURL: listResultURL, connection: connection, localizationsProvider: localizationsProvider)
-		
-		sessionService = PaymentSessionService(paymentSessionProvider: paymentSessionProvider, downloadProvider: downloadProvider)
+		sessionService = PaymentSessionService(paymentSessionURL: listResultURL, connection: connection, localizationsProvider: SharedTranslationProvider)
 		configuration = tableConfiguration
 		self.localizationsProvider = localizationsProvider
 		
