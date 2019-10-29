@@ -1,7 +1,6 @@
 #if canImport(UIKit)
 
 import Foundation
-
 import UIKit
 
 class PaymentListTableController: NSObject {

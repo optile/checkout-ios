@@ -34,6 +34,8 @@ class PaymentSessionServiceTests: XCTestCase {
 		XCTAssertEqual(session.networks[1].label, "Visa Electron Localized")
 	}
 	
+	// MARK: - Helper methods
+	
 	private func syncLoadPaymentSession(using dataSource: MockDataSource) -> Load<PaymentSession> {
 		let connection = MockConnection(dataSource: dataSource)
 		let provider = PaymentSessionService(paymentSessionURL: URL.example, connection: connection, localizationProvider: SharedTranslationProvider())
@@ -58,6 +60,8 @@ class PaymentSessionServiceTests: XCTestCase {
 		return sessionResult
 	}
 }
+
+// MARK: - Data Sources
 
 private class PaymentPageFailureDataSource: MockDataSource {
 	func fakeData(for request: URLRequest) -> Result<Data?, Error> {
