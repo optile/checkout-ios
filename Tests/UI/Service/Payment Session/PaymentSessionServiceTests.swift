@@ -4,9 +4,6 @@ import XCTest
 class PaymentSessionServiceTests: XCTestCase {
 	func testPaymentPageUnavailable() {
 		let result = syncLoadPaymentSession(using: PaymentPageFailureDataSource())
-		let attachment = XCTAttachment(subject: result)
-		attachment.name = "LoadPaymentSessionResult"
-		add(attachment)
 		
 		guard case let .failure(error) = result else {
 			XCTFail("Expected failure")
@@ -25,6 +22,18 @@ class PaymentSessionServiceTests: XCTestCase {
 		XCTAssertEqual(localized.localizedDescription, LocalTranslation.errorDefault.localizedString)
 	}
 	
+	func testValid() {
+		let result = syncLoadPaymentSession(using: PaymentSessionDataSource())
+		
+		guard case let .success(session) = result else {
+			XCTFail("Expected success")
+			return
+		}
+
+		XCTAssertEqual(session.networks.count, 4)
+		XCTAssertEqual(session.networks[1].label, "Visa Electron Localized")
+	}
+	
 	private func syncLoadPaymentSession(using dataSource: MockDataSource) -> Load<PaymentSession> {
 		let connection = MockConnection(dataSource: dataSource)
 		let provider = PaymentSessionService(paymentSessionURL: URL.example, connection: connection, localizationProvider: SharedTranslationProvider())
@@ -41,6 +50,11 @@ class PaymentSessionServiceTests: XCTestCase {
 			}
 		}
 		wait(for: [loadingPromise, resultPromise], timeout: 1, enforceOrder: true)
+		
+		let attachment = XCTAttachment(subject: sessionResult)
+		attachment.name = "LoadPaymentSessionResult"
+		add(attachment)
+		
 		return sessionResult
 	}
 }
