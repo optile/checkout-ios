@@ -47,11 +47,20 @@ class PaymentSessionService {
 		
 		switch error {
 		case let localized as LocalizedError: return localized
-		case let localizable as LocalizableError: return localizer.localize(model: localizable)
+		case let localizable as LocalizableError:
+			let localized = localizer.localize(model: localizable)
+			return localized.transformToPaymentError()
 		default:
 			var defaultError = LocalizableError(localizationKey: .errorDefault)
 			defaultError.underlyingError = error
-			return localizer.localize(model: defaultError)
+			localizer.localize(model: &defaultError)
+			return defaultError.transformToPaymentError()
 		}
+	}
+}
+
+extension LocalizableError {
+	func transformToPaymentError() -> PaymentError {
+		return .init(localizedDescription: self.localizedDescription, isRetryable: self.isRetryable, underlyingError: self.underlyingError)
 	}
 }

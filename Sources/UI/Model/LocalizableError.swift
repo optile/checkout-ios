@@ -14,10 +14,6 @@ struct LocalizableError: Retryable {
 	}
 }
 
-extension LocalizableError: LocalizedError {
-	var errorDescription: String? { localizedDescription }
-}
-
 extension LocalizableError: Localizable {
 	var localeURL: URL? { return nil }
 	

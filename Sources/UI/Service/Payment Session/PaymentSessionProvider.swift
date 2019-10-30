@@ -39,8 +39,8 @@ class PaymentSessionProvider {
 			case .failure(let error):
 				log(.error, "getListResultOperation failed: %@", error.localizedDescription)
 
-				var error = LocalizableError(localizationKey: .errorConnection, isRetryable: true)
-				error.underlyingError = error
+				var localizableError = LocalizableError(localizationKey: .errorConnection, isRetryable: true)
+				localizableError.underlyingError = error
 
 				completion(.failure(error))
 			}
