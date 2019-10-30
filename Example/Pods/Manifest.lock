@@ -1,0 +1,16 @@
+PODS:
+  - Optile (0.1.0)
+
+DEPENDENCIES:
+  - Optile (from `../`)
+
+EXTERNAL SOURCES:
+  Optile:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  Optile: 12cca17dffbcb45cde7513c5bb3537671c97db6f
+
+PODFILE CHECKSUM: 6afe5e5b93e3e4b46e6a58557956be3836dc9a27
+
+COCOAPODS: 1.8.1
