@@ -36,13 +36,13 @@ class PaymentSessionServiceTests: XCTestCase {
 	
 	// MARK: - Helper methods
 	
-	private func syncLoadPaymentSession(using dataSource: MockDataSource) -> Load<PaymentSession> {
+	private func syncLoadPaymentSession(using dataSource: MockDataSource) -> Load<PaymentSession, PaymentError> {
 		let connection = MockConnection(dataSource: dataSource)
 		let provider = PaymentSessionService(paymentSessionURL: URL.example, connection: connection, localizationProvider: SharedTranslationProvider())
 		
 		let loadingPromise = expectation(description: "PaymentSessionProvider: loading")
 		let resultPromise = expectation(description: "PaymentSessionProvider: completed")
-		var sessionResult: Load<PaymentSession>!
+		var sessionResult: Load<PaymentSession, PaymentError>!
 		provider.loadPaymentSession { result in
 			switch result {
 			case .loading: loadingPromise.fulfill()
