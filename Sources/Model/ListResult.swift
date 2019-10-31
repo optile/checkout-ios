@@ -3,7 +3,7 @@ import Foundation
 /// List response with possible payment networks
 public class ListResult: NSObject, Decodable {
 	/// Collection of links related to this `LIST` session
-	public let links: ListLinks
+	public let links: Dictionary<String, URL>
 	
 	/// Descriptive information that complements the result code and interaction advice.
 	public let resultInfo: String
