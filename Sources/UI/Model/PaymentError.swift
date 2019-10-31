@@ -1,6 +1,6 @@
 import Foundation
 
-struct PaymentError: LocalizedError, Retryable {
+struct PaymentError: LocalizedError {
 	var localizedDescription: String
 	var isRetryable: Bool = false
 	

@@ -13,14 +13,15 @@ class PaymentSessionService {
 		self.localizationProvider = localizationProvider
 	}
 	
-	func loadPaymentSession(completion: @escaping ((Load<PaymentSession>) -> Void)) {
-		paymentSessionProvider.loadPaymentSession { [localize] result in
-			// TODO: Return `LocalizedError`, not `Error`
+	func loadPaymentSession(completion: @escaping ((Load<PaymentSession, PaymentError>) -> Void)) {
+		paymentSessionProvider.loadPaymentSession { [localizationProvider] result in
 			switch result {
+			case .loading: completion(.loading)
+			case .success(let session): completion(.success(session))
 			case .failure(let error):
-				let localizedError = localize(error)
+				let localizer = Localizer(provider: localizationProvider)
+				let localizedError = localizer.localize(error: error)				
 				completion(.failure(localizedError))
-			default: completion(result)
 			}
 		}
 	}
@@ -41,26 +42,11 @@ class PaymentSessionService {
 			}
 		}
 	}
-	
-	private func localize(error: Error) -> LocalizedError {
-		let localizer = Localizer(provider: localizationProvider)
-		
-		switch error {
-		case let localized as LocalizedError: return localized
-		case let localizable as LocalizableError:
-			let localized = localizer.localize(model: localizable)
-			return localized.transformToPaymentError()
-		default:
-			var defaultError = LocalizableError(localizationKey: .errorDefault)
-			defaultError.underlyingError = error
-			localizer.localize(model: &defaultError)
-			return defaultError.transformToPaymentError()
-		}
-	}
 }
 
-extension LocalizableError {
-	func transformToPaymentError() -> PaymentError {
-		return .init(localizedDescription: self.localizedDescription, isRetryable: self.isRetryable, underlyingError: self.underlyingError)
-	}
+/// Enumeration that is used for any object that can't be instantly loaded (e.g. fetched from a network)
+enum Load<Success, ErrorType> where ErrorType: Error {
+	case loading
+	case failure(ErrorType)
+	case success(Success)
 }

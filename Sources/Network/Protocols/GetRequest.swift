@@ -10,7 +10,7 @@ protocol GetRequest: Request {
 extension GetRequest {
 	public func build() throws -> URLRequest {
 		guard var components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
-			throw NetworkInternalError(description: "Internal error, incorrect GetRequest URL")
+			throw PaymentInternalError(description: "Internal error, incorrect GetRequest URL")
 		}
 		
 		if !queryItems.isEmpty {
@@ -18,7 +18,7 @@ extension GetRequest {
 		}
 		
 		guard let url = components.url else {
-			throw NetworkInternalError(description: "Internal error, unable to make API request URL")
+			throw PaymentInternalError(description: "Internal error, unable to make API request URL")
 		}
 		
 		var urlRequest = URLRequest(url: url)

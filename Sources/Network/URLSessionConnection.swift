@@ -37,13 +37,14 @@ class URLSessionConnection: Connection {
 		}
 
 		guard let response = response else {
-			completionHandler(.failure(NetworkInternalError.unexpected()))
+			let error = PaymentInternalError(description: "Incorrect completion from a URLSession, we have no error and no response")
+			completionHandler(.failure(error))
 			return
 		}
 		
 		// We expect HTTP response
 		guard let httpResponse = response as? HTTPURLResponse else {
-			let error = NetworkInternalError(description: "Unexpected server response (non-http)")
+			let error = PaymentInternalError(description: "Unexpected server response (receive a non-HTTP response)")
 			completionHandler(.failure(error))
 			return
 		}
@@ -51,10 +52,9 @@ class URLSessionConnection: Connection {
 		// - TODO: Read more about backend's status codes
 		guard httpResponse.statusCode >= 200, httpResponse.statusCode < 400 else {
 			if let data = data, let optileError = try? JSONDecoder().decode(ErrorInfo.self, from: data) {
-				
 				completionHandler(.failure(optileError))
 			} else {
-				let error = NetworkInternalError(description: "Non-OK response from a server")
+				let error = PaymentInternalError(description: "Non-OK response from a server")
 				completionHandler(.failure(error))
 			}
 			

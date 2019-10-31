@@ -9,12 +9,11 @@ func log(_ type: LogType, _ message: StaticString, _ args: CVarArg...) {
 	}
 }
 
-
 enum LogType {
 	case info, debug, error, fault
 	
 	@available(OSX 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *)
-	fileprivate var osLogType: OSLogType {
+	var osLogType: OSLogType {
 		switch self {
 		case .debug: return OSLogType.debug
 		case .error: return OSLogType.error

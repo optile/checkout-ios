@@ -15,7 +15,7 @@ class PaymentSessionProvider {
 		self.localizer = Localizer(provider: localizationsProvider)
 	}
 	
-	func loadPaymentSession(completion: @escaping ((Load<PaymentSession>) -> Void)) {
+	func loadPaymentSession(completion: @escaping ((Load<PaymentSession, Error>) -> Void)) {
 		completion(.loading)
 
 		let job = getListResult ->> downloadSharedLocalization ->> checkInteractionCode ->> filterUnsupportedNetworks ->> downloadLocalizations
@@ -37,11 +37,7 @@ class PaymentSessionProvider {
 			switch result {
 			case .success(let listResult): completion(.success(listResult))
 			case .failure(let error):
-				log(.error, "getListResultOperation failed: %@", error.localizedDescription)
-
-				var localizableError = LocalizableError(localizationKey: .errorConnection, isRetryable: true)
-				localizableError.underlyingError = error
-
+				log(.error, "GetListResult failed: %@", String(describing: error))
 				completion(.failure(error))
 			}
 		}
