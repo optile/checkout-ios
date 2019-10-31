@@ -9,6 +9,18 @@ func log(_ type: LogType, _ message: StaticString, _ args: CVarArg...) {
 	}
 }
 
+func log(_ error: Error) {
+	// Log errors
+	if let internalError = error as? PaymentInternalError {
+		internalError.log()
+		return
+	}
+	
+	var text = String()
+	dump(error, to: &text)
+	log(.error, "%@", text)
+}
+
 enum LogType {
 	case info, debug, error, fault
 	

@@ -27,7 +27,9 @@ class Localizer {
 		// Connection errors, return Apple's localized description for connection's errors and make it retryable
 		let nsError = error as NSError
 		
-		if nsError.domain == NSURLErrorDomain {
+		let allowedCodes: [URLError.Code] = [.notConnectedToInternet, .dataNotAllowed]
+		let allowedCodesNumber = allowedCodes.map { $0.rawValue }
+		if nsError.domain == NSURLErrorDomain, allowedCodesNumber.contains(nsError.code) {
 			return PaymentError(localizedDescription: nsError.localizedDescription, isRetryable: true, underlyingError: error)
 		}
 		

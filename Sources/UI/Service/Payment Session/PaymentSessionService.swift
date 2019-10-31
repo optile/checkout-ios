@@ -19,8 +19,10 @@ class PaymentSessionService {
 			case .loading: completion(.loading)
 			case .success(let session): completion(.success(session))
 			case .failure(let error):
+				log(error)
+				
 				let localizer = Localizer(provider: localizationProvider)
-				let localizedError = localizer.localize(error: error)				
+				let localizedError = localizer.localize(error: error)
 				completion(.failure(localizedError))
 			}
 		}
@@ -37,7 +39,8 @@ class PaymentSessionService {
 			case .success(let logoData):
 				completion(logoData)
 			case .failure(let error):
-				log(.error, "Couldn't download a logo for a payment network %@ from %@, reason: %@", network.code, logoURL.absoluteString, error.localizedDescription)
+				let paymentError = PaymentInternalError(description: "Couldn't download a logo for a payment network %@ from %@, reason: %@", network.code, logoURL.absoluteString, error.localizedDescription)
+				paymentError.log()
 				completion(nil)
 			}
 		}

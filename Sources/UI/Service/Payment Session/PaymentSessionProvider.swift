@@ -36,9 +36,7 @@ class PaymentSessionProvider {
 		getListResultOperation.downloadCompletionBlock = { result in
 			switch result {
 			case .success(let listResult): completion(.success(listResult))
-			case .failure(let error):
-				log(.error, "GetListResult failed: %@", String(describing: error))
-				completion(.failure(error))
+			case .failure(let error): completion(.failure(error))
 			}
 		}
 		getListResultOperation.start()

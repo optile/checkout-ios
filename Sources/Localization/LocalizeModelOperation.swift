@@ -66,8 +66,8 @@ private class DownloadableTranslationProvider: TranslationProvider {
 				self.remoteTranslation = remoteTranslation
 				completion(nil)
 			case .failure(let error):
-				log(.error, "Downloading specific localization failed with error: %@", error.localizedDescription)
-				completion(error)
+				let paymentError = PaymentInternalError(description: "Downloading specific localization failed with error %@", objects: error)
+				completion(paymentError)
 			}
 		}
 		sendRequestOperation.start()
