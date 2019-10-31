@@ -5,7 +5,6 @@ import Foundation
 struct ErrorInfo: Decodable {
 	let resultInfo: String
 	let interaction: Interaction
-
 	
 	struct Interaction: Decodable {
 		let code, reason: String
