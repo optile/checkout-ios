@@ -9,7 +9,7 @@ let package = Package(
 		.iOS(.v10)
 	],
     products: [
-		.library(name: "Payment", targets: ["Payment"]),
+		.library(name: "Optile", targets: ["Payment"]),
     ],
     dependencies: [
 //		.package(url: "https://github.com/shibapm/Komondor.git", from: "1.0.4"),
