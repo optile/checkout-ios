@@ -14,16 +14,15 @@ class PaymentSessionService {
 	}
 	
 	func loadPaymentSession(completion: @escaping ((Load<PaymentSession, PaymentError>) -> Void)) {
-		paymentSessionProvider.loadPaymentSession { [localizationProvider] result in
+		paymentSessionProvider.loadPaymentSession { [makePaymentError] result in
 			switch result {
 			case .loading: completion(.loading)
 			case .success(let session): completion(.success(session))
 			case .failure(let error):
 				log(error)
 				
-				let localizer = Localizer(provider: localizationProvider)
-				let localizedError = localizer.localize(error: error)
-				completion(.failure(localizedError))
+				let paymentError = makePaymentError(error)
+				completion(.failure(paymentError))
 			}
 		}
 	}
@@ -44,6 +43,13 @@ class PaymentSessionService {
 				completion(nil)
 			}
 		}
+	}
+	
+	private func makePaymentError(from error: Error) -> PaymentError {
+		let localizer = Localizer(provider: localizationProvider)
+		let localizedErrorText = localizer.localize(error: error)
+		let paymentError = PaymentError(localizedDescription: localizedErrorText, underlyingError: error)
+		return paymentError
 	}
 }
 

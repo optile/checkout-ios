@@ -51,8 +51,8 @@ class URLSessionConnection: Connection {
 
 		// - TODO: Read more about backend's status codes
 		guard httpResponse.statusCode >= 200, httpResponse.statusCode < 400 else {
-			if let data = data, let optileError = try? JSONDecoder().decode(ErrorInfo.self, from: data) {
-				completionHandler(.failure(optileError))
+			if let data = data, let backendError = try? JSONDecoder().decode(ErrorInfo.self, from: data) {
+				completionHandler(.failure(backendError))
 			} else {
 				let error = PaymentInternalError(description: "Non-OK response from a server")
 				completionHandler(.failure(error))

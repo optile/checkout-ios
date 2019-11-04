@@ -69,7 +69,6 @@ extension PaymentListViewContoller {
 			activityIndicator(isActive: true)
 			showPaymentMethods(for: nil)
 			presentError(error)
-		default: return
 		}
 	}
 	
@@ -127,7 +126,7 @@ extension PaymentListViewContoller {
 		let controller = UIAlertController(title: error.localizedDescription, message: nil, preferredStyle: .alert)
 		
 		// Add retry button if needed
-		if error.isRetryable {
+		if error.underlyingError?.isRecoverableNetworkError == true {
 			let retryAction = UIAlertAction(title: "Retry", style: .default) { [weak self] _ in
 				self?.load()
 			}

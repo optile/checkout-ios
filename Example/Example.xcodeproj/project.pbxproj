@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D9BF40C7236AF873000B949D /* Optile in Frameworks */ = {isa = PBXBuildFile; productRef = D9BF40C6236AF873000B949D /* Optile */; };
+		D9D705FE23703B66004000AE /* Optile in Frameworks */ = {isa = PBXBuildFile; productRef = D9D705FD23703B66004000AE /* Optile */; };
 		D9E0AEB1234143BD0021184C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E0AEB0234143BD0021184C /* AppDelegate.swift */; };
 		D9E0AEB5234143BD0021184C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E0AEB4234143BD0021184C /* ViewController.swift */; };
 		D9E0AEB8234143BD0021184C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9E0AEB6234143BD0021184C /* Main.storyboard */; };
@@ -31,19 +31,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D9BF40C7236AF873000B949D /* Optile in Frameworks */,
+				D9D705FE23703B66004000AE /* Optile in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D9D705FC23703B66004000AE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		D9E0AEA4234143BD0021184C = {
 			isa = PBXGroup;
 			children = (
 				D9BF40C5236AF86B000B949D /* ios-sdk */,
 				D9E0AEAF234143BD0021184C /* Example */,
 				D9E0AEAE234143BD0021184C /* Products */,
+				D9D705FC23703B66004000AE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -85,7 +93,7 @@
 			);
 			name = Example;
 			packageProductDependencies = (
-				D9BF40C6236AF873000B949D /* Optile */,
+				D9D705FD23703B66004000AE /* Optile */,
 			);
 			productName = Example;
 			productReference = D9E0AEAD234143BD0021184C /* Example.app */;
@@ -345,7 +353,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		D9BF40C6236AF873000B949D /* Optile */ = {
+		D9D705FD23703B66004000AE /* Optile */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Optile;
 		};
