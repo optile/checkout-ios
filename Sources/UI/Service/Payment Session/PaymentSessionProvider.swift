@@ -18,7 +18,7 @@ class PaymentSessionProvider {
 	func loadPaymentSession(completion: @escaping ((Load<PaymentSession, Error>) -> Void)) {
 		completion(.loading)
 
-		let job = getListResult ->> downloadSharedLocalization ->> checkInteractionCode ->> filterUnsupportedNetworks ->> downloadLocalizations
+		let job = getListResult ->> downloadSharedLocalization ->> checkInteractionCode ->> filterUnsupportedNetworks ->> transformToUIModel ->> downloadLocalizations ->> makePaymentSession
 
 		job(paymentSessionURL) { result in
 			switch result {
@@ -81,20 +81,48 @@ class PaymentSessionProvider {
 		completion(filteredPaymentNetworks)
 	}
 	
-	private func downloadLocalizations(for applicableNetworks: [ApplicableNetwork], completion: @escaping ((PaymentSession) -> Void)) {
+	private func transformToUIModel(applicableNetworks: [ApplicableNetwork], completion: @escaping ((Result<[PaymentNetwork: URL], Error>) -> Void)) {
+		var localizationURLsByNetwork = [PaymentNetwork: URL]()
+		
+		for applicableNetwork in applicableNetworks {
+			guard let localizationURL = applicableNetwork.links?["lang"] else {
+				let error = PaymentInternalError(description: "Applicable network doesn't contain localization URL. Network: %@", objects: applicableNetwork)
+				completion(.failure(error))
+				return
+			}
+			
+			let paymentNetwork = PaymentNetwork(from: applicableNetwork)
+			localizationURLsByNetwork[paymentNetwork] = localizationURL
+		}
+		
+		completion(.success(localizationURLsByNetwork))
+	}
+	
+	private func downloadLocalizations(for networksWithURL: [PaymentNetwork: URL], completion: @escaping ((Result<[PaymentNetwork], Error>) -> Void)) {
 		var allOperations: [LocalizeModelOperation<PaymentNetwork>] = []
 		
 		let completionOperation = BlockOperation {
-			let localizedModels = allOperations.compactMap { $0.localizedModel }
-			let session = PaymentSession(networks: localizedModels)
-			completion(session)
+			var localizedModels = [PaymentNetwork]()
+			for operation in allOperations {
+				switch operation.localizationResult {
+				case .success(let network): localizedModels.append(network)
+				case .failure(let error):
+					completion(.failure(error))
+					return
+				case .none:
+					let error = PaymentInternalError(description: "Model wasn't localized %@", objects: operation.modelToLocalize)
+					completion(.failure(error))
+					return
+				}
+			}
+			
+			completion(.success(localizedModels))
 		}
 		
-		for applicableNetwork in applicableNetworks {
-			let network = PaymentNetwork(from: applicableNetwork)
+		for (network, localizationURL) in networksWithURL {
 			let operation = LocalizeModelOperation(
 				network,
-				downloadFrom: applicableNetwork.links?["lang"],
+				downloadFrom: localizationURL,
 				using: connection,
 				additionalProvider: localizationsProvider
 			)
@@ -107,5 +135,9 @@ class PaymentSessionProvider {
 		
 		localizationQueue.addOperation(completionOperation)
 	}
-
+	
+	private func makePaymentSession(from paymentNetworks: [PaymentNetwork], completion: ((PaymentSession) -> Void)) {
+		let session = PaymentSession(networks: paymentNetworks)
+		completion(session)
+	}
 }

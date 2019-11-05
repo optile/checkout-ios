@@ -6,11 +6,8 @@ class LocalizeModelOperation<Model>: AsynchronousOperation where Model: Localiza
 	let connection: Connection
 	let localeURL: URL?
 	
-	private(set) var localizedModel: Model?
-	private(set) var remoteLocalizationError: Error?
+	private(set) var localizationResult: Result<Model, Error>?
 	
-	var localizationCompletionBlock: ((Model) -> Void)?
-
 	init(_ model: Model, downloadFrom url: URL?, using connection: Connection, additionalProvider: TranslationProvider) {
 		self.modelToLocalize = model
 		self.connection = connection
@@ -22,23 +19,26 @@ class LocalizeModelOperation<Model>: AsynchronousOperation where Model: Localiza
 		if let localizationFileURL = localeURL {
 			let provider = DownloadableTranslationProvider(otherTranslations: additionalProvider.translations)
 			provider.downloadTranslation(from: localizationFileURL, using: connection) { [modelToLocalize] error in
-				self.remoteLocalizationError = error
+				if let error = error {
+					self.finish(with: .failure(error))
+					return
+				}
+				
 				let localizer = Localizer(provider: provider)
 				let localizedModel = localizer.localize(model: modelToLocalize)
-
-				self.finish(with: localizedModel)
+				
+				self.finish(with: .success(localizedModel))
 			}
 		} else {
 			let localizer = Localizer(provider: additionalProvider)
 			let localizedModel = localizer.localize(model: modelToLocalize)
 
-			finish(with: localizedModel)
+			finish(with: .success(localizedModel))
 		}
 	}
 	
-	private func finish(with model: Model) {
-		self.localizedModel = model
-		localizationCompletionBlock?(model)
+	private func finish(with result: Result<Model, Error>) {
+		self.localizationResult = result
 		finish()
 	}
 }

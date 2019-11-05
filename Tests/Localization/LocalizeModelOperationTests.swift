@@ -32,20 +32,29 @@ class LocalizeModelOperationTests: XCTestCase {
 		operation.completionBlock = { promise.fulfill() }
 		operation.start()
 		wait(for: [promise], timeout: 1)
-		
-		XCTAssertNotNil(operation.localizedModel, "Model wasn't localized")
-
-		XCTAssertEqual(operation.localizedModel!.testValue, expected.testValue)
-		XCTAssertEqual(operation.localizedModel!.otherValue, expected.otherValue)
-		XCTAssertEqual(operation.localizedModel!.notFoundKey, expected.notFoundKey)
 
 		XCTAssertEqual(connection.requestedURL, url)
-		
+		XCTAssertNotNil(operation.localizationResult, "Model wasn't localized")
+
 		if isErrorExpected {
-			XCTAssertNotNil(operation.remoteLocalizationError)
-		} else {
-			XCTAssertNil(operation.remoteLocalizationError)
+			switch operation.localizationResult {
+			case .failure: return
+			default:
+				XCTFail("Localization result doesn't contain an error")
+				return
+			}
 		}
+		
+		// If error is not expected
+		
+		guard case let .success(localizedModel) = operation.localizationResult else {
+			XCTFail("Localization result doesn't contain localized model")
+			return
+		}
+
+		XCTAssertEqual(localizedModel.testValue, expected.testValue)
+		XCTAssertEqual(localizedModel.otherValue, expected.otherValue)
+		XCTAssertEqual(localizedModel.notFoundKey, expected.notFoundKey)
 	}
 }
 
