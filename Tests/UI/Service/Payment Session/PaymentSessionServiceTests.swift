@@ -22,6 +22,9 @@ class PaymentSessionServiceTests: XCTestCase {
 		XCTAssertEqual(localized.localizedDescription, LocalTranslation.errorDefault.localizedString)
 	}
 	
+	// TODO:
+	// Write a test if payment network doesn't contain language URL or download failed
+	
 	func testValid() {
 		let result = syncLoadPaymentSession(using: PaymentSessionDataSource())
 		
