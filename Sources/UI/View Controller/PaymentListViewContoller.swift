@@ -36,11 +36,17 @@ import UIKit
 	override public func viewDidLoad() {
 		super.viewDidLoad()
 		view.backgroundColor = UIColor.white
+
+		navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelButtonDidPress))
 		
 		// FIXME: Localize
 		title = "Payment method"
 		
 		load()
+	}
+	
+	@objc private func cancelButtonDidPress() {
+		dismiss(animated: true, completion: nil)
 	}
 		
 	private func load() {
