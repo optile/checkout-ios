@@ -2,7 +2,7 @@ import Foundation
 
 public class PresetAccount: NSObject, Decodable {
 	/// Collection of links related to this `PRESET` account.
-	public let links: PresetLinks
+	public let links: Dictionary<String, URL>
 	
 	/// Code of preset network
 	public let code: String
