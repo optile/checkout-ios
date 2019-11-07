@@ -4,11 +4,11 @@ import Foundation
 /// Used by `PaymentListViewController`
 class PaymentSessionService {
 	private let paymentSessionProvider: PaymentSessionProvider
-	private let downloadProvider: NetworkDownloadProvider
+	private let downloadProvider: DataDownloadProvider
 	private let localizationProvider: TranslationProvider
 	
 	init(paymentSessionURL: URL, connection: Connection, localizationProvider: SharedTranslationProvider) {
-		downloadProvider = NetworkDownloadProvider(connection: connection)
+		downloadProvider = DataDownloadProvider(connection: connection)
 		paymentSessionProvider = PaymentSessionProvider(paymentSessionURL: paymentSessionURL, connection: connection, localizationsProvider: localizationProvider)
 		self.localizationProvider = localizationProvider
 	}

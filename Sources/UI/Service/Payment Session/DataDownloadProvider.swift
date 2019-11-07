@@ -1,6 +1,6 @@
 import Foundation
 
-class NetworkDownloadProvider {
+class DataDownloadProvider {
 	let operationQueue = OperationQueue()
 	let connection: Connection
 	

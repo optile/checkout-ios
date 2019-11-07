@@ -1,10 +1,10 @@
 import XCTest
 @testable import Payment
 
-class NetworkDownloadProviderTests: XCTestCase {
+class DataDownloadProviderTests: XCTestCase {
 	func testDownloadProvider() {
 		let connection = MockConnection(dataSource: "test42")
-		let provider = NetworkDownloadProvider(connection: connection)
+		let provider = DataDownloadProvider(connection: connection)
 		
 		let promise = expectation(description: "NetworkDownloadProvider completion")
 		provider.downloadData(from: URL.example) { result in
