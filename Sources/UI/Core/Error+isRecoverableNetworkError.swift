@@ -1,7 +1,7 @@
 import Foundation
 
 extension Error {
-	var isRecoverableNetworkError: Bool {
+	var isNetworkError: Bool {
 		let nsError = self as NSError
 		
 		let allowedCodes: [URLError.Code] = [.notConnectedToInternet, .dataNotAllowed]

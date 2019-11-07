@@ -132,7 +132,7 @@ extension PaymentListViewContoller {
 		let controller = UIAlertController(title: error.localizedDescription, message: nil, preferredStyle: .alert)
 		
 		// Add retry button if needed
-		if error.underlyingError?.isRecoverableNetworkError == true {
+		if error.underlyingError?.isNetworkError == true {
 			let retryAction = UIAlertAction(title: "Retry", style: .default) { [weak self] _ in
 				self?.load()
 			}
