@@ -66,9 +66,21 @@ class PaymentSessionProvider {
 			completion(.success(listResult))
 			return
 		}
+		
+		// Non-proceed interaction, throw an error
+		
 		let localizedInteraction =
 			localizer.localize(model: listResult.interaction.localizable)
-		let error = PaymentError(localizedDescription: localizedInteraction.localizedDescription)
+		
+		let error: Error
+		if !localizedInteraction.localizedDescription.isEmpty {
+			// If we have a localization for that interaction throw it as an error
+			error = PaymentError(localizedDescription: localizedInteraction.localizedDescription)
+		} else {
+			// If we don't have such localization throw an internal error, later it would be converted to a generic error
+			error = InternalError(description: "%@", listResult.interaction.reason)
+		}
+		
 		completion(.failure(error))
 	}
 	
@@ -139,5 +151,11 @@ class PaymentSessionProvider {
 	private func makePaymentSession(from paymentNetworks: [PaymentNetwork], completion: ((PaymentSession) -> Void)) {
 		let session = PaymentSession(networks: paymentNetworks)
 		completion(session)
+	}
+}
+
+private extension Interaction {
+	var localizable: LocalizableInteraction {
+		.init(code: code, reason: reason)
 	}
 }

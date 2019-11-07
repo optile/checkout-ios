@@ -14,12 +14,8 @@ struct LocalizationKey<T> {
 	/// Localization key that would be used by a provider to lookup a translation string
 	let key: String
 	
-	/// If localization is not found by `key`, try to use that key
-	let fallbackKey: String?
-	
-	init(_ field: WritableKeyPath<T, String>, key: String, fallbackKey: String? = nil) {
+	init(_ field: WritableKeyPath<T, String>, key: String) {
 		self.field = field
 		self.key = key
-		self.fallbackKey = fallbackKey
 	}
 }

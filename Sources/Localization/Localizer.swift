@@ -44,8 +44,6 @@ class Localizer {
 			
 			if let translation = findTranslation(forKey: localizationKey.key, in: translations) {
 				 localized = translation
-			} else if let fallbackKey = localizationKey.fallbackKey, let fallbackTranslation = findTranslation(forKey: fallbackKey, in: translations) {
-				localized = fallbackTranslation
 			} else {
 				// @siebe approach to nullify string that has not localization
 				localized = String()
