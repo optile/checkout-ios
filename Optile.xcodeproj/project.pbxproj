@@ -116,7 +116,7 @@
       };
       "OBJ_110" = {
          isa = "PBXFileReference";
-         path = "NetworkDownloadProviderTests.swift";
+         path = "DataDownloadProviderTests.swift";
          sourceTree = "<group>";
       };
       "OBJ_111" = {
@@ -127,8 +127,8 @@
       "OBJ_112" = {
          isa = "PBXGroup";
          children = (
-            "Optile::Payment::Product",
-            "Optile::PaymentTests::Product"
+            "Optile::PaymentTests::Product",
+            "Optile::Payment::Product"
          );
          name = "Products";
          path = "";
@@ -425,8 +425,7 @@
             "OBJ_195",
             "OBJ_196",
             "OBJ_197",
-            "OBJ_198",
-            "OBJ_199"
+            "OBJ_198"
          );
       };
       "OBJ_14" = {
@@ -596,7 +595,7 @@
       };
       "OBJ_175" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_50";
+         fileRef = "OBJ_51";
       };
       "OBJ_176" = {
          isa = "PBXBuildFile";
@@ -604,15 +603,15 @@
       };
       "OBJ_177" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_53";
+         fileRef = "OBJ_54";
       };
       "OBJ_178" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_54";
+         fileRef = "OBJ_55";
       };
       "OBJ_179" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_55";
+         fileRef = "OBJ_56";
       };
       "OBJ_18" = {
          isa = "PBXFileReference";
@@ -621,43 +620,43 @@
       };
       "OBJ_180" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_57";
+         fileRef = "OBJ_58";
       };
       "OBJ_181" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_58";
+         fileRef = "OBJ_59";
       };
       "OBJ_182" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_59";
+         fileRef = "OBJ_60";
       };
       "OBJ_183" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_60";
+         fileRef = "OBJ_61";
       };
       "OBJ_184" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_61";
+         fileRef = "OBJ_64";
       };
       "OBJ_185" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_64";
+         fileRef = "OBJ_66";
       };
       "OBJ_186" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_66";
+         fileRef = "OBJ_68";
       };
       "OBJ_187" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_68";
+         fileRef = "OBJ_69";
       };
       "OBJ_188" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_69";
+         fileRef = "OBJ_72";
       };
       "OBJ_189" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_72";
+         fileRef = "OBJ_73";
       };
       "OBJ_19" = {
          isa = "PBXFileReference";
@@ -666,43 +665,44 @@
       };
       "OBJ_190" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_73";
+         fileRef = "OBJ_74";
       };
       "OBJ_191" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_74";
+         fileRef = "OBJ_75";
       };
       "OBJ_192" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_75";
+         fileRef = "OBJ_77";
       };
       "OBJ_193" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_77";
+         fileRef = "OBJ_80";
       };
       "OBJ_194" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_80";
+         fileRef = "OBJ_81";
       };
       "OBJ_195" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_81";
+         fileRef = "OBJ_82";
       };
       "OBJ_196" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_82";
+         fileRef = "OBJ_84";
       };
       "OBJ_197" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_84";
+         fileRef = "OBJ_86";
       };
       "OBJ_198" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_86";
+         fileRef = "OBJ_87";
       };
       "OBJ_199" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_87";
+         isa = "PBXFrameworksBuildPhase";
+         files = (
+         );
       };
       "OBJ_2" = {
          isa = "XCConfigurationList";
@@ -719,20 +719,15 @@
          sourceTree = "<group>";
       };
       "OBJ_200" = {
-         isa = "PBXFrameworksBuildPhase";
-         files = (
-         );
-      };
-      "OBJ_201" = {
          isa = "XCConfigurationList";
          buildConfigurations = (
-            "OBJ_202",
-            "OBJ_203"
+            "OBJ_201",
+            "OBJ_202"
          );
          defaultConfigurationIsVisible = "0";
          defaultConfigurationName = "Release";
       };
-      "OBJ_202" = {
+      "OBJ_201" = {
          isa = "XCBuildConfiguration";
          buildSettings = {
             CLANG_ENABLE_MODULES = "YES";
@@ -771,7 +766,7 @@
          };
          name = "Debug";
       };
-      "OBJ_203" = {
+      "OBJ_202" = {
          isa = "XCBuildConfiguration";
          buildSettings = {
             CLANG_ENABLE_MODULES = "YES";
@@ -810,9 +805,10 @@
          };
          name = "Release";
       };
-      "OBJ_204" = {
+      "OBJ_203" = {
          isa = "PBXSourcesBuildPhase";
          files = (
+            "OBJ_204",
             "OBJ_205",
             "OBJ_206",
             "OBJ_207",
@@ -826,29 +822,32 @@
             "OBJ_215",
             "OBJ_216",
             "OBJ_217",
-            "OBJ_218",
-            "OBJ_219"
+            "OBJ_218"
          );
       };
-      "OBJ_205" = {
+      "OBJ_204" = {
          isa = "PBXBuildFile";
          fileRef = "OBJ_90";
       };
-      "OBJ_206" = {
+      "OBJ_205" = {
          isa = "PBXBuildFile";
          fileRef = "OBJ_91";
       };
-      "OBJ_207" = {
+      "OBJ_206" = {
          isa = "PBXBuildFile";
          fileRef = "OBJ_92";
       };
-      "OBJ_208" = {
+      "OBJ_207" = {
          isa = "PBXBuildFile";
          fileRef = "OBJ_94";
       };
-      "OBJ_209" = {
+      "OBJ_208" = {
          isa = "PBXBuildFile";
          fileRef = "OBJ_95";
+      };
+      "OBJ_209" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_98";
       };
       "OBJ_21" = {
          isa = "PBXGroup";
@@ -861,43 +860,45 @@
       };
       "OBJ_210" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_98";
+         fileRef = "OBJ_99";
       };
       "OBJ_211" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_99";
+         fileRef = "OBJ_100";
       };
       "OBJ_212" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_100";
+         fileRef = "OBJ_101";
       };
       "OBJ_213" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_101";
+         fileRef = "OBJ_102";
       };
       "OBJ_214" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_102";
+         fileRef = "OBJ_103";
       };
       "OBJ_215" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_103";
+         fileRef = "OBJ_105";
       };
       "OBJ_216" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_105";
+         fileRef = "OBJ_106";
       };
       "OBJ_217" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_106";
+         fileRef = "OBJ_110";
       };
       "OBJ_218" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_110";
+         fileRef = "OBJ_111";
       };
       "OBJ_219" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_111";
+         isa = "PBXFrameworksBuildPhase";
+         files = (
+            "OBJ_220"
+         );
       };
       "OBJ_22" = {
          isa = "PBXFileReference";
@@ -905,16 +906,10 @@
          sourceTree = "<group>";
       };
       "OBJ_220" = {
-         isa = "PBXFrameworksBuildPhase";
-         files = (
-            "OBJ_221"
-         );
-      };
-      "OBJ_221" = {
          isa = "PBXBuildFile";
          fileRef = "Optile::Payment::Product";
       };
-      "OBJ_222" = {
+      "OBJ_221" = {
          isa = "PBXTargetDependency";
          target = "Optile::Payment";
       };
@@ -1155,9 +1150,8 @@
          children = (
             "OBJ_49",
             "OBJ_50",
-            "OBJ_51",
-            "OBJ_56",
-            "OBJ_60",
+            "OBJ_53",
+            "OBJ_57",
             "OBJ_61"
          );
          name = "Network";
@@ -1166,7 +1160,7 @@
       };
       "OBJ_49" = {
          isa = "PBXFileReference";
-         path = "AsynchronousOperation.swift";
+         path = "HTTPMethod.swift";
          sourceTree = "<group>";
       };
       "OBJ_5" = {
@@ -1184,66 +1178,70 @@
          sourceTree = "<group>";
       };
       "OBJ_50" = {
-         isa = "PBXFileReference";
-         path = "HTTPMethod.swift";
+         isa = "PBXGroup";
+         children = (
+            "OBJ_51",
+            "OBJ_52"
+         );
+         name = "Operations";
+         path = "Operations";
          sourceTree = "<group>";
       };
       "OBJ_51" = {
+         isa = "PBXFileReference";
+         path = "AsynchronousOperation.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_52" = {
+         isa = "PBXFileReference";
+         path = "SendRequestOperation.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_53" = {
          isa = "PBXGroup";
          children = (
-            "OBJ_52",
-            "OBJ_53",
             "OBJ_54",
-            "OBJ_55"
+            "OBJ_55",
+            "OBJ_56"
          );
          name = "Protocols";
          path = "Protocols";
          sourceTree = "<group>";
       };
-      "OBJ_52" = {
+      "OBJ_54" = {
          isa = "PBXFileReference";
          path = "Connection.swift";
          sourceTree = "<group>";
       };
-      "OBJ_53" = {
-         isa = "PBXFileReference";
-         path = "CustomRequest.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_54" = {
+      "OBJ_55" = {
          isa = "PBXFileReference";
          path = "GetRequest.swift";
          sourceTree = "<group>";
       };
-      "OBJ_55" = {
+      "OBJ_56" = {
          isa = "PBXFileReference";
          path = "Request.swift";
          sourceTree = "<group>";
       };
-      "OBJ_56" = {
+      "OBJ_57" = {
          isa = "PBXGroup";
          children = (
-            "OBJ_57",
             "OBJ_58",
-            "OBJ_59"
+            "OBJ_59",
+            "OBJ_60"
          );
          name = "Requests";
          path = "Requests";
          sourceTree = "<group>";
       };
-      "OBJ_57" = {
+      "OBJ_58" = {
          isa = "PBXFileReference";
          path = "DownloadData.swift";
          sourceTree = "<group>";
       };
-      "OBJ_58" = {
-         isa = "PBXFileReference";
-         path = "DownloadLocalization.swift";
-         sourceTree = "<group>";
-      };
       "OBJ_59" = {
          isa = "PBXFileReference";
-         path = "GetListResult.swift";
+         path = "DownloadLocalization.swift";
          sourceTree = "<group>";
       };
       "OBJ_6" = {
@@ -1254,7 +1252,7 @@
       };
       "OBJ_60" = {
          isa = "PBXFileReference";
-         path = "SendRequestOperation.swift";
+         path = "GetListResult.swift";
          sourceTree = "<group>";
       };
       "OBJ_61" = {
@@ -1426,7 +1424,7 @@
       };
       "OBJ_80" = {
          isa = "PBXFileReference";
-         path = "NetworkDownloadProvider.swift";
+         path = "DataDownloadProvider.swift";
          sourceTree = "<group>";
       };
       "OBJ_81" = {
@@ -1499,7 +1497,7 @@
       };
       "OBJ_9" = {
          isa = "PBXFileReference";
-         path = "PaymentInternalError.swift";
+         path = "InternalError.swift";
          sourceTree = "<group>";
       };
       "OBJ_90" = {
@@ -1597,7 +1595,7 @@
          buildConfigurationList = "OBJ_136";
          buildPhases = (
             "OBJ_139",
-            "OBJ_200"
+            "OBJ_199"
          );
          dependencies = (
          );
@@ -1613,13 +1611,13 @@
       };
       "Optile::PaymentTests" = {
          isa = "PBXNativeTarget";
-         buildConfigurationList = "OBJ_201";
+         buildConfigurationList = "OBJ_200";
          buildPhases = (
-            "OBJ_204",
-            "OBJ_220"
+            "OBJ_203",
+            "OBJ_219"
          );
          dependencies = (
-            "OBJ_222"
+            "OBJ_221"
          );
          name = "PaymentTests";
          productName = "PaymentTests";
