@@ -12,4 +12,12 @@ public class Checkbox: NSObject, Decodable {
 	
 	/// Error message that will be displayed if checkbox is required, but was not checked.
 	public let requireMsg: String?
+	
+	// MARK: - Enumerations
+	
+	public var checkboxMode: Mode? { Mode(rawValue: mode) }
+	
+	public enum Mode: String, Decodable {
+		case OPTIONAL, OPTIONAL_PRESELECTED, REQUIRED, REQUIRED_PRESELECTED, FORCED, FORCED_DISPLAYED
+	}
 }
