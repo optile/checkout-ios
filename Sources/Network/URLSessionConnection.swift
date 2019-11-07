@@ -37,14 +37,14 @@ class URLSessionConnection: Connection {
 		}
 
 		guard let response = response else {
-			let error = PaymentInternalError(description: "Incorrect completion from a URLSession, we have no error and no response")
+			let error = InternalError(description: "Incorrect completion from a URLSession, we have no error and no response")
 			completionHandler(.failure(error))
 			return
 		}
 		
 		// We expect HTTP response
 		guard let httpResponse = response as? HTTPURLResponse else {
-			let error = PaymentInternalError(description: "Unexpected server response (receive a non-HTTP response)")
+			let error = InternalError(description: "Unexpected server response (receive a non-HTTP response)")
 			completionHandler(.failure(error))
 			return
 		}
@@ -54,7 +54,7 @@ class URLSessionConnection: Connection {
 			if let data = data, let backendError = try? JSONDecoder().decode(ErrorInfo.self, from: data) {
 				completionHandler(.failure(backendError))
 			} else {
-				let error = PaymentInternalError(description: "Non-OK response from a server")
+				let error = InternalError(description: "Non-OK response from a server")
 				completionHandler(.failure(error))
 			}
 			

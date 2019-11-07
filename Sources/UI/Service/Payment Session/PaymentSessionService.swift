@@ -38,7 +38,7 @@ class PaymentSessionService {
 			case .success(let logoData):
 				completion(logoData)
 			case .failure(let error):
-				let paymentError = PaymentInternalError(description: "Couldn't download a logo for a payment network %@ from %@, reason: %@", network.code, logoURL.absoluteString, error.localizedDescription)
+				let paymentError = InternalError(description: "Couldn't download a logo for a payment network %@ from %@, reason: %@", network.code, logoURL.absoluteString, error.localizedDescription)
 				paymentError.log()
 				completion(nil)
 			}

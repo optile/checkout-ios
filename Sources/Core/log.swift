@@ -11,7 +11,7 @@ func log(_ type: LogType, _ message: StaticString, _ args: CVarArg...) {
 
 func log(_ error: Error) {
 	// Log errors
-	if let internalError = error as? PaymentInternalError {
+	if let internalError = error as? InternalError {
 		internalError.log()
 		return
 	}

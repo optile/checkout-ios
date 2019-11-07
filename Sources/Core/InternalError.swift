@@ -1,7 +1,7 @@
 import Foundation
 import os
 
-struct PaymentInternalError: Error, CustomStringConvertible, CustomDebugStringConvertible {
+struct InternalError: Error, CustomStringConvertible, CustomDebugStringConvertible {
 	var debugDescription: String { return String(format: staticDescription.description, arguments) }
 	var description: String {
 		var redactedArguments = [CVarArg]()

@@ -45,7 +45,7 @@ class PaymentSessionProvider {
 	private func downloadSharedLocalization(for listResult: ListResult, completion: @escaping ((Result<ListResult, Error>) -> Void)) {
 		guard let localeURL = listResult.networks.applicable.first?.links?[
 			"lang"] else {
-			let error = PaymentInternalError(description: "Applicable network language URL wasn't provided to a localization provider")
+			let error = InternalError(description: "Applicable network language URL wasn't provided to a localization provider")
 			completion(.failure(error))
 			return
 		}
@@ -86,7 +86,7 @@ class PaymentSessionProvider {
 		
 		for applicableNetwork in applicableNetworks {
 			guard let localizationURL = applicableNetwork.links?["lang"] else {
-				let error = PaymentInternalError(description: "Applicable network doesn't contain localization URL. Network: %@", objects: applicableNetwork)
+				let error = InternalError(description: "Applicable network doesn't contain localization URL. Network: %@", objects: applicableNetwork)
 				completion(.failure(error))
 				return
 			}
@@ -110,7 +110,7 @@ class PaymentSessionProvider {
 					completion(.failure(error))
 					return
 				case .none:
-					let error = PaymentInternalError(description: "Model wasn't localized %@", objects: operation.modelToLocalize)
+					let error = InternalError(description: "Model wasn't localized %@", objects: operation.modelToLocalize)
 					completion(.failure(error))
 					return
 				}

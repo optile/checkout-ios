@@ -46,12 +46,12 @@ private extension URL {
 	/// - To: `https://resources.sandbox.oscato.com/resource/lang/VASILY_DEMO/en_US/paymentpage.properties`
 	func transformToPaymentPageLocalizationURL() throws -> URL {
 		guard let components = URLComponents(url: self, resolvingAgainstBaseURL: false) else {
-			let error = PaymentInternalError(description: "Incorrect shared translation URL: %@", self.absoluteString)
+			let error = InternalError(description: "Incorrect shared translation URL: %@", self.absoluteString)
 			throw error
 		}
 		
 		guard let lastPathComponent = components.path.components(separatedBy: "/").last else {
-			let error = PaymentInternalError(description: "Unable to find the last path component in url %@", self.absoluteString)
+			let error = InternalError(description: "Unable to find the last path component in url %@", self.absoluteString)
 			throw error
 		}
 		
@@ -59,7 +59,7 @@ private extension URL {
 		updatedComponents.path = components.path.replacingOccurrences(of: lastPathComponent, with: "paymentpage.properties")
 		
 		guard let paymentPageURL = updatedComponents.url else {
-			let error = PaymentInternalError(description: "Unable for form a url from URLComponents: %@", "\(updatedComponents)")
+			let error = InternalError(description: "Unable for form a url from URLComponents: %@", "\(updatedComponents)")
 			throw error
 		}
 		
