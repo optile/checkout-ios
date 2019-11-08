@@ -1281,7 +1281,7 @@
       };
       "OBJ_63" = {
          isa = "PBXFileReference";
-         path = "Error+isRecoverableNetworkError.swift";
+         path = "Error+isNetworkError.swift";
          sourceTree = "<group>";
       };
       "OBJ_64" = {
