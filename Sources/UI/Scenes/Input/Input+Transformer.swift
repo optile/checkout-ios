@@ -74,7 +74,7 @@ extension Input.Transformer {
             verificationCodeFields.append(field)
             return field
         case ("expiryMonth", .some(.select)):
-            return Input.ExpiryMonthInputField(from: inputElement, translator: translator)
+            return Input.Field.ExpiryMonth(from: inputElement, translator: translator)
         case ("expiryYear", .some(.select)):
             return Input.ExpiryYearInputField(from: inputElement, translator: translator)
         default:
