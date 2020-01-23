@@ -68,7 +68,7 @@ extension Input.Transformer {
         case ("number", .some(.numeric)):
             return Input.Field.AccountNumber(from: inputElement, translator: translator, validationRule: validationRule)
         case ("holderName", .some(.string)):
-            return Input.HolderNameInputField(from: inputElement, translator: translator, validationRule: validationRule)
+            return Input.Field.HolderName(from: inputElement, translator: translator, validationRule: validationRule)
         case ("verificationCode", .some(.integer)):
             let field = Input.VerificationCodeField(from: inputElement, translator: translator, validationRule: validationRule)
             verificationCodeFields.append(field)
