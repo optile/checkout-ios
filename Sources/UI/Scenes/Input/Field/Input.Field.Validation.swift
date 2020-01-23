@@ -1,12 +1,12 @@
 import Foundation
 
-extension Input {
+extension Input.Field {
     enum Validation {}
 }
 
 // MARK: - Model
 
-extension Input.Validation {
+extension Input.Field.Validation {
     struct Options: OptionSet {
         let rawValue: Int
 
@@ -49,7 +49,7 @@ extension Input.Validation {
     }
 }
 
-extension Sequence where Element == Input.Validation.Network {
+extension Sequence where Element == Input.Field.Validation.Network {
     /// First found network with specified network code
     func first(withCode: String) -> Element? {
         for element in self where element.code == withCode {
@@ -60,7 +60,7 @@ extension Sequence where Element == Input.Validation.Network {
     }
 }
 
-extension Sequence where Element == Input.Validation.Rule {
+extension Sequence where Element == Input.Field.Validation.Rule {
     /// First found rule with specified type code
     func first(withType: String) -> Element? {
         for element in self where element.type == withType {
@@ -73,7 +73,7 @@ extension Sequence where Element == Input.Validation.Rule {
 
 // MARK: - Provider
 
-extension Input.Validation {
+extension Input.Field.Validation {
     class Provider {
         func get() throws -> [Network] {
             guard let jsonData = RawProvider.validationsJSON.data(using: .utf8) else {

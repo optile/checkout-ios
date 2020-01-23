@@ -1,17 +1,17 @@
 import Foundation
 
 protocol Validatable: class {
-    var validationRule: Input.Validation.Rule? { get }
+    var validationRule: Input.Field.Validation.Rule? { get }
     var validationErrorText: String? { get set }
     
-    func validateAndSaveResult(options: Input.Validation.Options)
-    func validate(using options: Input.Validation.Options) -> Input.Validation.Result
-    func localize(error: Input.Validation.ValidationError) -> String
+    func validateAndSaveResult(options: Input.Field.Validation.Options)
+    func validate(using options: Input.Field.Validation.Options) -> Input.Field.Validation.Result
+    func localize(error: Input.Field.Validation.ValidationError) -> String
 }
 
 extension Validatable {
     /// Validate and write result to `validationResult`
-    func validateAndSaveResult(options: Input.Validation.Options) {
+    func validateAndSaveResult(options: Input.Field.Validation.Options) {
         switch validate(using: options) {
         case .success:
             validationErrorText = nil
@@ -24,7 +24,7 @@ extension Validatable {
 // MARK: - TextInputField
 
 extension Validatable where Self: TextInputField {
-    func validate(using options: Input.Validation.Options) -> Input.Validation.Result {
+    func validate(using options: Input.Field.Validation.Options) -> Input.Field.Validation.Result {
         // Value exists
         if options.contains(.valueExists) {
             guard let value = self.value, !value.isEmpty else {
@@ -62,9 +62,9 @@ extension Validatable where Self: TextInputField {
 // MARK: - SelectInputField
 
 extension Validatable where Self: SelectInputField {
-    var validationRule: Input.Validation.Rule? { return nil }
+    var validationRule: Input.Field.Validation.Rule? { return nil }
     
-    func validate(using options: Input.Validation.Options) -> Input.Validation.Result {
+    func validate(using options: Input.Field.Validation.Options) -> Input.Field.Validation.Result {
         // Value exists
         if options.contains(.valueExists) {
             guard let value = self.value, !value.isEmpty else {

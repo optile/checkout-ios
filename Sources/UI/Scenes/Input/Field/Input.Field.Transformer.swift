@@ -24,20 +24,20 @@ extension Input.Field.Transformer {
         }
         
         // Get validation rules for a network
-        let validationRules: [Input.Validation.Rule]
+        let validationRules: [Input.Field.Validation.Rule]
         
         do {
-            let networks = try Input.Validation.Provider().get()
+            let networks = try Input.Field.Validation.Provider().get()
             if let network = networks.first(withCode: paymentNetwork.applicableNetwork.code) {
                 validationRules = network.items
             } else {
-                validationRules = [Input.Validation.Rule]()
+                validationRules = [Input.Field.Validation.Rule]()
             }
         } catch {
             let getRulesError = InternalError(description: "Failed to get validation rules: %@", objects: error)
             getRulesError.log()
             
-            validationRules = [Input.Validation.Rule]()
+            validationRules = [Input.Field.Validation.Rule]()
         }
         
         // Transform input fields
@@ -63,7 +63,7 @@ extension Input.Field.Transformer {
     }
     
     /// Transform `InputElement` to `InputField`
-    private func transform(inputElement: InputElement, translateUsing translator: TranslationProvider, validationRule: Input.Validation.Rule?) -> InputField & CellRepresentable {
+    private func transform(inputElement: InputElement, translateUsing translator: TranslationProvider, validationRule: Input.Field.Validation.Rule?) -> InputField & CellRepresentable {
         switch (inputElement.name, inputElement.inputElementType) {
         case ("number", .some(.numeric)):
             return Input.Field.AccountNumber(from: inputElement, translator: translator, validationRule: validationRule)

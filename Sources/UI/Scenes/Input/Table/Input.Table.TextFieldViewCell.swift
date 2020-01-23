@@ -5,7 +5,7 @@ private struct UIConstant {
     static let defaultSpacing: CGFloat = 8
 }
 
-extension Input {
+extension Input.Table {
     /// Cell that represents all text inputs, contains label and text field.
     /// Upon some actions calls `delegate`, don't forget to set it.
     ///
@@ -63,7 +63,7 @@ extension Input {
 
 // MARK: - Cell configuration
 
-extension Input.TextFieldViewCell {
+extension Input.Table.TextFieldViewCell {
     override var canBecomeFirstResponder: Bool { return true }
     
     override func becomeFirstResponder() -> Bool {
@@ -93,7 +93,7 @@ extension Input.TextFieldViewCell {
 
 // MARK: - Validation error label
 
-extension Input.TextFieldViewCell {
+extension Input.Table.TextFieldViewCell {
     func showValidationResult(for model: Any) {
         // If model is not validatable just set a normal text color
         guard let model = model as? Validatable else {
@@ -161,7 +161,7 @@ extension Input.TextFieldViewCell {
 
 // MARK: - UITextFieldDelegate
 
-extension Input.TextFieldViewCell: UITextFieldDelegate {
+extension Input.Table.TextFieldViewCell: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         delegate?.inputCellBecameFirstResponder(at: indexPath)
     }

@@ -10,13 +10,13 @@ protocol CellRepresentable {
 // If model is `TextInputField` & `DefinesKeyboardStyle`
 extension CellRepresentable where Self: DefinesKeyboardStyle {
     func dequeueCell(for tableView: UITableView, indexPath: IndexPath) -> UITableViewCell & ContainsInputCellDelegate {
-        let cell = tableView.dequeueReusableCell(Input.TextFieldViewCell.self, for: indexPath)
+        let cell = tableView.dequeueReusableCell(Input.Table.TextFieldViewCell.self, for: indexPath)
         cell.indexPath = indexPath
         return cell
     }
     
     func configure(cell: UITableViewCell) {
-        guard let cell = cell as? Input.TextFieldViewCell else { return }
+        guard let cell = cell as? Input.Table.TextFieldViewCell else { return }
         cell.configure(with: self)
     }
 }

@@ -1,7 +1,7 @@
 import Foundation
 
 extension Input.Field {
-    final class ExpiryYear {
+    final class ExpiryMonth {
         let inputElement: InputElement
         let translator: TranslationProvider
         var validationErrorText: String?
@@ -15,21 +15,21 @@ extension Input.Field {
     }
 }
 
-extension Input.Field.ExpiryYear: Validatable {
-    func localize(error: Input.Validation.ValidationError) -> String {
+extension Input.Field.ExpiryMonth: Validatable {
+    func localize(error: Input.Field.Validation.ValidationError) -> String {
         switch error {
-        case .invalidValue, .incorrectLength: return translator.translation(forKey: "error.INVALID_EXPIRY_YEAR")
-        case .missingValue: return translator.translation(forKey: "error.MISSING_EXPIRY_YEAR")
+        case .invalidValue, .incorrectLength: return translator.translation(forKey: "error.INVALID_EXPIRY_MONTH")
+        case .missingValue: return translator.translation(forKey: "error.MISSING_EXPIRY_MONTH")
         }
     }
 }
 
-extension Input.Field.ExpiryYear: SelectInputField {}
+extension Input.Field.ExpiryMonth: SelectInputField {}
 
 #if canImport(UIKit)
 import UIKit
 
-extension Input.Field.ExpiryYear: CellRepresentable, DefinesKeyboardStyle {
+extension Input.Field.ExpiryMonth: CellRepresentable, DefinesKeyboardStyle {
     var keyboardType: UIKeyboardType {
         return .numberPad
     }

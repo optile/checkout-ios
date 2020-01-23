@@ -13,13 +13,13 @@ extension Input.Field {
     final class VerificationCode {
         let inputElement: InputElement
         let translator: TranslationProvider
-        let validationRule: Input.Validation.Rule?
+        let validationRule: Validation.Rule?
         var validationErrorText: String?
         
         var value: String?
         weak var keySuffixer: VerificationCodeTranslationKeySuffixer?
         
-        init(from inputElement: InputElement, translator: TranslationProvider, validationRule: Input.Validation.Rule?) {
+        init(from inputElement: InputElement, translator: TranslationProvider, validationRule: Validation.Rule?) {
             self.inputElement = inputElement
             self.translator = translator
             self.validationRule = validationRule
@@ -45,7 +45,7 @@ extension Input.Field.VerificationCode: TextInputField {
 }
 
 extension Input.Field.VerificationCode: Validatable {
-    func localize(error: Input.Validation.ValidationError) -> String {
+    func localize(error: Input.Field.Validation.ValidationError) -> String {
         switch error {
         case .invalidValue, .incorrectLength: return translator.translation(forKey: "error.INVALID_VERIFICATION_CODE")
         case .missingValue: return translator.translation(forKey: "error.MISSING_VERIFICATION_CODE")

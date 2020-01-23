@@ -4,12 +4,12 @@ extension Input.Field {
     final class HolderName {
         let inputElement: InputElement
         let translator: TranslationProvider
-        let validationRule: Input.Validation.Rule?
+        let validationRule: Validation.Rule?
         var validationErrorText: String?
         
         var value: String?
         
-        init(from inputElement: InputElement, translator: TranslationProvider, validationRule: Input.Validation.Rule?) {
+        init(from inputElement: InputElement, translator: TranslationProvider, validationRule: Validation.Rule?) {
             self.inputElement = inputElement
             self.translator = translator
             self.validationRule = validationRule
@@ -20,7 +20,7 @@ extension Input.Field {
 extension Input.Field.HolderName: TextInputField {}
 
 extension Input.Field.HolderName: Validatable {
-    func localize(error: Input.Validation.ValidationError) -> String {
+    func localize(error: Input.Field.Validation.ValidationError) -> String {
         switch error {
         case .invalidValue, .incorrectLength: return translator.translation(forKey: "error.INVALID_HOLDER_NAME")
         case .missingValue: return translator.translation(forKey: "error.MISSING_HOLDER_NAME")

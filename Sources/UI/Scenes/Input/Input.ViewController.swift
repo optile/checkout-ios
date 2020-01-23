@@ -7,7 +7,7 @@ extension Input {
     class ViewController: UIViewController {
         let networks: [Network]
         
-        private let tableController: TableController
+        private let tableController: Table.Controller
         private let tableView = UITableView(frame: .zero, style: .grouped)
         fileprivate let smartSwitch: SmartSwitch.Selector
         
@@ -72,7 +72,7 @@ extension Input.ViewController {
 
 extension Input.ViewController {
     fileprivate func configure(tableView: UITableView) {
-        tableView.register(Input.TextFieldViewCell.self)
+        tableView.register(Input.Table.TextFieldViewCell.self)
         tableView.dataSource = tableController
         tableView.delegate = tableController
         tableView.tableHeaderView = makeTableViewHeader(for: tableController.network)

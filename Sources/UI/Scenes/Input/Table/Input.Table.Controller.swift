@@ -1,10 +1,10 @@
 #if canImport(UIKit)
 import UIKit
 
-extension Input {
+extension Input.Table {
     /// Acts as a datasource for input table views and responds on delegate events from a table and cells.
-    class TableController: NSObject {
-        var network: Network {
+    class Controller: NSObject {
+        var network: Input.Network {
             didSet {
                 networkDidUpdate()
             }
@@ -14,14 +14,14 @@ extension Input {
         private var cells: [CellRepresentable & InputField]
         weak var inputChangesListener: InputValueChangesListener?
         
-        init(for network: Network, tableView: UITableView) {
+        init(for network: Input.Network, tableView: UITableView) {
             self.network = network
             self.tableView = tableView
             self.cells = network.inputFields
             super.init()
         }
         
-        func validateFields(options: Validation.Options) {
+        func validateFields(options: Input.Field.Validation.Options) {
             // We need to resign a responder to avoid double validation after `textFieldDidEndEditing` event (keyboard will disappear on table reload).
             tableView.endEditing(true)
             
@@ -48,7 +48,7 @@ extension Input {
     }
 }
 
-extension Input.TableController: UITableViewDataSource {
+extension Input.Table.Controller: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
          return 1
     }
@@ -67,14 +67,14 @@ extension Input.TableController: UITableViewDataSource {
      }
 }
 
-extension Input.TableController: UITableViewDelegate {
+extension Input.Table.Controller: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let row = tableView.cellForRow(at: indexPath)
         row?.becomeFirstResponder()
     }
 }
 
-extension Input.TableController: InputCellDelegate {
+extension Input.Table.Controller: InputCellDelegate {
     func inputCellDidEndEditing(at indexPath: IndexPath) {
         guard let model = cells[indexPath.row] as? Validatable else { return }
         
