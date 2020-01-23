@@ -4,7 +4,7 @@ extension Input {
     class Transformer {
         /// Transformed verification code fields.
         /// - Note: we need it to set a placholder suffix delegate after transformation
-        fileprivate(set) var verificationCodeFields = [Input.VerificationCodeField]()
+        fileprivate(set) var verificationCodeFields = [Input.Field.VerificationCode]()
         
         init() {}
     }
@@ -70,7 +70,7 @@ extension Input.Transformer {
         case ("holderName", .some(.string)):
             return Input.Field.HolderName(from: inputElement, translator: translator, validationRule: validationRule)
         case ("verificationCode", .some(.integer)):
-            let field = Input.VerificationCodeField(from: inputElement, translator: translator, validationRule: validationRule)
+            let field = Input.Field.VerificationCode(from: inputElement, translator: translator, validationRule: validationRule)
             verificationCodeFields.append(field)
             return field
         case ("expiryMonth", .some(.select)):

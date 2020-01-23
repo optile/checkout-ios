@@ -9,17 +9,17 @@ protocol VerificationCodeTranslationKeySuffixer: class {
 
 // MARK: - VerificationCodeField
 
-extension Input {
-    final class VerificationCodeField {
+extension Input.Field {
+    final class VerificationCode {
         let inputElement: InputElement
         let translator: TranslationProvider
-        let validationRule: Validation.Rule?
+        let validationRule: Input.Validation.Rule?
         var validationErrorText: String?
         
         var value: String?
         weak var keySuffixer: VerificationCodeTranslationKeySuffixer?
         
-        init(from inputElement: InputElement, translator: TranslationProvider, validationRule: Validation.Rule?) {
+        init(from inputElement: InputElement, translator: TranslationProvider, validationRule: Input.Validation.Rule?) {
             self.inputElement = inputElement
             self.translator = translator
             self.validationRule = validationRule
@@ -27,7 +27,7 @@ extension Input {
     }
 }
 
-extension Input.VerificationCodeField: TextInputField {
+extension Input.Field.VerificationCode: TextInputField {
     var placeholder: String {
         let key: String
         
@@ -44,7 +44,7 @@ extension Input.VerificationCodeField: TextInputField {
     }
 }
 
-extension Input.VerificationCodeField: Validatable {
+extension Input.Field.VerificationCode: Validatable {
     func localize(error: Input.Validation.ValidationError) -> String {
         switch error {
         case .invalidValue, .incorrectLength: return translator.translation(forKey: "error.INVALID_VERIFICATION_CODE")
@@ -56,5 +56,5 @@ extension Input.VerificationCodeField: Validatable {
 #if canImport(UIKit)
 import UIKit
 
-extension Input.VerificationCodeField: CellRepresentable, DefinesKeyboardStyle {}
+extension Input.Field.VerificationCode: CellRepresentable, DefinesKeyboardStyle {}
 #endif
