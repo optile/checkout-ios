@@ -1,6 +1,6 @@
 import Foundation
 
-extension Input {
+extension Input.Field {
     class Transformer {
         /// Transformed verification code fields.
         /// - Note: we need it to set a placholder suffix delegate after transformation
@@ -10,7 +10,7 @@ extension Input {
     }
 }
 
-extension Input.Transformer {
+extension Input.Field.Transformer {
     /// Transform `PaymentNetwork` to `Input.Network`
     func transform(paymentNetwork: PaymentNetwork) -> Input.Network {
         // Logo

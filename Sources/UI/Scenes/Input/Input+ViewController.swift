@@ -12,7 +12,7 @@ extension Input {
         fileprivate let smartSwitch: SmartSwitch.Selector
         
         init(for paymentNetworks: [PaymentNetwork]) throws {
-            let transfomer = Transformer()
+            let transfomer = Field.Transformer()
             networks = paymentNetworks.map { transfomer.transform(paymentNetwork: $0) }
             smartSwitch = try .init(networks: self.networks)
             tableController = .init(for: smartSwitch.selected.network, tableView: tableView)
