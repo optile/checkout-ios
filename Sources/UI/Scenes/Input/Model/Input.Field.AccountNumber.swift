@@ -1,15 +1,15 @@
 import Foundation
 
-extension Input {
-    final class AccountNumberInputField {
+extension Input.Field {
+    final class AccountNumber {
         let inputElement: InputElement
         let translator: TranslationProvider
-        let validationRule: Validation.Rule?
+        let validationRule: Input.Validation.Rule?
         var validationErrorText: String?
         
         var value: String?
         
-        init(from inputElement: InputElement, translator: TranslationProvider, validationRule: Validation.Rule?) {
+        init(from inputElement: InputElement, translator: TranslationProvider, validationRule: Input.Validation.Rule?) {
             self.inputElement = inputElement
             self.translator = translator
             self.validationRule = validationRule
@@ -17,9 +17,9 @@ extension Input {
     }
 }
 
-extension Input.AccountNumberInputField: TextInputField {}
+extension Input.Field.AccountNumber: TextInputField {}
 
-extension Input.AccountNumberInputField: Validatable {
+extension Input.Field.AccountNumber: Validatable {
     func localize(error: Input.Validation.ValidationError) -> String {
         switch error {
         case .invalidValue, .incorrectLength: return translator.translation(forKey: "error.INVALID_ACCOUNT_NUMBER")
@@ -31,7 +31,7 @@ extension Input.AccountNumberInputField: Validatable {
 #if canImport(UIKit)
 import UIKit
 
-extension Input.AccountNumberInputField: CellRepresentable, DefinesKeyboardStyle {
+extension Input.Field.AccountNumber: CellRepresentable, DefinesKeyboardStyle {
     var contentType: UITextContentType? { return .creditCardNumber }
 }
 #endif

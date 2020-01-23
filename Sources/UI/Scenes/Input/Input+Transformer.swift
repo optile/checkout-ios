@@ -66,7 +66,7 @@ extension Input.Transformer {
     private func transform(inputElement: InputElement, translateUsing translator: TranslationProvider, validationRule: Input.Validation.Rule?) -> InputField & CellRepresentable {
         switch (inputElement.name, inputElement.inputElementType) {
         case ("number", .some(.numeric)):
-            return Input.AccountNumberInputField(from: inputElement, translator: translator, validationRule: validationRule)
+            return Input.Field.AccountNumber(from: inputElement, translator: translator, validationRule: validationRule)
         case ("holderName", .some(.string)):
             return Input.HolderNameInputField(from: inputElement, translator: translator, validationRule: validationRule)
         case ("verificationCode", .some(.integer)):

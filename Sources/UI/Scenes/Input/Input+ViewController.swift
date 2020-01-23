@@ -157,7 +157,7 @@ extension Input.ViewController: InputValueChangesListener {
     /// - Note: called by `TableController`
     func valueDidChange(for field: InputField) {
         // React only on account number changes
-        guard let accountNumberField = field as? Input.AccountNumberInputField else { return }
+        guard let accountNumberField = field as? Input.Field.AccountNumber else { return }
         guard let accountNumber = accountNumberField.value else { return }
         
         let previousSelection = smartSwitch.selected
