@@ -78,7 +78,7 @@ extension Input.Transformer {
         case ("expiryYear", .some(.select)):
             return Input.Field.ExpiryYear(from: inputElement, translator: translator)
         default:
-            return Input.GenericInputField(from: inputElement, translator: translator, validationRule: validationRule)
+            return Input.Field.Generic(from: inputElement, translator: translator, validationRule: validationRule)
         }
     }
 }
