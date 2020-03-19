@@ -15,6 +15,7 @@ platform :ios do
 
   desc "Build example app"
   lane :adhoc do
+    filename = "Example-" + ENV["CIRCLE_BRANCH"].to_s + ".ipa"
     cocoapods(podfile: "./Example/Podfile")
     disable_automatic_code_signing(
       path: "./Example/Example.xcodeproj",
@@ -30,11 +31,17 @@ platform :ios do
       scheme: "Example",
       configuration: "Release",
       workspace: "./Example/Example.xcworkspace",
-      export_method: "ad-hoc"
+      export_method: "ad-hoc",
+      output_directory: "./build",
+      output_name: filename
     )
     # Restore default settings
     enable_automatic_code_signing(path: "./Example/Example.xcodeproj")
     update_project_team(path: "./Example/Example.xcodeproj", teamid: "")
+    upload_to_browserstack_app_live(
+      browserstack_username: ENV["BROWSERSTACK_USERNAME"],
+      browserstack_access_key: ENV["BROWSERSTACK_ACCESS_KEY"]
+    )
   end
 
 end
