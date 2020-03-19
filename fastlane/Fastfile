@@ -1,0 +1,40 @@
+default_platform(:ios)
+
+platform :ios do
+  before_all do
+    if is_ci?
+      setup_circle_ci
+    end
+  end
+
+  desc "Build framework and run tests"
+  lane :test do
+    cocoapods
+    scan
+  end
+
+  desc "Build example app"
+  lane :adhoc do
+    cocoapods(podfile: "./Example/Podfile")
+    disable_automatic_code_signing(
+      path: "./Example/Example.xcodeproj",
+      code_sign_identity: "iPhone Distribution"
+    )
+    match(type: "adhoc", readonly: is_ci)
+    update_project_team(path: "./Example/Example.xcodeproj")
+    update_project_provisioning(
+      profile: ENV["sigh_net.optile.payment.example_adhoc_profile-path"],
+      xcodeproj: "./Example/Example.xcodeproj"
+    )
+    build_ios_app(
+      scheme: "Example",
+      configuration: "Release",
+      workspace: "./Example/Example.xcworkspace",
+      export_method: "ad-hoc"
+    )
+    # Restore default settings
+    enable_automatic_code_signing(path: "./Example/Example.xcodeproj")
+    update_project_team(path: "./Example/Example.xcodeproj", teamid: "")
+  end
+
+end

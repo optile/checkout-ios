@@ -1,0 +1,3 @@
+app_identifier("net.optile.payment.example")
+apple_id("mobiledev@optile.net")
+team_id "9FN68XYFY9"

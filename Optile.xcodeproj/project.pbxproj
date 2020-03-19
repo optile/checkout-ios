@@ -926,9 +926,11 @@
 				TargetAttributes = {
 					D9C95734241C54CA00049AFE = {
 						CreatedOnToolsVersion = 11.3.1;
+						ProvisioningStyle = Manual;
 					};
 					D9C9573D241C54CA00049AFE = {
 						CreatedOnToolsVersion = 11.3.1;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -979,9 +981,11 @@
 			files = (
 			);
 			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Tests/Pods-Tests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Tests/Pods-Tests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1317,7 +1321,7 @@
 			baseConfigurationReference = 95E5DEA2906240D51D3804B0 /* Pods-Optile.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 7X2PJ6H6YM;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1345,7 +1349,7 @@
 			baseConfigurationReference = C1464685FF385FE59D6C10F5 /* Pods-Optile.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 7X2PJ6H6YM;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1374,7 +1378,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 7X2PJ6H6YM;
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1395,7 +1399,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 7X2PJ6H6YM;
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

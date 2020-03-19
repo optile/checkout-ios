@@ -1,0 +1,5 @@
+git_url("git@github.com:optile/opx-mobiledev-certificates.git")
+git_branch("ios-sdk")
+storage_mode("git")
+
+app_identifier(["net.optile.payment.example"])
