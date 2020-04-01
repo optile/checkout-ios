@@ -1,3 +1,7 @@
 app_identifier("net.optile.payment.example")
-apple_id("mobiledev@optile.net")
-team_id "9FN68XYFY9"
+
+# Apple email address for signing
+apple_id ENV['FASTLANE_IOS_USERNAME'] 
+
+# Developer Portal Team ID
+team_id ENV['FASTLANE_IOS_TEAM_ID'] 
