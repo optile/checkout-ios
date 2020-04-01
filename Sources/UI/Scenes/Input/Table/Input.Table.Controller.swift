@@ -38,8 +38,6 @@ extension Input.Table {
         func registerCells() {
             tableView.register(TextFieldViewCell.self)
             tableView.register(CheckboxViewCell.self)
-            tableView.register(LogoTextCell.self)
-            tableView.register(DetailedTextLogoCell.self)
             tableView.register(ButtonCell.self)
             tableView.register(SectionHeaderCell.self)
         }
@@ -100,11 +98,6 @@ extension Input.Table {
         private static func arrangeBySections(network: Input.Network) -> [DataSourceElement] {
             var sections = [[CellRepresentable]]()
             
-            // Header
-            if let header = network.header {
-                sections += [[header]]
-            }
-            
             // Input Fields
             let inputFields = network.inputFields.filter {
                 if let field = $0 as? InputField, field.isHidden { return false }
@@ -117,6 +110,7 @@ extension Input.Table {
             for field in network.separatedCheckboxes where !field.isHidden {
                 checkboxes.append(field)
             }
+
             sections += [checkboxes]
 
             // Submit
@@ -167,6 +161,16 @@ extension Input.Table.Controller: UITableViewDataSource {
             return cell
         }
      }
+}
+
+
+extension Input.Table.Controller: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch dataSource[indexPath.row] {
+        case .separator: return Input.Table.SectionHeaderCell.Constant.height
+        case .row(let cell): return cell.estimatedHeightForRow
+        }
+    }
 }
 
 // MARK: - InputCellDelegate

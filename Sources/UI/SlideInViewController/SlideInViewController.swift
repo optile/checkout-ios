@@ -27,11 +27,7 @@ class SlideInViewController: UIViewController {
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
         super.willTransition(to: newCollection, with: coordinator)
 
-        if isPresentedAsForm {
-            scrollView.bounces = true
-        } else {
-            scrollView.bounces = false
-        }
+        scrollView.bounces = isPresentedAsForm
     }
 
     // MARK: Custom methods

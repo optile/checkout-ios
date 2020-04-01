@@ -1,10 +1,9 @@
 import Foundation
 
 /// Service responsible for localization file downloads and model localizations
-final class TranslationService {
+final class DownloadTranslationService {
     private let networks: [ApplicableNetwork]
     private let accounts: [AccountRegistration]
-    private let listResult: ListResult
     private let sharedTranslationProvider: TranslationProvider
     
     private let localizationQueue = OperationQueue()
@@ -12,25 +11,33 @@ final class TranslationService {
     private var downloadNetworkOperations = [DownloadTranslationOperation<ApplicableNetwork>]()
     private var downloadAccountsOperations = [DownloadTranslationOperation<AccountRegistration>]()
     
-    typealias ConvertedNetworksTuple = (paymentNetworks: [PaymentNetwork], registeredAccounts: [RegisteredAccount], listResult: ListResult)
-    typealias CompletionBlock = (Result<ConvertedNetworksTuple, Error>) -> Void
+    // MARK: Output
     
-    init(networks: [ApplicableNetwork], accounts: [AccountRegistration], listResult: ListResult, sharedTranslation: SharedTranslationProvider) {
+    class Translations {
+        fileprivate(set) var networks: [TranslatedModel<ApplicableNetwork>] = .init()
+        fileprivate(set) var accounts: [TranslatedModel<AccountRegistration>] = .init()
+    }
+    
+    init(networks: [ApplicableNetwork], accounts: [AccountRegistration], sharedTranslation: SharedTranslationProvider) {
         self.networks = networks
         self.accounts = accounts
         self.sharedTranslationProvider = sharedTranslation
-        self.listResult = listResult
     }
     
-    func localize(using connection: Connection, completion: @escaping CompletionBlock) {
+    func localize(using connection: Connection, completion: @escaping (Result<Translations, Error>) -> Void) {
         // We should never call that method twice but we need to protect from that situation
         localizationQueue.cancelAllOperations()
         downloadNetworkOperations = .init()
         downloadAccountsOperations = .init()
 
         // That operation is called after all localizations were downloaded
-        let completionOperation = BlockOperation { [translate] in
-            translate(completion)
+        let completionOperation = BlockOperation { [makeTranslatedModels] in
+            do {
+                let translations = try makeTranslatedModels()
+                completion(.success(translations))
+            } catch {
+                completion(.failure(error))
+            }
         }
                 
         do {
@@ -60,51 +67,41 @@ final class TranslationService {
         localizationQueue.addOperation(completionOperation)
     }
     
-    /// Perform a translation using downloaded localization files.
-    private func translate(completion: CompletionBlock) {
-        // Fill translations with downloaded results for **networks**
-        var paymentNetworks = [PaymentNetwork]()
+    /// Create `Translations` object with models and translators to return it as class' outupt
+    private func makeTranslatedModels() throws -> Translations {
+        let translations = Translations()
 
         for operation in downloadNetworkOperations {
             switch operation.result {
             case .some(.success(let translation)):
                 let combinedProvider = CombinedTranslationProvider(priorityTranslation: translation, otherProvider: sharedTranslationProvider)
-                let paymentNetwork = PaymentNetwork(from: operation.model, localizeUsing: combinedProvider)
-                paymentNetworks.append(paymentNetwork)
+                let translatedNetwork = TranslatedModel(model: operation.model, translator: combinedProvider)
+                translations.networks.append(translatedNetwork)
             case .some(.failure(let error)):
                 // If translation wasn't downloaded don't proceed anymore, throw an error and exit
-                completion(.failure(error))
-                return
+                throw error
             case .none:
                 // Should never happen, but if...
-                let unexpectedError = InternalError(description: "Download localization operation wasn't completed")
-                completion(.failure(unexpectedError))
-                
+                throw InternalError(description: "Download localization operation wasn't completed")
             }
         }
-        
-        // Fill translations with downloaded results for **registered accounts**
-        var registeredAccounts = [RegisteredAccount]()
         
         for operation in downloadAccountsOperations {
             switch operation.result {
             case .some(.success(let translation)):
                 let combinedProvider = CombinedTranslationProvider(priorityTranslation: translation, otherProvider: sharedTranslationProvider)
-                let account = RegisteredAccount(from: operation.model, localizeUsing: combinedProvider)
-                registeredAccounts.append(account)
+                let translatedAccount = TranslatedModel(model: operation.model, translator: combinedProvider)
+                translations.accounts.append(translatedAccount)
             case .some(.failure(let error)):
                 // If translation wasn't downloaded don't proceed anymore, throw an error and exit
-                completion(.failure(error))
-                return
+                throw error
             case .none:
                 // Should never happen, but if...
-                let unexpectedError = InternalError(description: "Download localization operation wasn't completed")
-                completion(.failure(unexpectedError))
+                throw InternalError(description: "Download localization operation wasn't completed")
             }
         }
         
-        let resultTuple = (paymentNetworks, registeredAccounts, listResult)
-        completion(.success(resultTuple))
+        return translations
     }
 }
 

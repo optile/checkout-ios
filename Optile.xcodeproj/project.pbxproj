@@ -22,7 +22,7 @@
 		D9A88DA7241C55040043F535 /* Input.Field.BIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A88D14241C55040043F535 /* Input.Field.BIC.swift */; };
 		D9A88DA8241C55040043F535 /* Input.Field.ExpiryYear.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A88D15241C55040043F535 /* Input.Field.ExpiryYear.swift */; };
 		D9A88DA9241C55040043F535 /* Input.Field.VerificationCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A88D16241C55040043F535 /* Input.Field.VerificationCode.swift */; };
-		D9A88DAA241C55040043F535 /* Input.Field.Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A88D17241C55040043F535 /* Input.Field.Header.swift */; };
+		D9A88DAA241C55040043F535 /* Input.TextHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A88D17241C55040043F535 /* Input.TextHeader.swift */; };
 		D9A88DAB241C55040043F535 /* Input.Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A88D18241C55040043F535 /* Input.Field.swift */; };
 		D9A88DAC241C55040043F535 /* Input.Field.Validation.IBAN.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A88D1A241C55040043F535 /* Input.Field.Validation.IBAN.swift */; };
 		D9A88DAD241C55040043F535 /* Input.Field.Validation.ExpiryDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A88D1B241C55040043F535 /* Input.Field.Validation.ExpiryDate.swift */; };
@@ -33,10 +33,10 @@
 		D9A88DB2241C55040043F535 /* Input.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A88D20241C55040043F535 /* Input.swift */; };
 		D9A88DB3241C55040043F535 /* Input.Table.Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A88D22241C55040043F535 /* Input.Table.Controller.swift */; };
 		D9A88DB4241C55040043F535 /* Input.Table.SectionHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A88D23241C55040043F535 /* Input.Table.SectionHeaderCell.swift */; };
-		D9A88DB5241C55040043F535 /* Input.Table.DetailedTextLogoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A88D24241C55040043F535 /* Input.Table.DetailedTextLogoCell.swift */; };
+		D9A88DB5241C55040043F535 /* Input.Table.DetailedTextLogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A88D24241C55040043F535 /* Input.Table.DetailedTextLogoView.swift */; };
 		D9A88DB6241C55040043F535 /* Input.Table.CheckboxViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A88D25241C55040043F535 /* Input.Table.CheckboxViewCell.swift */; };
 		D9A88DB7241C55040043F535 /* Input.Table.TextFieldViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A88D26241C55040043F535 /* Input.Table.TextFieldViewCell.swift */; };
-		D9A88DB8241C55040043F535 /* Input.Table.LogoTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A88D27241C55040043F535 /* Input.Table.LogoTextCell.swift */; };
+		D9A88DB8241C55040043F535 /* Input.Table.LogoTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A88D27241C55040043F535 /* Input.Table.LogoTextView.swift */; };
 		D9A88DB9241C55040043F535 /* Input.Table.ButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A88D28241C55040043F535 /* Input.Table.ButtonCell.swift */; };
 		D9A88DBA241C55040043F535 /* Input.Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A88D29241C55040043F535 /* Input.Table.swift */; };
 		D9A88DBB241C55040043F535 /* InputElementModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A88D2C241C55040043F535 /* InputElementModel.swift */; };
@@ -82,7 +82,6 @@
 		D9A88DE3241C55040043F535 /* PaymentSessionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A88D5F241C55040043F535 /* PaymentSessionProvider.swift */; };
 		D9A88DE4241C55040043F535 /* PaymentSessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A88D60241C55040043F535 /* PaymentSessionService.swift */; };
 		D9A88DE5241C55040043F535 /* DataDownloadProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A88D61241C55040043F535 /* DataDownloadProvider.swift */; };
-		D9A88DE6241C55040043F535 /* TranslationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A88D62241C55040043F535 /* TranslationService.swift */; };
 		D9A88DE7241C55040043F535 /* DequeueableTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A88D64241C55040043F535 /* DequeueableTableCell.swift */; };
 		D9A88DE8241C55040043F535 /* KeyboardChangeFrameObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A88D65241C55040043F535 /* KeyboardChangeFrameObserver.swift */; };
 		D9A88DE9241C55040043F535 /* log.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A88D67241C55040043F535 /* log.swift */; };
@@ -145,6 +144,9 @@
 		D9A88E46241C56340043F535 /* URL+Example.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A88E33241C56340043F535 /* URL+Example.swift */; };
 		D9A88E47241C56340043F535 /* SharedTranslationProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A88E35241C56340043F535 /* SharedTranslationProviderTests.swift */; };
 		D9A88E48241C56490043F535 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9A88D92241C55040043F535 /* Media.xcassets */; };
+		D9A938BF242E169C0030B910 /* DownloadTranslationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A938BE242E169C0030B910 /* DownloadTranslationService.swift */; };
+		D9A938C1242E16DB0030B910 /* TranslatedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A938C0242E16DB0030B910 /* TranslatedModel.swift */; };
+		D9AAC8452432305300C90A9F /* ViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9AAC8442432305300C90A9F /* ViewRepresentable.swift */; };
 		D9C9573F241C54CA00049AFE /* Optile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9C95735241C54CA00049AFE /* Optile.framework */; };
 /* End PBXBuildFile section */
 
@@ -178,7 +180,7 @@
 		D9A88D14241C55040043F535 /* Input.Field.BIC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Input.Field.BIC.swift; sourceTree = "<group>"; };
 		D9A88D15241C55040043F535 /* Input.Field.ExpiryYear.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Input.Field.ExpiryYear.swift; sourceTree = "<group>"; };
 		D9A88D16241C55040043F535 /* Input.Field.VerificationCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Input.Field.VerificationCode.swift; sourceTree = "<group>"; };
-		D9A88D17241C55040043F535 /* Input.Field.Header.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Input.Field.Header.swift; sourceTree = "<group>"; };
+		D9A88D17241C55040043F535 /* Input.TextHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Input.TextHeader.swift; sourceTree = "<group>"; };
 		D9A88D18241C55040043F535 /* Input.Field.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Input.Field.swift; sourceTree = "<group>"; };
 		D9A88D1A241C55040043F535 /* Input.Field.Validation.IBAN.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Input.Field.Validation.IBAN.swift; sourceTree = "<group>"; };
 		D9A88D1B241C55040043F535 /* Input.Field.Validation.ExpiryDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Input.Field.Validation.ExpiryDate.swift; sourceTree = "<group>"; };
@@ -189,10 +191,10 @@
 		D9A88D20241C55040043F535 /* Input.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Input.swift; sourceTree = "<group>"; };
 		D9A88D22241C55040043F535 /* Input.Table.Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Input.Table.Controller.swift; sourceTree = "<group>"; };
 		D9A88D23241C55040043F535 /* Input.Table.SectionHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Input.Table.SectionHeaderCell.swift; sourceTree = "<group>"; };
-		D9A88D24241C55040043F535 /* Input.Table.DetailedTextLogoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Input.Table.DetailedTextLogoCell.swift; sourceTree = "<group>"; };
+		D9A88D24241C55040043F535 /* Input.Table.DetailedTextLogoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Input.Table.DetailedTextLogoView.swift; sourceTree = "<group>"; };
 		D9A88D25241C55040043F535 /* Input.Table.CheckboxViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Input.Table.CheckboxViewCell.swift; sourceTree = "<group>"; };
 		D9A88D26241C55040043F535 /* Input.Table.TextFieldViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Input.Table.TextFieldViewCell.swift; sourceTree = "<group>"; };
-		D9A88D27241C55040043F535 /* Input.Table.LogoTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Input.Table.LogoTextCell.swift; sourceTree = "<group>"; };
+		D9A88D27241C55040043F535 /* Input.Table.LogoTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Input.Table.LogoTextView.swift; sourceTree = "<group>"; };
 		D9A88D28241C55040043F535 /* Input.Table.ButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Input.Table.ButtonCell.swift; sourceTree = "<group>"; };
 		D9A88D29241C55040043F535 /* Input.Table.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Input.Table.swift; sourceTree = "<group>"; };
 		D9A88D2C241C55040043F535 /* InputElementModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputElementModel.swift; sourceTree = "<group>"; };
@@ -238,7 +240,6 @@
 		D9A88D5F241C55040043F535 /* PaymentSessionProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentSessionProvider.swift; sourceTree = "<group>"; };
 		D9A88D60241C55040043F535 /* PaymentSessionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentSessionService.swift; sourceTree = "<group>"; };
 		D9A88D61241C55040043F535 /* DataDownloadProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataDownloadProvider.swift; sourceTree = "<group>"; };
-		D9A88D62241C55040043F535 /* TranslationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslationService.swift; sourceTree = "<group>"; };
 		D9A88D64241C55040043F535 /* DequeueableTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DequeueableTableCell.swift; sourceTree = "<group>"; };
 		D9A88D65241C55040043F535 /* KeyboardChangeFrameObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardChangeFrameObserver.swift; sourceTree = "<group>"; };
 		D9A88D67241C55040043F535 /* log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = log.swift; sourceTree = "<group>"; };
@@ -301,6 +302,9 @@
 		D9A88E32241C56340043F535 /* XCTAttachment+subject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTAttachment+subject.swift"; sourceTree = "<group>"; };
 		D9A88E33241C56340043F535 /* URL+Example.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URL+Example.swift"; sourceTree = "<group>"; };
 		D9A88E35241C56340043F535 /* SharedTranslationProviderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedTranslationProviderTests.swift; sourceTree = "<group>"; };
+		D9A938BE242E169C0030B910 /* DownloadTranslationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadTranslationService.swift; sourceTree = "<group>"; };
+		D9A938C0242E16DB0030B910 /* TranslatedModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslatedModel.swift; sourceTree = "<group>"; };
+		D9AAC8442432305300C90A9F /* ViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRepresentable.swift; sourceTree = "<group>"; };
 		D9C95735241C54CA00049AFE /* Optile.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Optile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9C9573E241C54CA00049AFE /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E918DF5930A18AE9887BB63A /* Pods_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -377,33 +381,32 @@
 			isa = PBXGroup;
 			children = (
 				D9A88D08241C55040043F535 /* Input.NavigationController.swift */,
-				D9A88D09241C55040043F535 /* Field */,
+				D9A88D09241C55040043F535 /* Model */,
 				D9A88D1F241C55040043F535 /* Input.SmartSwitch.swift */,
 				D9A88D20241C55040043F535 /* Input.swift */,
 				D9A88D21241C55040043F535 /* Table */,
-				D9A88D2A241C55040043F535 /* New Group */,
 				D9A88D2B241C55040043F535 /* Protocols */,
 				D9A88D36241C55040043F535 /* Input.ViewController.swift */,
 			);
 			path = Input;
 			sourceTree = "<group>";
 		};
-		D9A88D09241C55040043F535 /* Field */ = {
+		D9A88D09241C55040043F535 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				D9A88D0A241C55040043F535 /* Input.Field.Transformer.swift */,
-				D9A88D0B241C55040043F535 /* Input.Field.Button.swift */,
-				D9A88D0C241C55040043F535 /* Model */,
-				D9A88D17241C55040043F535 /* Input.Field.Header.swift */,
-				D9A88D18241C55040043F535 /* Input.Field.swift */,
-				D9A88D19241C55040043F535 /* Validation */,
+				D9A88D1C241C55040043F535 /* Input.Network.swift */,
+				D9AAC84A243236C900C90A9F /* Header */,
+				D9A88D0C241C55040043F535 /* Field */,
 			);
-			path = Field;
+			path = Model;
 			sourceTree = "<group>";
 		};
-		D9A88D0C241C55040043F535 /* Model */ = {
+		D9A88D0C241C55040043F535 /* Field */ = {
 			isa = PBXGroup;
 			children = (
+				D9A88D19241C55040043F535 /* Validation */,
+				D9A88D18241C55040043F535 /* Input.Field.swift */,
+				D9A88D0A241C55040043F535 /* Input.Field.Transformer.swift */,
 				D9A88D0D241C55040043F535 /* Input.Field.Checkbox.swift */,
 				D9A88D0E241C55040043F535 /* Input.Field.AccountNumber.swift */,
 				D9A88D0F241C55040043F535 /* Input.Field.ExpiryMonth.swift */,
@@ -414,8 +417,9 @@
 				D9A88D14241C55040043F535 /* Input.Field.BIC.swift */,
 				D9A88D15241C55040043F535 /* Input.Field.ExpiryYear.swift */,
 				D9A88D16241C55040043F535 /* Input.Field.VerificationCode.swift */,
+				D9A88D0B241C55040043F535 /* Input.Field.Button.swift */,
 			);
-			path = Model;
+			path = Field;
 			sourceTree = "<group>";
 		};
 		D9A88D19241C55040043F535 /* Validation */ = {
@@ -423,7 +427,6 @@
 			children = (
 				D9A88D1A241C55040043F535 /* Input.Field.Validation.IBAN.swift */,
 				D9A88D1B241C55040043F535 /* Input.Field.Validation.ExpiryDate.swift */,
-				D9A88D1C241C55040043F535 /* Input.Network.swift */,
 				D9A88D1D241C55040043F535 /* Input.Field.Validation.Luhn.swift */,
 				D9A88D1E241C55040043F535 /* Input.Field.Validation.swift */,
 			);
@@ -433,23 +436,12 @@
 		D9A88D21241C55040043F535 /* Table */ = {
 			isa = PBXGroup;
 			children = (
+				D9AAC8492432355700C90A9F /* Header */,
+				D9AAC8482432354B00C90A9F /* Cell */,
 				D9A88D22241C55040043F535 /* Input.Table.Controller.swift */,
-				D9A88D23241C55040043F535 /* Input.Table.SectionHeaderCell.swift */,
-				D9A88D24241C55040043F535 /* Input.Table.DetailedTextLogoCell.swift */,
-				D9A88D25241C55040043F535 /* Input.Table.CheckboxViewCell.swift */,
-				D9A88D26241C55040043F535 /* Input.Table.TextFieldViewCell.swift */,
-				D9A88D27241C55040043F535 /* Input.Table.LogoTextCell.swift */,
-				D9A88D28241C55040043F535 /* Input.Table.ButtonCell.swift */,
 				D9A88D29241C55040043F535 /* Input.Table.swift */,
 			);
 			path = Table;
-			sourceTree = "<group>";
-		};
-		D9A88D2A241C55040043F535 /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
 			sourceTree = "<group>";
 		};
 		D9A88D2B241C55040043F535 /* Protocols */ = {
@@ -465,6 +457,7 @@
 				D9A88D33241C55040043F535 /* InputCellDelegate.swift */,
 				D9A88D34241C55040043F535 /* Selectable.swift */,
 				D9A88D35241C55040043F535 /* TextInputField.swift */,
+				D9AAC8442432305300C90A9F /* ViewRepresentable.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -579,7 +572,7 @@
 				D9A88D5F241C55040043F535 /* PaymentSessionProvider.swift */,
 				D9A88D60241C55040043F535 /* PaymentSessionService.swift */,
 				D9A88D61241C55040043F535 /* DataDownloadProvider.swift */,
-				D9A88D62241C55040043F535 /* TranslationService.swift */,
+				D9A938BE242E169C0030B910 /* DownloadTranslationService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -688,6 +681,7 @@
 		D9A88D96241C55040043F535 /* Localization */ = {
 			isa = PBXGroup;
 			children = (
+				D9A938C0242E16DB0030B910 /* TranslatedModel.swift */,
 				D9A88D97241C55040043F535 /* Strings */,
 				D9A88D99241C55040043F535 /* Translation Providers */,
 			);
@@ -829,6 +823,34 @@
 				D9A88E35241C56340043F535 /* SharedTranslationProviderTests.swift */,
 			);
 			path = Localization;
+			sourceTree = "<group>";
+		};
+		D9AAC8482432354B00C90A9F /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				D9A88D23241C55040043F535 /* Input.Table.SectionHeaderCell.swift */,
+				D9A88D25241C55040043F535 /* Input.Table.CheckboxViewCell.swift */,
+				D9A88D26241C55040043F535 /* Input.Table.TextFieldViewCell.swift */,
+				D9A88D28241C55040043F535 /* Input.Table.ButtonCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		D9AAC8492432355700C90A9F /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				D9A88D27241C55040043F535 /* Input.Table.LogoTextView.swift */,
+				D9A88D24241C55040043F535 /* Input.Table.DetailedTextLogoView.swift */,
+			);
+			path = Header;
+			sourceTree = "<group>";
+		};
+		D9AAC84A243236C900C90A9F /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				D9A88D17241C55040043F535 /* Input.TextHeader.swift */,
+			);
+			path = Header;
 			sourceTree = "<group>";
 		};
 		D9C9572B241C54CA00049AFE = {
@@ -1053,7 +1075,7 @@
 				D9A88DE7241C55040043F535 /* DequeueableTableCell.swift in Sources */,
 				D9A88DBF241C55040043F535 /* InputField.swift in Sources */,
 				D9A88DBD241C55040043F535 /* DefinesKeyboardStyle.swift in Sources */,
-				D9A88DAA241C55040043F535 /* Input.Field.Header.swift in Sources */,
+				D9A88DAA241C55040043F535 /* Input.TextHeader.swift in Sources */,
 				D9A88E0D241C55040043F535 /* AccountFormData.swift in Sources */,
 				D9A88DFE241C55040043F535 /* AccountMask.swift in Sources */,
 				D9A88DA8241C55040043F535 /* Input.Field.ExpiryYear.swift in Sources */,
@@ -1074,6 +1096,7 @@
 				D9A88DD7241C55040043F535 /* Bool+stringValue.swift in Sources */,
 				D9A88DE3241C55040043F535 /* PaymentSessionProvider.swift in Sources */,
 				D9A88DD2241C55040043F535 /* List.Table.Controller.swift in Sources */,
+				D9A938C1242E16DB0030B910 /* TranslatedModel.swift in Sources */,
 				D9A88DA6241C55040043F535 /* Input.Field.BankCode.swift in Sources */,
 				D9A88DC7241C55040043F535 /* List.swift in Sources */,
 				D9A88DEA241C55040043F535 /* InternalError.swift in Sources */,
@@ -1086,8 +1109,8 @@
 				D9A88DCD241C55040043F535 /* List.Table.BorderedCell.swift in Sources */,
 				D9A88DEB241C55040043F535 /* AssetProvider.swift in Sources */,
 				D9A88DA5241C55040043F535 /* Input.Field.Generic.swift in Sources */,
-				D9A88DE6241C55040043F535 /* TranslationService.swift in Sources */,
 				D9A88DB3241C55040043F535 /* Input.Table.Controller.swift in Sources */,
+				D9A938BF242E169C0030B910 /* DownloadTranslationService.swift in Sources */,
 				D9A88DF7241C55040043F535 /* PaymentAmount.swift in Sources */,
 				D9A88DC8241C55040043F535 /* List.Table.DataSource.SingleNetworkRow.swift in Sources */,
 				D9A88DA1241C55040043F535 /* Input.Field.AccountNumber.swift in Sources */,
@@ -1119,7 +1142,7 @@
 				D9A88DDA241C55040043F535 /* UIColor+.swift in Sources */,
 				D9A88E08241C55040043F535 /* Checkbox.swift in Sources */,
 				D9A88E04241C55040043F535 /* ExtraElement.swift in Sources */,
-				D9A88DB5241C55040043F535 /* Input.Table.DetailedTextLogoCell.swift in Sources */,
+				D9A88DB5241C55040043F535 /* Input.Table.DetailedTextLogoView.swift in Sources */,
 				D9A88DC4241C55040043F535 /* TextInputField.swift in Sources */,
 				D9A88DC2241C55040043F535 /* InputCellDelegate.swift in Sources */,
 				D9A88DE5241C55040043F535 /* DataDownloadProvider.swift in Sources */,
@@ -1127,9 +1150,10 @@
 				D9A88DA7241C55040043F535 /* Input.Field.BIC.swift in Sources */,
 				D9A88DD9241C55040043F535 /* Error+isNetworkError.swift in Sources */,
 				D9A88DC9241C55040043F535 /* List.Table.DataSource.swift in Sources */,
-				D9A88DB8241C55040043F535 /* Input.Table.LogoTextCell.swift in Sources */,
+				D9A88DB8241C55040043F535 /* Input.Table.LogoTextView.swift in Sources */,
 				D9A88DAE241C55040043F535 /* Input.Network.swift in Sources */,
 				D9A88DC6241C55040043F535 /* List.ViewController.swift in Sources */,
+				D9AAC8452432305300C90A9F /* ViewRepresentable.swift in Sources */,
 				D9A88DF2241C55040043F535 /* URLSessionConnection.swift in Sources */,
 				D9A88E09241C55040043F535 /* InputElement.swift in Sources */,
 				D9A88DFD241C55040043F535 /* InstallmentItem.swift in Sources */,

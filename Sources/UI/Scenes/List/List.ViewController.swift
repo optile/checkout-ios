@@ -211,7 +211,12 @@ extension List.ViewController {
 
         // Cancel
         let cancelAction = UIAlertAction(title: "Dismiss", style: .cancel) { [weak self] _ in
-            self?.dismiss(animated: true, completion: nil)
+            // Dimiss or pop back on error
+            if self?.navigationController == nil {
+                self?.dismiss(animated: true, completion: nil)
+            } else {
+                self?.navigationController?.popViewController(animated: true)
+            }
         }
         controller.addAction(cancelAction)
 
@@ -282,9 +287,7 @@ extension List.ViewController {
 }
 
 extension List.ViewController: ListTableControllerDelegate {
-    func load(from url: URL, completion: @escaping (Result<Data, Error>) -> Void) {
-        sessionService.load(from: url, completion: completion)
-    }
+    var downloadProvider: DataDownloadProvider { sessionService.downloadProvider }
     
     func didSelect(paymentNetworks: [PaymentNetwork]) {
         show(paymentNetworks: paymentNetworks, animated: true)

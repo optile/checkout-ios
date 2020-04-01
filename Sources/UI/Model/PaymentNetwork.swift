@@ -3,9 +3,9 @@ import Foundation
 final class PaymentNetwork {
     let applicableNetwork: ApplicableNetwork
     let translation: TranslationProvider
-    weak var session: PaymentSession?
-    
+
     let label: String
+    let submitButtonLabel: String
     var logo: Loadable<Data>?
     
     init(from applicableNetwork: ApplicableNetwork, localizeUsing localizer: TranslationProvider) {
@@ -13,6 +13,7 @@ final class PaymentNetwork {
         self.translation = localizer
         
         self.label = localizer.translation(forKey: "network.label")
+        self.submitButtonLabel = translation.translation(forKey: applicableNetwork.button ?? "button.charge.label")
         
         if let logoURL = applicableNetwork.links?["logo"] {
             logo = .notLoaded(logoURL)

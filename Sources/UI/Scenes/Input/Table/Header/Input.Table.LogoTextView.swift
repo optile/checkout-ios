@@ -7,22 +7,25 @@ private extension CGFloat {
 }
 
 extension Input.Table {
-    class LogoTextCell: UITableViewCell, DequeueableTableCell {
+    class LogoTextView: UIView {
         private let label: UILabel
         private let logoView: UIImageView
         
-        override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-            label = .init(frame: .zero)
-            logoView = .init(frame: .zero)
+        override init(frame: CGRect) {
+            label = .init(frame: frame)
+            logoView = .init(frame: frame)
             
-            super.init(style: style, reuseIdentifier: reuseIdentifier)
+            super.init(frame: frame)
             
-            self.accessoryType = .checkmark
+            // FIXME: Add a checkmark for a view
+//            self.accessoryType = .checkmark
 
+            self.preservesSuperviewLayoutMargins = true
+            
             label.font = .preferredFont(forTextStyle: .body)
             
-            contentView.addSubview(label)
-            contentView.addSubview(logoView)
+            self.addSubview(label)
+            self.addSubview(logoView)
 
             label.translatesAutoresizingMaskIntoConstraints = false
             label.textColor = .text
@@ -33,11 +36,11 @@ extension Input.Table {
             logoView.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
 
             NSLayoutConstraint.activate([
-                label.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor),
-                label.bottomAnchor.constraint(equalTo: contentView.layoutMarginsGuide.bottomAnchor),
-                label.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor),
+                label.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor),
+                label.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor),
+                label.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor),
                 
-                logoView.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor),
+                logoView.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor),
                 logoView.topAnchor.constraint(equalTo: label.topAnchor),
                 logoView.bottomAnchor.constraint(equalTo: label.bottomAnchor),
                 logoView.widthAnchor.constraint(equalToConstant: .logoWidth),
@@ -52,8 +55,8 @@ extension Input.Table {
     }
 }
 
-extension Input.Table.LogoTextCell {
-    func configure(with model: Input.Field.Header) {
+extension Input.Table.LogoTextView {
+    func configure(with model: Input.TextHeader) {
         let image: UIImage?
         if let imageData = model.logoData {
             image = UIImage(data: imageData)

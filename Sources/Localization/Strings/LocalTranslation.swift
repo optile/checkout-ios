@@ -24,6 +24,7 @@ enum LocalTranslation: String, CaseIterable {
     
     // iOS only
     case creditCard = "pmlocal_ios_credit_card"
+    case pay = "pmlocal_ios_pay"
 
     var localizedString: String {
         switch self {
@@ -50,6 +51,7 @@ enum LocalTranslation: String, CaseIterable {
         
         // iOS only
         case .creditCard: return "Credit card"
+        case .pay: return "Pay"
         }
     }
 }

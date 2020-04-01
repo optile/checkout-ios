@@ -25,4 +25,6 @@ extension Input.Field.Button: CellRepresentable {
     func dequeueCell(for tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
         return tableView.dequeueReusableCell(Input.Table.ButtonCell.self, for: indexPath)
     }
+    
+    var estimatedHeightForRow: CGFloat { 66 }
 }

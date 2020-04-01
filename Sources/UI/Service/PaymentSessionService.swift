@@ -3,8 +3,8 @@ import Foundation
 /// Service that fetches and stores PaymentSession.
 /// Used by `PaymentListViewController`
 class PaymentSessionService {
+    let downloadProvider: DataDownloadProvider
     private let paymentSessionProvider: PaymentSessionProvider
-    private let downloadProvider: DataDownloadProvider
     private let localizationProvider: TranslationProvider
 
     init(paymentSessionURL: URL, connection: Connection, localizationProvider: SharedTranslationProvider) {
@@ -30,10 +30,6 @@ class PaymentSessionService {
                 loadDidComplete(.failure(localizedError))
             }
         }
-    }
-
-    func load(from url: URL, completion: @escaping (Result<Data, Error>) -> Void) {
-        downloadProvider.downloadData(from: url, completion: completion)
     }
 
     private func localize(error: Error) -> Error {

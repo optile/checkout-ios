@@ -5,16 +5,17 @@ final class RegisteredAccount {
     let translation: TranslationProvider
 
     let networkLabel: String
+    let submitButtonLabel: String
     var logo: Loadable<Data>?
-    
-    weak var session: PaymentSession?
     
     init(from apiModel: AccountRegistration, localizeUsing localizer: TranslationProvider) {
         self.apiModel = apiModel
         self.translation = localizer
         
         self.networkLabel = localizer.translation(forKey: "network.label")
-        
+
+        self.submitButtonLabel = LocalTranslation.pay.localizedString
+
         if let logoURL = apiModel.links["logo"] {
             logo = .notLoaded(logoURL)
         } else {

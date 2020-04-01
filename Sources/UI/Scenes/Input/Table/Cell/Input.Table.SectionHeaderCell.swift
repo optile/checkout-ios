@@ -1,16 +1,16 @@
 import UIKit
 
-private extension CGFloat {
-    static var height: CGFloat { return 4 }
-}
-
 extension Input.Table {
     class SectionHeaderCell: UITableViewCell, DequeueableTableCell {
+        struct Constant {
+            static var height: CGFloat { return 4 }
+        }
+        
         override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
             super.init(style: style, reuseIdentifier: reuseIdentifier)
 
             NSLayoutConstraint.activate([
-                contentView.heightAnchor.constraint(equalToConstant: .height)
+                contentView.heightAnchor.constraint(equalToConstant: Constant.height)
             ])
          }
          

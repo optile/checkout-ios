@@ -1,8 +1,8 @@
 import UIKit
 import Foundation
 
-extension Input.Field {
-    final class Header {
+extension Input {
+    final class TextHeader {
         let logoData: Data?
         let label: String
         var detailedLabel: String?
@@ -39,22 +39,16 @@ extension Input.Field {
     }
 }
 
-extension Input.Field.Header: CellRepresentable {
-    func configure(cell: UITableViewCell) {
-        switch cell {
-        case let cell as Input.Table.LogoTextCell: cell.configure(with: self)
-        case let cell as Input.Table.DetailedTextLogoCell: cell.configure(with: self)
-        default:
-            assertionFailure("Called configure(cell:) from unexpected UITableViewCell")
-            return
+extension Input.TextHeader: ViewRepresentable {
+    func configure(view: UIView) throws {
+        switch view {
+        case let view as Input.Table.LogoTextView: view.configure(with: self)
+        case let view as Input.Table.DetailedTextLogoView: view.configure(with: self)
+        default: throw errorForIncorrectView(view)
         }
     }
     
-    func dequeueCell(for tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
-        if detailedLabel != nil {
-            return tableView.dequeueReusableCell(Input.Table.DetailedTextLogoCell.self, for: indexPath)
-        } else {
-            return tableView.dequeueReusableCell(Input.Table.LogoTextCell.self, for: indexPath)
-        }
+    var configurableViewType: UIView.Type {
+        return detailedLabel == nil ? Input.Table.LogoTextView.self : Input.Table.DetailedTextLogoView.self
     }
 }

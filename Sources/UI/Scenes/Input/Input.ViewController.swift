@@ -10,10 +10,12 @@ extension Input {
         private let tableController: Table.Controller
         private let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 0), style: .plain)
         fileprivate let smartSwitch: SmartSwitch.Selector
+        fileprivate let headerModel: ViewRepresentable?
         
         init(for paymentNetworks: [PaymentNetwork]) throws {
             let transfomer = Field.Transformer()
             networks = paymentNetworks.map { transfomer.transform(paymentNetwork: $0) }
+            headerModel = nil
             smartSwitch = try .init(networks: self.networks)
             tableController = .init(for: smartSwitch.selected.network, tableView: tableView)
             
@@ -33,6 +35,7 @@ extension Input {
             let transfomer = Field.Transformer()
             let network = transfomer.transform(registeredAccount: registeredAccount)
             networks = [network]
+            headerModel = Input.TextHeader(from: registeredAccount)
             smartSwitch = .init(network: network)
             tableController = .init(for: smartSwitch.selected.network, tableView: tableView)
             
@@ -97,7 +100,7 @@ extension Input.ViewController {
         tableController.registerCells()
         
         tableView.dataSource = tableController
-        tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: CGFloat.leastNormalMagnitude))
+        tableView.delegate = tableController
         tableView.separatorStyle = .none
         tableView.tintColor = view.tintColor
         
@@ -117,6 +120,35 @@ extension Input.ViewController {
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             tableView.topAnchor.constraint(equalTo: view.topAnchor)
         ])
+        
+        // Table header
+        if let model = headerModel {
+            tableView.tableHeaderView = makeTableHeaderView(for: model)
+        } else {
+            tableView.tableHeaderView = nil
+        }
+    }
+    
+    private func makeTableHeaderView(for model: ViewRepresentable) -> UIView {
+        let headerContentView = model.configurableViewType.init(frame: .zero)
+        try? model.configure(view: headerContentView)
+        
+        let headerContentViewSize = headerContentView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+        headerContentView.frame = CGRect(origin: .zero, size: headerContentViewSize)
+        
+        let viewHeightWithSeparator = headerContentViewSize.height + Input.Table.SectionHeaderCell.Constant.height
+        
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: viewHeightWithSeparator))
+        headerView.preservesSuperviewLayoutMargins = true
+        headerView.addSubview(headerContentView)
+        NSLayoutConstraint.activate([
+            headerContentView.topAnchor.constraint(equalTo: headerView.topAnchor),
+            headerContentView.bottomAnchor.constraint(equalTo: headerView.bottomAnchor),
+            headerContentView.leadingAnchor.constraint(equalTo: headerView.leadingAnchor),
+            headerContentView.trailingAnchor.constraint(equalTo: headerView.trailingAnchor)
+        ])
+        
+        return headerView
     }
 }
 

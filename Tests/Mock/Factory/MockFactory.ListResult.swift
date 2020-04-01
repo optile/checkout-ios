@@ -12,13 +12,11 @@ extension MockFactory.ListResult {
         let listResultData = listResult.data(using: .utf8)!
         let listResult = try! JSONDecoder().decode(Optile.ListResult.self, from: listResultData)
 
-        var paymentNetworks = [PaymentNetwork]()
-        for network in listResult.networks.applicable {
-            let paymentNetwork = PaymentNetwork(from: network, localizeUsing: MockFactory.Localization.provider)
-            paymentNetworks.append(paymentNetwork)
+        let translatedNetworks = listResult.networks.applicable.map {
+            TranslatedModel(model: $0, translator: MockFactory.Localization.provider)
         }
-
-        return PaymentSession(listResult: listResult, networks: paymentNetworks, registeredAccounts: nil)
+        
+        return PaymentSession(networks: translatedNetworks, accounts: nil)
     }
 
     static var listResult: String {
