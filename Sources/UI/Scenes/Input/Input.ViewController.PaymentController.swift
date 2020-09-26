@@ -24,42 +24,42 @@ extension Input.ViewController {
 
 extension Input.ViewController.PaymentController {
     func submitPayment(for network: Input.Network) {
-         let service = paymentServiceFactory.createPaymentService(forNetworkCode: network.networkCode, paymentMethod: network.paymentMethod)
-         service?.delegate = self
+        let service = paymentServiceFactory.createPaymentService(forNetworkCode: network.networkCode, paymentMethod: network.paymentMethod)
+        service?.delegate = self
 
-         var inputFieldsDictionary = [String: String]()
-         var expiryDate: String?
-         for element in network.uiModel.inputFields + network.uiModel.separatedCheckboxes {
-             if element.name == "expiryDate" {
-                 // Expiry date is processed below
-                 expiryDate = element.value
-                 continue
-             }
-
-             inputFieldsDictionary[element.name] = element.value
-         }
-
-         // Split expiry date
-         if let expiryDate = expiryDate {
-             inputFieldsDictionary["expiryMonth"] = String(expiryDate.prefix(2))
+        var inputFieldsDictionary = [String: String]()
+        var expiryDate: String?
+        for element in network.uiModel.inputFields + network.uiModel.separatedCheckboxes {
+            if element.name == "expiryDate" {
+                // Expiry date is processed below
+                expiryDate = element.value
+                continue
+            }
             
-             // Create expiry year
-             guard let shortExpiryYear = Int(expiryDate.suffix(2)) else {
-                 let errorInteraction = Interaction(code: .RETRY, reason: .CLIENTSIDE_ERROR)
-                 let error = InternalError(description: "Couldn't convert expiry date's year to integer: %@", expiryDate)
-                 let paymentResult = PaymentResult(operationResult: nil, interaction: errorInteraction, error: error)
+            inputFieldsDictionary[element.name] = element.value
+        }
+
+        // Split expiry date
+        if let expiryDate = expiryDate {
+            inputFieldsDictionary["expiryMonth"] = String(expiryDate.prefix(2))
+            
+            // Create expiry year
+            guard let shortExpiryYear = Int(expiryDate.suffix(2)) else {
+                let errorInteraction = Interaction(code: .RETRY, reason: .CLIENTSIDE_ERROR)
+                let error = InternalError(description: "Couldn't convert expiry date's year to integer: %@", expiryDate)
+                let paymentResult = PaymentResult(operationResult: nil, interaction: errorInteraction, error: error)
                 delegate?.paymentController(paymentFailedWith: error, withResult: paymentResult, isRetryable: true)
-                 return
-             }
-            
-             let fullExpiryYear = createFullYear(fromShortYear: shortExpiryYear)
-             inputFieldsDictionary["expiryYear"] = String(fullExpiryYear)
-         }
+                return
+            }
 
-         let request = PaymentRequest(networkCode: network.networkCode, operationURL: network.operationURL, inputFields: inputFieldsDictionary)
+            let fullExpiryYear = createFullYear(fromShortYear: shortExpiryYear)
+            inputFieldsDictionary["expiryYear"] = String(fullExpiryYear)
+        }
 
-         service?.send(paymentRequest: request)
-     }
+        let request = PaymentRequest(networkCode: network.networkCode, operationURL: network.operationURL, inputFields: inputFieldsDictionary)
+        
+        service?.send(paymentRequest: request)
+    }
 
     /// Create a full expiry year from the last part of the expiry year.
     /// This will use dynamic windowing of -30 years and +70 year.
@@ -67,7 +67,7 @@ extension Input.ViewController.PaymentController {
     /// - Returns: transformed year value using dynamic rule, from 00 to 99
     private func createFullYear(fromShortYear shortYear: Int) -> Int {
         let currentYear = Calendar.current.component(.year, from: Date())
-        
+
         let startingYear = currentYear - 30
         let endingYear = currentYear + 70
 
