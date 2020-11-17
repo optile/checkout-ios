@@ -100,5 +100,6 @@ class UITests: XCTestCase {
         
         clearButton.tap()
         XCTAssertEqual(cardNumberTextField.value as! String, "", "Text wasn't cleared")
+        XCTAssertFalse(clearButton.exists, "Clear button should be hidden")
     }
 }
