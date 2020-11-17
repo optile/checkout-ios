@@ -18,6 +18,7 @@ extension Input.Table {
 
             textField.rightView = button
             textField.rightViewMode = .always
+            textField.clearButtonMode = .never
         }
 
         @objc private func hintButtonDidTap() {

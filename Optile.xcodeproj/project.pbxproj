@@ -12,6 +12,7 @@
 		D918A3F2254F205C005BBA8B /* ListResult.json in Resources */ = {isa = PBXBuildFile; fileRef = D918A3F1254F205C005BBA8B /* ListResult.json */; };
 		D918A3F5254F2450005BBA8B /* NetworkLocalization.json in Resources */ = {isa = PBXBuildFile; fileRef = D918A3F4254F2450005BBA8B /* NetworkLocalization.json */; };
 		D918A3F7254F2483005BBA8B /* CheckoutLocalization.json in Resources */ = {isa = PBXBuildFile; fileRef = D918A3F6254F2483005BBA8B /* CheckoutLocalization.json */; };
+		D94B1D9F25645A540041B851 /* Input.Table.TextFieldController.ClearButtonController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94B1D9E25645A540041B851 /* Input.Table.TextFieldController.ClearButtonController.swift */; };
 		D96BB8BA249FEBB400C2AD73 /* NetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96BB89E249FEBB400C2AD73 /* NetworkTests.swift */; };
 		D96BB8BB249FEBB400C2AD73 /* XCTestManifests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96BB89F249FEBB400C2AD73 /* XCTestManifests.swift */; };
 		D96BB8BC249FEBB400C2AD73 /* MockFactory.InputElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96BB8A5249FEBB400C2AD73 /* MockFactory.InputElements.swift */; };
@@ -212,6 +213,7 @@
 		D918A3F1254F205C005BBA8B /* ListResult.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ListResult.json; sourceTree = "<group>"; };
 		D918A3F4254F2450005BBA8B /* NetworkLocalization.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = NetworkLocalization.json; sourceTree = "<group>"; };
 		D918A3F6254F2483005BBA8B /* CheckoutLocalization.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CheckoutLocalization.json; sourceTree = "<group>"; };
+		D94B1D9E25645A540041B851 /* Input.Table.TextFieldController.ClearButtonController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Input.Table.TextFieldController.ClearButtonController.swift; sourceTree = "<group>"; };
 		D96BB89E249FEBB400C2AD73 /* NetworkTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkTests.swift; sourceTree = "<group>"; };
 		D96BB89F249FEBB400C2AD73 /* XCTestManifests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCTestManifests.swift; sourceTree = "<group>"; };
 		D96BB8A5249FEBB400C2AD73 /* MockFactory.InputElements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockFactory.InputElements.swift; sourceTree = "<group>"; };
@@ -835,6 +837,7 @@
 				D9ED40A8252E8274009F14DA /* Input.Table.CheckboxViewCell.swift */,
 				D9ED40A9252E8274009F14DA /* Input.Table.TextFieldViewCell.swift */,
 				D9AD5F79256321AD00DE65C4 /* Input.Table.TextFieldController.swift */,
+				D94B1D9E25645A540041B851 /* Input.Table.TextFieldController.ClearButtonController.swift */,
 				D9ED40AA252E8274009F14DA /* Input.Table.ButtonCell.swift */,
 				D9AD5F7D25634AA100DE65C4 /* Input.Table.CVVTextFieldViewCell.swift */,
 				D9ED40AB252E8274009F14DA /* Header */,
@@ -1391,6 +1394,7 @@
 				D9ED4124252E8274009F14DA /* PaymentAmount.swift in Sources */,
 				D9ED4132252E8274009F14DA /* PaymentMethod.swift in Sources */,
 				D9ED4154252E8274009F14DA /* Input.ViewController.PaymentController.swift in Sources */,
+				D94B1D9F25645A540041B851 /* Input.Table.TextFieldController.ClearButtonController.swift in Sources */,
 				D9ED4180252E8275009F14DA /* CellRepresentable.swift in Sources */,
 				D9ED4126252E8274009F14DA /* PresetAccount.swift in Sources */,
 				D9ED419B252E8275009F14DA /* TranslatedError.swift in Sources */,

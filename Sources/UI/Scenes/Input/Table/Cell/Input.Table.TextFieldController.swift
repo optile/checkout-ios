@@ -26,10 +26,12 @@ extension Input.Table {
         
         unowned let textField: MDCTextField
         fileprivate let materialInputController: MDCTextInputControllerFilled
+        fileprivate let clearButtonController: ClearButtonController
 
         init(textField: MDCTextField) {
             self.textField = textField
             materialInputController = .init(textInput: textField)
+            clearButtonController = .init(textField: textField)
 
             super.init()
             
@@ -45,10 +47,11 @@ extension Input.Table {
             materialInputController.errorColor = .themedError
             materialInputController.textInputFont = UIFont.preferredThemeFont(forTextStyle: .body)
             materialInputController.inlinePlaceholderFont = UIFont.preferredThemeFont(forTextStyle: .body)
-
         }
         
         @objc private func textFieldDidChange(_ textField: UITextField) {
+            clearButtonController.textFieldDidChange()
+
             guard let model = self.model else { return }
             
             let text = textField.text ?? String()
@@ -91,6 +94,8 @@ extension Input.Table.TextFieldController {
 
         textField.keyboardType = model.keyboardType
         textField.autocapitalizationType = model.autocapitalizationType
+        
+        clearButtonController.configure()
     }
     
     func setErrorText(to errorText: String?) {
