@@ -24,7 +24,7 @@ extension Input.Table.Validator {
 
         let cellRepresentable = dataSource.model[indexPath.section][indexPath.row]
 
-        if let validatableModel = cellRepresentable as? Validatable, validatableModel.validationErrorText != nil {
+        if let validatableModel = cellRepresentable as? ValidatableInputField, validatableModel.validationErrorText != nil {
             validatableModel.validationErrorText = nil
 
             // Update cell's view if cell is on the screen
@@ -46,7 +46,7 @@ extension Input.Table.Validator {
 
         for section in dataSource.model {
             for row in section {
-                guard let validatable = row as? Validatable else { continue }
+                guard let validatable = row as? ValidatableInputField else { continue }
                 validatable.validateAndSaveResult(option: option)
 
                 if validatable.validationErrorText != nil {
@@ -68,7 +68,7 @@ extension Input.Table.Validator {
         }
 
         let cellRepresentable = dataSource.model[indexPath.section][indexPath.row]
-        guard let validatableRow = cellRepresentable as? Validatable else { return }
+        guard let validatableRow = cellRepresentable as? ValidatableInputField else { return }
 
         let previousValidationErrorText = validatableRow.validationErrorText
 

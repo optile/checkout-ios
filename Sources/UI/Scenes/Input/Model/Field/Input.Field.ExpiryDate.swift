@@ -21,7 +21,7 @@ extension Input.Field {
     }
 }
 
-extension Input.Field.ExpiryDate: Validatable {
+extension Input.Field.ExpiryDate: ValidatableInputField {
     var validationRule: Input.Field.Validation.Rule? { nil }
 
     func localize(error: Input.Field.Validation.ValidationError) -> String {

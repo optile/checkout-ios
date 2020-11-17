@@ -16,7 +16,7 @@ extension Input.Field {
     }
 }
 
-extension Input.Field.IBAN: Validatable {
+extension Input.Field.IBAN: ValidatableInputField {
     func localize(error: Input.Field.Validation.ValidationError) -> String {
         switch error {
         case .invalidValue, .incorrectLength: return translator.translation(forKey: "error.INVALID_IBAN")

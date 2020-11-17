@@ -6,7 +6,7 @@ extension Input.Field {
 
 extension Input.Field.BankCode: TextInputField {}
 
-extension Input.Field.BankCode: Validatable {
+extension Input.Field.BankCode: ValidatableInputField {
     func localize(error: Input.Field.Validation.ValidationError) -> String {
         switch error {
         case .invalidValue, .incorrectLength: return translator.translation(forKey: "error.INVALID_BANK_CODE")

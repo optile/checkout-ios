@@ -6,7 +6,7 @@ extension Input.Field {
 
 extension Input.Field.HolderName: TextInputField {}
 
-extension Input.Field.HolderName: Validatable {
+extension Input.Field.HolderName: ValidatableInputField {
     func localize(error: Input.Field.Validation.ValidationError) -> String {
         switch error {
         case .invalidValue, .incorrectLength: return translator.translation(forKey: "error.INVALID_HOLDER_NAME")

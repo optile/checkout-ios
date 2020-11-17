@@ -6,7 +6,7 @@ extension Input.Field {
 
 extension Input.Field.BIC: TextInputField {}
 
-extension Input.Field.BIC: Validatable {
+extension Input.Field.BIC: ValidatableInputField {
     func localize(error: Input.Field.Validation.ValidationError) -> String {
         switch error {
         case .invalidValue, .incorrectLength: return translator.translation(forKey: "error.INVALID_BIC")
