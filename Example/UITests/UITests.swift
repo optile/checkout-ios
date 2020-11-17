@@ -69,4 +69,36 @@ class UITests: XCTestCase {
         let expectedResult = "ResultInfo: Approved Interaction code: PROCEED Interaction reason: OK Error: n/a"
         XCTAssertEqual(expectedResult, interactionResult)
     }
+    
+    func testClearButton() {
+        // UI tests must launch the application that they test.
+        let app = XCUIApplication()
+        app.launch()
+
+        // Initial screen
+        let tablesQuery = app.tables
+        if tablesQuery.buttons["Clear text"].exists {
+            tablesQuery.buttons["Clear text"].tap()
+        }
+        tablesQuery.textFields.firstMatch.typeText(sessionURL.absoluteString)
+        tablesQuery.staticTexts["Send request"].tap()
+
+        // List
+        app.tables.staticTexts["Cards"].tap()
+
+        // Input
+        let collectionViewsQuery = app.collectionViews
+        collectionViewsQuery.textFields["Card Number"].tap()
+        
+        let clearButton = app.collectionViews.buttons["iconClear"]
+        let cardNumberTextField = collectionViewsQuery.textFields["Card Number"]
+
+        XCTAssertFalse(clearButton.exists, "Clear button should be hidden")
+
+        cardNumberTextField.typeText("4111")
+        XCTAssertTrue(clearButton.exists, "Clear button should be visible")
+        
+        clearButton.tap()
+        XCTAssertEqual(cardNumberTextField.value as! String, "", "Text wasn't cleared")
+    }
 }
