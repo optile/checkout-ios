@@ -94,7 +94,7 @@ extension Input.Table.TextFieldViewCell: TextFieldControllerDelegate {
 
 extension Input.Table.TextFieldViewCell {
     func showValidationResult(for model: Any) {
-        guard let model = model as? ValidatableInputField else { return }
+        guard let model = model as? Validatable else { return }
 
         if let errorText = model.validationErrorText {
             showErrorLabel(withText: errorText)

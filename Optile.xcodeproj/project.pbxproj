@@ -138,7 +138,7 @@
 		D9ED417C252E8275009F14DA /* DefinesKeyboardStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9ED40D2252E8274009F14DA /* DefinesKeyboardStyle.swift */; };
 		D9ED417D252E8275009F14DA /* SupportsPrimaryAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9ED40D3252E8274009F14DA /* SupportsPrimaryAction.swift */; };
 		D9ED417E252E8275009F14DA /* InputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9ED40D4252E8274009F14DA /* InputField.swift */; };
-		D9ED417F252E8275009F14DA /* ValidatableInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9ED40D5252E8274009F14DA /* ValidatableInputField.swift */; };
+		D9ED417F252E8275009F14DA /* Validatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9ED40D5252E8274009F14DA /* Validatable.swift */; };
 		D9ED4180252E8275009F14DA /* CellRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9ED40D6252E8274009F14DA /* CellRepresentable.swift */; };
 		D9ED4181252E8275009F14DA /* InputCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9ED40D7252E8274009F14DA /* InputCellDelegate.swift */; };
 		D9ED4182252E8275009F14DA /* Selectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9ED40D8252E8274009F14DA /* Selectable.swift */; };
@@ -343,7 +343,7 @@
 		D9ED40D2252E8274009F14DA /* DefinesKeyboardStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefinesKeyboardStyle.swift; sourceTree = "<group>"; };
 		D9ED40D3252E8274009F14DA /* SupportsPrimaryAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SupportsPrimaryAction.swift; sourceTree = "<group>"; };
 		D9ED40D4252E8274009F14DA /* InputField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputField.swift; sourceTree = "<group>"; };
-		D9ED40D5252E8274009F14DA /* ValidatableInputField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidatableInputField.swift; sourceTree = "<group>"; };
+		D9ED40D5252E8274009F14DA /* Validatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validatable.swift; sourceTree = "<group>"; };
 		D9ED40D6252E8274009F14DA /* CellRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellRepresentable.swift; sourceTree = "<group>"; };
 		D9ED40D7252E8274009F14DA /* InputCellDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputCellDelegate.swift; sourceTree = "<group>"; };
 		D9ED40D8252E8274009F14DA /* Selectable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Selectable.swift; sourceTree = "<group>"; };
@@ -927,7 +927,7 @@
 				D9ED40D2252E8274009F14DA /* DefinesKeyboardStyle.swift */,
 				D9ED40D3252E8274009F14DA /* SupportsPrimaryAction.swift */,
 				D9ED40D4252E8274009F14DA /* InputField.swift */,
-				D9ED40D5252E8274009F14DA /* ValidatableInputField.swift */,
+				D9ED40D5252E8274009F14DA /* Validatable.swift */,
 				D9ED40D6252E8274009F14DA /* CellRepresentable.swift */,
 				D9ED40D7252E8274009F14DA /* InputCellDelegate.swift */,
 				D9ED40D8252E8274009F14DA /* Selectable.swift */,
@@ -1287,7 +1287,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D9ED416B252E8274009F14DA /* Input.Field.BankCode.swift in Sources */,
-				D9ED417F252E8275009F14DA /* ValidatableInputField.swift in Sources */,
+				D9ED417F252E8275009F14DA /* Validatable.swift in Sources */,
 				D9ED4165252E8274009F14DA /* Input.Field.Checkbox.swift in Sources */,
 				D9ED412E252E8274009F14DA /* ProviderParameters.swift in Sources */,
 				D9ED411F252E8274009F14DA /* URLSessionConnection.swift in Sources */,

@@ -23,7 +23,7 @@ extension Input.Field.AccountNumber: TextInputField {
     var allowedCharacters: CharacterSet? { return .decimalDigits }
 }
 
-extension Input.Field.AccountNumber: ValidatableInputField {
+extension Input.Field.AccountNumber: Validatable {
     private var luhnValidatableMethods: [String] { ["DEBIT_CARD", "CREDIT_CARD"] }
 
     func localize(error: Input.Field.Validation.ValidationError) -> String {

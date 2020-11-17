@@ -1,6 +1,6 @@
 import Foundation
 
-protocol ValidatableInputField: class {
+protocol Validatable: class {
     var validationRule: Input.Field.Validation.Rule? { get }
     var validationErrorText: String? { get set }
 
@@ -14,7 +14,7 @@ protocol ValidatableInputField: class {
     var isPassedCustomValidation: Bool { get }
 }
 
-extension ValidatableInputField {
+extension Validatable {
     /// Validate and write result to `validationResult`
     func validateAndSaveResult(option: Input.Field.Validation.Option) {
         switch validate(using: option) {
@@ -30,13 +30,13 @@ extension ValidatableInputField {
 
 // MARK: - TextInputField
 
-extension TextInputField where Self: ValidatableInputField {
+extension TextInputField where Self: Validatable {
     var maxInputLength: Int? {
         return validationRule?.maxLength
     }
 }
 
-extension ValidatableInputField where Self: TextInputField {
+extension Validatable where Self: TextInputField {
     func validate(using option: Input.Field.Validation.Option) -> Input.Field.Validation.Result {
         if case .preCheck = option {
             guard isValueExists else {
@@ -95,7 +95,7 @@ extension ValidatableInputField where Self: TextInputField {
 
 // MARK: - SelectInputField
 
-extension ValidatableInputField where Self: SelectInputField {
+extension Validatable where Self: SelectInputField {
     var validationRule: Input.Field.Validation.Rule? { return nil }
 
     func validate(using option: Input.Field.Validation.Option) -> Input.Field.Validation.Result {

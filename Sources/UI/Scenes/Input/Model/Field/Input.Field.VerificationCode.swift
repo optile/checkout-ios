@@ -52,7 +52,7 @@ extension Input.Field.VerificationCode: TextInputField {
     var allowedCharacters: CharacterSet? { return .decimalDigits }
 }
 
-extension Input.Field.VerificationCode: ValidatableInputField {
+extension Input.Field.VerificationCode: Validatable {
     func localize(error: Input.Field.Validation.ValidationError) -> String {
         switch error {
         case .invalidValue, .incorrectLength: return translator.translation(forKey: "error.INVALID_VERIFICATION_CODE")
