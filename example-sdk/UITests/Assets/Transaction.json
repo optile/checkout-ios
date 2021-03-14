@@ -13,11 +13,9 @@
     "reference": "Example iOS SDK"
   },
   "style": {
-    "language": "en_US",
-    "resolution": "2x"
+    "language": "en_US"
   },
   "callback": {
-    "appId": "com.payoneer.mrs.examplesdk",
-    "notificationUrl": "https://example.com/shop/notify.html"
+    "appId": "com.payoneer.mrs.examplesdk"
   }
 }
