@@ -19,22 +19,17 @@ platform :ios do
   desc "Build example app"
   lane :build_example do
     filename = "Example-sdk-" + ENV["CIRCLE_BRANCH"].to_s + ".ipa"
+    example_xcodeproj = "Example-sdk/Example-sdk.xcodeproj"
     cocoapods(podfile: "./Example-sdk/Podfile")
-    disable_automatic_code_signing(
-      path: "./Example-sdk/Example-sdk.xcodeproj",
-      code_sign_identity: "iPhone Distribution"
+    increment_build_number(
+      build_number: ENV["CIRCLE_BUILD_NUM"],
+      xcodeproj: example_xcodeproj
     )
-    match(type: "adhoc", readonly: is_ci)
-    update_project_team(path: "./Example-sdk/Example-sdk.xcodeproj")
-    update_project_provisioning(
-      profile: ENV["sigh_com.payoneer.mrs.examplesdk_adhoc_profile-path"],
-      xcodeproj: "./Example-sdk/Example-sdk.xcodeproj"
-    )
+    match(type: "appstore", readonly: is_ci)
     build_ios_app(
       scheme: "Example-sdk",
       configuration: "Release",
       workspace: "./Example-sdk/Example-sdk.xcworkspace",
-      export_method: "ad-hoc",
       output_directory: "/tmp/workspace/output",
       output_name: filename,
       derived_data_path: "/tmp/workspace/derived_data"
@@ -43,11 +38,11 @@ platform :ios do
 
   desc "Upload binary to Browserstack"
   lane :browserstack do
-    path = "/tmp/workspace/output/Example-sdk-" + ENV["CIRCLE_BRANCH"].to_s + ".ipa"
+    example_ipa = "/tmp/workspace/output/Example-sdk-" + ENV["CIRCLE_BRANCH"].to_s + ".ipa"
     upload_to_browserstack_app_live(
       browserstack_username: ENV["BROWSERSTACK_USERNAME"],
       browserstack_access_key: ENV["BROWSERSTACK_ACCESS_KEY"],
-      file_path: path
+      file_path: example_ipa
     )
   end
 
