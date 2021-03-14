@@ -116,6 +116,26 @@ jobs:
           at: /tmp/workspace
       - run: bundle exec fastlane browserstack
 
+  submit_to_testflight:
+    macos:
+      xcode: "12.1.0"
+    environment:
+      HOMEBREW_NO_AUTO_UPDATE: 1
+    shell: /bin/bash --login -o pipefail
+    steps:
+      - checkout
+      - run: git clone --single-branch --branch ios-sdk --depth 1 https://github.com/optile/opx-mobiledev-certificates.git certificates
+      - restore_cache:
+          key: gems-{{ checksum "Gemfile.lock" }}
+      - run: bundle check || bundle install --path vendor/bundle
+      - save_cache:
+          key: gems-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+      - attach_workspace:
+          at: /tmp/workspace
+      - run: bundle exec fastlane submit_to_testflight
+
 workflows:
   build:
     jobs:
@@ -127,3 +147,14 @@ workflows:
       - browserstack:
           requires:
             - build_example
+          filters:
+            branches:
+              ignore:
+                - develop
+      - submit_to_testflight:
+          requires: 
+            - build_example
+          filters:
+            branches:
+              only:
+                - develop

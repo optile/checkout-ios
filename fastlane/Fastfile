@@ -61,4 +61,14 @@ platform :ios do
     )
   end
 
+  desc "Submit to TestFlight"
+  lane :submit_to_testflight do
+    example_ipa = "/tmp/workspace/output/Example-sdk-" + ENV["CIRCLE_BRANCH"].to_s + ".ipa"
+    certificate_json = "itunes_connect/fastlane_api_key.json"
+    upload_to_testflight(
+      api_key_path: certificate_json,
+      ipa: example_ipa
+    )
+  end
+
 end
