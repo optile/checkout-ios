@@ -36,6 +36,11 @@ Upload binary to Browserstack
 fastlane ios ui_test
 ```
 Run UI tests
+### ios develop_testflight
+```
+fastlane ios develop_testflight
+```
+Upload to TestFlight
 
 ----
 
