@@ -16,6 +16,6 @@
     "language": "en_US"
   },
   "callback": {
-    "appId": "com.payoneer.mrs.examplesdk"
+    "appId": "com.payoneer.checkout.examplecheckout"
   }
 }

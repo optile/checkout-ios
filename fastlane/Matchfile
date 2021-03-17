@@ -2,4 +2,4 @@ git_url("git@github.com:optile/opx-mobiledev-certificates.git")
 git_branch("ios-sdk")
 storage_mode("git")
 
-app_identifier(["com.payoneer.mrs.examplesdk"])
+app_identifier(["com.payoneer.checkout.examplecheckout"])

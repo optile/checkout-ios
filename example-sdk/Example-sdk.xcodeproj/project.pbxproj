@@ -450,7 +450,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.payoneer.mrs.UITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.payoneer.checkout.examplecheckout.tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 5.0;
@@ -473,7 +473,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.payoneer.mrs.UITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.payoneer.checkout.examplecheckout.tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 5.0;
@@ -612,9 +612,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.payoneer.mrs.examplesdk;
+				PRODUCT_BUNDLE_IDENTIFIER = com.payoneer.checkout.examplecheckout;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.payoneer.mrs.examplesdk";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.payoneer.checkout.examplecheckout";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -636,9 +636,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.payoneer.mrs.examplesdk;
+				PRODUCT_BUNDLE_IDENTIFIER = com.payoneer.checkout.examplecheckout;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.payoneer.mrs.examplesdk";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.payoneer.checkout.examplecheckout";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

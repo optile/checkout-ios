@@ -31,7 +31,7 @@
 			<string>test.app</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.payoneer.mrs.examplesdk.mobileredirect</string>
+				<string>com.payoneer.checkout.examplecheckout.mobileredirect</string>
 			</array>
 		</dict>
 	</array>
