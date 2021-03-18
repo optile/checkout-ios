@@ -5,7 +5,7 @@
 // See the LICENSE file for more information.
 
 import Foundation
-@testable import Payoneer
+@testable import PayoneerCheckout
 
 extension MockFactory {
     class Validation {}

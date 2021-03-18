@@ -5,7 +5,7 @@
 // See the LICENSE file for more information.
 
 import Foundation
-@testable import Payoneer
+@testable import PayoneerCheckout
 
 class MockConnection: Connection {
     private let serialQueue = DispatchQueue(label: "Mock connection serial queue")

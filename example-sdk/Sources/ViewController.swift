@@ -5,7 +5,7 @@
 // See the LICENSE file for more information.
 
 import UIKit
-import Payoneer
+import PayoneerCheckout
 
 class ViewController: UITableViewController {
     @IBOutlet weak var textField: UITextField!

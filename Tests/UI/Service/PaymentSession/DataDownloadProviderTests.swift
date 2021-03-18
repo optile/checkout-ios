@@ -5,7 +5,7 @@
 // See the LICENSE file for more information.
 
 import XCTest
-@testable import Payoneer
+@testable import PayoneerCheckout
 
 class DataDownloadProviderTests: XCTestCase {
     @available(iOS 13.0, *)
