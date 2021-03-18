@@ -5,7 +5,7 @@ use_frameworks!
 
 pod 'SwiftLint'
 
-target 'Payoneer' do
+target 'PayoneerCheckout' do
   pod 'MaterialComponents/TextFields', '103.1.0'
 end
 

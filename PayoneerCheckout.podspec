@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-  s.name             = 'Payoneer'
+  s.name             = 'PayoneerCheckout'
   s.version          = '0.1.0'
   s.summary          = 'A short description.'
 

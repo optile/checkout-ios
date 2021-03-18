@@ -54,12 +54,12 @@ PODS:
     - MaterialComponents/private/Math
     - MDFTextAccessibility
   - MDFInternationalization (2.0.0)
-  - MDFTextAccessibility (2.0.0)
-  - Payoneer (0.1.0):
+  - MDFTextAccessibility (2.0.1)
+  - PayoneerCheckout (0.1.0):
     - MaterialComponents/TextFields (= 117.0.0)
 
 DEPENDENCIES:
-  - Payoneer (from `../`)
+  - PayoneerCheckout (from `../`)
 
 SPEC REPOS:
   trunk:
@@ -68,15 +68,15 @@ SPEC REPOS:
     - MDFTextAccessibility
 
 EXTERNAL SOURCES:
-  Payoneer:
+  PayoneerCheckout:
     :path: "../"
 
 SPEC CHECKSUMS:
   MaterialComponents: 29320b6a89c4c90e41c7a41fc70e91127ac34161
   MDFInternationalization: 010097556d6b09d2c4ea38e0820ea6d37be6a314
-  MDFTextAccessibility: 85c09a1bd9c321f494348e632a25063bcda35a53
-  Payoneer: 692f95b6ff1aab0ee966effa6bc1fbf56fe52d27
+  MDFTextAccessibility: f4bb4cc2194286651b59a215fdeaa0e05dc90ba5
+  PayoneerCheckout: 1848785bee4f322a3cd47181eebb184cde28b693
 
-PODFILE CHECKSUM: 7f9c5f8fd381b8e128206667b3e65c8b6384e48e
+PODFILE CHECKSUM: dbbd3660cbaca340e825a70042e075d8ae6a4731
 
 COCOAPODS: 1.10.1

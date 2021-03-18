@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D9C95734241C54CA00049AFE"
-               BuildableName = "Payoneer.framework"
-               BlueprintName = "Payoneer"
-               ReferencedContainer = "container:Payoneer.xcodeproj">
+               BuildableName = "PayoneerCheckout.framework"
+               BlueprintName = "PayoneerCheckout"
+               ReferencedContainer = "container:PayoneerCheckout.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
                BlueprintIdentifier = "D9C9573D241C54CA00049AFE"
                BuildableName = "Tests.xctest"
                BlueprintName = "Tests"
-               ReferencedContainer = "container:Payoneer.xcodeproj">
+               ReferencedContainer = "container:PayoneerCheckout.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -61,9 +61,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D9C95734241C54CA00049AFE"
-            BuildableName = "Payoneer.framework"
-            BlueprintName = "Payoneer"
-            ReferencedContainer = "container:Payoneer.xcodeproj">
+            BuildableName = "PayoneerCheckout.framework"
+            BlueprintName = "PayoneerCheckout"
+            ReferencedContainer = "container:PayoneerCheckout.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

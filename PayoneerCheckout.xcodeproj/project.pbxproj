@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6D1C8B4799FCEA259FABC744 /* Pods_Payoneer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36B42BA5B51E0C0C5F1F7D54 /* Pods_Payoneer.framework */; };
 		AA144B5943E1616B03AD583E /* Pods_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E918DF5930A18AE9887BB63A /* Pods_Tests.framework */; };
+		D171739C205EC3E55EFF56B1 /* Pods_PayoneerCheckout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1034F946707DF3385D21E705 /* Pods_PayoneerCheckout.framework */; };
 		D918A3F2254F205C005BBA8B /* ListResult.json in Resources */ = {isa = PBXBuildFile; fileRef = D918A3F1254F205C005BBA8B /* ListResult.json */; };
 		D918A3F5254F2450005BBA8B /* NetworkLocalization.json in Resources */ = {isa = PBXBuildFile; fileRef = D918A3F4254F2450005BBA8B /* NetworkLocalization.json */; };
 		D918A3F7254F2483005BBA8B /* CheckoutLocalization.json in Resources */ = {isa = PBXBuildFile; fileRef = D918A3F6254F2483005BBA8B /* CheckoutLocalization.json */; };
@@ -196,7 +196,7 @@
 		D9A88E11241C55040043F535 /* validations-default.json in Resources */ = {isa = PBXBuildFile; fileRef = D9A88D95241C55040043F535 /* validations-default.json */; };
 		D9A88E48241C56490043F535 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9A88D92241C55040043F535 /* Media.xcassets */; };
 		D9B8372125D9158100066EB4 /* Date+fullYear.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B8372025D9158100066EB4 /* Date+fullYear.swift */; };
-		D9C9573F241C54CA00049AFE /* Payoneer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9C95735241C54CA00049AFE /* Payoneer.framework */; };
+		D9C9573F241C54CA00049AFE /* PayoneerCheckout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9C95735241C54CA00049AFE /* PayoneerCheckout.framework */; };
 		D9D9A35825B087860072EE2E /* UserAgentBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D9A35725B087860072EE2E /* UserAgentBuilder.swift */; };
 /* End PBXBuildFile section */
 
@@ -212,8 +212,9 @@
 
 /* Begin PBXFileReference section */
 		04081EF4F12285ABCF79A364 /* Pods-Payoneer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Payoneer.debug.xcconfig"; path = "Target Support Files/Pods-Payoneer/Pods-Payoneer.debug.xcconfig"; sourceTree = "<group>"; };
-		36B42BA5B51E0C0C5F1F7D54 /* Pods_Payoneer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Payoneer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1034F946707DF3385D21E705 /* Pods_PayoneerCheckout.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PayoneerCheckout.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AA5EF5833CCFE9360C69E54 /* Pods-Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.debug.xcconfig"; path = "Target Support Files/Pods-Tests/Pods-Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		8077BD8BBF00C6DDCD134FA2 /* Pods-PayoneerCheckout.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PayoneerCheckout.release.xcconfig"; path = "Target Support Files/Pods-PayoneerCheckout/Pods-PayoneerCheckout.release.xcconfig"; sourceTree = "<group>"; };
 		8AE876F2AB3608344995F5BC /* Pods-Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.release.xcconfig"; path = "Target Support Files/Pods-Tests/Pods-Tests.release.xcconfig"; sourceTree = "<group>"; };
 		BF36E8A2FE025E51C137C45E /* Pods-Payoneer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Payoneer.release.xcconfig"; path = "Target Support Files/Pods-Payoneer/Pods-Payoneer.release.xcconfig"; sourceTree = "<group>"; };
 		D918A3F1254F205C005BBA8B /* ListResult.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ListResult.json; sourceTree = "<group>"; };
@@ -406,10 +407,11 @@
 		D9A88D94241C55040043F535 /* groups.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = groups.json; sourceTree = "<group>"; };
 		D9A88D95241C55040043F535 /* validations-default.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "validations-default.json"; sourceTree = "<group>"; };
 		D9B8372025D9158100066EB4 /* Date+fullYear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+fullYear.swift"; sourceTree = "<group>"; };
-		D9C95735241C54CA00049AFE /* Payoneer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Payoneer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D9C95735241C54CA00049AFE /* PayoneerCheckout.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PayoneerCheckout.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9C9573E241C54CA00049AFE /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9D9A35725B087860072EE2E /* UserAgentBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAgentBuilder.swift; sourceTree = "<group>"; };
 		E918DF5930A18AE9887BB63A /* Pods_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC1CB91EC930B1CBA1398C25 /* Pods-PayoneerCheckout.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PayoneerCheckout.debug.xcconfig"; path = "Target Support Files/Pods-PayoneerCheckout/Pods-PayoneerCheckout.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -417,7 +419,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6D1C8B4799FCEA259FABC744 /* Pods_Payoneer.framework in Frameworks */,
+				D171739C205EC3E55EFF56B1 /* Pods_PayoneerCheckout.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,7 +427,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D9C9573F241C54CA00049AFE /* Payoneer.framework in Frameworks */,
+				D9C9573F241C54CA00049AFE /* PayoneerCheckout.framework in Frameworks */,
 				AA144B5943E1616B03AD583E /* Pods_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -437,7 +439,7 @@
 			isa = PBXGroup;
 			children = (
 				E918DF5930A18AE9887BB63A /* Pods_Tests.framework */,
-				36B42BA5B51E0C0C5F1F7D54 /* Pods_Payoneer.framework */,
+				1034F946707DF3385D21E705 /* Pods_PayoneerCheckout.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1117,7 +1119,7 @@
 		D9C95736241C54CA00049AFE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D9C95735241C54CA00049AFE /* Payoneer.framework */,
+				D9C95735241C54CA00049AFE /* PayoneerCheckout.framework */,
 				D9C9573E241C54CA00049AFE /* Tests.xctest */,
 			);
 			name = Products;
@@ -1130,6 +1132,8 @@
 				8AE876F2AB3608344995F5BC /* Pods-Tests.release.xcconfig */,
 				04081EF4F12285ABCF79A364 /* Pods-Payoneer.debug.xcconfig */,
 				BF36E8A2FE025E51C137C45E /* Pods-Payoneer.release.xcconfig */,
+				FC1CB91EC930B1CBA1398C25 /* Pods-PayoneerCheckout.debug.xcconfig */,
+				8077BD8BBF00C6DDCD134FA2 /* Pods-PayoneerCheckout.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -1147,9 +1151,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		D9C95734241C54CA00049AFE /* Payoneer */ = {
+		D9C95734241C54CA00049AFE /* PayoneerCheckout */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D9C95749241C54CA00049AFE /* Build configuration list for PBXNativeTarget "Payoneer" */;
+			buildConfigurationList = D9C95749241C54CA00049AFE /* Build configuration list for PBXNativeTarget "PayoneerCheckout" */;
 			buildPhases = (
 				557A62C15D120866EC5811EF /* [CP] Check Pods Manifest.lock */,
 				D9C95730241C54CA00049AFE /* Headers */,
@@ -1161,9 +1165,9 @@
 			);
 			dependencies = (
 			);
-			name = Payoneer;
+			name = PayoneerCheckout;
 			productName = Payoneer;
-			productReference = D9C95735241C54CA00049AFE /* Payoneer.framework */;
+			productReference = D9C95735241C54CA00049AFE /* PayoneerCheckout.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		D9C9573D241C54CA00049AFE /* Tests */ = {
@@ -1207,7 +1211,7 @@
 					};
 				};
 			};
-			buildConfigurationList = D9C9572F241C54CA00049AFE /* Build configuration list for PBXProject "Payoneer" */;
+			buildConfigurationList = D9C9572F241C54CA00049AFE /* Build configuration list for PBXProject "PayoneerCheckout" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -1220,7 +1224,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D9C95734241C54CA00049AFE /* Payoneer */,
+				D9C95734241C54CA00049AFE /* PayoneerCheckout */,
 				D9C9573D241C54CA00049AFE /* Tests */,
 			);
 		};
@@ -1284,7 +1288,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Payoneer-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-PayoneerCheckout-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1515,7 +1519,7 @@
 /* Begin PBXTargetDependency section */
 		D9C95741241C54CA00049AFE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D9C95734241C54CA00049AFE /* Payoneer */;
+			target = D9C95734241C54CA00049AFE /* PayoneerCheckout */;
 			targetProxy = D9C95740241C54CA00049AFE /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1643,7 +1647,7 @@
 		};
 		D9C9574A241C54CA00049AFE /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 04081EF4F12285ABCF79A364 /* Pods-Payoneer.debug.xcconfig */;
+			baseConfigurationReference = FC1CB91EC930B1CBA1398C25 /* Pods-PayoneerCheckout.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Manual;
@@ -1671,7 +1675,7 @@
 		};
 		D9C9574B241C54CA00049AFE /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BF36E8A2FE025E51C137C45E /* Pods-Payoneer.release.xcconfig */;
+			baseConfigurationReference = 8077BD8BBF00C6DDCD134FA2 /* Pods-PayoneerCheckout.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Manual;
@@ -1742,7 +1746,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D9C9572F241C54CA00049AFE /* Build configuration list for PBXProject "Payoneer" */ = {
+		D9C9572F241C54CA00049AFE /* Build configuration list for PBXProject "PayoneerCheckout" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D9C95747241C54CA00049AFE /* Debug */,
@@ -1751,7 +1755,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D9C95749241C54CA00049AFE /* Build configuration list for PBXNativeTarget "Payoneer" */ = {
+		D9C95749241C54CA00049AFE /* Build configuration list for PBXNativeTarget "PayoneerCheckout" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D9C9574A241C54CA00049AFE /* Debug */,
