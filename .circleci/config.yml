@@ -41,16 +41,16 @@ jobs:
           paths:
             - vendor/bundle
       - restore_cache:
-          key: example-cocoapods-{{ checksum "Example-sdk/Podfile.lock" }}
+          key: example-cocoapods-{{ checksum "ExampleCheckout/Podfile.lock" }}
       - run:
           name: Fastlane
           command: bundle exec fastlane $FASTLANE_LANE
       - store_test_results:
           path: output/scan
       - save_cache:
-          key: example-cocoapods-{{ checksum "Example-sdk/Podfile.lock" }}
+          key: example-cocoapods-{{ checksum "ExampleCheckout/Podfile.lock" }}
           paths:
-            - Example-sdk/Pods
+            - ExampleCheckout/Pods
       - persist_to_workspace:
           root: /tmp/workspace
           paths:
@@ -74,19 +74,19 @@ jobs:
           paths:
             - vendor/bundle
       - restore_cache:
-          key: example-cocoapods-{{ checksum "Example-sdk/Podfile.lock" }}
+          key: example-cocoapods-{{ checksum "ExampleCheckout/Podfile.lock" }}
       - run:
           name: Inject env variables
           command: |
-            echo "MERCHANT_PAYMENT_TOKEN=$MERCHANT_PAYMENT_TOKEN" > Example-sdk/UITests/Assets/Config.xcconfig
-            echo "MERCHANT_CODE=$MERCHANT_CODE" >> Example-sdk/UITests/Assets/Config.xcconfig
+            echo "MERCHANT_PAYMENT_TOKEN=$MERCHANT_PAYMENT_TOKEN" > ExampleCheckout/UITests/Assets/Config.xcconfig
+            echo "MERCHANT_CODE=$MERCHANT_CODE" >> ExampleCheckout/UITests/Assets/Config.xcconfig
       - run:
           name: Fastlane
           command: bundle exec fastlane $FASTLANE_LANE
       - save_cache:
-          key: example-cocoapods-{{ checksum "Example-sdk/Podfile.lock" }}
+          key: example-cocoapods-{{ checksum "ExampleCheckout/Podfile.lock" }}
           paths:
-            - Example-sdk/Pods
+            - ExampleCheckout/Pods
       - store_test_results:
           path: output/scan
       - run:

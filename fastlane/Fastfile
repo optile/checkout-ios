@@ -18,18 +18,18 @@ platform :ios do
 
   desc "Build example app"
   lane :build_example do
-    filename = "Example-sdk-" + ENV["CIRCLE_BRANCH"].to_s + ".ipa"
-    example_xcodeproj = "Example-sdk/Example-sdk.xcodeproj"
-    cocoapods(podfile: "./Example-sdk/Podfile")
+    filename = "ExampleCheckout-" + ENV["CIRCLE_BRANCH"].to_s + ".ipa"
+    example_xcodeproj = "ExampleCheckout/ExampleCheckout.xcodeproj"
+    cocoapods(podfile: "./ExampleCheckout/Podfile")
     increment_build_number(
       build_number: ENV["CIRCLE_BUILD_NUM"],
       xcodeproj: example_xcodeproj
     )
     match(type: "appstore", readonly: is_ci)
     build_ios_app(
-      scheme: "Example-sdk",
+      scheme: "ExampleCheckout",
       configuration: "Release",
-      workspace: "./Example-sdk/Example-sdk.xcworkspace",
+      workspace: "./ExampleCheckout/ExampleCheckout.xcworkspace",
       output_directory: "/tmp/workspace/output",
       output_name: filename,
       derived_data_path: "/tmp/workspace/derived_data"
@@ -38,7 +38,7 @@ platform :ios do
 
   desc "Upload binary to Browserstack"
   lane :browserstack do
-    example_ipa = "/tmp/workspace/output/Example-sdk-" + ENV["CIRCLE_BRANCH"].to_s + ".ipa"
+    example_ipa = "/tmp/workspace/output/ExampleCheckout-" + ENV["CIRCLE_BRANCH"].to_s + ".ipa"
     upload_to_browserstack_app_live(
       browserstack_username: ENV["BROWSERSTACK_USERNAME"],
       browserstack_access_key: ENV["BROWSERSTACK_ACCESS_KEY"],
@@ -48,11 +48,11 @@ platform :ios do
 
   desc "Run UI tests"
   lane :ui_test do
-    cocoapods(podfile: "./Example-sdk/Podfile")
+    cocoapods(podfile: "./ExampleCheckout/Podfile")
     run_tests(
-      scheme: "Example-sdk",
+      scheme: "ExampleCheckout",
       derived_data_path: "/tmp/workspace/derived_data",
-      workspace: "Example-sdk/Example-sdk.xcworkspace",
+      workspace: "ExampleCheckout/ExampleCheckout.xcworkspace",
       devices: ["iPhone 12"],
       output_directory: "./output/scan",
       output_types: "junit",
@@ -63,7 +63,7 @@ platform :ios do
 
   desc "Submit to TestFlight"
   lane :submit_to_testflight do
-    example_ipa = "/tmp/workspace/output/Example-sdk-" + ENV["CIRCLE_BRANCH"].to_s + ".ipa"
+    example_ipa = "/tmp/workspace/output/ExampleCheckout-" + ENV["CIRCLE_BRANCH"].to_s + ".ipa"
     certificate_json = "certificates/itunes_connect/fastlane_api_key.json"
     upload_to_testflight(
       api_key_path: certificate_json,
