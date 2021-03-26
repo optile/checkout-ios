@@ -93,7 +93,7 @@ platform :ios do
     version_number = get_version_number()
     add_git_tag(tag: version_number)
     push_git_tags()
-
+    
     pod_lib_lint(allow_warnings: true)
     pod_push(allow_warnings: true)
   end
