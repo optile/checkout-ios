@@ -116,6 +116,30 @@ jobs:
           at: /tmp/workspace
       - run: bundle exec fastlane browserstack
 
+  deploy:
+    macos:
+      xcode: "12.1.0"
+    environment:
+      HOMEBREW_NO_AUTO_UPDATE: 1
+    shell: /bin/bash --login -o pipefail
+    steps:
+      - checkout
+      - restore_cache:
+          key: gems-{{ checksum "Gemfile.lock" }}
+      - run: bundle check || bundle install --path vendor/bundle
+      - save_cache:
+          key: gems-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+      - run:
+          name: Deploy
+          command: bundle exec fastlane deploy
+      - run: 
+          name: Increase version number in develop branch
+          command: |
+            git checkout develop
+            bundle exec fastlane bump_version_number
+
   submit_to_testflight:
     macos:
       xcode: "12.1.0"
@@ -137,6 +161,7 @@ jobs:
       - run: bundle exec fastlane submit_to_testflight
 
 workflows:
+  # Build workflow
   build:
     jobs:
       - unit_test
@@ -158,3 +183,11 @@ workflows:
             branches:
               only:
                 - develop
+  # Deploy workflow
+  deploy:
+    jobs:
+      - deploy:
+          filters:
+            branches:
+              only:
+                - master
