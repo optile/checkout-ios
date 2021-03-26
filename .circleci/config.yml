@@ -18,13 +18,13 @@ jobs:
           key: framework-cocoapods-{{ checksum "Podfile.lock" }}
       - run:
           name: Fastlane
-          command: bundle exec fastlane $FASTLANE_LANE
-      - store_test_results:
-          path: output/scan
-      - save_cache:
-          key: framework-cocoapods-{{ checksum "Podfile.lock" }}
-          paths:
-            - Pods
+          command: pod trunk me
+      # - store_test_results:
+      #     path: output/scan
+      # - save_cache:
+      #     key: framework-cocoapods-{{ checksum "Podfile.lock" }}
+      #     paths:
+      #       - Pods
 
   build_example:
     macos:
@@ -165,24 +165,24 @@ workflows:
   build:
     jobs:
       - unit_test
-      - build_example
-      - ui_test:
-          requires:
-            - build_example
-      - browserstack:
-          requires:
-            - build_example
-          filters:
-            branches:
-              ignore:
-                - develop
-      - submit_to_testflight:
-          requires: 
-            - build_example
-          filters:
-            branches:
-              only:
-                - develop
+      # - build_example
+      # - ui_test:
+      #     requires:
+      #       - build_example
+      # - browserstack:
+      #     requires:
+      #       - build_example
+      #     filters:
+      #       branches:
+      #         ignore:
+      #           - develop
+      # - submit_to_testflight:
+      #     requires: 
+      #       - build_example
+      #     filters:
+      #       branches:
+      #         only:
+      #           - develop
   # Deploy workflow
   deploy:
     jobs:
