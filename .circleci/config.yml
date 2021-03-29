@@ -31,10 +31,6 @@ jobs:
       xcode: 12.1.0
     environment:
       FASTLANE_LANE: build_example
-    parameters:
-      match_type:
-        # type argument for fastlane match
-        type: string
     steps:
       - checkout
       - restore_cache:
@@ -48,7 +44,7 @@ jobs:
           key: example-cocoapods-{{ checksum "ExampleCheckout/Podfile.lock" }}
       - run:
           name: Fastlane
-          command: bundle exec fastlane $FASTLANE_LANE match_type:<< parameters.match_type >>
+          command: bundle exec fastlane $FASTLANE_LANE
       - store_test_results:
           path: output/scan
       - save_cache:
@@ -175,7 +171,6 @@ workflows:
                 - master
                 - develop
       - build_example:
-          match_type: adhoc
           filters:
             branches:
               ignore:
@@ -189,20 +184,19 @@ workflows:
               ignore:
                 - master
                 - develop
-      - browserstack:
-          requires:
-            - build_example
-          filters:
-            branches:
-              ignore:
-                - develop
-                - master
+      # - browserstack:
+      #     requires:
+      #       - build_example
+      #     filters:
+      #       branches:
+      #         ignore:
+      #           - develop
+      #           - master
 
   # Submit to TestFlight, only for commits in develop branch
   testflight:
     jobs:
       - build_example:
-          match_type: appstore
           filters:
             branches:
               only:

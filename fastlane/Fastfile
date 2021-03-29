@@ -20,19 +20,16 @@ platform :ios do
 
   desc "Build example app"
   # Options: `type` (appstore, adhoc, development)
-  lane :build_example do |options|
+  lane :build_example do
     filename = "ExampleCheckout-" + ENV["CIRCLE_BRANCH"].to_s + ".ipa"
     cocoapods(podfile: "./ExampleCheckout/Podfile")
     increment_build_number(
       build_number: ENV["CIRCLE_BUILD_NUM"],
       xcodeproj: example_xcodeproj
     )
-    match(type: options[:match_type], readonly: is_ci)
-    profile_uuid = sigh
+    match(type: "appstore", readonly: is_ci)
     build_ios_app(
       silent: true,
-      xcargs: "PROVISIONING_PROFILE_SPECIFIER='#{profile_uuid}'",
-      export_method: "ad-hoc",
       scheme: "ExampleCheckout",
       workspace: "./ExampleCheckout/ExampleCheckout.xcworkspace",
       output_directory: "/tmp/workspace/output",
