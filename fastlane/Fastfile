@@ -19,17 +19,19 @@ platform :ios do
   end
 
   desc "Build example app"
-  lane :build_example do
+  # Options: `type` (appstore, adhoc, development)
+  lane :build_example do |options|
     filename = "ExampleCheckout-" + ENV["CIRCLE_BRANCH"].to_s + ".ipa"
     cocoapods(podfile: "./ExampleCheckout/Podfile")
     increment_build_number(
       build_number: ENV["CIRCLE_BUILD_NUM"],
       xcodeproj: example_xcodeproj
     )
-    match(type: "appstore", readonly: is_ci)
+    match(type: options[:match_type], readonly: is_ci)
     build_ios_app(
+      silent: true,
+      export_method: "ad-hoc",
       scheme: "ExampleCheckout",
-      configuration: "Release",
       workspace: "./ExampleCheckout/ExampleCheckout.xcworkspace",
       output_directory: "/tmp/workspace/output",
       output_name: filename,
