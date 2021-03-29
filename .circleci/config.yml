@@ -161,29 +161,47 @@ jobs:
       - run: bundle exec fastlane submit_to_testflight
 
 workflows:
-  # Build workflow
+  # Build workflow, only for pull requests
   build:
     jobs:
-      - unit_test
-      - build_example
+      - unit_test:
+          filters:
+            branches:
+              only: /PCX-.*/
+      - build_example:
+          filters:
+            branches:
+              only: /PCX-.*/
       - ui_test:
           requires:
             - build_example
+          filters:
+            branches:
+              only: /PCX-.*/
       - browserstack:
           requires:
             - build_example
           filters:
             branches:
-              ignore:
-                - develop
-      - submit_to_testflight:
-          requires: 
-            - build_example
-          filters:
-            branches:
-              only:
-                - develop
-  # Deploy workflow
+              only: /PCX-.*/
+
+  # Submit to TestFlight, only for commits in develop branch
+  # testflight:
+  #   jobs:
+  #     - build_example:
+  #         filters:
+  #           branches:
+  #             only:
+  #               - develop
+  #     - submit_to_testflight:
+  #         requires: 
+  #           - build_example
+  #         filters:
+  #           branches:
+  #             only:
+  #               - develop
+
+  # Deploy to CocoaPods
   deploy:
     jobs:
       - deploy:
