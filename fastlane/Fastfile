@@ -27,8 +27,7 @@ platform :ios do
       build_number: ENV["CIRCLE_BUILD_NUM"],
       xcodeproj: example_xcodeproj
     )
-    match(type: options[:match_type], readonly: is_ci)
-    update_project_team(path: "./ExampleCheckout/ExampleCheckout.xcodeproj")
+    match(type: options[:match_type], readonly: is_ci, profile_name: "com.payoneer.checkout.examplecheckout")
     build_ios_app(
       silent: true,
       export_method: "ad-hoc",
