@@ -28,6 +28,7 @@ platform :ios do
       xcodeproj: example_xcodeproj
     )
     match(type: options[:match_type], readonly: is_ci)
+    update_project_team(path: "./ExampleCheckout/ExampleCheckout.xcodeproj")
     build_ios_app(
       silent: true,
       export_method: "ad-hoc",
