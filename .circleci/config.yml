@@ -162,7 +162,7 @@ jobs:
 
 workflows:
   # Build workflow, only for pull requests
-  build:
+  test:
     jobs:
       - unit_test:
           filters:
