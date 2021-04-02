@@ -28,6 +28,8 @@ class CardsTests: NetworksTests {
         collectionViewsQuery.buttons["Pay"].tap()
 
         // Check result
+        app.alerts.firstMatch.waitForExistence(timeout: 10)
+
         let interactionResult = app.alerts.firstMatch.staticTexts.element(boundBy: 1).label
         let expectedResult = "ResultInfo: Approved Interaction code: PROCEED Interaction reason: OK Error: n/a"
         XCTAssertEqual(expectedResult, interactionResult)

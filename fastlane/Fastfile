@@ -26,10 +26,10 @@ platform :ios do
       build_number: ENV["CIRCLE_BUILD_NUM"],
       xcodeproj: example_xcodeproj
     )
-    match(type: "appstore", readonly: is_ci)
+    match(type: "adhoc", readonly: is_ci)
     build_ios_app(
+      silent: true,
       scheme: "ExampleCheckout",
-      configuration: "Release",
       workspace: "./ExampleCheckout/ExampleCheckout.xcworkspace",
       output_directory: "/tmp/workspace/output",
       output_name: filename,

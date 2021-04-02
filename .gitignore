@@ -33,3 +33,7 @@ Pods/
 # Fastlane
 .env.*
 output/
+
+# Artifacts
+vendor/
+.bundle/
