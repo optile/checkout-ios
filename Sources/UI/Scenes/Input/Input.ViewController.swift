@@ -30,7 +30,7 @@ extension Input {
             self.networks = smartSwitch.networks
             self.header = header
             self.smartSwitch = smartSwitch
-            self.collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 0), collectionViewLayout: tableController.flowLayout)
+            self.collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 0), collectionViewLayout: tableController.layoutController.flowLayout)
 
             super.init(nibName: nil, bundle: nil)
 
