@@ -23,6 +23,8 @@ extension Input.Table {
         weak var collectionView: UICollectionView!
         let flowLayout: UICollectionViewFlowLayout
         weak var inputTableControllerDelegate: InputTableControllerDelegate?
+        
+        var maxCellHeight: CGFloat = 0
 
         internal init(dataSource: Input.Table.DataSource, collectionView: UICollectionView? = nil) {
             self.dataSource = dataSource
@@ -48,16 +50,52 @@ extension Input.Table.LayoutController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return .init(top: .sectionSpacing / 2, left: collectionView.layoutMargins.left, bottom: .sectionSpacing / 2, right: collectionView.layoutMargins.right)
-
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        var currentCellSize = size(forItemAt: indexPath, in: collectionView)
+        if !isHalfWidthCell(at: indexPath) {
+            return currentCellSize
+        }
+
+        // Make equal heights for half-width rows
+
+        var maxHeight: CGFloat = 0
+
+        let models = dataSource.model[indexPath.section]
+
+        // Size for the next row
+        let nextIndexPath = indexPath.nextRow
+        if models.isElementExists(at: nextIndexPath.row), isHalfWidthCell(at: nextIndexPath) {
+            let cellSize = size(forItemAt: nextIndexPath, in: collectionView)
+            if cellSize.height > maxHeight {
+                maxHeight = cellSize.height
+            }
+        }
+
+        // Size for the previous row
+        let previousIndexPath = indexPath.previousRow
+        if models.isElementExists(at: previousIndexPath.row), isHalfWidthCell(at: previousIndexPath) {
+            let cellSize = size(forItemAt: previousIndexPath, in: collectionView)
+            if cellSize.height > maxHeight {
+                maxHeight = cellSize.height
+            }
+        }
+
+        if currentCellSize.height < maxHeight {
+            currentCellSize.height = maxHeight
+        }
+
+        return currentCellSize
+    }
+
+    private func size(forItemAt indexPath: IndexPath, in collectionView: UICollectionView) -> CGSize {
         let model = dataSource.model[indexPath.section][indexPath.row]
 
         let availableWidth = collectionView.bounds.inset(by: collectionView.adjustedContentInset).width
         let cellWidth: CGFloat
 
-        if isHalfWidthCell(at: indexPath, collectionView: collectionView) {
+        if isHalfWidthCell(at: indexPath) {
             // -1 was added to compatability with previous iOS versions, summary value for 2 cells should be less than available width, not equal
             cellWidth = (availableWidth - collectionView.layoutMargins.left - collectionView.layoutMargins.right - .interitemSpacing) / 2 - 1
         } else {
@@ -75,7 +113,7 @@ extension Input.Table.LayoutController: UICollectionViewDelegateFlowLayout {
     }
 
     /// Half-width cells are expiry date and verification code cells following each other
-    private func isHalfWidthCell(at indexPath: IndexPath, collectionView: UICollectionView) -> Bool {
+    private func isHalfWidthCell(at indexPath: IndexPath) -> Bool {
         var isExpiryDatePresent = false
         var isVerificationCodePresent = false
         var halfWidthItemsPosition = [Int]()
@@ -104,5 +142,25 @@ extension Input.Table.LayoutController: UICollectionViewDelegateFlowLayout {
         guard (halfWidthItemsPosition[1] - halfWidthItemsPosition[0] == 1) else { return false }
 
         return true
+    }
+}
+
+private extension BidirectionalCollection {
+    func isElementExists(at index: Index) -> Bool {
+        return indices.contains(index)
+    }
+}
+
+private extension IndexPath {
+    /// Returns the next row
+    /// - Warning: return doesn't guarantee that row exists, you should check it before accessing it.
+    var nextRow: IndexPath {
+        IndexPath(row: row + 1, section: section)
+    }
+
+    /// Returns the previous row
+    /// - Warning: return doesn't guarantee that row exists, you should check it before accessing it.
+    var previousRow: IndexPath {
+        IndexPath(row: row - 1, section: section)
     }
 }
