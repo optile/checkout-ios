@@ -28,7 +28,7 @@ class NetworksTests: XCTestCase {
             tablesQuery.buttons["Clear text"].tap()
         }
         tablesQuery.textFields.firstMatch.typeText(sessionURL.absoluteString)
-        tablesQuery.staticTexts["Send request"].tap()
+        tablesQuery.buttons["Send request"].tap()
     }
 
     private func createPaymentSession() throws -> URL {
