@@ -24,8 +24,6 @@ extension Input.Table {
         let flowLayout: UICollectionViewFlowLayout
         weak var inputTableControllerDelegate: InputTableControllerDelegate?
         
-        var maxCellHeight: CGFloat = 0
-
         internal init(dataSource: Input.Table.DataSource, collectionView: UICollectionView? = nil) {
             self.dataSource = dataSource
             self.collectionView = collectionView
