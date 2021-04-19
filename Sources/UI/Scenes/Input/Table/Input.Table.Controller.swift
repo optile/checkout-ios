@@ -12,12 +12,6 @@ import UIKit
 private extension CGFloat {
     /// Set to size of most used cell (`TextFieldViewCell`), if cell would be changed - don't forget to change that value.
     static var estimatedCellHeight: CGFloat { return 87 }
-
-    /// Spacing between rows in section
-    static var rowLineSpacing: CGFloat { return 8 }
-
-    /// Spacing between sections
-    static var sectionSpacing: CGFloat { return 24 }
 }
 
 // MARK: - InputTableControllerDelegate
@@ -32,8 +26,8 @@ protocol InputTableControllerDelegate: class {
 
 extension Input.Table {
     class Controller: NSObject {
-        let flowLayout = UICollectionViewFlowLayout()
         let dataSource = DataSource()
+        let layoutController: LayoutController
         let validator: Validator
 
         // Externally set
@@ -41,9 +35,14 @@ extension Input.Table {
         weak var collectionView: UICollectionView! {
             didSet {
                 validator.collectionView = collectionView
+                layoutController.collectionView = collectionView
             }
         }
-        weak var delegate: InputTableControllerDelegate?
+
+        weak var delegate: InputTableControllerDelegate? {
+            didSet { layoutController.inputTableControllerDelegate = delegate }
+        }
+        
         weak var cvvHintDelegate: CVVTextFieldViewCellDelegate? {
             didSet {
                 dataSource.cvvHintDelegate = cvvHintDelegate
@@ -52,6 +51,8 @@ extension Input.Table {
 
         override init() {
             self.validator = Validator(dataSource: dataSource)
+            self.layoutController = LayoutController(dataSource: dataSource)
+
             super.init()
             dataSource.inputCellDelegate = self
         }
@@ -75,11 +76,8 @@ extension Input.Table {
             registerCells()
 
             collectionView.bounces = true
-
-            configure(layout: flowLayout)
-
             collectionView.dataSource = dataSource
-            collectionView.delegate = self
+            collectionView.delegate = layoutController
 
             collectionView.contentInsetAdjustmentBehavior = .always
 
@@ -116,10 +114,6 @@ extension Input.Table {
             })
         }
 
-        private func configure(layout: UICollectionViewFlowLayout) {
-            layout.minimumLineSpacing = .rowLineSpacing
-        }
-
         private func registerCells() {
             // Input field cells
             collectionView.register(TextFieldViewCell.self)
@@ -152,37 +146,6 @@ extension Input.Table.Controller {
         }
 
         return false
-    }
-}
-
-extension Input.Table.Controller: UICollectionViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        delegate?.scrollViewWillBeginDragging(scrollView)
-    }
-}
-
-extension Input.Table.Controller: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return .zero
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return .init(top: .sectionSpacing / 2, left: 0, bottom: .sectionSpacing / 2, right: 0)
-
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let model = dataSource.model[indexPath.section][indexPath.row]
-
-        let availableWidth = collectionView.bounds.inset(by: collectionView.adjustedContentInset).width - collectionView.layoutMargins.left - collectionView.layoutMargins.right
-
-        let frame = CGRect(origin: .zero, size: CGSize(width: availableWidth, height: UIView.layoutFittingCompressedSize.height))
-        let cell = model.cellType.init(frame: frame)
-        try? model.configure(cell: cell)
-
-        let autoLayoutSize = cell.systemLayoutSizeFitting(frame.size, withHorizontalFittingPriority: .required, verticalFittingPriority: .defaultLow)
-
-        return autoLayoutSize
     }
 }
 

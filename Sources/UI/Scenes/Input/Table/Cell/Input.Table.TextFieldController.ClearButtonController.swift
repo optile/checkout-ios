@@ -29,6 +29,7 @@ extension Input.Table.TextFieldController.ClearButtonController {
 
         // Assign custom clear button as a trailing view
         textField.rightView = button
+        button.sizeToFit()
 
         // Hide default clear button
         textField.clearButton.isHidden = true
