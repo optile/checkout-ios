@@ -27,10 +27,9 @@ extension Input.Table {
 
             // Add the text field to a view
             contentView.addSubview(textField)
-
             textField.translatesAutoresizingMaskIntoConstraints = false
 
-            let textFieldBottomAnchor = contentView.bottomAnchor.constraint(equalTo: textField.bottomAnchor)
+            let textFieldBottomAnchor = textField.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor)
             textFieldBottomAnchor.priority = .defaultHigh
 
             NSLayoutConstraint.activate([
