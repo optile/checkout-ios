@@ -50,19 +50,33 @@ extension Input.Table.Validator {
 
         var isValid = true
 
-        for section in dataSource.model {
-            for row in section {
+        for (sectionNumber, section) in dataSource.model.enumerated() {
+            for (rowNumber, row) in section.enumerated() {
+                // Update validation model
                 guard let validatable = row as? Validatable else { continue }
                 validatable.validateAndSaveResult(option: option)
 
                 if validatable.validationErrorText != nil {
                     isValid = false
                 }
+
+                // Update cells
+                // We update each cell separately, because if we just use `.reloadData()` something goes wrong with Material TextFields lessOrEqual constraint and error text fields will be positioned incorrectly
+                let indexPath = IndexPath(row: rowNumber, section: sectionNumber)
+                guard let cell = collectionView.cellForItem(at: indexPath) else { continue }
+                let cellRepresentable = dataSource.model[indexPath.section][indexPath.row]
+
+                do {
+                    try cellRepresentable.configure(cell: cell)
+                } catch {
+                    log(error)
+                }
             }
         }
 
-        collectionView.reloadData()
-        isSingleCellValidationEnabled = true
+        collectionView.collectionViewLayout.invalidateLayout()
+
+        self.isSingleCellValidationEnabled = true
 
         return isValid
     }
