@@ -13,16 +13,13 @@ import UIKit
     weak var errorAlertController: UIAlertController?
 
     let sessionService: PaymentSessionService
-    fileprivate(set) var tableController: List.Table.Controller?
+
     let sharedTranslationProvider: SharedTranslationProvider
     fileprivate let router: List.Router
 
     public weak var delegate: PaymentDelegate?
 
-    /// TODO: Migrate to separate State manager
-    fileprivate var viewState: Load<PaymentSession, UIAlertController.AlertError> = .loading {
-        didSet { changeState(to: viewState) }
-    }
+    let stateManager = StateManager()
 
     lazy private(set) var slideInPresentationManager = SlideInPresentationManager()
 
@@ -41,6 +38,7 @@ import UIKit
 
         super.init(nibName: nil, bundle: nil)
 
+        stateManager.vc = self
         sessionService.delegate = self
         router.rootViewController = self
     }
@@ -73,7 +71,7 @@ extension PaymentListViewController {
 
 extension PaymentListViewController {
     func loadPaymentSession() {
-        viewState = .loading
+        stateManager.viewState = .loading
         sessionService.loadPaymentSession()
     }
 
@@ -102,74 +100,11 @@ extension PaymentListViewController {
     }
 }
 
-// MARK: - View state management
+// MARK: - UI Management
 
 extension PaymentListViewController {
-    fileprivate func changeState(to state: Load<PaymentSession, UIAlertController.AlertError>) {
-        switch state {
-        case .success(let session):
-            do {
-                activityIndicator(isActive: false)
-                try showPaymentMethods(for: session)
-                dismissAlertController()
-            } catch {
-                let errorInfo = CustomErrorInfo.createClientSideError(from: error)
-                dismiss(with: .failure(errorInfo))
-            }
-        case .loading:
-            do {
-                activityIndicator(isActive: true)
-                try showPaymentMethods(for: nil)
-                dismissAlertController()
-            } catch {
-                let errorInfo = CustomErrorInfo.createClientSideError(from: error)
-                dismiss(with: .failure(errorInfo))
-           }
-        case .failure(let error):
-            activityIndicator(isActive: true)
-            try? showPaymentMethods(for: nil)
-            present(error: error)
-        }
-    }
-
-    private func showPaymentMethods(for session: PaymentSession?) throws {
-        guard let session = session else {
-            // Hide payment methods
-            methodsTableView?.removeFromSuperview()
-            methodsTableView = nil
-            tableController = nil
-
-            return
-        }
-
-        // Show payment methods
-        let methodsTableView = addMethodsTableView(to: view)
-        self.methodsTableView = methodsTableView
-
-        let tableController = try List.Table.Controller(session: session, translationProvider: sharedTranslationProvider)
-        tableController.tableView = methodsTableView
-        tableController.delegate = self
-        self.tableController = tableController
-
-        methodsTableView.dataSource = tableController.dataSource
-        methodsTableView.delegate = tableController
-        methodsTableView.prefetchDataSource = tableController
-
-        methodsTableView.invalidateIntrinsicContentSize()
-    }
-
-    private func activityIndicator(isActive: Bool) {
-        if isActive == false {
-            // Hide activity indicator
-            activityIndicator?.stopAnimating()
-            activityIndicator?.removeFromSuperview()
-            activityIndicator = nil
-            return
-        }
-
-        if self.activityIndicator != nil { return }
-
-        // Show activity indicator
+    /// Add and activate an activity indicator
+    func addActivityIndicator() {
         let activityIndicator = UIActivityIndicatorView(style: .gray)
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(activityIndicator)
@@ -181,11 +116,13 @@ extension PaymentListViewController {
         activityIndicator.startAnimating()
     }
 
-    private func dismissAlertController() {
-        errorAlertController?.dismiss(animated: true, completion: nil)
+    func removeActivityIndicator() {
+        activityIndicator?.stopAnimating()
+        activityIndicator?.removeFromSuperview()
+        activityIndicator = nil
     }
 
-    private func present(error: UIAlertController.AlertError) {
+    func present(error: UIAlertController.AlertError) {
         let alertController = error.createAlertController(translator: sharedTranslationProvider)
         present(alertController, animated: true, completion: nil)
     }
@@ -212,7 +149,9 @@ extension PaymentListViewController {
         return scrollView
     }
 
-    fileprivate func addMethodsTableView(to superview: UIView) -> UITableView {
+    @discardableResult
+    /// Add methods UITableView to view and assign it to `self.methodsTableView`
+    func addMethodsTableView() -> UITableView {
         let methodsTableView = List.Table.TableView(frame: CGRect.zero, style: .grouped)
         methodsTableView.separatorStyle = .none
         methodsTableView.backgroundColor = .clear
@@ -222,19 +161,21 @@ extension PaymentListViewController {
         methodsTableView.translatesAutoresizingMaskIntoConstraints = false
         methodsTableView.register(List.Table.SingleLabelCell.self)
         methodsTableView.register(List.Table.DetailedLabelCell.self)
-        superview.addSubview(methodsTableView)
+        view.addSubview(methodsTableView)
 
         let topPadding: CGFloat = 30
 
         NSLayoutConstraint.activate([
-            methodsTableView.leadingAnchor.constraint(equalTo: superview.leadingAnchor),
-            methodsTableView.bottomAnchor.constraint(equalTo: superview.bottomAnchor),
-            methodsTableView.topAnchor.constraint(equalTo: superview.topAnchor, constant: topPadding)
+            methodsTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            methodsTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            methodsTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: topPadding)
         ])
 
-        let trailingConstraint = methodsTableView.trailingAnchor.constraint(equalTo: superview.trailingAnchor)
+        let trailingConstraint = methodsTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         trailingConstraint.priority = .defaultHigh
         trailingConstraint.isActive = true
+
+        self.methodsTableView = methodsTableView
 
         return methodsTableView
     }
@@ -259,15 +200,15 @@ extension PaymentListViewController: PaymentSessionServiceDelegate {
                         dismiss(.failure(errorInfo))
                     }
                 ]
-                viewState = .failure(alert)
+                stateManager.viewState = .failure(alert)
             // In case of other errors just route the error to a merchant
             } else {
                 dismiss(with: .failure(errorInfo))
             }
         case .loading:
-            viewState = .loading
+            stateManager.viewState = .loading
         case .success(let session):
-            viewState = .success(session)
+            stateManager.viewState = .success(session)
         }
     }
 
@@ -306,7 +247,7 @@ extension PaymentListViewController: NetworkOperationResultHandler {
                 self.loadPaymentSession()
             }]
 
-            viewState = .failure(alertError)
+            stateManager.viewState = .failure(alertError)
         case .RELOAD:
             // Reload the LIST object and re-render the payment method list accordingly, don't show error alert.
             loadPaymentSession()
@@ -316,7 +257,7 @@ extension PaymentListViewController: NetworkOperationResultHandler {
     }
 
     /// Dismiss view controller and send result to a merchant
-    private func dismiss(with result: Result<OperationResult, ErrorInfo>) {
+    func dismiss(with result: Result<OperationResult, ErrorInfo>) {
         let paymentResult = PaymentResult(operationResult: result)
         delegate?.paymentService(didReceivePaymentResult: paymentResult, viewController: self)
     }

@@ -199,6 +199,7 @@
 		D9C9573F241C54CA00049AFE /* PayoneerCheckout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9C95735241C54CA00049AFE /* PayoneerCheckout.framework */; };
 		D9D9A35825B087860072EE2E /* UserAgentBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D9A35725B087860072EE2E /* UserAgentBuilder.swift */; };
 		D9F00EA02625AF6D00C5A823 /* Input.Table.LayoutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F00E9F2625AF6D00C5A823 /* Input.Table.LayoutController.swift */; };
+		E2F3031E2635F8A100A38A97 /* PaymentListViewController.StateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F3031D2635F8A100A38A97 /* PaymentListViewController.StateManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -412,6 +413,7 @@
 		D9C9573E241C54CA00049AFE /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9D9A35725B087860072EE2E /* UserAgentBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAgentBuilder.swift; sourceTree = "<group>"; };
 		D9F00E9F2625AF6D00C5A823 /* Input.Table.LayoutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Input.Table.LayoutController.swift; sourceTree = "<group>"; };
+		E2F3031D2635F8A100A38A97 /* PaymentListViewController.StateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentListViewController.StateManager.swift; sourceTree = "<group>"; };
 		E918DF5930A18AE9887BB63A /* Pods_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC1CB91EC930B1CBA1398C25 /* Pods-PayoneerCheckout.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PayoneerCheckout.debug.xcconfig"; path = "Target Support Files/Pods-PayoneerCheckout/Pods-PayoneerCheckout.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -670,6 +672,7 @@
 			children = (
 				D96A4ECF257D96EE00E74C8C /* List.Router.swift */,
 				D96A4ED0257D96EE00E74C8C /* PaymentListViewController.swift */,
+				E2F3031D2635F8A100A38A97 /* PaymentListViewController.StateManager.swift */,
 				D96A4ED1257D96EE00E74C8C /* Protocol */,
 				D96A4ED3257D96EE00E74C8C /* List.swift */,
 				D96A4ED4257D96EE00E74C8C /* Table */,
@@ -1453,6 +1456,7 @@
 				D96A4F5B257D96EF00E74C8C /* Input.Table.CheckboxViewCell.swift in Sources */,
 				D96A4FCF257D96EF00E74C8C /* ExtraElement.swift in Sources */,
 				D96A4FC4257D96EF00E74C8C /* Parameter.swift in Sources */,
+				E2F3031E2635F8A100A38A97 /* PaymentListViewController.StateManager.swift in Sources */,
 				D96A4FB9257D96EF00E74C8C /* TranslatedModel.swift in Sources */,
 				D96A4F7E257D96EF00E74C8C /* SelectInputField.swift in Sources */,
 				D96A4F83257D96EF00E74C8C /* CellRepresentable.swift in Sources */,
