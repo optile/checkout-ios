@@ -20,6 +20,7 @@ import UIKit
     public weak var delegate: PaymentDelegate?
 
     let stateManager = StateManager()
+    let viewManager = ViewManager()
 
     lazy private(set) var slideInPresentationManager = SlideInPresentationManager()
 
@@ -38,6 +39,7 @@ import UIKit
 
         super.init(nibName: nil, bundle: nil)
 
+        viewManager.vc = self
         stateManager.vc = self
         sessionService.delegate = self
         router.rootViewController = self
@@ -53,7 +55,7 @@ import UIKit
 extension PaymentListViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .themedBackground
+        viewManager.configureMainView()
         navigationItem.largeTitleDisplayMode = .never
 
         // If view was presented modally show Cancel button
@@ -103,81 +105,9 @@ extension PaymentListViewController {
 // MARK: - UI Management
 
 extension PaymentListViewController {
-    /// Add and activate an activity indicator
-    func addActivityIndicator() {
-        let activityIndicator = UIActivityIndicatorView(style: .gray)
-        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(activityIndicator)
-        NSLayoutConstraint.activate([
-            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-        ])
-        self.activityIndicator = activityIndicator
-        activityIndicator.startAnimating()
-    }
-
-    func removeActivityIndicator() {
-        activityIndicator?.stopAnimating()
-        activityIndicator?.removeFromSuperview()
-        activityIndicator = nil
-    }
-
     func present(error: UIAlertController.AlertError) {
         let alertController = error.createAlertController(translator: sharedTranslationProvider)
         present(alertController, animated: true, completion: nil)
-    }
-}
-
-// MARK: - Table View UI
-
-extension PaymentListViewController {
-    fileprivate func addScrollView() -> UIScrollView {
-        let scrollView = UIScrollView(frame: .zero)
-        scrollView.alwaysBounceVertical = true
-        scrollView.preservesSuperviewLayoutMargins = true
-        view.addSubview(scrollView)
-
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-
-        NSLayoutConstraint.activate([
-            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            scrollView.topAnchor.constraint(equalTo: view.topAnchor)
-        ])
-
-        return scrollView
-    }
-
-    @discardableResult
-    /// Add methods UITableView to view and assign it to `self.methodsTableView`
-    func addMethodsTableView() -> UITableView {
-        let methodsTableView = List.Table.TableView(frame: CGRect.zero, style: .grouped)
-        methodsTableView.separatorStyle = .none
-        methodsTableView.backgroundColor = .clear
-        methodsTableView.rowHeight = .rowHeight
-        methodsTableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: CGFloat.leastNormalMagnitude))
-
-        methodsTableView.translatesAutoresizingMaskIntoConstraints = false
-        methodsTableView.register(List.Table.SingleLabelCell.self)
-        methodsTableView.register(List.Table.DetailedLabelCell.self)
-        view.addSubview(methodsTableView)
-
-        let topPadding: CGFloat = 30
-
-        NSLayoutConstraint.activate([
-            methodsTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            methodsTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            methodsTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: topPadding)
-        ])
-
-        let trailingConstraint = methodsTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        trailingConstraint.priority = .defaultHigh
-        trailingConstraint.isActive = true
-
-        self.methodsTableView = methodsTableView
-
-        return methodsTableView
     }
 }
 

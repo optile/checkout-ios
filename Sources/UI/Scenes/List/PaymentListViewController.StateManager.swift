@@ -3,6 +3,7 @@ import UIKit
 extension PaymentListViewController {
     class StateManager {
         weak var vc: PaymentListViewController!
+        var viewManager: ViewManager { vc.viewManager }
 
         fileprivate var tableController: List.Table.Controller?
 
@@ -51,7 +52,7 @@ extension PaymentListViewController.StateManager {
         }
 
         // Show payment methods
-        let methodsTableView = vc.addMethodsTableView()
+        let methodsTableView = viewManager.addMethodsTableView()
 
         let tableController = try List.Table.Controller(session: session, translationProvider: vc.sharedTranslationProvider)
         tableController.tableView = methodsTableView
@@ -68,13 +69,13 @@ extension PaymentListViewController.StateManager {
     private func activityIndicator(isActive: Bool) {
         if isActive == false {
             // Hide activity indicator
-            vc.removeActivityIndicator()
+            viewManager.removeActivityIndicator()
             return
         }
 
         if vc.activityIndicator != nil { return }
 
-        vc.addActivityIndicator()
+        viewManager.addActivityIndicator()
     }
 
     private func dismissAlertController() {
