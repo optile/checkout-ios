@@ -22,9 +22,6 @@ private struct Constant {
 
 extension Input {
     class ModelTransformer {
-        /// Transformed verification code fields.
-        /// - Note: we need it to set a placeholder suffix delegate after transformation
-        fileprivate(set) var verificationCodeFields = [Input.Field.VerificationCode]()
         fileprivate let inputFieldFactory = InputFieldFactory()
 
         init() {}
@@ -39,7 +36,6 @@ extension Input.ModelTransformer {
         let inputElements = registeredAccount.apiModel.inputElements ?? [InputElement]()
         let modelToTransform = InputFieldFactory.TransformableModel(inputElements: inputElements, networkCode: registeredAccount.apiModel.code, networkMethod: nil, translator: registeredAccount.translation)
         let inputFields = inputFieldFactory.createInputFields(for: modelToTransform)
-        self.verificationCodeFields = inputFieldFactory.verificationCodeFields
 
         let submitButton = Input.Field.Button(label: registeredAccount.submitButtonLabel)
 
@@ -61,7 +57,6 @@ extension Input.ModelTransformer {
 
         let modelToTransform = InputFieldFactory.TransformableModel(inputElements: inputElements, networkCode: paymentNetwork.applicableNetwork.code, networkMethod: paymentNetwork.applicableNetwork.method, translator: paymentNetwork.translation)
         let inputFields = inputFieldFactory.createInputFields(for: modelToTransform)
-        self.verificationCodeFields = inputFieldFactory.verificationCodeFields
 
         // Switch rule
         let smartSwitchRule = switchRule(forNetworkCode: paymentNetwork.applicableNetwork.code)
@@ -106,10 +101,6 @@ extension Input.ModelTransformer {
 }
 
 private class InputFieldFactory {
-    /// Transformed verification code fields.
-    /// - Note: we need it to set a placeholder suffix delegate after transformation
-    fileprivate(set) var verificationCodeFields = [Input.Field.VerificationCode]()
-
     /// Used as input for `createInputFields(for:)` method
     fileprivate struct TransformableModel {
         var inputElements: [InputElement]
@@ -166,9 +157,7 @@ private class InputFieldFactory {
         case "holderName":
             return Input.Field.HolderName(from: inputElement, translator: translator, validationRule: validationRule)
         case "verificationCode":
-            let field = Input.Field.VerificationCode(from: inputElement, networkCode: networkCode, translator: translator, validationRule: validationRule)
-            verificationCodeFields.append(field)
-            return field
+            return Input.Field.VerificationCode(from: inputElement, networkCode: networkCode, translator: translator, validationRule: validationRule)
         case "bankCode":
             return Input.Field.BankCode(from: inputElement, translator: translator, validationRule: validationRule)
         case "bic":

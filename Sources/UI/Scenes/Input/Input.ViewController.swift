@@ -59,11 +59,6 @@ extension Input {
 
             self.init(header: header, smartSwitch: smartSwitch, paymentServiceFactory: paymentServiceFactory)
 
-            // Placeholder translation suffixer
-            for field in transformer.verificationCodeFields {
-                field.keySuffixer = self
-            }
-
             self.title = smartSwitch.selected.network.translation.translation(forKey: "networks.form.default.title")
         }
 
@@ -74,11 +69,6 @@ extension Input {
             let header = Input.TextHeader(from: registeredAccount)
 
             self.init(header: header, smartSwitch: smartSwitch, paymentServiceFactory: paymentServiceFactory)
-
-            // Placeholder translation suffixer
-            for field in transformer.verificationCodeFields {
-                field.keySuffixer = self
-            }
 
             self.title = registeredAccount.translation.translation(forKey: "accounts.form.default.title")
         }
@@ -229,16 +219,6 @@ extension Input.ViewController: InputTableControllerDelegate {
 
 extension Input.ViewController: ModifableInsetsOnKeyboardFrameChanges {
     var scrollViewToModify: UIScrollView? { collectionView }
-}
-
-// MARK: - VerificationCodeTranslationKeySuffixer
-extension Input.ViewController: VerificationCodeTranslationKeySuffixer {
-    var suffixKey: String {
-        switch smartSwitch.selected {
-        case .generic: return "generic"
-        case .specific: return "specific"
-        }
-    }
 }
 
 extension Input.ViewController: InputPaymentControllerDelegate {

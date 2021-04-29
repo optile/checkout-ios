@@ -6,15 +6,6 @@
 
 import Foundation
 
-// MARK: Protocol
-
-protocol VerificationCodeTranslationKeySuffixer: class {
-    /// Generic / specific key for placeholder translation without dot (e.g. `generic`)
-    var suffixKey: String { get }
-}
-
-// MARK: - VerificationCodeField
-
 extension Input.Field {
     final class VerificationCode: InputElementModel {
         /// Network that contains that field
@@ -28,8 +19,6 @@ extension Input.Field {
         var isEnabled: Bool = true
         var value: String = ""
 
-        weak var keySuffixer: VerificationCodeTranslationKeySuffixer?
-
         init(from inputElement: InputElement, networkCode: String, translator: TranslationProvider, validationRule: Validation.Rule?) {
             self.inputElement = inputElement
             self.networkCode = networkCode
@@ -41,18 +30,11 @@ extension Input.Field {
 
 extension Input.Field.VerificationCode: TextInputField {
     var placeholder: String {
-        let key: String
+        translator.translation(forKey: translationPrefix + "specific.placeholder")
+    }
 
-        if let suffix = keySuffixer?.suffixKey {
-            key = translationPrefix + suffix + ".placeholder"
-        } else {
-            let error = InternalError(description: "keySuffixer is not set, it's not an intended behaviour, programmatic error")
-            error.log()
-
-            key = translationPrefix + "placeholder"
-        }
-
-        return translator.translation(forKey: key)
+    var label: String {
+        translator.translation(forKey: translationPrefix + "generic.placeholder")
     }
 
     var allowedCharacters: CharacterSet? { return .decimalDigits }

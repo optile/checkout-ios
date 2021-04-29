@@ -19,8 +19,8 @@ class CardsTests: NetworksTests {
         collectionViewsQuery.textFields["MM / YY"].tap()
         collectionViewsQuery.textFields["MM / YY"].typeText("1030")
 
-        collectionViewsQuery.textFields["Security Code"].tap()
-        collectionViewsQuery.textFields["Security Code"].typeText("111")
+        collectionViewsQuery.textFields["CVV"].tap()
+        collectionViewsQuery.textFields["CVV"].typeText("111")
 
         collectionViewsQuery.textFields["Name on card"].tap()
         collectionViewsQuery.textFields["Name on card"].typeText("Test Test")
