@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'PayoneerCheckout'
-  s.version          = '0.2.1'
+  s.version          = '0.3.0'
   s.summary          = 'Payoneer Checkout SDK for iOS-based devices'
 
   s.homepage         = 'https://github.com/optile/checkout-ios'

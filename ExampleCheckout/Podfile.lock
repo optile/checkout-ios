@@ -55,7 +55,7 @@ PODS:
     - MDFTextAccessibility
   - MDFInternationalization (2.0.0)
   - MDFTextAccessibility (2.0.1)
-  - PayoneerCheckout (0.2.1):
+  - PayoneerCheckout (0.3.0):
     - MaterialComponents/TextFields (= 124.1.1)
 
 DEPENDENCIES:
@@ -75,7 +75,7 @@ SPEC CHECKSUMS:
   MaterialComponents: b9f58f24bf74588a83b2dce05802a11aaed5257d
   MDFInternationalization: 010097556d6b09d2c4ea38e0820ea6d37be6a314
   MDFTextAccessibility: f4bb4cc2194286651b59a215fdeaa0e05dc90ba5
-  PayoneerCheckout: da6a12b1deb806ddfe71e22fbb03f0281aa4dbc3
+  PayoneerCheckout: e29f04a3afc5b4f3165028f92ea7bf7ea2576e10
 
 PODFILE CHECKSUM: 59cb5106ab85990c425ec89a70599a7efc06dfd3
 
