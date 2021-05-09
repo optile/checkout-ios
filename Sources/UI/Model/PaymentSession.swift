@@ -7,15 +7,18 @@
 import Foundation
 
 final class PaymentSession {
+    enum Operation: String {
+        case CHARGE, UPDATE
+    }
+
     let networks: [PaymentNetwork]
     let registeredAccounts: [RegisteredAccount]?
 
-    /// Same as `ListResult.operationType`
-    let operationType: String
+    let operationType: Operation
 
-    init(operationType: String, networks: [TranslatedModel<ApplicableNetwork>], accounts: [TranslatedModel<AccountRegistration>]?) {
+    init(operationType: Operation, networks: [TranslatedModel<ApplicableNetwork>], accounts: [TranslatedModel<AccountRegistration>]?) {
         self.operationType = operationType
-        let buttonLocalizationKey = "button.operation." + operationType.uppercased() + ".label"
+        let buttonLocalizationKey = "button.operation." + operationType.rawValue.uppercased() + ".label"
 
         self.networks = networks.map {
             .init(from: $0.model, submitButtonLocalizationKey: buttonLocalizationKey, localizeUsing: $0.translator)

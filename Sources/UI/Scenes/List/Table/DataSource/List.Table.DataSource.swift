@@ -12,9 +12,9 @@ extension List.Table {
     final class DataSource: NSObject {
         private let sections: [Section]
         private let translationProvider: TranslationProvider
-        private let operationType: String
+        private let operationType: PaymentSession.Operation
 
-        init(networks: [PaymentNetwork], accounts: [RegisteredAccount]?, translation: SharedTranslationProvider, genericLogo: UIImage, operationType: String) {
+        init(networks: [PaymentNetwork], accounts: [RegisteredAccount]?, translation: SharedTranslationProvider, genericLogo: UIImage, operationType: PaymentSession.Operation) {
             self.translationProvider = translation
             self.operationType = operationType
 
@@ -98,11 +98,10 @@ extension List.Table.DataSource: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch (sections[section], operationType) {
-        case (.accounts, "CHARGE"): return translationProvider.translation(forKey: "accounts.title")
-        case (.accounts, "UPDATE"): return translationProvider.translation(forKey: "accounts.update.title")
-        case (.networks, "CHARGE"): return translationProvider.translation(forKey: "networks.title")
-        case (.networks, "UPDATE"): return translationProvider.translation(forKey: "networks.update.title")
-        default: return nil
+        case (.accounts, .CHARGE): return translationProvider.translation(forKey: "accounts.title")
+        case (.accounts, .UPDATE): return translationProvider.translation(forKey: "accounts.update.title")
+        case (.networks, .CHARGE): return translationProvider.translation(forKey: "networks.title")
+        case (.networks, .UPDATE): return translationProvider.translation(forKey: "networks.update.title")
         }
     }
 

@@ -15,8 +15,6 @@ class PaymentSessionProvider {
 
     var listResult: ListResult?
 
-    private let supportedOperationTypes = ["CHARGE", "UPDATE"]
-
     init(paymentSessionURL: URL, connection: Connection, paymentServicesFactory: PaymentServicesFactory, localizationsProvider: SharedTranslationProvider) {
         self.paymentSessionURL = paymentSessionURL
         self.connection = connection
@@ -81,11 +79,7 @@ class PaymentSessionProvider {
             return
         }
 
-        guard supportedOperationTypes.contains(operationType) else {
-            let error = InternalError(description: "Operation type is not known or supported: %@", operationType)
-            completion(.failure(error))
-            return
-        }
+
 
         completion(.success(listResult))
     }
@@ -151,6 +145,11 @@ class PaymentSessionProvider {
             throw InternalError(description: "Operation type or ListResult is not defined")
         }
 
-        return .init(operationType: operationType, networks: translations.networks, accounts: translations.accounts)
+        // PaymentSession.Operation contains only supported operation types by the framework
+        guard let operation = PaymentSession.Operation(rawValue: operationType) else {
+            throw InternalError(description: "Operation type is not known or supported: %@", operationType)
+        }
+
+        return .init(operationType: operation, networks: translations.networks, accounts: translations.accounts)
     }
 }
