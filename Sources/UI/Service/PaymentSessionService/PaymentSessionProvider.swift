@@ -15,6 +15,8 @@ class PaymentSessionProvider {
 
     var listResult: ListResult?
 
+    private let supportedOperationTypes = ["CHARGE", "UPDATE"]
+
     init(paymentSessionURL: URL, connection: Connection, paymentServicesFactory: PaymentServicesFactory, localizationsProvider: SharedTranslationProvider) {
         self.paymentSessionURL = paymentSessionURL
         self.connection = connection
@@ -79,14 +81,8 @@ class PaymentSessionProvider {
             return
         }
 
-        guard let operation = Operation(rawValue: operationType) else {
-            let error = InternalError(description: "Operation type is not known: %@", operationType)
-            completion(.failure(error))
-            return
-        }
-
-        guard case .CHARGE = operation else {
-            let error = InternalError(description: "Operation type is not supported: %@", operationType)
+        guard supportedOperationTypes.contains(operationType) else {
+            let error = InternalError(description: "Operation type is not known or supported: %@", operationType)
             completion(.failure(error))
             return
         }
@@ -156,11 +152,5 @@ class PaymentSessionProvider {
         }
 
         return .init(operationType: operationType, networks: translations.networks, accounts: translations.accounts)
-    }
-}
-
-private extension PaymentSessionProvider {
-    enum Operation: String {
-        case CHARGE
     }
 }

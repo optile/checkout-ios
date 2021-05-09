@@ -12,9 +12,11 @@ extension List.Table {
     final class DataSource: NSObject {
         private let sections: [Section]
         private let translationProvider: TranslationProvider
+        private let operationType: String
 
-        init(networks: [PaymentNetwork], accounts: [RegisteredAccount]?, translation: SharedTranslationProvider, genericLogo: UIImage) {
+        init(networks: [PaymentNetwork], accounts: [RegisteredAccount]?, translation: SharedTranslationProvider, genericLogo: UIImage, operationType: String) {
             self.translationProvider = translation
+            self.operationType = operationType
 
             var sections = [Section]()
 
@@ -95,9 +97,12 @@ extension List.Table.DataSource: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch sections[section] {
-        case .accounts: return translationProvider.translation(forKey: "accounts.title")
-        case .networks: return translationProvider.translation(forKey: "networks.title")
+        switch (sections[section], operationType) {
+        case (.accounts, "CHARGE"): return translationProvider.translation(forKey: "accounts.title")
+        case (.accounts, "UPDATE"): return translationProvider.translation(forKey: "accounts.update.title")
+        case (.networks, "CHARGE"): return translationProvider.translation(forKey: "networks.title")
+        case (.networks, "UPDATE"): return translationProvider.translation(forKey: "networks.update.title")
+        default: return nil
         }
     }
 

@@ -28,7 +28,7 @@ extension List.Table {
                 throw InternalError(description: "Unable to load a credit card's generic icon")
             }
 
-            dataSource = .init(networks: session.networks, accounts: session.registeredAccounts, translation: translationProvider, genericLogo: genericLogo)
+            dataSource = .init(networks: session.networks, accounts: session.registeredAccounts, translation: translationProvider, genericLogo: genericLogo, operationType: session.operationType)
         }
 
         fileprivate func loadLogo(for indexPath: IndexPath) {
