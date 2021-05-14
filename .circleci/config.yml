@@ -116,6 +116,25 @@ jobs:
           at: /tmp/workspace
       - run: bundle exec fastlane browserstack
 
+  lib_lint:
+    macos:
+      xcode: "12.1.0"
+    environment:
+      HOMEBREW_NO_AUTO_UPDATE: 1
+    shell: /bin/bash --login -o pipefail
+    steps:
+      - checkout
+      - restore_cache:
+          key: gems-{{ checksum "Gemfile.lock" }}
+      - run: bundle check || bundle install --path vendor/bundle
+      - save_cache:
+          key: gems-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+      - run:
+          name: CocoaPods validation
+          command: bundle exec fastlane lib_lint
+
   deploy:
     macos:
       xcode: "12.1.0"
@@ -184,6 +203,10 @@ workflows:
           filters:
             branches:
               only: /PCX-.*/
+      - lib_lint:
+          filters:
+            branches:
+              only: develop
 
   # Submit to TestFlight, only for commits in develop branch
   # testflight:

@@ -86,6 +86,11 @@ platform :ios do
     push_to_git_remote()
   end
 
+  desc "Validate framework for CocoaPods"
+  lane :lib_lint do
+    pod_lib_lint(allow_warnings: true)
+  end
+
   desc "Deploy"
   lane :deploy do
     ensure_git_branch(branch: "master")
