@@ -97,7 +97,7 @@ jobs:
           path: output/scan/example.xcresult.zip
           when: on_fail
   
-  browserstack:
+  upload_to_browserstack:
     macos:
       xcode: "12.1.0"
     environment:
@@ -115,6 +115,25 @@ jobs:
       - attach_workspace:
           at: /tmp/workspace
       - run: bundle exec fastlane browserstack
+
+  lib_lint:
+    macos:
+      xcode: "12.1.0"
+    environment:
+      HOMEBREW_NO_AUTO_UPDATE: 1
+    shell: /bin/bash --login -o pipefail
+    steps:
+      - checkout
+      - restore_cache:
+          key: gems-{{ checksum "Gemfile.lock" }}
+      - run: bundle check || bundle install --path vendor/bundle
+      - save_cache:
+          key: gems-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+      - run:
+          name: CocoaPods validation
+          command: bundle exec fastlane lib_lint
 
   deploy:
     macos:
@@ -178,12 +197,26 @@ workflows:
           filters:
             branches:
               only: /PCX-.*/
-      - browserstack:
-          requires:
-            - build_example
+      - lib_lint:
           filters:
             branches:
-              only: /PCX-.*/
+              only: develop
+
+  # Upload to BrowserStack workflow (required for QA testing)
+  browserstack:
+    jobs:
+      - request_qa:
+          type: approval
+          filters:
+            branches:
+              only: /PCX-.*/ 
+      - build_example:
+          requires:
+            - request_qa
+      - upload_to_browserstack:
+          requires:
+            - request_qa
+            - build_example
 
   # Submit to TestFlight, only for commits in develop branch
   # testflight:
