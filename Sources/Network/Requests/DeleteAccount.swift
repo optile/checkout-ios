@@ -24,7 +24,7 @@ struct DeleteAccount: DeleteRequest {
     let queryItems = [URLQueryItem]()
 
     /// Holds de-registration instructions about what types of registrations should be deleted. This information is optional and will be auto-detected based on channel if it isn't provided.
-    var body: Body?
+    var body: DeregistrationData?
 
     typealias Response = OperationResult
 
@@ -32,17 +32,5 @@ struct DeleteAccount: DeleteRequest {
     init(url: URL, body: Body) {
         self.url = url
         self.body = body
-    }
-}
-
-// MARK: - Body
-
-extension DeleteAccount {
-    struct Body: Encodable {
-        /// If set to `true` the account registrations (one-click) will be deleted if present, if set to `false` the registration remains
-        var deleteRegistration: Bool?
-
-        /// If set to `true` the recurring registrations will be deleted if present, if set to `false` the registration remains
-        var deleteRecurrence: Bool?
     }
 }
