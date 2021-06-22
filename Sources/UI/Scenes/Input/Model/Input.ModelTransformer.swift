@@ -47,12 +47,7 @@ extension Input.ModelTransformer {
         }
 
         // Detect if we're in UPDATE flow
-        let isDeletable: Bool
-        if registeredAccount.apiModel.operationType == "UPDATE" {
-            isDeletable = true
-        } else {
-            isDeletable = false
-        }
+        let isDeletable = registeredAccount.apiModel.operationType == "UPDATE"
 
         return .init(apiModel: .account(registeredAccount.apiModel), operationURL: operationURL, paymentMethod: registeredAccount.apiModel.method, networkCode: registeredAccount.apiModel.code, translator: registeredAccount.translation, switchRule: nil, uiModel: uiModel, isDeletable: isDeletable)
     }
