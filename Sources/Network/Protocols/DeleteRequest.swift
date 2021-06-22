@@ -6,17 +6,8 @@
 
 import Foundation
 
-/// Simple request that just performs `POST` request on specified URL.
-/// - Note: `queryItems` will always override items from the `url`
-protocol DeleteRequest: PostRequest {
-    associatedtype Body
-
-    var queryItems: [URLQueryItem] { get }
-    var url: URL { get }
-    var body: Body? { get }
-    
-    func encodeBody() throws -> Data?
-}
+/// The `HTTP DELETE `method is used to delete a resource from the server.
+protocol DeleteRequest: Request, BodyEncodable {}
 
 extension DeleteRequest {
     var httpMethod: HTTPMethod { .DELETE }

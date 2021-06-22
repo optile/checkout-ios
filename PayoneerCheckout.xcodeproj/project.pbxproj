@@ -197,6 +197,7 @@
 		D9A88E10241C55040043F535 /* groups.json in Resources */ = {isa = PBXBuildFile; fileRef = D9A88D94241C55040043F535 /* groups.json */; };
 		D9A88E11241C55040043F535 /* validations-default.json in Resources */ = {isa = PBXBuildFile; fileRef = D9A88D95241C55040043F535 /* validations-default.json */; };
 		D9A88E48241C56490043F535 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9A88D92241C55040043F535 /* Media.xcassets */; };
+		D9A9277626822FF000AC67DD /* BodyEncodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A9277526822FF000AC67DD /* BodyEncodable.swift */; };
 		D9B8372125D9158100066EB4 /* Date+fullYear.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B8372025D9158100066EB4 /* Date+fullYear.swift */; };
 		D9C9573F241C54CA00049AFE /* PayoneerCheckout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9C95735241C54CA00049AFE /* PayoneerCheckout.framework */; };
 		D9D9A35825B087860072EE2E /* UserAgentBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D9A35725B087860072EE2E /* UserAgentBuilder.swift */; };
@@ -418,6 +419,7 @@
 		D9A88D93241C55040043F535 /* validations.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = validations.json; sourceTree = "<group>"; };
 		D9A88D94241C55040043F535 /* groups.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = groups.json; sourceTree = "<group>"; };
 		D9A88D95241C55040043F535 /* validations-default.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "validations-default.json"; sourceTree = "<group>"; };
+		D9A9277526822FF000AC67DD /* BodyEncodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyEncodable.swift; sourceTree = "<group>"; };
 		D9B8372025D9158100066EB4 /* Date+fullYear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+fullYear.swift"; sourceTree = "<group>"; };
 		D9C95735241C54CA00049AFE /* PayoneerCheckout.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PayoneerCheckout.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9C9573E241C54CA00049AFE /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -988,10 +990,11 @@
 			isa = PBXGroup;
 			children = (
 				D96A4F43257D96EF00E74C8C /* Connection.swift */,
+				D96A4F45257D96EF00E74C8C /* Request.swift */,
+				D9A9277526822FF000AC67DD /* BodyEncodable.swift */,
 				D96A4F44257D96EF00E74C8C /* GetRequest.swift */,
 				D99FF39E25E7B593005F4097 /* PostRequest.swift */,
 				D9F5C470265E60D000053715 /* DeleteRequest.swift */,
-				D96A4F45257D96EF00E74C8C /* Request.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -1415,6 +1418,7 @@
 				D96A4FB6257D96EF00E74C8C /* DequeueableCell.swift in Sources */,
 				D96A4F59257D96EF00E74C8C /* Input.Table.LabelViewCell.swift in Sources */,
 				D9E380C82671591200622FD0 /* PaymentListViewController.OperationResultHandler.swift in Sources */,
+				D9A9277626822FF000AC67DD /* BodyEncodable.swift in Sources */,
 				D96A4F8B257D96EF00E74C8C /* List.swift in Sources */,
 				D96A4F46257D96EF00E74C8C /* Input.ViewController.StateManager.swift in Sources */,
 				D96A4F82257D96EF00E74C8C /* Validatable.swift in Sources */,

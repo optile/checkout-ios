@@ -7,47 +7,12 @@
 import Foundation
 
 /// Simple request that just performs `POST` request on specified URL.
-/// - Note: `queryItems` will always override items from the `url`
-protocol PostRequest: Request {
-    associatedtype Body
-
-    var queryItems: [URLQueryItem] { get }
-    var url: URL { get }
-    var body: Body? { get }
-    
-    func encodeBody() throws -> Data?
-}
+protocol PostRequest: Request, BodyEncodable {}
 
 extension PostRequest {
     var httpMethod: HTTPMethod { .POST }
 }
 
-extension PostRequest where Body: Encodable {
-    func encodeBody() throws -> Data? {
-        guard let body = self.body else { return nil }
-        let encoder = JSONEncoder()
-        return try encoder.encode(body)
-    }
-}
-
 extension PostRequest {
-    func build() throws -> URLRequest {
-        guard var components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
-            throw InternalError(description: "Internal error, incorrect PostRequest URL: %@", url.absoluteString)
-        }
 
-        if !queryItems.isEmpty {
-            components.queryItems = queryItems
-        }
-
-        guard let url = components.url else {
-            throw InternalError(description: "Internal error, unable to create API request URL from URLComponents")
-        }
-
-        var urlRequest = URLRequest(url: url)
-        urlRequest.httpMethod = httpMethod.rawValue
-        urlRequest.httpBody = try encodeBody()
-
-        return urlRequest
-    }
 }
