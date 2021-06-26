@@ -71,7 +71,7 @@ class UserAgentBuilder {
     /// Returns framework version, e.g.: `IOSSDK/1.2.3 (43)`
     private var frameworkVersion: String? {
         let frameworkName = "IOSSDK"
-     
+
         let infoDictionary = Bundle(for: UserAgentBuilder.self).infoDictionary
         guard let version = infoDictionary?["CFBundleShortVersionString"] as? String else {
             // If version couldn't be obtained don't send framework version

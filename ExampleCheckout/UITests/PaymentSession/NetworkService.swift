@@ -47,8 +47,7 @@ class NetworkService {
             } else if let data = data, let textData = String(data: data, encoding: .utf8) {
                 let error = NetworkError(description: "Non-OK response from a server: \(textData)")
                 completionHandler(.failure(error))
-            }
-            else {
+            } else {
                 let error = NetworkError(description: "Non-OK response from a server")
                 completionHandler(.failure(error))
             }

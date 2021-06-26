@@ -14,7 +14,7 @@ extension DateFormatter {
         guard YY.count == 2 else {
             throw InternalError(description: "Input year contains incorrect number of digits: %@", YY)
         }
-        
+
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yy"
         guard let date = dateFormatter.date(from: YY) else {

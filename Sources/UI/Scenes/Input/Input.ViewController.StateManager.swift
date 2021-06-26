@@ -56,7 +56,7 @@ extension Input.ViewController.StateManager {
 
     private func setDeletionActivityIndicator(to state: RightBarButtonState) {
         let barButtonItem: UIBarButtonItem
-        
+
         switch state {
         case .activityIndicatorIsAnimating:
             barButtonItem = UIBarButtonItem(customView: vc.activityIndicatorView)
@@ -67,7 +67,7 @@ extension Input.ViewController.StateManager {
 
         vc.navigationItem.setRightBarButton(barButtonItem, animated: true)
     }
-    
+
     private func setPaymentSubmission(isActive: Bool) {
         vc.tableController.dataSource.setPaymentButtonState(isLoading: isActive)
     }
@@ -89,7 +89,7 @@ extension Input.ViewController.StateManager {
         case deletion
         case error(UIAlertController.AlertError)
     }
-    
+
     fileprivate enum RightBarButtonState {
         case activityIndicatorIsAnimating
         case deleteButtonIsShown

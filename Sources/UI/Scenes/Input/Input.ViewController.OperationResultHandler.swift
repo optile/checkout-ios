@@ -70,7 +70,7 @@ extension Input.ViewController.OperationResultHandler {
         // On retry show an error and leave on that view
         if case .RETRY = Interaction.Code(rawValue: response.interaction.code) {
             let errorInfo = ErrorInfo(resultInfo: response.resultInfo, interaction: response.interaction)
-            
+
             DispatchQueue.main.async {
                 self.delegate?.paymentController(inputShouldBeChanged: errorInfo)
             }
@@ -92,7 +92,7 @@ extension Input.ViewController.OperationResultHandler {
         // On retry show an error and leave on that view
         if case .RETRY = Interaction.Code(rawValue: response.interaction.code) {
             let errorInfo = ErrorInfo(resultInfo: response.resultInfo, interaction: response.interaction)
-            
+
             DispatchQueue.main.async {
                 self.delegate?.paymentController(inputShouldBeChanged: errorInfo)
             }

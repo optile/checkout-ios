@@ -23,11 +23,11 @@ extension Input.Table {
         weak var collectionView: UICollectionView!
         let flowLayout: UICollectionViewFlowLayout
         weak var inputTableControllerDelegate: InputTableControllerDelegate?
-        
+
         internal init(dataSource: Input.Table.DataSource, collectionView: UICollectionView? = nil) {
             self.dataSource = dataSource
             self.collectionView = collectionView
-            
+
             self.flowLayout = .init()
             flowLayout.minimumInteritemSpacing = .interitemSpacing
             flowLayout.minimumLineSpacing = .rowLineSpacing
@@ -137,7 +137,7 @@ extension Input.Table.LayoutController: UICollectionViewDelegateFlowLayout {
         guard halfWidthItemsPosition.count == 2 else { return false }
 
         // Check that items follow each other
-        guard (halfWidthItemsPosition[1] - halfWidthItemsPosition[0] == 1) else { return false }
+        guard halfWidthItemsPosition[1] - halfWidthItemsPosition[0] == 1 else { return false }
 
         return true
     }

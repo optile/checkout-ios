@@ -102,7 +102,7 @@ extension Input.ViewController {
 
         collectionView.layoutIfNeeded()
         setPreferredContentSize()
-        
+
         configureNavigationBar()
     }
 
@@ -150,7 +150,7 @@ extension Input.ViewController {
 
     @objc private func deleteBarButtonDidTap(_ sender: UIBarButtonItem) {
         let translator = smartSwitch.selected.network.translation
-        
+
         let title: String = translator.translation(forKey: "accounts.delete.title")
 
         // Message comes with replacable variables, whe replace it with 
@@ -174,7 +174,7 @@ extension Input.ViewController {
 
         present(alertController, animated: true, completion: nil)
     }
-    
+
     @objc func dismissView() {
         dismiss(animated: true, completion: nil)
     }

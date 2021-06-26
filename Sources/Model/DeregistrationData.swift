@@ -18,4 +18,4 @@ class DeregistrationData: NSObject, Codable {
         self.deleteRecurrence = deleteRecurrence
     }
 }
-    
+

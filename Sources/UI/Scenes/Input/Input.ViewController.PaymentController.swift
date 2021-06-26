@@ -34,7 +34,7 @@ extension Input.ViewController.PaymentController {
         let request = DeletionRequest(accountURL: selfLink, operationType: network.apiModel.operationType)
         service?.send(operationRequest: request)
     }
-    
+
     func submitPayment(for network: Input.Network) {
         let service = paymentServiceFactory.createPaymentService(forNetworkCode: network.networkCode, paymentMethod: network.paymentMethod)
         service?.delegate = operationResultHandler
@@ -52,7 +52,7 @@ extension Input.ViewController.PaymentController {
 
         service?.send(operationRequest: request)
     }
-    
+
     private func createInputFields(from network: Input.Network) throws -> [String: String] {
         var inputFieldsDictionary = [String: String]()
         for element in network.uiModel.inputFields + network.uiModel.separatedCheckboxes {

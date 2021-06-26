@@ -42,7 +42,7 @@ extension Input.Table {
         weak var delegate: InputTableControllerDelegate? {
             didSet { layoutController.inputTableControllerDelegate = delegate }
         }
-        
+
         weak var cvvHintDelegate: CVVTextFieldViewCellDelegate? {
             didSet {
                 dataSource.cvvHintDelegate = cvvHintDelegate

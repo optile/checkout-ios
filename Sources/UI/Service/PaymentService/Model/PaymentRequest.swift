@@ -14,7 +14,7 @@ class PaymentRequest {
 
     /// Textual dictionary with input fields.
     let inputFields: [String: String]
-    
+
     let operationType: String
 
     internal init(networkCode: String, operationURL: URL, inputFields: [String: String]) {

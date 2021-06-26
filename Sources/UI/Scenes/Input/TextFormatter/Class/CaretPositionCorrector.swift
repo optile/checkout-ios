@@ -55,7 +55,7 @@ class CaretPositionCorrector {
         let indexes = indexesOfPatternSymbols(in: searchRange)
 
         if let lastIndex = indexes.last {
-            //return lastIndex.encodedOffset + 1
+            // return lastIndex.encodedOffset + 1
             return lastIndex.utf16Offset(in: textPattern) + 1
         }
         return 0

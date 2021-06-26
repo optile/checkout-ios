@@ -14,7 +14,7 @@ private extension String {
 class RedirectCallbackHandler {
     weak var delegate: PaymentServiceDelegate?
     let operationRequest: OperationRequest
-    
+
     init(for operationRequest: OperationRequest) {
         self.operationRequest = operationRequest
     }
