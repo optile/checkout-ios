@@ -150,55 +150,23 @@ extension Input.ViewController {
 
     @objc private func deleteBarButtonDidTap(_ sender: UIBarButtonItem) {
         let translator = smartSwitch.selected.network.translation
+        let accountLabel = smartSwitch.selected.network.uiModel.maskedAccountLabel ?? smartSwitch.selected.network.uiModel.networkLabel
 
-        let title: String = translator.translation(forKey: "accounts.delete.title")
-
-        // Message comes with replacable variables, whe replace it with 
-        var message: String = translator.translation(forKey: "accounts.delete.text")
-        let accountDisplayLabel = smartSwitch.selected.network.uiModel.maskedAccountLabel ?? smartSwitch.selected.network.uiModel.networkLabel
-        message = message.replacingOccurrences(of: "${account.displayLabel}", with: accountDisplayLabel)
-
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-
-        let cancelText: String? = translator.translation(forKey: "button.cancel.label")
-        let cancelAction = UIAlertAction(title: cancelText, style: .cancel, handler: nil)
-
-        let deleteText: String? = translator.translation(forKey: "button.delete.label")
-        let deleteAction = UIAlertAction(title: deleteText, style: .destructive) { _ in
+        let alertController = DeletionAlertController(translator: translator, accountLabel: accountLabel)
+        alertController.addDeleteAction { _ in
             self.stateManager.state = .deletion
             self.paymentController.delete(network: self.smartSwitch.selected.network)
         }
 
-        alertController.addAction(cancelAction)
-        alertController.addAction(deleteAction)
-
         present(alertController, animated: true, completion: nil)
     }
 
-    @objc func dismissView() {
+    @objc private func dismissView() {
         dismiss(animated: true, completion: nil)
-    }
-
-    fileprivate func configure(collectionView: UICollectionView) {
-        collectionView.tintColor = view.tintColor
-        collectionView.backgroundColor = .themedBackground
-        collectionView.contentInsetAdjustmentBehavior = .scrollableAxes
-        collectionView.preservesSuperviewLayoutMargins = true
-
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-
-        view.addSubview(collectionView)
-
-        NSLayoutConstraint.activate([
-            collectionView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            collectionView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            collectionView.topAnchor.constraint(equalTo: view.topAnchor)
-        ])
     }
 }
 
-// MARK: - InputValueChangesListener
+// MARK: - InputTableControllerDelegate
 
 extension Input.ViewController: InputTableControllerDelegate {
     func submitPayment() {
@@ -206,8 +174,7 @@ extension Input.ViewController: InputTableControllerDelegate {
         paymentController.submitPayment(for: smartSwitch.selected.network)
     }
 
-    // MARK: Navigation bar shadow
-
+    // Navigation bar shadow
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         // Control behaviour of navigation bar's shadow line
         guard let navigationController = self.navigationController else { return }
