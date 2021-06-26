@@ -8,7 +8,7 @@
 import UIKit
 
 /// Could be represented as a table cell
-protocol CellRepresentable: class {
+protocol CellRepresentable: AnyObject {
     var isEnabled: Bool { get set }
 
     var cellType: (UICollectionViewCell & DequeueableCell).Type { get }

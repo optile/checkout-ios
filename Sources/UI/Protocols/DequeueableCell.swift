@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol DequeueableCell: class {
+protocol DequeueableCell: AnyObject {
     static var identifier: String { get }
 }
 

@@ -7,7 +7,7 @@
 import Foundation
 
 /// Generic UI model for input element
-protocol InputField: class {
+protocol InputField: AnyObject {
     var name: String { get }
     var value: String { get set }
 }

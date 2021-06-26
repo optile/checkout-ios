@@ -56,7 +56,7 @@ class DataDownloadProvider {
     }
 }
 
-protocol ContainsLoadableImage: class {
+protocol ContainsLoadableImage: AnyObject {
     var loadable: Loadable<UIImage>? { get set }
 }
 

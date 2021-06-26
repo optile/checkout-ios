@@ -7,7 +7,7 @@
 import UIKit
 import MaterialComponents.MaterialTextFields
 
-protocol CVVTextFieldViewCellDelegate: class {
+protocol CVVTextFieldViewCellDelegate: AnyObject {
     func presentHint(viewController: UIViewController)
 }
 

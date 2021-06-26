@@ -6,7 +6,7 @@
 
 import Foundation
 
-protocol Validatable: class {
+protocol Validatable: AnyObject {
     var validationRule: Input.Field.Validation.Rule? { get }
     var validationErrorText: String? { get set }
 

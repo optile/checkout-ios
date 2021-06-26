@@ -8,7 +8,7 @@
 import UIKit
 
 /// Cell calls that delegate on some actions
-protocol InputCellDelegate: class {
+protocol InputCellDelegate: AnyObject {
     func inputCellBecameFirstResponder(cell: UICollectionViewCell)
     func inputCellValueDidChange(to newValue: String?, cell: UICollectionViewCell)
     func inputCellDidEndEditing(cell: UICollectionViewCell)
@@ -22,7 +22,7 @@ extension InputCellDelegate {
 }
 
 /// Indicates that delegate could be set for that cell
-protocol ContainsInputCellDelegate: class {
+protocol ContainsInputCellDelegate: AnyObject {
     var delegate: InputCellDelegate? { get set }
 }
 #endif

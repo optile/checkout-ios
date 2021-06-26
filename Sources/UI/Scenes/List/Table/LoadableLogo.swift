@@ -7,6 +7,6 @@
 import UIKit
 
 /// Model that contains loadable logo
-protocol LoadableLogo: class {
+protocol LoadableLogo: AnyObject {
     var logo: Loadable<UIImage>? { get set }
 }

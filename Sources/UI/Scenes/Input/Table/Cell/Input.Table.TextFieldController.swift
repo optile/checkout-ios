@@ -7,7 +7,7 @@
 import UIKit
 import MaterialComponents.MaterialTextFields
 
-protocol TextFieldControllerDelegate: class {
+protocol TextFieldControllerDelegate: AnyObject {
     func textFieldDidBeginEditing()
     func textFieldDidEndEditing()
     func textFieldPrimaryActionTriggered()

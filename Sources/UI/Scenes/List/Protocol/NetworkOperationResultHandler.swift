@@ -6,6 +6,6 @@
 
 import Foundation
 
-protocol NetworkOperationResultHandler: class {
+protocol NetworkOperationResultHandler: AnyObject {
     func paymentController(didReceiveOperationResult result: Result<OperationResult, ErrorInfo>, for request: OperationRequest?, network: Input.Network)
 }

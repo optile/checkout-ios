@@ -7,7 +7,7 @@
 import Foundation
 
 /// A protocol used to implement event handling for payment service events.
-@objc public protocol PaymentDelegate: class {
+@objc public protocol PaymentDelegate: AnyObject {
     /// Method is called when payment result was received, you should handle a payment result and dismiss a view manually
     /// - Parameters:
     ///   - controller: payment view controller, it should be dismissed

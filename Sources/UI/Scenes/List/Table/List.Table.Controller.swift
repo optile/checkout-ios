@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-protocol ListTableControllerDelegate: class {
+protocol ListTableControllerDelegate: AnyObject {
     func didSelect(paymentNetworks: [PaymentNetwork])
     func didSelect(registeredAccount: RegisteredAccount)
 

@@ -6,7 +6,7 @@
 
 import Foundation
 
-protocol PaymentSessionServiceDelegate: class {
+protocol PaymentSessionServiceDelegate: AnyObject {
     func paymentSessionService(loadingDidCompleteWith result: Load<PaymentSession, ErrorInfo>)
     func paymentSessionService(shouldSelect network: PaymentNetwork)
 }

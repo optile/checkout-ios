@@ -8,7 +8,7 @@ import Foundation
 
 // MARK: - Delegate
 
-protocol InputPaymentControllerDelegate: class {
+protocol InputPaymentControllerDelegate: AnyObject {
     func paymentController(presentURL url: URL)
     func paymentController(route result: Result<OperationResult, ErrorInfo>, for request: OperationRequest)
     func paymentController(inputShouldBeChanged error: ErrorInfo)
