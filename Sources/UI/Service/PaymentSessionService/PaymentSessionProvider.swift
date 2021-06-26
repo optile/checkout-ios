@@ -73,13 +73,11 @@ class PaymentSessionProvider {
     }
 
     private func checkOperationType(for listResult: ListResult, completion: @escaping ((Result<ListResult, Error>) -> Void)) {
-        guard let operationType = listResult.operationType else {
+        guard let _ = listResult.operationType else {
             let error = InternalError(description: "Operation type is not specified")
             completion(.failure(error))
             return
         }
-
-
 
         completion(.success(listResult))
     }
