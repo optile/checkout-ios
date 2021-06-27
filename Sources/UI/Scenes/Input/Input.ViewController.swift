@@ -129,9 +129,27 @@ extension Input.ViewController {
     }
 }
 
-// MARK: - View configurator
+// MARK: - Initial configuration
 
 extension Input.ViewController {
+    fileprivate func configure(collectionView: UICollectionView) {
+        collectionView.tintColor = view.tintColor
+        collectionView.backgroundColor = .themedBackground
+        collectionView.contentInsetAdjustmentBehavior = .scrollableAxes
+        collectionView.preservesSuperviewLayoutMargins = true
+
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+
+        view.addSubview(collectionView)
+
+        NSLayoutConstraint.activate([
+            collectionView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            collectionView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            collectionView.topAnchor.constraint(equalTo: view.topAnchor)
+        ])
+    }
+
     fileprivate func configureNavigationBar() {
         let closeButton: UIBarButtonItem
 
@@ -147,6 +165,12 @@ extension Input.ViewController {
             navigationItem.setRightBarButton(deleteBarButton, animated: false)
         }
     }
+}
+
+// MARK: - Navigation Bar configurator
+
+extension Input.ViewController {
+
 
     @objc private func deleteBarButtonDidTap(_ sender: UIBarButtonItem) {
         let translator = smartSwitch.selected.network.translation
@@ -234,6 +258,8 @@ extension Input.ViewController: InputTableControllerDelegate {
 extension Input.ViewController: ModifableInsetsOnKeyboardFrameChanges {
     var scrollViewToModify: UIScrollView? { collectionView }
 }
+
+// MARK: - InputPaymentControllerDelegate
 
 extension Input.ViewController: InputPaymentControllerDelegate {
     /// Route result to the next view controller

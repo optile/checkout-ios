@@ -636,9 +636,9 @@
 			isa = PBXGroup;
 			children = (
 				D96A4EA9257D96EE00E74C8C /* Input.Network.swift */,
+				D96A4EBF257D96EE00E74C8C /* Header */,
 				D96A4EAA257D96EE00E74C8C /* Field */,
 				D96A4EBE257D96EE00E74C8C /* Input.ModelTransformer.swift */,
-				D96A4EBF257D96EE00E74C8C /* Header */,
 			);
 			path = Model;
 			sourceTree = "<group>";
