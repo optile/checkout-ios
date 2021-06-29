@@ -112,7 +112,9 @@ extension Input.ModelTransformer {
     }
 }
 
-struct IgnoredFields {
-    let networkCode: String
-    let inputElementName: String
+extension Input.ModelTransformer {
+    struct IgnoredFields {
+        let networkCode: String
+        let inputElementName: String
+    }
 }
