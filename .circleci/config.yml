@@ -178,12 +178,17 @@ workflows:
           filters:
             branches:
               only: /PCX-.*/
-      - browserstack:
+      - request_qa:
+          type: approval
           requires:
             - build_example
           filters:
             branches:
               only: /PCX-.*/
+      - browserstack:
+          requires:
+            - build_example
+            - request_qa
 
   # Submit to TestFlight, only for commits in develop branch
   # testflight:
