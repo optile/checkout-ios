@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   unit_test:
     macos:
-      xcode: 12.1.0
+      xcode: 12.5.1
     environment:
       FASTLANE_LANE: test
     steps:
@@ -28,7 +28,7 @@ jobs:
 
   build_example:
     macos:
-      xcode: 12.1.0
+      xcode: 12.5.1
     environment:
       FASTLANE_LANE: build_example
     steps:
@@ -59,7 +59,7 @@ jobs:
 
   ui_test:
     macos:
-      xcode: 12.1.0
+      xcode: 12.5.1
     environment:
       FASTLANE_LANE: ui_test
     steps:
@@ -99,7 +99,7 @@ jobs:
   
   browserstack:
     macos:
-      xcode: "12.1.0"
+      xcode: 12.5.1
     environment:
       HOMEBREW_NO_AUTO_UPDATE: 1
     shell: /bin/bash --login -o pipefail
@@ -118,7 +118,7 @@ jobs:
 
   deploy:
     macos:
-      xcode: "12.1.0"
+      xcode: 12.5.1
     environment:
       HOMEBREW_NO_AUTO_UPDATE: 1
     shell: /bin/bash --login -o pipefail
@@ -142,7 +142,7 @@ jobs:
 
   submit_to_testflight:
     macos:
-      xcode: "12.1.0"
+      xcode: 12.5.1
     environment:
       HOMEBREW_NO_AUTO_UPDATE: 1
     shell: /bin/bash --login -o pipefail
