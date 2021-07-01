@@ -7,8 +7,8 @@
 import Foundation
 
 extension Input.ModelTransformer {
-    /// Factory responsible for making internal model checkboxes from backend (network) models
-    class CheckboxFactory {
+    /// Builder responsible for making UI models from registration options.
+    class RegistrationOptionsBuilder {
         let translator: TranslationProvider
 
         init(translator: TranslationProvider) {
@@ -17,37 +17,37 @@ extension Input.ModelTransformer {
     }
 }
 
-extension Input.ModelTransformer.CheckboxFactory {
-    func createInternalModel(from backendCheckbox: ApplicableNetworkCheckbox) -> InputField {
+extension Input.ModelTransformer.RegistrationOptionsBuilder {
+    func createInternalModel(from registrationOption: RegistrationOption) -> InputField {
         let isOn: Bool
 
-        switch backendCheckbox.requirement {
+        switch registrationOption.requirement {
         case .OPTIONAL: isOn = false
         case .OPTIONAL_PRESELECTED: isOn = true
         case .FORCED_DISPLAYED:
-            let translationKey = localizationKey(for: backendCheckbox)
-            return Input.Field.Label(label: translator.translation(forKey: translationKey), name: backendCheckbox.type.name, value: true.stringValue)
+            let translationKey = localizationKey(for: registrationOption)
+            return Input.Field.Label(label: translator.translation(forKey: translationKey), name: registrationOption.type.name, value: true.stringValue)
         case .FORCED:
-            return Input.Field.Hidden(name: backendCheckbox.type.name, value: true.stringValue)
+            return Input.Field.Hidden(name: registrationOption.type.name, value: true.stringValue)
         case .NONE:
-            return Input.Field.Hidden(name: backendCheckbox.type.name, value: false.stringValue)
+            return Input.Field.Hidden(name: registrationOption.type.name, value: false.stringValue)
         }
 
-        let translationKey = localizationKey(for: backendCheckbox)
-        return Input.Field.Checkbox(name: backendCheckbox.type.name, isOn: isOn, translationKey: translationKey, translator: translator)
+        let translationKey = localizationKey(for: registrationOption)
+        return Input.Field.Checkbox(name: registrationOption.type.name, isOn: isOn, translationKey: translationKey, translator: translator)
     }
 
     /// Localization key rules are declared in [PCX-728](https://optile.atlassian.net/browse/PCX-728).
     /// - Returns: localization key, `nil` if requirement is `NONE`
-    private func localizationKey(for backendCheckbox: ApplicableNetworkCheckbox) -> String {
+    private func localizationKey(for registrationOption: RegistrationOption) -> String {
         var localizationKey = "networks."
 
-        switch backendCheckbox.type {
+        switch registrationOption.type {
         case .registration: localizationKey += "registration."
         case .recurrence: localizationKey += "recurrence."
         }
 
-        switch backendCheckbox.requirement {
+        switch registrationOption.requirement {
         case .OPTIONAL, .OPTIONAL_PRESELECTED: localizationKey += "optional."
         case .FORCED, .FORCED_DISPLAYED: localizationKey += "forced."
         case .NONE:
@@ -61,8 +61,8 @@ extension Input.ModelTransformer.CheckboxFactory {
     }
 }
 
-extension Input.ModelTransformer.CheckboxFactory {
-    struct ApplicableNetworkCheckbox {
+extension Input.ModelTransformer.RegistrationOptionsBuilder {
+    struct RegistrationOption {
         enum CheckboxType {
             case recurrence
             case registration
@@ -78,7 +78,7 @@ extension Input.ModelTransformer.CheckboxFactory {
         let type: CheckboxType
         let requirement: ApplicableNetwork.Requirement
 
-        init(type: ApplicableNetworkCheckbox.CheckboxType, requirement: ApplicableNetwork.Requirement?) {
+        init(type: RegistrationOption.CheckboxType, requirement: ApplicableNetwork.Requirement?) {
             self.type = type
             self.requirement = requirement ?? .NONE
         }
