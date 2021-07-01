@@ -8,13 +8,13 @@ import Foundation
 
 extension Input.Field {
     final class AccountNumber: BasicText {
-        let networkMethod: String?
+        let paymentMethod: String?
         let patternFormatter: InputPatternFormatter?
 
         /// - Parameters:
         ///   - networkMethod: Indicates payment method this network belongs (from `ApplicableNetwork`)
-        init(from inputElement: InputElement, translator: TranslationProvider, validationRule: Validation.Rule?, networkMethod: String?) {
-            self.networkMethod = networkMethod
+        init(from inputElement: InputElement, translator: TranslationProvider, validationRule: Validation.Rule?, paymentMethod: String?) {
+            self.paymentMethod = paymentMethod
 
             // Pattern formatter
             let maxLength = validationRule?.maxLength ?? 34
@@ -40,10 +40,10 @@ extension Input.Field.AccountNumber: Validatable {
     }
 
     var isPassedCustomValidation: Bool {
-        guard let networkMethod = self.networkMethod else { return true }
+        guard let paymentMethod = self.paymentMethod else { return true }
 
         // Validate only some networks
-        if luhnValidatableMethods.contains(networkMethod) {
+        if luhnValidatableMethods.contains(paymentMethod) {
             return Input.Field.Validation.Luhn.isValid(accountNumber: value)
         }
 

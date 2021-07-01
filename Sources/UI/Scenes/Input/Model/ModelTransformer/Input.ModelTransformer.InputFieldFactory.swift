@@ -18,7 +18,7 @@ extension Input.ModelTransformer.InputFieldFactory {
     struct TransformableModel {
         var inputElements: [InputElement]
         var networkCode: String
-        var networkMethod: String?
+        var paymentMethod: String?
         var translator: TranslationProvider
     }
 
@@ -45,7 +45,7 @@ extension Input.ModelTransformer.InputFieldFactory {
             }
 
             let validationRule = validationProvider?.getRule(forNetworkCode: model.networkCode, withInputElementName: inputElement.name)
-            return transform(inputElement: inputElement, translateUsing: model.translator, validationRule: validationRule, networkMethod: model.networkMethod, networkCode: model.networkCode)
+            return transform(inputElement: inputElement, translateUsing: model.translator, validationRule: validationRule, paymentMethod: model.paymentMethod, networkCode: model.networkCode)
         }
 
         let transformationResult = ExpirationDateManager().removeExpiryFields(in: inputFields)
@@ -61,10 +61,10 @@ extension Input.ModelTransformer.InputFieldFactory {
     }
 
     /// Transform `InputElement` to `InputField`
-    private func transform(inputElement: InputElement, translateUsing translator: TranslationProvider, validationRule: Input.Field.Validation.Rule?, networkMethod: String?, networkCode: String) -> InputField & CellRepresentable {
+    private func transform(inputElement: InputElement, translateUsing translator: TranslationProvider, validationRule: Input.Field.Validation.Rule?, paymentMethod: String?, networkCode: String) -> InputField & CellRepresentable {
         switch inputElement.name {
         case "number":
-            return Input.Field.AccountNumber(from: inputElement, translator: translator, validationRule: validationRule, networkMethod: networkMethod)
+            return Input.Field.AccountNumber(from: inputElement, translator: translator, validationRule: validationRule, paymentMethod: paymentMethod)
         case "iban":
             return Input.Field.IBAN(from: inputElement, translator: translator, validationRule: validationRule)
         case "holderName":

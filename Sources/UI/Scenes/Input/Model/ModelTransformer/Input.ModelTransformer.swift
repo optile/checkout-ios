@@ -37,7 +37,7 @@ extension Input.ModelTransformer {
 
         // Input fields
         let inputElements = registeredAccount.apiModel.inputElements ?? [InputElement]()
-        let modelToTransform = InputFieldFactory.TransformableModel(inputElements: inputElements, networkCode: registeredAccount.apiModel.code, networkMethod: nil, translator: registeredAccount.translation)
+        let modelToTransform = InputFieldFactory.TransformableModel(inputElements: inputElements, networkCode: registeredAccount.apiModel.code, paymentMethod: nil, translator: registeredAccount.translation)
         let inputFields = inputFieldFactory.createInputFields(for: modelToTransform)
 
         // Operation URL
@@ -67,7 +67,7 @@ extension Input.ModelTransformer {
         // Input fields
         let inputElements = paymentNetwork.applicableNetwork.inputElements ?? [InputElement]()
 
-        let modelToTransform = InputFieldFactory.TransformableModel(inputElements: inputElements, networkCode: paymentNetwork.applicableNetwork.code, networkMethod: paymentNetwork.applicableNetwork.method, translator: paymentNetwork.translation)
+        let modelToTransform = InputFieldFactory.TransformableModel(inputElements: inputElements, networkCode: paymentNetwork.applicableNetwork.code, paymentMethod: paymentNetwork.applicableNetwork.method, translator: paymentNetwork.translation)
         let inputFields = inputFieldFactory.createInputFields(for: modelToTransform)
 
         // Switch rule
