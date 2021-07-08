@@ -1,6 +1,5 @@
 included:
   - Sources
-  - ExampleCheckout
 line_length:
   warning: 230
   error: 300
