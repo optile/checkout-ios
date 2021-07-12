@@ -68,17 +68,19 @@ extension List.Table {
             }
         }
 
-        enum Model {
-            case network([PaymentNetwork])
-            case account(RegisteredAccount)
-        }
-
         func model(for indexPath: IndexPath) -> Model {
             switch sections[indexPath.section] {
             case .accounts(let accountRows): return .account(accountRows[indexPath.row].account)
             case .networks(let networkRows): return .network(networkRows[indexPath.row].networks)
             }
         }
+    }
+}
+
+extension List.Table.DataSource {
+    enum Model {
+        case network([PaymentNetwork])
+        case account(RegisteredAccount)
     }
 }
 

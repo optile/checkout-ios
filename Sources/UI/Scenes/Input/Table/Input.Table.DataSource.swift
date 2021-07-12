@@ -23,7 +23,7 @@ extension Input.Table {
             let rowsInSection = model[indexPath.section]
             for rowIndex in indexPath.row...rowsInSection.count - 1 {
                 let element = rowsInSection[rowIndex]
-                guard let _ = element as? TextInputField else { continue }
+                guard element as? TextInputField != nil else { continue }
                 lastTextFieldRow = rowIndex
             }
 

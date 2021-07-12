@@ -23,6 +23,7 @@ import UIKit
     /// - Parameters:
     ///   - font: `nil` is used for default system font
     @objc public init(font: UIFont? = nil, backgroundColor: UIColor, tableBorder: UIColor, tableCellSeparator: UIColor, textColor: UIColor, detailTextColor: UIColor, buttonTextColor: UIColor, tintColor: UIColor, errorTextColor: UIColor) {
+        // swiftlint:disable:previous line_length
         self.font = font
         self.backgroundColor = backgroundColor
         self.tableBorder = tableBorder

@@ -63,24 +63,26 @@ extension Input.ModelTransformer.RegistrationOptionsBuilder {
 
 extension Input.ModelTransformer.RegistrationOptionsBuilder {
     struct RegistrationOption {
-        enum CheckboxType {
-            case recurrence
-            case registration
-
-            var name: String {
-                switch self {
-                case .recurrence: return Input.Field.Checkbox.Constant.allowRecurrence
-                case .registration: return Input.Field.Checkbox.Constant.allowRegistration
-                }
-            }
-        }
-
         let type: CheckboxType
         let requirement: ApplicableNetwork.Requirement
 
         init(type: RegistrationOption.CheckboxType, requirement: ApplicableNetwork.Requirement?) {
             self.type = type
             self.requirement = requirement ?? .NONE
+        }
+    }
+}
+
+extension Input.ModelTransformer.RegistrationOptionsBuilder.RegistrationOption {
+    enum CheckboxType {
+        case recurrence
+        case registration
+
+        var name: String {
+            switch self {
+            case .recurrence: return Input.Field.Checkbox.Constant.allowRecurrence
+            case .registration: return Input.Field.Checkbox.Constant.allowRegistration
+            }
         }
     }
 }

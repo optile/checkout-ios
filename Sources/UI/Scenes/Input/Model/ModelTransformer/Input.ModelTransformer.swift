@@ -56,9 +56,25 @@ extension Input.ModelTransformer {
             submitButton = Input.Field.Button(label: registeredAccount.submitButtonLabel)
         }
 
-        let uiModel = Input.Network.UIModel(networkLabel: registeredAccount.networkLabel, maskedAccountLabel: registeredAccount.maskedAccountLabel, logo: logo, inputFields: inputFields, separatedCheckboxes: [], submitButton: submitButton)
+        let uiModel = Input.Network.UIModel(
+            networkLabel: registeredAccount.networkLabel,
+            maskedAccountLabel: registeredAccount.maskedAccountLabel,
+            logo: logo,
+            inputFields: inputFields,
+            separatedCheckboxes: [],
+            submitButton: submitButton
+        )
 
-        return .init(apiModel: .account(registeredAccount.apiModel), operationURL: operationURL, paymentMethod: registeredAccount.apiModel.method, networkCode: registeredAccount.apiModel.code, translator: registeredAccount.translation, switchRule: nil, uiModel: uiModel, isDeletable: isDeletable)
+        return .init(
+            apiModel: .account(registeredAccount.apiModel),
+            operationURL: operationURL,
+            paymentMethod: registeredAccount.apiModel.method,
+            networkCode: registeredAccount.apiModel.code,
+            translator: registeredAccount.translation,
+            switchRule: nil,
+            uiModel: uiModel,
+            isDeletable: isDeletable
+        )
     }
 
     func transform(paymentNetwork: PaymentNetwork) throws -> Input.Network {
@@ -67,7 +83,12 @@ extension Input.ModelTransformer {
         // Input fields
         let inputElements = paymentNetwork.applicableNetwork.inputElements ?? [InputElement]()
 
-        let modelToTransform = InputFieldFactory.TransformableModel(inputElements: inputElements, networkCode: paymentNetwork.applicableNetwork.code, paymentMethod: paymentNetwork.applicableNetwork.method, translator: paymentNetwork.translation)
+        let modelToTransform = InputFieldFactory.TransformableModel(
+            inputElements: inputElements,
+            networkCode: paymentNetwork.applicableNetwork.code,
+            paymentMethod: paymentNetwork.applicableNetwork.method,
+            translator: paymentNetwork.translation
+        )
         let inputFields = inputFieldFactory.createInputFields(for: modelToTransform)
 
         // Switch rule
@@ -86,14 +107,25 @@ extension Input.ModelTransformer {
 
         let submitButton = Input.Field.Button(label: paymentNetwork.submitButtonLabel)
 
-        let uiModel = Input.Network.UIModel(networkLabel: paymentNetwork.label, maskedAccountLabel: nil, logo: logo, inputFields: inputFields, separatedCheckboxes: checkboxes, submitButton: submitButton)
+        let uiModel = Input.Network.UIModel(networkLabel: paymentNetwork.label,
+                                            maskedAccountLabel: nil,
+                                            logo: logo, inputFields: inputFields,
+                                            separatedCheckboxes: checkboxes,
+                                            submitButton: submitButton)
 
         // Operation URL
         guard let operationURL = paymentNetwork.applicableNetwork.links?["operation"] else {
             throw InternalError(description: "Incorrect applicable network model, operation URL is not present. Links: %@", objects: paymentNetwork.applicableNetwork.links)
         }
 
-        return .init(apiModel: .network(paymentNetwork.applicableNetwork), operationURL: operationURL, paymentMethod: paymentNetwork.applicableNetwork.method, networkCode: paymentNetwork.applicableNetwork.code, translator: paymentNetwork.translation, switchRule: smartSwitchRule, uiModel: uiModel, isDeletable: false)
+        return .init(apiModel: .network(paymentNetwork.applicableNetwork),
+                     operationURL: operationURL,
+                     paymentMethod: paymentNetwork.applicableNetwork.method,
+                     networkCode: paymentNetwork.applicableNetwork.code,
+                     translator: paymentNetwork.translation,
+                     switchRule: smartSwitchRule,
+                     uiModel: uiModel,
+                     isDeletable: false)
     }
 
     // MARK: Smart Switch

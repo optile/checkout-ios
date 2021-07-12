@@ -40,6 +40,7 @@ extension List.Table.GroupingService {
         let regex: NSRegularExpression
 
         enum CodingKeys: String, CodingKey {
+            // swiftlint:disable:previous nesting
             case code, regex
         }
 

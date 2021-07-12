@@ -17,13 +17,13 @@ extension Input.ViewController {
         ///   - accountLabel: account label (e.g. `VISA **** 2021`) that will be used in a message
         init(translator: TranslationProvider, accountLabel: String) {
             self.translator = translator
-            
+
             let title: String = translator.translation(forKey: "accounts.delete.title")
 
             // Message comes with replacable variable
             var message: String = translator.translation(forKey: "accounts.delete.text")
             message = message.replacingOccurrences(of: "${account.displayLabel}", with: accountLabel)
-            
+
             super.init(title: title, message: message, preferredStyle: .alert)
 
             let cancelText: String? = translator.translation(forKey: "button.cancel.label")
@@ -35,7 +35,7 @@ extension Input.ViewController {
         required init?(coder: NSCoder) {
             fatalError("init(coder:) has not been implemented")
         }
-        
+
         /// Add a translated delete action.
         func addDeleteAction(handler: ((UIAlertAction) -> Void)?) {
             let deleteText: String? = translator.translation(forKey: "button.delete.label")

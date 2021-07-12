@@ -6,13 +6,15 @@
 
 import Foundation
 
+extension Input.Field.Checkbox {
+    struct Constant {
+        static var allowRegistration: String { "allowRegistration" }
+        static var allowRecurrence: String { "allowRecurrence" }
+    }
+}
+
 extension Input.Field {
     final class Checkbox {
-        struct Constant {
-            static var allowRegistration: String { "allowRegistration" }
-            static var allowRecurrence: String { "allowRecurrence" }
-        }
-
         let translationKey: String
         let translator: TranslationProvider
 

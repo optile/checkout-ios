@@ -55,6 +55,7 @@ class ApplicableNetwork: NSObject, Decodable {
     /// Types of possible operations
     let operationType: String
 
+    // swiftlint:disable:next line_length
     internal init(code: String, label: String, method: String, grouping: String, registration: String, recurrence: String, redirect: Bool, button: String? = nil, selected: Bool? = nil, formData: FormData? = nil, iFrameHeight: Int? = nil, emptyForm: Bool? = nil, inputElements: [InputElement]?, links: [String: URL]? = nil, operationType: String) {
         self.code = code
         self.label = label

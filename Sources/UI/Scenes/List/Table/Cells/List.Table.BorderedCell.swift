@@ -22,15 +22,6 @@ extension List.Table {
             didSet { cellIndexDidChange() }
         }
 
-        enum CellIndex {
-            case first
-            case middle
-            case last
-
-            /// It is an only one cell in section
-            case singleCell
-        }
-
         override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
             super.init(style: style, reuseIdentifier: reuseIdentifier)
 
@@ -45,6 +36,17 @@ extension List.Table {
         required init?(coder: NSCoder) {
             fatalError("init(coder:) has not been implemented")
         }
+    }
+}
+
+extension List.Table.BorderedCell {
+    enum CellIndex {
+        case first
+        case middle
+        case last
+
+        /// It is an only one cell in section
+        case singleCell
     }
 }
 

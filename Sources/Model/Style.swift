@@ -6,7 +6,6 @@
 
 import Foundation
 
-// swiftlint:disable line_length
 // swiftlint:disable:next type_name
 class _Style: NSObject, Decodable {
     /// Preferred language for payment page. If undefined will be decided upon country information from transaction object.

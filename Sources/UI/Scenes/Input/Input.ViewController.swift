@@ -170,8 +170,6 @@ extension Input.ViewController {
 // MARK: - Navigation Bar configurator
 
 extension Input.ViewController {
-
-
     @objc private func deleteBarButtonDidTap(_ sender: UIBarButtonItem) {
         let translator = smartSwitch.selected.network.translation
         let accountLabel = smartSwitch.selected.network.uiModel.maskedAccountLabel ?? smartSwitch.selected.network.uiModel.networkLabel

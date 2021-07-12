@@ -81,7 +81,8 @@ class TooltipViewController: UIViewController {
     // MARK: - Private methods
 
     private func setPreferredContentSize() {
-        preferredContentSize = view.systemLayoutSizeFitting(CGSize(width: 300, height: UIView.layoutFittingCompressedSize.height), withHorizontalFittingPriority: .required, verticalFittingPriority: .defaultLow)
+        let tooltipSize = CGSize(width: 300, height: UIView.layoutFittingCompressedSize.height)
+        preferredContentSize = view.systemLayoutSizeFitting(tooltipSize, withHorizontalFittingPriority: .required, verticalFittingPriority: .defaultLow)
         self.preferredContentSize = preferredContentSize
     }
 

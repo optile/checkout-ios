@@ -94,9 +94,8 @@ extension Input.Table.ImagesView {
                 }
             }
 
-        }) { _ in
-
-        }
+        },
+        completion: { _ in })
     }
 }
 #endif

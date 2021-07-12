@@ -20,9 +20,9 @@ class PaymentSessionService {
 
     init(paymentSessionURL: URL, connection: Connection, localizationProvider: SharedTranslationProvider) {
         self.connection = connection
-        paymentServicesFactory = PaymentServicesFactory(connection: connection)
-        downloadProvider = DataDownloadProvider(connection: connection)
-        paymentSessionProvider = PaymentSessionProvider(paymentSessionURL: paymentSessionURL, connection: connection, paymentServicesFactory: paymentServicesFactory, localizationsProvider: localizationProvider)
+        paymentServicesFactory = .init(connection: connection)
+        downloadProvider = .init(connection: connection)
+        paymentSessionProvider = .init(paymentSessionURL: paymentSessionURL, connection: connection, paymentServicesFactory: paymentServicesFactory, localizationsProvider: localizationProvider)
         self.localizationProvider = localizationProvider
 
         paymentServicesFactory.registerServices()
@@ -73,10 +73,8 @@ class PaymentSessionService {
 
     /// Return first preselected network in a session
     private func firstSelectedNetwork(in session: PaymentSession) -> PaymentNetwork? {
-        for network in session.networks {
-            if network.applicableNetwork.selected == true {
-                return network
-            }
+        for network in session.networks where network.applicableNetwork.selected == true {
+            return network
         }
 
         return nil

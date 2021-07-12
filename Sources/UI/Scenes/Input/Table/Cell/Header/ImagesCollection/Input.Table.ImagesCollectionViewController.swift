@@ -36,7 +36,10 @@ extension Input.Table.ImagesCollectionViewController: UICollectionViewDataSource
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: .cellIdentifier, for: indexPath) as! Input.Table.ImageViewCell
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: .cellIdentifier, for: indexPath) as? Input.Table.ImageViewCell else {
+            assertionFailure("Unexpected cell")
+            return UICollectionViewCell(frame: .zero)
+        }
         cell.imageView.image = dataSource[indexPath.row].uiModel.logo
         return cell
     }

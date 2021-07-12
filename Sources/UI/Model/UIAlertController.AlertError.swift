@@ -16,22 +16,26 @@ extension UIAlertController {
 
         /// Alert window's actions
         var actions = [Action]()
+    }
+}
 
-        struct Action {
-            /// Button's label (localization key), e.g.: `button.ok.label`
-            let label: LocalizationKey
+extension UIAlertController {
+    struct Action {
+        /// Button's label (localization key), e.g.: `button.ok.label`
+        let label: LocalizationKey
 
-            let style: UIAlertAction.Style
+        let style: UIAlertAction.Style
 
-            /// Action to be executed when button is tapped
-            let handler: ((UIAlertAction) -> Void)?
+        /// Action to be executed when button is tapped
+        let handler: ((UIAlertAction) -> Void)?
+    }
+}
 
-            enum LocalizationKey: String {
-                case cancel = "button.cancel.label"
-                case retry = "button.retry.label"
-                case ok = "button.ok.label"
-            }
-        }
+extension UIAlertController.Action {
+    enum LocalizationKey: String {
+        case cancel = "button.cancel.label"
+        case retry = "button.retry.label"
+        case ok = "button.ok.label"
     }
 }
 
