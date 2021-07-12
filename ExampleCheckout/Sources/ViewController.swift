@@ -43,7 +43,6 @@ class ViewController: UITableViewController {
 }
 
 extension ViewController: PaymentDelegate {
-    // swiftlint:disable:next line_length
     func paymentService(didReceivePaymentResult paymentResult: PaymentResult, viewController: PaymentListViewController) {
         navigationController?.popViewController(animated: true, completion: {
             self.presentAlert(with: paymentResult)

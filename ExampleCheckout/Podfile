@@ -3,5 +3,6 @@ platform :ios, '12.4'
 target 'ExampleCheckout' do
   use_frameworks!
 
+  pod 'SwiftLint'
   pod 'PayoneerCheckout', :path => '../'
 end
