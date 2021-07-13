@@ -154,6 +154,10 @@ extension PaymentListViewController: ListTableControllerDelegate {
     func didSelect(registeredAccount: RegisteredAccount) {
         show(registeredAccount: registeredAccount, animated: true)
     }
+
+    func didRefreshRequest() {
+        loadPaymentSession()
+    }
 }
 
 // MARK: - NetworkOperationResultHandler

@@ -12,16 +12,23 @@ import UIKit
 protocol ListTableControllerDelegate: AnyObject {
     func didSelect(paymentNetworks: [PaymentNetwork])
     func didSelect(registeredAccount: RegisteredAccount)
+    func didRefreshRequest()
 
     var downloadProvider: DataDownloadProvider { get }
 }
 
 extension List.Table {
     final class Controller: NSObject {
-        weak var tableView: UITableView?
+        weak var tableView: UITableView? {
+            didSet { updateRefreshControl() }
+        }
+
         weak var delegate: ListTableControllerDelegate?
 
         let dataSource: List.Table.DataSource
+
+        fileprivate let isRefreshable: Bool
+        fileprivate var refreshControl: UIRefreshControl?
 
         init(session: PaymentSession, translationProvider: SharedTranslationProvider) throws {
             guard let genericLogo = AssetProvider.iconCard else {
@@ -29,6 +36,11 @@ extension List.Table {
             }
 
             dataSource = .init(networks: session.networks, accounts: session.registeredAccounts, translation: translationProvider, genericLogo: genericLogo, operationType: session.operationType)
+
+            switch session.operationType {
+            case .UPDATE: isRefreshable = true
+            default: isRefreshable = false
+            }
         }
 
         fileprivate func loadLogo(for indexPath: IndexPath) {
@@ -47,6 +59,25 @@ extension List.Table {
                 }
             })
         }
+    }
+}
+
+extension List.Table.Controller {
+    fileprivate func updateRefreshControl() {
+        guard isRefreshable else {
+            refreshControl?.removeFromSuperview()
+            refreshControl = nil
+            return
+        }
+
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(self.refresh), for: .valueChanged)
+        tableView?.addSubview(refreshControl)
+        self.refreshControl = refreshControl
+    }
+
+    @objc private func refresh() {
+        delegate?.didRefreshRequest()
     }
 }
 
