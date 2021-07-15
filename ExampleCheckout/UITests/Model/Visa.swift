@@ -8,7 +8,7 @@ import XCTest
 
 struct Visa: PaymentNetwork {
     /// Number without spaces
-    let number: String = "4111111111111111"
+    var number: String = "4111111111111111"
 
     /// Date without formatting, e.g.: `1030`
     var expiryDate: String? = "1030"

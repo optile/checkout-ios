@@ -7,8 +7,12 @@
 import XCTest
 
 class CardsTests: NetworksTests {
-    func testVISAProceed() throws {
-        try setupWithPaymentSession()
+    
+    // MARK: Success Card Payment
+    
+    func testProceedOk() throws {
+        let transaction = try Transaction.loadFromTemplate(amount: .proceedOk, operationType: .charge)
+        try setupWithPaymentSession(using: transaction)
 
         app.tables.staticTexts["Cards"].tap()
         Visa().submit(in: app.collectionViews)
@@ -20,6 +24,48 @@ class CardsTests: NetworksTests {
         let expectedResult = "ResultInfo: Approved Interaction code: PROCEED Interaction reason: OK Error: n/a"
         XCTAssertEqual(expectedResult, interactionResult)
     }
+    
+    func testProceedPending() throws {
+        let transaction = try Transaction.loadFromTemplate(amount: .proceedPending, operationType: .charge)
+        try setupWithPaymentSession(using: transaction)
+
+        app.tables.staticTexts["Cards"].tap()
+        Visa().submit(in: app.collectionViews)
+
+        // Check result
+        XCTAssertTrue(app.alerts.firstMatch.waitForExistence(timeout: .networkTimeout), "Alert didn't appear in time")
+
+        let interactionResult = app.alerts.firstMatch.staticTexts.element(boundBy: 1).label
+        let expectedResult = "ResultInfo: Pending, you have to check the status later Interaction code: PROCEED Interaction reason: PENDING Error: n/a"
+        XCTAssertEqual(expectedResult, interactionResult)
+    }
+    
+    // MARK: Retry Card Payment
+
+    func testRetry() throws {
+        let transaction = try Transaction.loadFromTemplate(amount: .retry, operationType: .charge)
+        try setupWithPaymentSession(using: transaction)
+
+        app.tables.staticTexts["Cards"].tap()
+        let visa = Visa()
+        visa.submit(in: app.collectionViews)
+
+        // Check result
+        XCTAssertTrue(app.alerts.firstMatch.waitForExistence(timeout: .networkTimeout), "Alert didn't appear in time")
+
+        // Retry alert
+        let interactionResult = app.alerts.firstMatch.staticTexts.element(boundBy: 1).label
+        let expectedResult = "Something went wrong. Please try again later or use another payment method."
+        XCTAssertEqual(expectedResult, interactionResult)
+        
+        // Check input fields
+        app.alerts.buttons.firstMatch.tap()
+        let nameTextField = app.collectionViews.textFields["Name on card"]
+        XCTAssert(nameTextField.exists, "Couldn't find holder name input field")
+        XCTAssertEqual(nameTextField.value as? String, visa.holderName, "Couldn't find previosly typed holder name")
+    }
+    
+    // MARK: Interface tests
 
     func testClearButton() throws {
         try setupWithPaymentSession()
