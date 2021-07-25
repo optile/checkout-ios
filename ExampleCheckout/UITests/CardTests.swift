@@ -108,7 +108,28 @@ class CardsTests: NetworksTests {
         XCTAssert(app.tables.staticTexts["Cards"].waitForExistence(timeout: .networkTimeout))
         XCTAssert(app.tables.staticTexts.contains(text: visa.label))
     }
-    
+
+    // MARK: Failed Card Payment
+
+    func testRiskDetected() throws {
+        let transaction = try Transaction.loadFromTemplate(amount: .nonMagicNumber, operationType: .charge)
+        try setupWithPaymentSession(using: transaction)
+
+        app.tables.staticTexts["Cards"].tap()
+        var visa = Visa()
+        // The `ANDROID_TESTING` merchant on Integration has been setup to block the Mastercard number: 5105105105105100
+        visa.number = "5105105105105100"
+
+        visa.submit(in: app.collectionViews)
+
+        // Check result
+        XCTAssertTrue(app.alerts.firstMatch.waitForExistence(timeout: .networkTimeout), "Alert didn't appear in time")
+
+        let interactionResult = app.alerts.firstMatch.staticTexts.element(boundBy: 1).label
+        XCTAssert(interactionResult.contains("ABORT"))
+        XCTAssert(interactionResult.contains("RISK_DETECTED"))
+    }
+
     // MARK: Interface tests
 
     func testClearButton() throws {
