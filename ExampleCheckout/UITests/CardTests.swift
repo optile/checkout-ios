@@ -87,6 +87,28 @@ class CardsTests: NetworksTests {
         XCTAssertFalse(app.tables.staticTexts.contains(text: visa.label))
     }
 
+    func testTryOtherAccount() throws {
+        let transaction = try Transaction.loadFromTemplate(amount: .tryOtherAccount, operationType: .charge)
+        try setupWithPaymentSession(using: transaction)
+        let visa = Visa()
+
+        XCTAssert(app.tables.staticTexts.contains(text: visa.label))
+
+        app.tables.staticTexts["Cards"].tap()
+        visa.submit(in: app.collectionViews)
+
+        // Alert
+        XCTAssertTrue(app.alerts.firstMatch.waitForExistence(timeout: .networkTimeout), "Alert didn't appear in time")
+        let interactionResult = app.alerts.firstMatch.staticTexts.element(boundBy: 1).label
+        let expectedResult = "This payment method cannot be used at the moment. Please use another method."
+        XCTAssertEqual(expectedResult, interactionResult)
+
+        // After TRY_OTHER_ACCOUNT response, cards should still contain Visa payment method
+        app.alerts.buttons.firstMatch.tap()
+        XCTAssert(app.tables.staticTexts["Cards"].waitForExistence(timeout: .networkTimeout))
+        XCTAssert(app.tables.staticTexts.contains(text: visa.label))
+    }
+    
     // MARK: Interface tests
 
     func testClearButton() throws {
