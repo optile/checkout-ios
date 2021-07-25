@@ -8,6 +8,7 @@ import XCTest
 
 struct PayPalAccount: PaymentNetwork {
     let label = "PayPal"
+    let maskedLabel = "PayPal"
 
     func fill(in collectionView: XCUIElementQuery) {}
 }

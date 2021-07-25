@@ -10,6 +10,9 @@ protocol PaymentNetwork {
     /// Network label
     var label: String { get }
 
+    /// Masked label for saved account
+    var maskedLabel: String { get }
+
     /// Fill collection view with input fields with card's data.
     /// - Parameters:
     ///   - collectionView: collection view with input fields

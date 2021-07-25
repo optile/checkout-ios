@@ -16,7 +16,8 @@ struct Visa: PaymentNetwork {
     var verificationCode: String? = "111"
     var holderName: String? = "Test Test"
 
-    let label: String = "Visa •••• 1111"
+    let label: String = "Visa"
+    let maskedLabel: String = "Visa •••• 1111"
 
     func fill(in collectionView: XCUIElementQuery) {
         XCTContext.runActivity(named: "Fill VISA card's data") { _ in

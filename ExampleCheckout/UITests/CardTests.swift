@@ -64,7 +64,29 @@ class CardsTests: NetworksTests {
         XCTAssert(nameTextField.exists, "Couldn't find holder name input field")
         XCTAssertEqual(nameTextField.value as? String, visa.holderName, "Couldn't find previosly typed holder name")
     }
-    
+
+    func testTryOtherNetwork() throws {
+        let transaction = try Transaction.loadFromTemplate(amount: .tryOtherNetwork, operationType: .charge)
+        try setupWithPaymentSession(using: transaction)
+        let visa = Visa()
+
+        XCTAssert(app.tables.staticTexts.contains(text: visa.label))
+
+        app.tables.staticTexts["Cards"].tap()
+        visa.submit(in: app.collectionViews)
+
+        // Alert
+        XCTAssertTrue(app.alerts.firstMatch.waitForExistence(timeout: .networkTimeout), "Alert didn't appear in time")
+        let interactionResult = app.alerts.firstMatch.staticTexts.element(boundBy: 1).label
+        let expectedResult = "Please verify the data you entered is correct and try again, or use another payment method."
+        XCTAssertEqual(expectedResult, interactionResult)
+
+        // After TRY_OTHER_NETWORK response cards shouldn't contain Visa payment method
+        app.alerts.buttons.firstMatch.tap()
+        XCTAssert(app.tables.staticTexts["Cards"].waitForExistence(timeout: .networkTimeout))
+        XCTAssertFalse(app.tables.staticTexts.contains(text: visa.label))
+    }
+
     // MARK: Interface tests
 
     func testClearButton() throws {
@@ -88,5 +110,13 @@ class CardsTests: NetworksTests {
         clearButton.tap()
         XCTAssertEqual(cardNumberTextField.value as? String, "", "Text wasn't cleared")
         XCTAssertFalse(clearButton.exists, "Clear button should be hidden")
+    }
+}
+
+fileprivate extension XCUIElementQuery {
+    func contains(text: String) -> Bool {
+        let predicate = NSPredicate(format: "label CONTAINS[c] %@", text)
+        let elementQuery = self.containing(predicate)
+        return elementQuery.count != 0
     }
 }

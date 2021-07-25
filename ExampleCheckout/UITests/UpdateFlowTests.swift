@@ -68,15 +68,15 @@ extension UpdateFlowTests {
         let visa = Visa()
 
         XCTContext.runActivity(named: "Test saving the new payment method") { _ in
-            deleteIfExistsPaymentMethod(withLabel: visa.label)
+            deleteIfExistsPaymentMethod(withLabel: visa.maskedLabel)
             submitAndWaitForExistence(forPaymentNetwork: visa)
         }
 
         // Test deletion
         XCTContext.runActivity(named: "Test payment method deletion") { _ in
-            deleteIfExistsPaymentMethod(withLabel: visa.label)
+            deleteIfExistsPaymentMethod(withLabel: visa.maskedLabel)
             waitForLoadingCompletion()
-            XCTAssertFalse(app.tables.staticTexts[visa.label].exists, "Payment network still exists after deletion")
+            XCTAssertFalse(app.tables.staticTexts[visa.maskedLabel].exists, "Payment network still exists after deletion")
         }
     }
 
@@ -115,13 +115,13 @@ extension UpdateFlowTests {
 
     private func addPaymentNetworkIfNeeded(_ paymentNetwork: PaymentNetwork) throws {
         // Add a payment method if it doesn't exist
-        if !app.tables.staticTexts[paymentNetwork.label].exists {
+        if !app.tables.staticTexts[paymentNetwork.maskedLabel].exists {
             submitAndWaitForExistence(forPaymentNetwork: paymentNetwork)
         }
     }
 
     private func delete(paymentNetwork: PaymentNetwork) {
-        app.tables.staticTexts[paymentNetwork.label].tap()
+        app.tables.staticTexts[paymentNetwork.maskedLabel].tap()
         XCTAssertFalse(app.navigationBars.buttons["Delete"].exists, "Delete button shouldn't exist in a CHARGE flow")
     }
 }
@@ -145,7 +145,7 @@ fileprivate extension UpdateFlowTests {
         app.tables.staticTexts["Cards"].tap()
         paymentNetwork.submit(in: app.collectionViews)
 
-        let isPaymentMethodAppeared = app.tables.staticTexts[paymentNetwork.label].waitForExistence(timeout: .networkTimeout)
+        let isPaymentMethodAppeared = app.tables.staticTexts[paymentNetwork.maskedLabel].waitForExistence(timeout: .networkTimeout)
         XCTAssert(isPaymentMethodAppeared, "Payment method didn't appear in the list after saving")
     }
 }
