@@ -11,6 +11,7 @@
 		D917D814267679B0000DB4CA /* ErrorInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D917D813267679B0000DB4CA /* ErrorInfo.swift */; };
 		D917D816267679F8000DB4CA /* Interaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D917D815267679F8000DB4CA /* Interaction.swift */; };
 		D92B4D6825F6843A00103C70 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D92B4D6725F6843A00103C70 /* Assets.xcassets */; };
+		D9368BAB26B1CC7F0083E5E3 /* ThreeDSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9368BAA26B1CC7F0083E5E3 /* ThreeDSTests.swift */; };
 		D954C00E2696621600714396 /* Visa.swift in Sources */ = {isa = PBXBuildFile; fileRef = D954C00D2696621600714396 /* Visa.swift */; };
 		D954C0102696F41000714396 /* TimeInterval+timeout.swift in Sources */ = {isa = PBXBuildFile; fileRef = D954C00F2696F41000714396 /* TimeInterval+timeout.swift */; };
 		D956D28325DEB9C2001A2EAD /* RedirectNetworksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D956D28225DEB9C2001A2EAD /* RedirectNetworksTests.swift */; };
@@ -72,6 +73,7 @@
 		D917D813267679B0000DB4CA /* ErrorInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorInfo.swift; sourceTree = "<group>"; };
 		D917D815267679F8000DB4CA /* Interaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interaction.swift; sourceTree = "<group>"; };
 		D92B4D6725F6843A00103C70 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D9368BAA26B1CC7F0083E5E3 /* ThreeDSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDSTests.swift; sourceTree = "<group>"; };
 		D954C00D2696621600714396 /* Visa.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Visa.swift; sourceTree = "<group>"; };
 		D954C00F2696F41000714396 /* TimeInterval+timeout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+timeout.swift"; sourceTree = "<group>"; };
 		D956D28225DEB9C2001A2EAD /* RedirectNetworksTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedirectNetworksTests.swift; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 				D9A5FA7E253D8AE3001C71B7 /* Assets */,
 				D956D28525DEB9E0001A2EAD /* NetworksTests.swift */,
 				D9E1A87D2694893F00CF4C9C /* UpdateFlowTests.swift */,
+				D9368BAA26B1CC7F0083E5E3 /* ThreeDSTests.swift */,
 				D956D28825DEBE23001A2EAD /* CardTests.swift */,
 				D956D28225DEB9C2001A2EAD /* RedirectNetworksTests.swift */,
 				D9A5FA65253CF744001C71B7 /* PaymentSession */,
@@ -443,6 +446,7 @@
 				D9A5FA6C253D8213001C71B7 /* Transaction.swift in Sources */,
 				D9FCC6AE25488A9800E0AF74 /* String+LocalizedError.swift in Sources */,
 				D9A5FA74253D870E001C71B7 /* Payment.swift in Sources */,
+				D9368BAB26B1CC7F0083E5E3 /* ThreeDSTests.swift in Sources */,
 				D954C00E2696621600714396 /* Visa.swift in Sources */,
 				D9A5FA69253CF7B6001C71B7 /* PaymentSession.swift in Sources */,
 				D9A5FA7A253D887B001C71B7 /* Style.swift in Sources */,

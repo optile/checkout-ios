@@ -43,6 +43,7 @@ extension Transaction {
         var transaction = try JSONDecoder().decode(Transaction.self, from: data)
         transaction.payment.amount = amount
         transaction.operationType = operationType.rawValue
+        transaction.transactionId = String(Date().timeIntervalSince1970)
 
         return transaction
     }
@@ -70,6 +71,7 @@ extension Transaction {
         case tryOtherAccount
         case tryOtherNetwork
         case nonMagicNumber
+        case threeDS
     }
 }
 
@@ -92,6 +94,7 @@ extension Transaction.MagicNumber {
         case .tryOtherNetwork: return 1.20
         case .tryOtherAccount: return 1.21
         case .nonMagicNumber: return 15
+        case .threeDS: return 1.23
         }
     }
 
@@ -103,6 +106,7 @@ extension Transaction.MagicNumber {
         case .tryOtherNetwork: return nil
         case .tryOtherAccount: return 1.21
         case .nonMagicNumber: return 15
+        case .threeDS: return nil
         }
     }
 }
