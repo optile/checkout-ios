@@ -5,6 +5,7 @@
 // See the LICENSE file for more information.
 
 import Foundation
+import OSLog
 
 /// Base request protocol that will be used for `Connection`.
 protocol Request {
@@ -18,6 +19,14 @@ protocol Request {
     func build() throws -> URLRequest
 
     var httpMethod: HTTPMethod { get }
+
+    // Logging
+
+    @available(iOS 14.0, *)
+    func logRequest(to logger: Logger)
+
+    @available(iOS 14.0, *)
+    func logResponse(_ response: Response, to logger: Logger)
 }
 
 extension Request where Response == Data {

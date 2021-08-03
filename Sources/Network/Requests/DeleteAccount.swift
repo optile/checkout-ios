@@ -5,6 +5,7 @@
 // See the LICENSE file for more information.
 
 import Foundation
+import OSLog
 
 // MARK: - Request
 
@@ -32,5 +33,16 @@ struct DeleteAccount: DeleteRequest {
     init(url: URL, body: Body) {
         self.url = url
         self.body = body
+    }
+}
+
+@available(iOS 14.0, *)
+extension DeleteAccount {
+    func logRequest(to logger: Logger) {
+        logger.notice("[DELETE] ➡️ Delete registration using \(url, privacy: .private)")
+    }
+
+    func logResponse(_ response: OperationResult, to logger: Logger) {
+        logger.notice("[DELETE] ✅ \(response.resultInfo, privacy: .public)")
     }
 }

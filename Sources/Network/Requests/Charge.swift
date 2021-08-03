@@ -5,6 +5,7 @@
 // See the LICENSE file for more information.
 
 import Foundation
+import OSLog
 
 // MARK: - Request
 
@@ -12,7 +13,8 @@ import Foundation
 struct Charge: PostRequest {
     let url: URL
     let queryItems = [URLQueryItem]()
-    let body: Body?
+    var body: Body? { chargeBody }
+    private let chargeBody: Body
 
     var operationType: String { url.lastPathComponent }
 
@@ -21,7 +23,18 @@ struct Charge: PostRequest {
     /// - Parameter url: value from `links.operation` for charge operation
     init(from url: URL, body: Body) {
         self.url = url
-        self.body = body
+        self.chargeBody = body
+    }
+}
+
+@available(iOS 14.0, *)
+extension Charge {
+    func logRequest(to logger: Logger) {
+        logger.notice("[POST] ➡️ Charge request: \(url.absoluteString, privacy: .private)")
+    }
+
+    func logResponse(_ response: OperationResult, to logger: Logger) {
+        logger.info("[POST] ✅ \(response.resultInfo, privacy: .public). Interaction: \(response.interaction.code, privacy: .public)/\(response.interaction.reason, privacy: .public)")
     }
 }
 

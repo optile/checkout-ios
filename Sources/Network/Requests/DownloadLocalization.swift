@@ -5,6 +5,7 @@
 // See the LICENSE file for more information.
 
 import Foundation
+import OSLog
 
 // MARK: - Request
 
@@ -19,5 +20,20 @@ struct DownloadLocalization: GetRequest {
     /// - Parameter url: `self` link from payment session
     init(from url: URL) {
         self.url = url
+    }
+}
+
+@available(iOS 14.0, *)
+extension DownloadLocalization {
+    private var localizationName: String {
+        url.lastPathComponent.replacingOccurrences(of: ".json", with: "")
+    }
+
+    func logRequest(to logger: Logger) {
+        logger.info("[GET] ➡️ Localization for \(localizationName, privacy: .public)")
+    }
+
+    func logResponse(_ response: [String: String], to logger: Logger) {
+        logger.info("[GET] ✅ Localization for \(localizationName, privacy: .public)")
     }
 }

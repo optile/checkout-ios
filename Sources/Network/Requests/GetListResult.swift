@@ -5,6 +5,7 @@
 // See the LICENSE file for more information.
 
 import Foundation
+import OSLog
 
 // MARK: - Request
 
@@ -19,5 +20,16 @@ struct GetListResult: GetRequest {
     /// - Parameter url: `self` link from payment session
     init(url: URL) {
         self.url = url
+    }
+}
+
+@available(iOS 14.0, *)
+extension GetListResult {
+    func logRequest(to logger: Logger) {
+        logger.notice("[GET] ➡️ Payment session for \(url.lastPathComponent, privacy: .private(mask: .hash))")
+    }
+
+    func logResponse(_ response: ListResult, to logger: Logger) {
+        logger.notice("[GET] ✅ \(response.resultInfo, privacy: .private)")
     }
 }

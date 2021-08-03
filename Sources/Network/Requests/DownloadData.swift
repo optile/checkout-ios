@@ -5,6 +5,7 @@
 // See the LICENSE file for more information.
 
 import Foundation
+import OSLog
 
 // MARK: - Request
 
@@ -20,5 +21,16 @@ struct DownloadData: GetRequest {
     /// - Parameter url: `self` link from payment session
     init(from url: URL) {
         self.url = url
+    }
+}
+
+@available(iOS 14.0, *)
+extension DownloadData {
+    func logRequest(to logger: Logger) {
+        logger.notice("[GET] ➡️ Download data from \(url, privacy: .public)")
+    }
+
+    func logResponse(_ response: Data, to logger: Logger) {
+        logger.notice("[GET] ✅ OK")
     }
 }

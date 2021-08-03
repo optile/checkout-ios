@@ -19,11 +19,6 @@ class URLSessionConnection: Connection {
         }
 
         task.resume()
-
-        #if DEBUG
-        let method = request.httpMethod?.uppercased() ?? ""
-        os_log(.debug, "[API] >> %@ %@", method, request.url!.absoluteString)
-        #endif
     }
 
     // MARK: - Helper methods

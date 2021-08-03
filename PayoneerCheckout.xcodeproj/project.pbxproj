@@ -12,6 +12,7 @@
 		D918A3F2254F205C005BBA8B /* ListResult.json in Resources */ = {isa = PBXBuildFile; fileRef = D918A3F1254F205C005BBA8B /* ListResult.json */; };
 		D918A3F5254F2450005BBA8B /* NetworkLocalization.json in Resources */ = {isa = PBXBuildFile; fileRef = D918A3F4254F2450005BBA8B /* NetworkLocalization.json */; };
 		D918A3F7254F2483005BBA8B /* CheckoutLocalization.json in Resources */ = {isa = PBXBuildFile; fileRef = D918A3F6254F2483005BBA8B /* CheckoutLocalization.json */; };
+		D91A4E3726B8A3450036CAC9 /* Bundle+identifer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91A4E3626B8A3450036CAC9 /* Bundle+identifer.swift */; };
 		D91FC7FD2687E1090014997B /* Input.ViewController.DeletionAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91FC7FC2687E1090014997B /* Input.ViewController.DeletionAlertController.swift */; };
 		D91FC802268868CF0014997B /* Input.ModelTransformer.RegistrationOptionsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91FC801268868CF0014997B /* Input.ModelTransformer.RegistrationOptionsBuilder.swift */; };
 		D91FC804268869700014997B /* Input.ModelTransformer.ExpirationDateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91FC803268869700014997B /* Input.ModelTransformer.ExpirationDateManager.swift */; };
@@ -235,6 +236,7 @@
 		D918A3F1254F205C005BBA8B /* ListResult.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ListResult.json; sourceTree = "<group>"; };
 		D918A3F4254F2450005BBA8B /* NetworkLocalization.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = NetworkLocalization.json; sourceTree = "<group>"; };
 		D918A3F6254F2483005BBA8B /* CheckoutLocalization.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CheckoutLocalization.json; sourceTree = "<group>"; };
+		D91A4E3626B8A3450036CAC9 /* Bundle+identifer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+identifer.swift"; sourceTree = "<group>"; };
 		D91FC7FC2687E1090014997B /* Input.ViewController.DeletionAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Input.ViewController.DeletionAlertController.swift; sourceTree = "<group>"; };
 		D91FC801268868CF0014997B /* Input.ModelTransformer.RegistrationOptionsBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Input.ModelTransformer.RegistrationOptionsBuilder.swift; sourceTree = "<group>"; };
 		D91FC803268869700014997B /* Input.ModelTransformer.ExpirationDateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Input.ModelTransformer.ExpirationDateManager.swift; sourceTree = "<group>"; };
@@ -965,6 +967,7 @@
 			isa = PBXGroup;
 			children = (
 				D96A4F35257D96EE00E74C8C /* log.swift */,
+				D91A4E3626B8A3450036CAC9 /* Bundle+identifer.swift */,
 				D96A4F36257D96EF00E74C8C /* InternalError.swift */,
 				D96A4F37257D96EF00E74C8C /* AssetProvider.swift */,
 			);
@@ -976,8 +979,8 @@
 			children = (
 				D928CD8425B9F9B300DE602F /* BrowserDataBuilder.swift */,
 				D9D9A35725B087860072EE2E /* UserAgentBuilder.swift */,
-				D96A4F39257D96EF00E74C8C /* Operations */,
 				D96A4F3C257D96EF00E74C8C /* HTTPMethod.swift */,
+				D96A4F39257D96EF00E74C8C /* Operations */,
 				D96A4F3D257D96EF00E74C8C /* Requests */,
 				D96A4F41257D96EF00E74C8C /* URLSessionConnection.swift */,
 				D96A4F42257D96EF00E74C8C /* Protocols */,
@@ -1453,6 +1456,7 @@
 				D96A4F55257D96EF00E74C8C /* Input.swift in Sources */,
 				D96A4FAE257D96EF00E74C8C /* RedirectCallbackHandler.swift in Sources */,
 				D96A4F78257D96EF00E74C8C /* Input.Field.Validation.Luhn.swift in Sources */,
+				D91A4E3726B8A3450036CAC9 /* Bundle+identifer.swift in Sources */,
 				D96A4FA8257D96EF00E74C8C /* PaymentSessionServiceDelegate.swift in Sources */,
 				D96A4FAB257D96EF00E74C8C /* DataDownloadProvider.swift in Sources */,
 				D96A4FB6257D96EF00E74C8C /* DequeueableCell.swift in Sources */,
