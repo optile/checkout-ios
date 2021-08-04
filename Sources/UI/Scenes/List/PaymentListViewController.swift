@@ -6,6 +6,7 @@
 
 #if canImport(UIKit)
 import UIKit
+import os.log
 
 @objc public final class PaymentListViewController: UIViewController {
     weak var methodsTableView: UITableView?
@@ -13,7 +14,6 @@ import UIKit
     weak var errorAlertController: UIAlertController?
 
     let sessionService: PaymentSessionService
-
     let sharedTranslationProvider: SharedTranslationProvider
     fileprivate let router: List.Router
 
@@ -24,6 +24,9 @@ import UIKit
     fileprivate let operationResultHandler = OperationResultHandler()
 
     lazy private(set) var slideInPresentationManager = SlideInPresentationManager()
+
+    @available(iOS 14.0, *)
+    fileprivate var logger: Logger { Logger(subsystem: Bundle.frameworkIdentifier, category: "ListScene") }
 
     /// - Parameter listResultURL: URL that you receive after executing *Create new payment session request* request. Needed URL will be specified in `links.self`
     @objc public convenience init(listResultURL: URL) {
@@ -75,12 +78,19 @@ extension PaymentListViewController {
 
 extension PaymentListViewController {
     func loadPaymentSession() {
+        if #available(iOS 14.0, *) {
+            logger.info("Loading payment session...")
+        }
         stateManager.viewState = .loading
         sessionService.loadPaymentSession()
     }
 
     fileprivate func show(paymentNetworks: [PaymentNetwork], animated: Bool) {
         do {
+            if #available(iOS 14.0, *) {
+                let paymentNetworkNames = paymentNetworks.map { $0.label }
+                logger.info("Requested to show payment networks: \(paymentNetworkNames, privacy: .public)")
+            }
             let inputViewController = try router.present(paymentNetworks: paymentNetworks, animated: animated)
             inputViewController.delegate = operationResultHandler
         } catch {
@@ -91,6 +101,9 @@ extension PaymentListViewController {
 
     fileprivate func show(registeredAccount: RegisteredAccount, animated: Bool) {
         do {
+            if #available(iOS 14.0, *) {
+                logger.debug("Requested to show a registered account for the network: \(registeredAccount.networkLabel, privacy: .public)")
+            }
             let inputViewController = try router.present(registeredAccount: registeredAccount, animated: animated)
             inputViewController.delegate = operationResultHandler
         } catch {
@@ -171,6 +184,12 @@ extension PaymentListViewController: OperationResultHandlerDelegate {
 
     /// Dismiss view controller and send result to a merchant
     func dismiss(with result: Result<OperationResult, ErrorInfo>) {
+        if #available(iOS 14.0, *) {
+            if case let .failure(error) = result {
+                logger.error("⛔️ Dismissing list view with error: \(error.localizedDescription, privacy: .public)")
+            }
+        }
+
         let paymentResult = PaymentResult(operationResult: result)
         delegate?.paymentService(didReceivePaymentResult: paymentResult, viewController: self)
     }
