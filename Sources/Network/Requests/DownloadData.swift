@@ -27,7 +27,7 @@ struct DownloadData: GetRequest {
 @available(iOS 14.0, *)
 extension DownloadData {
     func logRequest(to logger: Logger) {
-        logger.notice("[GET] ➡️ Download data from \(url, privacy: .public)")
+        logger.notice("[GET] ➡️ Download data from \(url, privacy: .private)")
     }
 
     func logResponse(_ response: Data, to logger: Logger) {

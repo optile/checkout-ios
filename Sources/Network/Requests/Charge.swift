@@ -34,7 +34,7 @@ extension Charge {
     }
 
     func logResponse(_ response: OperationResult, to logger: Logger) {
-        logger.info("[POST] ✅ \(response.resultInfo, privacy: .public). Interaction: \(response.interaction.code, privacy: .public)/\(response.interaction.reason, privacy: .public)")
+        logger.info("[POST] ✅ \(response.resultInfo, privacy: .private). Interaction: \(response.interaction.code, privacy: .private)/\(response.interaction.reason, privacy: .private)")
     }
 }
 

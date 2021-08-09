@@ -89,7 +89,7 @@ extension PaymentListViewController {
         do {
             if #available(iOS 14.0, *) {
                 let paymentNetworkNames = paymentNetworks.map { $0.label }
-                logger.info("Requested to show payment networks: \(paymentNetworkNames, privacy: .public)")
+                logger.info("Requested to show payment networks: \(paymentNetworkNames, privacy: .private)")
             }
             let inputViewController = try router.present(paymentNetworks: paymentNetworks, animated: animated)
             inputViewController.delegate = operationResultHandler
@@ -102,7 +102,7 @@ extension PaymentListViewController {
     fileprivate func show(registeredAccount: RegisteredAccount, animated: Bool) {
         do {
             if #available(iOS 14.0, *) {
-                logger.debug("Requested to show a registered account for the network: \(registeredAccount.networkLabel, privacy: .public)")
+                logger.debug("Requested to show a registered account for the network: \(registeredAccount.networkLabel, privacy: .private)")
             }
             let inputViewController = try router.present(registeredAccount: registeredAccount, animated: animated)
             inputViewController.delegate = operationResultHandler
@@ -186,7 +186,7 @@ extension PaymentListViewController: OperationResultHandlerDelegate {
     func dismiss(with result: Result<OperationResult, ErrorInfo>) {
         if #available(iOS 14.0, *) {
             if case let .failure(error) = result {
-                logger.error("⛔️ Dismissing list view with error: \(error.localizedDescription, privacy: .public)")
+                logger.error("⛔️ Dismissing list view with error: \(error.localizedDescription, privacy: .private)")
             }
         }
 

@@ -71,9 +71,9 @@ class SendRequestOperation<T>: AsynchronousOperation where T: Request {
     @available(iOS 14.0, *)
     private func log(error: Error) {
         if let errorInfo = error as? ErrorInfo {
-            request.logger.error("⛔️ \(errorInfo.resultInfo, privacy: .public). Interaction: \(errorInfo.interaction.code, privacy: .public)/\(errorInfo.interaction.reason, privacy: .public)")
+            request.logger.error("⛔️ \(errorInfo.resultInfo, privacy: .private). Interaction: \(errorInfo.interaction.code, privacy: .private)/\(errorInfo.interaction.reason, privacy: .private)")
         } else {
-            request.logger.error("⛔️ \(error.localizedDescription, privacy: .public)")
+            request.logger.error("⛔️ \(error.localizedDescription, privacy: .private)")
         }
     }
 

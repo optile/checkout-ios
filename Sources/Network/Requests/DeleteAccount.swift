@@ -43,6 +43,6 @@ extension DeleteAccount {
     }
 
     func logResponse(_ response: OperationResult, to logger: Logger) {
-        logger.notice("[DELETE] ✅ \(response.resultInfo, privacy: .public)")
+        logger.notice("[DELETE] ✅ \(response.resultInfo, privacy: .private)")
     }
 }

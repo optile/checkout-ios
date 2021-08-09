@@ -30,10 +30,10 @@ extension DownloadLocalization {
     }
 
     func logRequest(to logger: Logger) {
-        logger.info("[GET] ➡️ Localization for \(localizationName, privacy: .public)")
+        logger.info("[GET] ➡️ Localization for \(localizationName, privacy: .private)")
     }
 
     func logResponse(_ response: [String: String], to logger: Logger) {
-        logger.info("[GET] ✅ Localization for \(localizationName, privacy: .public)")
+        logger.info("[GET] ✅ Localization for \(localizationName, privacy: .private)")
     }
 }
