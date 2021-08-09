@@ -5,11 +5,15 @@
 // See the LICENSE file for more information.
 
 import UIKit
+import os.log
 
 extension Input.Table {
     class Validator {
         let dataSource: DataSource
         weak var collectionView: UICollectionView!
+
+        @available(iOS 14.0, *)
+        var logger: Logger { Logger(subsystem: Bundle.frameworkIdentifier, category: "Validator")}
 
         /// If disabled single cell validation will be skipped.
         /// - Note: goal of that property is to avoid double validation animation bug when a text field looses a focus after user presses a pay button, so `validate(cell:)` and `validateAll` could be called at one time.
@@ -56,7 +60,11 @@ extension Input.Table.Validator {
                 guard let validatable = row as? Validatable else { continue }
                 validatable.validateAndSaveResult(option: option)
 
-                if validatable.validationErrorText != nil {
+                if let errorText = validatable.validationErrorText {
+                    if #available(iOS 14.0, *) {
+                        logger.debug("Validation error for row #\(rowNumber, privacy: .private): \(errorText, privacy: .private)")
+                    }
+
                     isValid = false
                 }
 
@@ -69,7 +77,9 @@ extension Input.Table.Validator {
                 do {
                     try cellRepresentable.configure(cell: cell)
                 } catch {
-                    log(error)
+                    if #available(iOS 14.0, *) {
+                        error.log(to: logger)
+                    }
                 }
             }
         }
@@ -101,7 +111,9 @@ extension Input.Table.Validator {
                 try cellRepresentable.configure(cell: cell)
                 invalidateLayout(at: [indexPath])
             } catch {
-                log(error)
+                if #available(iOS 14.0, *) {
+                    error.log(to: logger)
+                }
             }
         }
     }

@@ -23,6 +23,15 @@ func log(_ error: Error) {
     log(.error, "%@", text)
 }
 
+@available(iOS 14.0, *)
+extension Error {
+    func log(to logger: Logger) {
+        var text = String()
+        dump(self, to: &text)
+        logger.error("\(text)")
+    }
+}
+
 enum LogType {
     case info, debug, error, fault
 
