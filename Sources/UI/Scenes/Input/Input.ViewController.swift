@@ -7,6 +7,7 @@
 #if canImport(UIKit)
 import UIKit
 import SafariServices
+import os.log
 
 // MARK: Initializers
 
@@ -29,6 +30,9 @@ extension Input {
         lazy var deleteBarButton: UIBarButtonItem = {
             UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteBarButtonDidTap(_:)))
         }()
+
+        @available(iOS 14.0, *)
+        fileprivate var logger: Logger { Logger(subsystem: Bundle.frameworkIdentifier, category: "InputScene") }
 
         private init(header: CellRepresentable, smartSwitch: SmartSwitch.Selector, paymentServiceFactory: PaymentServicesFactory) {
             self.paymentController = .init(paymentServiceFactory: paymentServiceFactory)
@@ -242,8 +246,18 @@ extension Input.ViewController: InputTableControllerDelegate {
     private func replaceCurrentNetwork(with newSelection: Input.SmartSwitch.Selector.DetectedNetwork) {
         if let imagesHeaderModel = header as? Input.ImagesHeader {
             switch newSelection {
-            case .generic: imagesHeaderModel.networks = self.networks
-            case .specific(let specificNetwork): imagesHeaderModel.networks = [specificNetwork]
+            case .generic:
+                if #available(iOS 14.0, *) {
+                    logger.debug("SmartSwitch replacing model with a generic network")
+                }
+
+                imagesHeaderModel.networks = self.networks
+            case .specific(let specificNetwork):
+                if #available(iOS 14.0, *) {
+                    logger.debug("SmartSwitch replacing model with the specific network: \(specificNetwork.uiModel.networkLabel, privacy: .private)")
+                }
+
+                imagesHeaderModel.networks = [specificNetwork]
             }
         }
 
