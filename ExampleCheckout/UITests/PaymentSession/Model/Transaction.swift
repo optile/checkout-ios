@@ -71,7 +71,7 @@ extension Transaction {
         case tryOtherAccount
         case tryOtherNetwork
         case nonMagicNumber
-        case threeDS
+        case threeDS2
     }
 }
 
@@ -94,7 +94,7 @@ extension Transaction.MagicNumber {
         case .tryOtherNetwork: return 1.20
         case .tryOtherAccount: return 1.21
         case .nonMagicNumber: return 15
-        case .threeDS: return 1.23
+        case .threeDS2: return 1.23
         }
     }
 
@@ -106,7 +106,7 @@ extension Transaction.MagicNumber {
         case .tryOtherNetwork: return nil
         case .tryOtherAccount: return 1.21
         case .nonMagicNumber: return 15
-        case .threeDS: return nil
+        case .threeDS2: return nil
         }
     }
 }

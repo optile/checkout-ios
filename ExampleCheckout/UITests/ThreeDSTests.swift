@@ -9,7 +9,7 @@ import XCTest
 // Flows should follow rules specified in https://optile.atlassian.net/wiki/spaces/PPW/pages/2228158566/3DS2+-+TESTPSP.
 class ThreeDSTests: NetworksTests {
     func testProceedOk() throws {
-        let transaction = try Transaction.loadFromTemplate(amount: .threeDS, operationType: .charge)
+        let transaction = try Transaction.loadFromTemplate(amount: .threeDS2, operationType: .charge)
         try setupWithPaymentSession(using: transaction)
 
         app.tables.staticTexts["Cards"].tap()
@@ -31,7 +31,7 @@ class ThreeDSTests: NetworksTests {
     }
 
     func testProceedPending() throws {
-        let transaction = try Transaction.loadFromTemplate(amount: .threeDS, operationType: .charge)
+        let transaction = try Transaction.loadFromTemplate(amount: .threeDS2, operationType: .charge)
         try setupWithPaymentSession(using: transaction)
 
         app.tables.staticTexts["Cards"].tap()
@@ -60,7 +60,7 @@ class ThreeDSTests: NetworksTests {
     }
 
     func testAbort() throws {
-        let transaction = try Transaction.loadFromTemplate(amount: .threeDS, operationType: .charge)
+        let transaction = try Transaction.loadFromTemplate(amount: .threeDS2, operationType: .charge)
         try setupWithPaymentSession(using: transaction)
 
         app.tables.staticTexts["Cards"].tap()
