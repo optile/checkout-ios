@@ -196,6 +196,8 @@
 		D96BB8C8249FEBB400C2AD73 /* MockFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96BB8B7249FEBB400C2AD73 /* MockFactory.swift */; };
 		D96BB8CA249FEBB400C2AD73 /* MockFactory.ListResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96BB8B9249FEBB400C2AD73 /* MockFactory.ListResult.swift */; };
 		D9861B94257F71BD005DA1A4 /* Result+computedVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9861B93257F71BD005DA1A4 /* Result+computedVariables.swift */; };
+		D988E41526CAD96800A57D8E /* HolderNames.json in Resources */ = {isa = PBXBuildFile; fileRef = D988E41426CAD96800A57D8E /* HolderNames.json */; };
+		D988E41726CADA1500A57D8E /* CardNumberMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D988E41626CADA1500A57D8E /* CardNumberMatcherTests.swift */; };
 		D988E41A26CADB1100A57D8E /* Input.Field.Validation.CardNumberMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = D988E41826CADA4900A57D8E /* Input.Field.Validation.CardNumberMatcher.swift */; };
 		D99FF39D25E7B517005F4097 /* Charge.swift in Sources */ = {isa = PBXBuildFile; fileRef = D99FF39C25E7B517005F4097 /* Charge.swift */; };
 		D99FF39F25E7B593005F4097 /* PostRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D99FF39E25E7B593005F4097 /* PostRequest.swift */; };
@@ -423,6 +425,8 @@
 		D96BB8B9249FEBB400C2AD73 /* MockFactory.ListResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockFactory.ListResult.swift; sourceTree = "<group>"; };
 		D96BB8CB249FEBC500C2AD73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D9861B93257F71BD005DA1A4 /* Result+computedVariables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Result+computedVariables.swift"; sourceTree = "<group>"; };
+		D988E41426CAD96800A57D8E /* HolderNames.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = HolderNames.json; sourceTree = "<group>"; };
+		D988E41626CADA1500A57D8E /* CardNumberMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardNumberMatcherTests.swift; sourceTree = "<group>"; };
 		D988E41826CADA4900A57D8E /* Input.Field.Validation.CardNumberMatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Input.Field.Validation.CardNumberMatcher.swift; sourceTree = "<group>"; };
 		D99FF39C25E7B517005F4097 /* Charge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Charge.swift; sourceTree = "<group>"; };
 		D99FF39E25E7B593005F4097 /* PostRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRequest.swift; sourceTree = "<group>"; };
@@ -481,6 +485,7 @@
 		D918A3F3254F2074005BBA8B /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				D988E41426CAD96800A57D8E /* HolderNames.json */,
 				D918A3F1254F205C005BBA8B /* ListResult.json */,
 				D918A3F4254F2450005BBA8B /* NetworkLocalization.json */,
 				D918A3F6254F2483005BBA8B /* CheckoutLocalization.json */,
@@ -693,6 +698,7 @@
 				D96A4EBB257D96EE00E74C8C /* Input.Field.Validation.ExpiryDate.swift */,
 				D96A4EBC257D96EE00E74C8C /* Input.Field.Validation.Luhn.swift */,
 				D96A4EBD257D96EE00E74C8C /* Input.Field.Validation.swift */,
+				D988E41826CADA4900A57D8E /* Input.Field.Validation.CardNumberMatcher.swift */,
 			);
 			path = Validation;
 			sourceTree = "<group>";
@@ -1069,6 +1075,7 @@
 		D96BB8A4249FEBB400C2AD73 /* Validation */ = {
 			isa = PBXGroup;
 			children = (
+				D988E41626CADA1500A57D8E /* CardNumberMatcherTests.swift */,
 				D96BB8A5249FEBB400C2AD73 /* MockFactory.InputElements.swift */,
 				D96BB8A6249FEBB400C2AD73 /* ValidationTests.swift */,
 			);
@@ -1314,6 +1321,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D988E41526CAD96800A57D8E /* HolderNames.json in Resources */,
 				D918A3F5254F2450005BBA8B /* NetworkLocalization.json in Resources */,
 				D918A3F7254F2483005BBA8B /* CheckoutLocalization.json in Resources */,
 				D918A3F2254F205C005BBA8B /* ListResult.json in Resources */,
@@ -1599,6 +1607,7 @@
 			files = (
 				D96BB8BE249FEBB400C2AD73 /* DataDownloadProviderTests.swift in Sources */,
 				D96BB8C1249FEBB400C2AD73 /* XCTAttachment+subject.swift in Sources */,
+				D988E41726CADA1500A57D8E /* CardNumberMatcherTests.swift in Sources */,
 				D96BB8CA249FEBB400C2AD73 /* MockFactory.ListResult.swift in Sources */,
 				D96BB8BA249FEBB400C2AD73 /* NetworkTests.swift in Sources */,
 				D96BB8BB249FEBB400C2AD73 /* XCTestManifests.swift in Sources */,

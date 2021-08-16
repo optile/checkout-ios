@@ -1,0 +1,246 @@
+[
+  {
+    "holderName": "FirstName LastName",
+    "isValid": true
+  },
+  {
+    "holderName": "FirstName MiddleName LastName",
+    "isValid": true
+  },
+  {
+    "holderName": "FirstName III MiddleName LastName",
+    "isValid": true
+  },
+  {
+    "holderName": "FirstName 3rd MiddleName LastName",
+    "isValid": true
+  },
+  {
+    "holderName": "FirstName SecondName ThirdName FourthName von LastName",
+    "isValid": true
+  },
+  {
+    "holderName": "John the 8th------------",
+    "isValid": true
+  },
+  {
+    "holderName": "John the -.- -.-8th",
+    "isValid": true
+  },
+  {
+    "holderName": "1          a",
+    "isValid": true
+  },
+  {
+    "holderName": "1..........a",
+    "isValid": true
+  },
+  {
+    "holderName": "1----------a",
+    "isValid": true
+  },
+  {
+    "holderName": "1-2-3-4-5-6a",
+    "isValid": true
+  },
+  {
+    "holderName": "1-2-3-4-5-6-7-8-9-0",
+    "isValid": true
+  },
+  {
+    "holderName": "1-2-3-4-5-6-7-8-9-0 ",
+    "isValid": true
+  },
+  {
+    "holderName": " 1-2-3-4-5-6-7-8-9-0",
+    "isValid": true
+  },
+  {
+    "holderName": " 1234-5678-90 1",
+    "isValid": false
+  },
+  {
+    "holderName": " 1234-5678-90    1",
+    "isValid": false
+  },
+  {
+    "holderName": "123",
+    "isValid": true
+  },
+  {
+    "holderName": "1234",
+    "isValid": true
+  },
+  {
+    "holderName": "123456 ",
+    "isValid": true
+  },
+  {
+    "holderName": "123456.",
+    "isValid": true
+  },
+  {
+    "holderName": "123456-",
+    "isValid": true
+  },
+  {
+    "holderName": "1234567",
+    "isValid": true
+  },
+  {
+    "holderName": "123-4567",
+    "isValid": true
+  },
+  {
+    "holderName": "1234 567",
+    "isValid": true
+  },
+  {
+    "holderName": "12345.67",
+    "isValid": true
+  },
+  {
+    "holderName": "123456789",
+    "isValid": true
+  },
+  {
+    "holderName": "1234567890",
+    "isValid": true
+  },
+  {
+    "holderName": "12345678901",
+    "isValid": false
+  },
+  {
+    "holderName": "123456789012",
+    "isValid": false
+  },
+  {
+    "holderName": "1234567890123",
+    "isValid": false
+  },
+  {
+    "holderName": "12345678901234",
+    "isValid": false
+  },
+  {
+    "holderName": "123456789012345",
+    "isValid": false
+  },
+  {
+    "holderName": "1234567890123456",
+    "isValid": false
+  },
+  {
+    "holderName": "12345678901234567",
+    "isValid": false
+  },
+  {
+    "holderName": "123456789012345678",
+    "isValid": false
+  },
+  {
+    "holderName": "1234567890123456789",
+    "isValid": false
+  },
+  {
+    "holderName": "12345678901234567890",
+    "isValid": false
+  },
+  {
+    "holderName": "123456789012345678901",
+    "isValid": false
+  },
+  {
+    "holderName": "12345678901a",
+    "isValid": false
+  },
+  {
+    "holderName": "12345678901aäsdfa",
+    "isValid": false
+  },
+  {
+    "holderName": "a12345678901a",
+    "isValid": false
+  },
+  {
+    "holderName": "asdfasdf12345678901",
+    "isValid": false
+  },
+  {
+    "holderName": "aäfasdf12345678901aäfasdfas",
+    "isValid": false
+  },
+  {
+    "holderName": "aäfasdf 1234567890 aäfasdfas",
+    "isValid": true
+  },
+  {
+    "holderName": "aäfasdf 12345678901 aäfasdfas",
+    "isValid": false
+  },
+  {
+    "holderName": "aäfasdf 1234 5678 901 aäfasdfas",
+    "isValid": false
+  },
+  {
+    "holderName": "aäfasdf a1234 5678 9014 1235x öasdfüsdfas",
+    "isValid": false
+  },
+  {
+    "holderName": "aäfasdf 1234 5678 9014 1235 öasdfüsdfas",
+    "isValid": false
+  },
+  {
+    "holderName": "aäfasdf 1234-5678-9014-1235 öasdfüsdfas",
+    "isValid": false
+  },
+  {
+    "holderName": "aäfasdf 1234.5678.9014.1235 öasdfüsdfas",
+    "isValid": false
+  },
+  {
+    "holderName": "aäfasdff1234567890141235 öasdfüsdfas",
+    "isValid": false
+  },
+  {
+    "holderName": "aäfasdf1234 5678 9014 1235 öasdfüsdfas",
+    "isValid": false
+  },
+  {
+    "holderName": "aäfasdf1234-5678-9014-1235 öasdfüsdfas",
+    "isValid": false
+  },
+  {
+    "holderName": "aäfasdf1234.5678.9014.1235 öasdfüsdfas",
+    "isValid": false
+  },
+  {
+    "holderName": "aäfasdf 1234567890141235öasdfüsdfas",
+    "isValid": false
+  },
+  {
+    "holderName": "aäfasdf 1234 5678 9014 1235öasdfüsdfas",
+    "isValid": false
+  },
+  {
+    "holderName": "aäfasdf 1234-5678-9014-1235öasdfüsdfas",
+    "isValid": false
+  },
+  {
+    "holderName": "aäfasdf 1234.5678.9014.1235öasdfüsdfas",
+    "isValid": false
+  },
+  {
+      "holderName": "Adolph Blaine Charles David Earl Frederick Gerald Hubert Irvin John Kenneth Lloyd Martin Nero Oliver Paul Quincy Randolph Sherman Thomas Uncas Victor William Xerxes Yancy Zeus Wolfeschlegelsteinhausenbergerdorffwelchevoralternwarengewissenhaftschaferswessenschafewarenwohlgepflegeundsorgfaltigkeitbeschutzenvonangreifendurchihrraubgierigfeindewelchevoralternzwolftausendjahresvorandieerscheinenvanderersteerdemenschderraumschiffgebrauchlichtalsseinursprungvonkraftgestartseinlangefahrthinzwischensternartigraumaufdersuchenachdiesternwelchegehabtbewohnbarplanetenkreisedrehensichundwohinderneurassevonverstandigmenschlichkeitkonntefortpflanzenundsicherfreuenanlebenslanglichfreudeundruhemitnichteinfurchtvorangreifenvonandererintelligentgeschopfsvonhinzwischensternartigraum.",
+      "isValid": true
+  },
+  {
+      "holderName": "         ---- Aasdfal345-345.4th 3wrsdjf 123 Oijajsdf908 Asdf 12345 Aäsdfölkëdjf 123 Oijajsdf908 Asdf 12.345 Aäsdfölkëdjf 123 Oijajsdf908 Asdf 123-45 Aäsdfölkëdjf 123 Oijajsdf908 Asdf 1-2345 Aäsdfölkëdjf 123 Oijajsdf908 Asdf 1234-5 Aäsdfölkëdjf 123 Oijajsdf908 Asdf 1234 Aäsdfölkëdjf 478123 Oijajsdf908 Asdfgjwopi23456789            ",
+      "isValid": true
+  },
+  {
+    "holderName": "Aäsdfölkëdjf 123 Oijajsdf908 Asdf 1234 5678 9012 34 Aäsdfölkëdjf 123 Oijajsdf908 Asdf 1234567890 Aäsdfölkëdjf 123 Oijajsdf908 Asdf 12345678 Aäsdfölkëdjf 1231234123412342134 Oijajsdf908 Asdf 123456780 Aäsdfölkëdjf 123 Oijajsdf908 Asdf 1234567890 Aäsdfölkëdjf 123 Oijajsdf908 Asdf 1234567890 Aäsdfölkëdjf 123 Oijajsdf908 Asdf 1234567890",
+    "isValid": false
+  }
+]
