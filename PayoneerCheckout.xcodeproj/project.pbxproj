@@ -196,6 +196,7 @@
 		D96BB8C8249FEBB400C2AD73 /* MockFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96BB8B7249FEBB400C2AD73 /* MockFactory.swift */; };
 		D96BB8CA249FEBB400C2AD73 /* MockFactory.ListResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96BB8B9249FEBB400C2AD73 /* MockFactory.ListResult.swift */; };
 		D9861B94257F71BD005DA1A4 /* Result+computedVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9861B93257F71BD005DA1A4 /* Result+computedVariables.swift */; };
+		D988E41A26CADB1100A57D8E /* Input.Field.Validation.CardNumberMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = D988E41826CADA4900A57D8E /* Input.Field.Validation.CardNumberMatcher.swift */; };
 		D99FF39D25E7B517005F4097 /* Charge.swift in Sources */ = {isa = PBXBuildFile; fileRef = D99FF39C25E7B517005F4097 /* Charge.swift */; };
 		D99FF39F25E7B593005F4097 /* PostRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D99FF39E25E7B593005F4097 /* PostRequest.swift */; };
 		D9A88E0F241C55040043F535 /* validations.json in Resources */ = {isa = PBXBuildFile; fileRef = D9A88D93241C55040043F535 /* validations.json */; };
@@ -422,6 +423,7 @@
 		D96BB8B9249FEBB400C2AD73 /* MockFactory.ListResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockFactory.ListResult.swift; sourceTree = "<group>"; };
 		D96BB8CB249FEBC500C2AD73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D9861B93257F71BD005DA1A4 /* Result+computedVariables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Result+computedVariables.swift"; sourceTree = "<group>"; };
+		D988E41826CADA4900A57D8E /* Input.Field.Validation.CardNumberMatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Input.Field.Validation.CardNumberMatcher.swift; sourceTree = "<group>"; };
 		D99FF39C25E7B517005F4097 /* Charge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Charge.swift; sourceTree = "<group>"; };
 		D99FF39E25E7B593005F4097 /* PostRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRequest.swift; sourceTree = "<group>"; };
 		D9A67987241C6B2F006DC1DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1505,6 +1507,7 @@
 				D96A4FD0257D96EF00E74C8C /* FormData.swift in Sources */,
 				D96A4F94257D96EF00E74C8C /* LoadableLogo.swift in Sources */,
 				D96A4FD5257D96EF00E74C8C /* Networks.swift in Sources */,
+				D988E41A26CADB1100A57D8E /* Input.Field.Validation.CardNumberMatcher.swift in Sources */,
 				D96A4FBD257D96EF00E74C8C /* TranslationKey.swift in Sources */,
 				D928CD8525B9F9B300DE602F /* BrowserDataBuilder.swift in Sources */,
 				D99FF39F25E7B593005F4097 /* PostRequest.swift in Sources */,
