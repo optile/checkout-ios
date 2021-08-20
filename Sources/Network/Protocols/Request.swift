@@ -5,7 +5,7 @@
 // See the LICENSE file for more information.
 
 import Foundation
-import OSLog
+import os.log
 
 /// Base request protocol that will be used for `Connection`.
 protocol Request {
