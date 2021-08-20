@@ -46,7 +46,12 @@ struct InternalError: Error, CustomStringConvertible, CustomDebugStringConvertib
     }
 
     func log() {
-        os_log(type.osLogType, staticDescription, arguments)
+//        os_log(type.osLogType, staticDescription, arguments)
+
+        if #available(iOS 14.0, *) {
+            let logger = Logger(subsystem: Bundle.frameworkIdentifier, category: String(describing: Self.self))
+            logger.error("⛔️ \(staticDescription, privacy: .private)")
+        }
     }
 }
 

@@ -5,10 +5,13 @@
 // See the LICENSE file for more information.
 
 import Foundation
-import os
+import os.log
 
 func log(_ type: LogType, _ message: StaticString, _ args: CVarArg...) {
-    os_log(type.osLogType, message, args)
+    if #available(iOS 14.0, *) {
+        let logger = Logger(subsystem: Bundle.frameworkIdentifier + ".network", category: "Log")
+        logger.log(level: type.osLogType, "\(message, privacy: .private)")
+    }
 }
 
 func log(_ error: Error) {
