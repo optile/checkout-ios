@@ -5,7 +5,7 @@
 // See the LICENSE file for more information.
 
 import Foundation
-import os
+import os.log
 
 class URLSessionConnection: Connection {
     let session = URLSession(configuration: URLSessionConfiguration.default)
