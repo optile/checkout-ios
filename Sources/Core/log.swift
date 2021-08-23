@@ -9,7 +9,7 @@ import os.log
 
 func log(_ type: LogType, _ message: StaticString, _ args: CVarArg...) {
     if #available(iOS 14.0, *) {
-        let logger = Logger(subsystem: Bundle.frameworkIdentifier + ".network", category: "Log")
+        let logger = Logger(subsystem: Bundle.frameworkIdentifier, category: "Log")
         logger.log(level: type.osLogType, "\(message, privacy: .private)")
     }
 }
