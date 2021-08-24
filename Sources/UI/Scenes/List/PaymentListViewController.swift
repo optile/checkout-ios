@@ -4,9 +4,7 @@
 // This file is open source and available under the MIT license.
 // See the LICENSE file for more information.
 
-#if canImport(UIKit)
 import UIKit
-import os.log
 
 @objc public final class PaymentListViewController: UIViewController {
     weak var methodsTableView: UITableView?
@@ -24,9 +22,6 @@ import os.log
     fileprivate let operationResultHandler = OperationResultHandler()
 
     lazy private(set) var slideInPresentationManager = SlideInPresentationManager()
-
-    @available(iOS 14.0, *)
-    fileprivate var logger: Logger { Logger(subsystem: Bundle.frameworkIdentifier, category: "ListScene") }
 
     /// - Parameter listResultURL: URL that you receive after executing *Create new payment session request* request. Needed URL will be specified in `links.self`
     @objc public convenience init(listResultURL: URL) {
@@ -198,4 +193,7 @@ extension PaymentListViewController: OperationResultHandlerDelegate {
 extension CGFloat {
     static var rowHeight: CGFloat { return 64 }
 }
-#endif
+
+extension PaymentListViewController: Loggable {
+    var logCategory: String { "ListScene" }
+}

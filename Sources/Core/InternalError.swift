@@ -5,7 +5,6 @@
 // See the LICENSE file for more information.
 
 import Foundation
-import os.log
 
 struct InternalError: Error, CustomStringConvertible, CustomDebugStringConvertible {
     var debugDescription: String { return String(format: staticDescription.description, arguments) }
@@ -19,18 +18,16 @@ struct InternalError: Error, CustomStringConvertible, CustomDebugStringConvertib
     }
     let callStack: String
 
-    private let type: LogType
     private let staticDescription: StaticString
     private let arguments: [CVarArg]
 
-    init(description: StaticString, type: LogType = .error, file: String = #file, line: Int = #line, function: String = #function, _ args: CVarArg...) {
+    init(description: StaticString, file: String = #file, line: Int = #line, function: String = #function, _ args: CVarArg...) {
         self.callStack = "Called from the file: " + file + "#" + String(line) + ", method: " + function
         self.staticDescription = description
         self.arguments = args
-        self.type = type
     }
 
-    init<T>(description: StaticString, type: LogType = .error, file: String = #file, line: Int = #line, function: String = #function, objects: T...) {
+    init<T>(description: StaticString, file: String = #file, line: Int = #line, function: String = #function, objects: T...) {
         self.callStack = "Called from the file: " + file + "#" + String(line) + ", method: " + function
         self.staticDescription = description
 
@@ -41,16 +38,14 @@ struct InternalError: Error, CustomStringConvertible, CustomDebugStringConvertib
             dumps.append(text)
         }
         self.arguments = dumps
-
-        self.type = type
     }
 
     func log() {
         if #available(iOS 14.0, *) {
-            let logger = Logger(subsystem: Bundle.frameworkIdentifier, category: String(describing: Self.self))
             logger.error("⛔️ \(staticDescription, privacy: .private)")
         }
     }
 }
 
+extension InternalError: Loggable {}
 extension String: Error {}

@@ -66,10 +66,12 @@ class BasicPaymentService: PaymentService {
         let response = parser.parse(paymentRequestResponse: response)
 
         switch response {
-        case .result(let result):
-            log(.debug, "Payment result received. Interaction code: %@, reason: %@", result.interaction.code, result.interaction.reason)
+        case .result: break
         case .redirect(let url):
-            log(.debug, "Redirecting user to an external url: %@", url.absoluteString)
+            if #available(iOS 14.0, *) {
+                logger.notice("Redirecting user to an external url: \(url.absoluteString, privacy: .private)")
+            }
+
             let callbackHandler = RedirectCallbackHandler(for: request)
             callbackHandler.delegate = self.delegate
             callbackHandler.subscribeForNotification()
@@ -80,3 +82,5 @@ class BasicPaymentService: PaymentService {
         self.delegate?.paymentService(didReceiveResponse: response, for: request)
     }
 }
+
+extension BasicPaymentService: Loggable {}

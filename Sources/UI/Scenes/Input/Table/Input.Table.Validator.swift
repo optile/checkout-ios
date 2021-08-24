@@ -5,15 +5,11 @@
 // See the LICENSE file for more information.
 
 import UIKit
-import os.log
 
 extension Input.Table {
     class Validator {
         let dataSource: DataSource
         weak var collectionView: UICollectionView!
-
-        @available(iOS 14.0, *)
-        var logger: Logger { Logger(subsystem: Bundle.frameworkIdentifier, category: "Validator")}
 
         /// If disabled single cell validation will be skipped.
         /// - Note: goal of that property is to avoid double validation animation bug when a text field looses a focus after user presses a pay button, so `validate(cell:)` and `validateAll` could be called at one time.
@@ -128,4 +124,8 @@ extension Input.Table.Validator {
             self.collectionView.collectionViewLayout.invalidateLayout(with: context)
         }, completion: nil)
     }
+}
+
+extension Input.Table.Validator: Loggable {
+    var logCategory: String { "Validator" }
 }

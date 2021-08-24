@@ -45,7 +45,9 @@ class PaymentSessionService {
                     }
                 }
             case .failure(let error):
-                log(error)
+                if #available(iOS 14.0, *) {
+                    error.log(to: logger)
+                }
 
                 // If server responded with ErrorInfo
                 if let errorInfo = error as? ErrorInfo {
@@ -87,3 +89,5 @@ enum Load<Success, ErrorType> where ErrorType: Error {
     case failure(ErrorType)
     case success(Success)
 }
+
+extension PaymentSessionService: Loggable {}

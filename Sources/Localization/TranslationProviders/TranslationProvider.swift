@@ -6,7 +6,7 @@
 
 import Foundation
 
-protocol TranslationProvider {
+protocol TranslationProvider: Loggable {
     var translations: [[String: String]] { get }
 
     func translation(forKey key: String) -> String
@@ -20,8 +20,10 @@ extension TranslationProvider {
         if let translation = translation(forKey: key) {
             return translation
         } else {
-            log(.error, "Localization for key %@ is not found", key)
-            // FIXME: Show a key while localization files doesn't contain all keys
+            if #available(iOS 14.0, *) {
+                logger.error("Localization for key \(key, privacy: .private) is not found")
+            }
+
             return key
 //            return String()
         }

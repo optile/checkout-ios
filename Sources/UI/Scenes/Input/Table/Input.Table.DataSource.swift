@@ -122,7 +122,9 @@ extension Input.Table.DataSource: UICollectionViewDataSource {
         do {
             try cellModel.configure(cell: cell)
         } catch {
-            log(error)
+            if #available(iOS 14.0, *) {
+                error.log(to: logger)
+            }
         }
 
         if let cell = cell as? ContainsInputCellDelegate {
@@ -203,4 +205,8 @@ extension Input.Table.DataSource.Diff {
             }
         }
     }
+}
+
+extension Input.Table.DataSource: Loggable {
+    var logCategory: String { "InputScene" }
 }

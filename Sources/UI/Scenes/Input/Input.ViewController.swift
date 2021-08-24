@@ -4,10 +4,8 @@
 // This file is open source and available under the MIT license.
 // See the LICENSE file for more information.
 
-#if canImport(UIKit)
 import UIKit
 import SafariServices
-import os.log
 
 // MARK: Initializers
 
@@ -30,9 +28,6 @@ extension Input {
         lazy var deleteBarButton: UIBarButtonItem = {
             UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteBarButtonDidTap(_:)))
         }()
-
-        @available(iOS 14.0, *)
-        fileprivate var logger: Logger { Logger(subsystem: Bundle.frameworkIdentifier, category: "InputScene") }
 
         private init(header: CellRepresentable, smartSwitch: SmartSwitch.Selector, paymentServiceFactory: PaymentServicesFactory) {
             self.paymentController = .init(paymentServiceFactory: paymentServiceFactory)
@@ -356,4 +351,7 @@ extension Input.ViewController: CVVTextFieldViewCellDelegate {
         self.present(viewController, animated: true, completion: nil)
     }
 }
-#endif
+
+extension Input.ViewController: Loggable {
+    var logCategory: String { "InputScene" }
+}
