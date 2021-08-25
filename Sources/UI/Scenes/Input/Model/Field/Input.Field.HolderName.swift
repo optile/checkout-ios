@@ -19,6 +19,10 @@ extension Input.Field.HolderName: Validatable {
         case .missingValue: return translator.translation(forKey: "error.MISSING_HOLDER_NAME")
         }
     }
+
+    var isPassedCustomValidation: Bool {
+        return !Input.Field.Validation.CardNumberMatcher().containsCardNumber(in: value)
+    }
 }
 
 #if canImport(UIKit)
