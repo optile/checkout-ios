@@ -19,8 +19,8 @@ extension List {
 }
 
 extension List.Router {
-    func present(paymentNetworks: [PaymentNetwork], listOperationType: String, animated: Bool) throws -> Input.ViewController {
-        let inputViewController = try Input.ViewController(for: paymentNetworks, paymentServiceFactory: paymentServicesFactory, operationType: listOperationType)
+    func present(paymentNetworks: [PaymentNetwork], context: PaymentContext, animated: Bool) throws -> Input.ViewController {
+        let inputViewController = try Input.ViewController(for: paymentNetworks, context: context, paymentServiceFactory: paymentServicesFactory)
 
         let style: PresentationStyle
         if paymentNetworks.count == 1 && !inputViewController.hasInputFields {
@@ -33,8 +33,8 @@ extension List.Router {
         return inputViewController
     }
 
-    func present(registeredAccount: RegisteredAccount, listOperationType: String, animated: Bool) throws -> Input.ViewController {
-        let inputViewController = try Input.ViewController(for: registeredAccount, paymentServiceFactory: paymentServicesFactory, operationType: listOperationType)
+    func present(registeredAccount: RegisteredAccount, context: PaymentContext, animated: Bool) throws -> Input.ViewController {
+        let inputViewController = try Input.ViewController(for: registeredAccount, context: context, paymentServiceFactory: paymentServicesFactory)
         present(inputViewController: inputViewController, animated: animated, usingStyle: .bottomSlideIn)
         return inputViewController
     }

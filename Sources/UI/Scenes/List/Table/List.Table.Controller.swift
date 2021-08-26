@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 protocol ListTableControllerDelegate: AnyObject {
-    func didSelect(paymentNetworks: [PaymentNetwork], operationType: String)
-    func didSelect(registeredAccount: RegisteredAccount, operationType: String)
+    func didSelect(paymentNetworks: [PaymentNetwork], context: PaymentContext)
+    func didSelect(registeredAccount: RegisteredAccount, context: PaymentContext)
     func didRefreshRequest()
 
     var downloadProvider: DataDownloadProvider { get }
@@ -35,9 +35,9 @@ extension List.Table {
                 throw InternalError(description: "Unable to load a credit card's generic icon")
             }
 
-            dataSource = .init(networks: session.networks, accounts: session.registeredAccounts, translation: translationProvider, genericLogo: genericLogo, operationType: session.operationType)
+            dataSource = .init(networks: session.networks, accounts: session.registeredAccounts, translation: translationProvider, genericLogo: genericLogo, context: session.context)
 
-            switch session.operationType {
+            switch session.context.operationType {
             case .UPDATE: isRefreshable = true
             default: isRefreshable = false
             }
@@ -96,8 +96,8 @@ extension List.Table.Controller: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch dataSource.model(for: indexPath) {
-        case .account(let account): delegate?.didSelect(registeredAccount: account, operationType: dataSource.operationType.rawValue)
-        case .network(let networks): delegate?.didSelect(paymentNetworks: networks, operationType: dataSource.operationType.rawValue)
+        case .account(let account): delegate?.didSelect(registeredAccount: account, context: dataSource.context)
+        case .network(let networks): delegate?.didSelect(paymentNetworks: networks, context: dataSource.context)
         }
 
         tableView.deselectRow(at: indexPath, animated: true)

@@ -13,12 +13,12 @@ final class PaymentSession {
 
     let networks: [PaymentNetwork]
     let registeredAccounts: [RegisteredAccount]?
+    let context: PaymentContext
 
-    let operationType: Operation
+    init(networks: [TranslatedModel<ApplicableNetwork>], accounts: [TranslatedModel<AccountRegistration>]?, context: PaymentContext) {
+        self.context = context
 
-    init(operationType: Operation, networks: [TranslatedModel<ApplicableNetwork>], accounts: [TranslatedModel<AccountRegistration>]?) {
-        self.operationType = operationType
-        let buttonLocalizationKey = "button.operation." + operationType.rawValue.uppercased() + ".label"
+        let buttonLocalizationKey = "button.operation." + context.operationType.rawValue.uppercased() + ".label"
 
         self.networks = networks.map {
             .init(from: $0.model, submitButtonLocalizationKey: buttonLocalizationKey, localizeUsing: $0.translator)

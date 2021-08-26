@@ -8,5 +8,5 @@ import Foundation
 
 protocol PaymentSessionServiceDelegate: AnyObject {
     func paymentSessionService(loadingDidCompleteWith result: Load<PaymentSession, ErrorInfo>)
-    func paymentSessionService(shouldSelect network: PaymentNetwork, operationType: String)
+    func paymentSessionService(shouldSelect network: PaymentNetwork, context: PaymentContext)
 }

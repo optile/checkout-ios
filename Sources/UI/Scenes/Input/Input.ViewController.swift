@@ -29,8 +29,8 @@ extension Input {
             UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteBarButtonDidTap(_:)))
         }()
 
-        private init(header: CellRepresentable, smartSwitch: SmartSwitch.Selector, paymentServiceFactory: PaymentServicesFactory, listOperationType: String) {
-            self.paymentController = .init(paymentServiceFactory: paymentServiceFactory, listOperationType: listOperationType)
+        private init(header: CellRepresentable, smartSwitch: SmartSwitch.Selector, paymentServiceFactory: PaymentServicesFactory, context: PaymentContext) {
+            self.paymentController = .init(paymentServiceFactory: paymentServiceFactory, listOperationType: context.operationType.rawValue)
             self.networks = smartSwitch.networks
             self.header = header
             self.smartSwitch = smartSwitch
@@ -50,7 +50,7 @@ extension Input {
             tableController.cvvHintDelegate = self
         }
 
-        convenience init(for paymentNetworks: [PaymentNetwork], paymentServiceFactory: PaymentServicesFactory, operationType: String) throws {
+        convenience init(for paymentNetworks: [PaymentNetwork], context: PaymentContext, paymentServiceFactory: PaymentServicesFactory) throws {
             let transformer = ModelTransformer()
             let networks = try paymentNetworks.map { try transformer.transform(paymentNetwork: $0) }
             let smartSwitch = try SmartSwitch.Selector(networks: networks)
@@ -62,18 +62,18 @@ extension Input {
                 header = Input.ImagesHeader(for: networks)
             }
 
-            self.init(header: header, smartSwitch: smartSwitch, paymentServiceFactory: paymentServiceFactory, listOperationType: operationType)
+            self.init(header: header, smartSwitch: smartSwitch, paymentServiceFactory: paymentServiceFactory, context: context)
 
             self.title = smartSwitch.selected.network.translation.translation(forKey: "networks.form.default.title")
         }
 
-        convenience init(for registeredAccount: RegisteredAccount, paymentServiceFactory: PaymentServicesFactory, operationType: String) throws {
+        convenience init(for registeredAccount: RegisteredAccount, context: PaymentContext, paymentServiceFactory: PaymentServicesFactory) throws {
             let transformer = ModelTransformer()
             let network = try transformer.transform(registeredAccount: registeredAccount)
             let smartSwitch = try SmartSwitch.Selector(networks: [network])
             let header = Input.TextHeader(from: registeredAccount)
 
-            self.init(header: header, smartSwitch: smartSwitch, paymentServiceFactory: paymentServiceFactory, listOperationType: operationType)
+            self.init(header: header, smartSwitch: smartSwitch, paymentServiceFactory: paymentServiceFactory, context: context)
 
             self.title = registeredAccount.translation.translation(forKey: "accounts.form.default.title")
         }
