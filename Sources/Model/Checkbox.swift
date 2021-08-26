@@ -7,14 +7,11 @@
 import Foundation
 
 class Checkbox: NSObject, Decodable {
-    /// Distinguish name of this checkbox element.
-    let name: String
-
     /// Operating and display mode of this checkbox.
     let mode: String
 
     /// Error message that will be displayed if checkbox is required, but was not checked.
-    let requireMsg: String?
+    let requiredMessage: String?
 
     // MARK: - Enumerations
 
