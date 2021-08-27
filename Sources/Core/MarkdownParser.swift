@@ -12,7 +12,7 @@ private let urlExpression = "\\((?<url>[^\\)]*)\\)"
 private let linkExpression = textExpression + urlExpression
 
 /// Responsible for parsing Markdown. Currently only supports links.
-struct MarkdownParser {
+struct MarkdownParser: Loggable {
     /// Parses a Markdown string into an `NSAttributedString`.
     /// - Parameter input: The string to be parsed.
     /// - Returns: An `NSAttributedString` containing the parsed Markdown elements.
@@ -46,7 +46,10 @@ extension MarkdownParser {
                 return Link(string: linkString)
             }
         } catch {
-            print("Failed to parse links: \(error)")
+            if #available(iOS 14.0, *) {
+                logger.error("⛔️ \(error.localizedDescription)")
+            }
+
             return []
         }
     }
