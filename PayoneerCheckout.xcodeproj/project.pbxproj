@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		070FCD4926D8F94C00531B6A /* MarkdownParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070FCD4826D8F94C00531B6A /* MarkdownParser.swift */; };
+		070FCD4C26D8FA3F00531B6A /* MarkdownParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070FCD4B26D8FA3F00531B6A /* MarkdownParserTests.swift */; };
 		AA144B5943E1616B03AD583E /* Pods_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E918DF5930A18AE9887BB63A /* Pods_Tests.framework */; };
 		D171739C205EC3E55EFF56B1 /* Pods_PayoneerCheckout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1034F946707DF3385D21E705 /* Pods_PayoneerCheckout.framework */; };
 		D918A3F2254F205C005BBA8B /* ListResult.json in Resources */ = {isa = PBXBuildFile; fileRef = D918A3F1254F205C005BBA8B /* ListResult.json */; };
@@ -236,6 +237,7 @@
 /* Begin PBXFileReference section */
 		04081EF4F12285ABCF79A364 /* Pods-Payoneer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Payoneer.debug.xcconfig"; path = "Target Support Files/Pods-Payoneer/Pods-Payoneer.debug.xcconfig"; sourceTree = "<group>"; };
 		070FCD4826D8F94C00531B6A /* MarkdownParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownParser.swift; sourceTree = "<group>"; };
+		070FCD4B26D8FA3F00531B6A /* MarkdownParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownParserTests.swift; sourceTree = "<group>"; };
 		1034F946707DF3385D21E705 /* Pods_PayoneerCheckout.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PayoneerCheckout.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AA5EF5833CCFE9360C69E54 /* Pods-Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.debug.xcconfig"; path = "Target Support Files/Pods-Tests/Pods-Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		8077BD8BBF00C6DDCD134FA2 /* Pods-PayoneerCheckout.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PayoneerCheckout.release.xcconfig"; path = "Target Support Files/Pods-PayoneerCheckout/Pods-PayoneerCheckout.release.xcconfig"; sourceTree = "<group>"; };
@@ -481,6 +483,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		070FCD4A26D8FA1F00531B6A /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				070FCD4B26D8FA3F00531B6A /* MarkdownParserTests.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
 		686D71EBAB51C7A0DC05494C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1179,6 +1189,7 @@
 		D9A88E17241C56340043F535 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				070FCD4A26D8FA1F00531B6A /* Core */,
 				D918A3F3254F2074005BBA8B /* Assets */,
 				D96BB8CB249FEBC500C2AD73 /* Info.plist */,
 				D96BB8AB249FEBB400C2AD73 /* Helpers */,
@@ -1632,6 +1643,7 @@
 				D96BB8C6249FEBB400C2AD73 /* MockDataSource.swift in Sources */,
 				D96BB8BD249FEBB400C2AD73 /* ValidationTests.swift in Sources */,
 				D96BB8BF249FEBB400C2AD73 /* PaymentSessionServiceTests.swift in Sources */,
+				070FCD4C26D8FA3F00531B6A /* MarkdownParserTests.swift in Sources */,
 				D96BB8C2249FEBB400C2AD73 /* URL+Example.swift in Sources */,
 				D96BB8C3249FEBB400C2AD73 /* SharedTranslationProviderTests.swift in Sources */,
 				D96BB8C5249FEBB400C2AD73 /* MockConnection.swift in Sources */,

@@ -26,7 +26,7 @@ struct MarkdownParser {
 // MARK: - Parsing
 
 extension MarkdownParser {
-    private func parseLinks(in input: String) -> [Link] {
+    func parseLinks(in input: String) -> [Link] {
         do {
             let regex = try NSRegularExpression(pattern: linkExpression)
 
@@ -47,7 +47,7 @@ extension MarkdownParser {
 // MARK: - Link
 
 extension MarkdownParser {
-    private struct Link {
+    struct Link {
         let string: String
         let text: String
         let url: URL
