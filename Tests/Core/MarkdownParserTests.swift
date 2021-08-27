@@ -35,6 +35,12 @@ final class MarkdownParserTests: XCTestCase {
     }
 
     func testParseLinks_whenInputContains1Link_shouldReturnAttributedStringWith1Link() {
+        let input = "[Terms of Service](https://www.apple.com/)."
+        let links = parser.parseLinks(in: input)
+        XCTAssertEqual(links.count, 1)
+    }
+
+    func testParseLinks_whenInputContainsTextAndLink_shouldReturnAttributedStringWith1Link() {
         let input = "By clicking the button, you agree to the [Terms of Service](https://www.apple.com/)."
         let links = parser.parseLinks(in: input)
         XCTAssertEqual(links.count, 1)
