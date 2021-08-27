@@ -6,11 +6,16 @@
 
 import UIKit
 
+/// Regular expressions used by `MarkdownParser`.
 private let textExpression = "\\[(?<text>[^\\]]*)\\]"
 private let urlExpression = "\\((?<url>[^\\)]*)\\)"
 private let linkExpression = textExpression + urlExpression
 
+/// Responsible for parsing Markdown. Currently only supports links.
 struct MarkdownParser {
+    /// Parses a Markdown string into an `NSAttributedString`.
+    /// - Parameter input: The string to be parsed.
+    /// - Returns: An `NSAttributedString` containing the parsed Markdown elements.
     func parse(_ input: String) -> NSAttributedString {
         let output = NSMutableAttributedString(string: input)
 
@@ -26,6 +31,9 @@ struct MarkdownParser {
 // MARK: - Parsing
 
 extension MarkdownParser {
+    /// Parses a Markdown string into an array of `Link` objects.
+    /// - Parameter input: The string to be parsed.
+    /// - Returns: An array of `Link` objects containing the parsed links.
     func parseLinks(in input: String) -> [Link] {
         do {
             let regex = try NSRegularExpression(pattern: linkExpression)
@@ -47,6 +55,7 @@ extension MarkdownParser {
 // MARK: - Link
 
 extension MarkdownParser {
+    /// A representation of a Markdown link.
     struct Link {
         let string: String
         let text: String
