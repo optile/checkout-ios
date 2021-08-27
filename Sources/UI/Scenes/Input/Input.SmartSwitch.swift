@@ -106,14 +106,16 @@ extension Input.SmartSwitch.Selector {
         }
 
         if previouslySelected.network != selected.network {
-            moveInputValues(from: previouslySelected.network.uiModel.inputFields, to: selected.network.uiModel.inputFields)
+            let oldInputFields = previouslySelected.network.uiModel.inputFieldsByCategory.values.flatMap { $0 }
+            let newInputFields = selected.network.uiModel.inputFieldsByCategory.values.flatMap { $0 }
+
+            moveInputValues(from: oldInputFields, to: newInputFields)
         }
 
         return selected
     }
 
     /// Move input values from `InputField` to `InputField`.
-    /// We assume that inputFields are stored in the same order in both models, non-`InputField` elements will be skipped (e.g. header cells).
     /// - Parameters:
     ///   - lhs: any, if not `InputField` element will be skipped
     ///   - rhs: any, if not `InputField` element will be skipped

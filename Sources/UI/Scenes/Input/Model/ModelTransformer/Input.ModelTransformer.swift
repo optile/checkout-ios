@@ -60,8 +60,7 @@ extension Input.ModelTransformer {
             networkLabel: registeredAccount.networkLabel,
             maskedAccountLabel: registeredAccount.maskedAccountLabel,
             logo: logo,
-            inputFields: inputFields,
-            separatedCheckboxes: [],
+            inputFieldsByCategory: [.account: inputFields],
             submitButton: submitButton
         )
 
@@ -89,28 +88,33 @@ extension Input.ModelTransformer {
             paymentMethod: paymentNetwork.applicableNetwork.method,
             translator: paymentNetwork.translation
         )
-        let inputFields = inputFieldFactory.createInputFields(for: modelToTransform)
 
         // Switch rule
         let smartSwitchRule = switchRule(forNetworkCode: paymentNetwork.applicableNetwork.code)
 
         // Checkboxes
         let checkboxFactory = RegistrationOptionsBuilder(translator: paymentNetwork.translation, operationType: paymentNetwork.applicableNetwork.operationType)
-
         let registrationCheckbox = RegistrationOptionsBuilder.RegistrationOption(type: .registration, requirement: paymentNetwork.applicableNetwork.registrationRequirement)
         let recurrenceCheckbox = RegistrationOptionsBuilder.RegistrationOption(type: .recurrence, requirement: paymentNetwork.applicableNetwork.recurrenceRequirement)
 
-        let checkboxes = [
+        // Input fields
+        let registrationInputFields = [
             checkboxFactory.createInternalModel(from: registrationCheckbox),
             checkboxFactory.createInternalModel(from: recurrenceCheckbox)
             ].compactMap { $0 }
+
+        let paymentInputFields = inputFieldFactory.createInputFields(for: modelToTransform)
+
+        let inputFields: [Input.Network.UIModel.InputFieldCategory: [InputField]] = [
+            .account: paymentInputFields,
+            .registration: registrationInputFields
+        ]
 
         let submitButton = Input.Field.Button(label: paymentNetwork.submitButtonLabel)
 
         let uiModel = Input.Network.UIModel(networkLabel: paymentNetwork.label,
                                             maskedAccountLabel: nil,
-                                            logo: logo, inputFields: inputFields,
-                                            separatedCheckboxes: checkboxes,
+                                            logo: logo, inputFieldsByCategory: inputFields,
                                             submitButton: submitButton)
 
         // Operation URL

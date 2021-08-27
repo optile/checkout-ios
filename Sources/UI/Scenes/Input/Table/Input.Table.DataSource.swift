@@ -61,35 +61,38 @@ extension Input.Table {
             // Header
             sections += [[header]]
 
+            // Top extra elements
+            if let topExtraElements = networkUIModel.inputFieldsByCategory[.extraElements(at: .top)] {
+                sections += [topExtraElements.compactMap { $0 as? CellRepresentable }]
+            }
+
             // Input Fields
-            sections += [
-                networkUIModel.inputFields.compactMap {
-                    // Don't add to view non representable input fields
-                    guard let cell = $0 as? CellRepresentable else { return nil }
-                    return cell
-                }
-            ]
+            if let accountInputFields = networkUIModel.inputFieldsByCategory[.account] {
+                sections += [accountInputFields.compactMap { $0 as? CellRepresentable }]
+            }
 
             // Checkboxes, each checkbox in a separate section
-            var checkboxes = [CellRepresentable]()
-            for field in networkUIModel.separatedCheckboxes {
-                guard let cellRepresentable = field as? CellRepresentable else { continue }
-                checkboxes += [cellRepresentable]
-            }
+            if let registrationCheckboxes = networkUIModel.inputFieldsByCategory[.registration] {
+                let sortedCheckboxes = registrationCheckboxes
+                    .compactMap { $0 as? CellRepresentable }
+                    .sorted {
+                        // Labels should be at the bottom
+                        func order(for field: Any) -> Int {
+                            switch field {
+                            case is Input.Field.Label: return 1
+                            default: return 0
+                            }
+                        }
 
-            checkboxes.sort {
-                // Labels is always on the bottom
-                func order(for field: Any) -> Int {
-                    switch field {
-                    case is Input.Field.Label: return 1
-                    default: return 0
+                        return order(for: $0) < order(for: $1)
                     }
-                }
-
-                return order(for: $0) < order(for: $1)
+                sections += [sortedCheckboxes]
             }
 
-            sections += checkboxes.map { [$0] }
+            // Bottom extra elements
+            if let bottomExtraElements = networkUIModel.inputFieldsByCategory[.extraElements(at: .bottom)] {
+                sections += [bottomExtraElements.compactMap { $0 as? CellRepresentable }]
+            }
 
             // Submit
             if let submitButton = networkUIModel.submitButton {

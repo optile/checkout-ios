@@ -87,7 +87,9 @@ extension Input {
 // MARK: - Overrides
 
 extension Input.ViewController {
-    var hasInputFields: Bool { !smartSwitch.selected.network.uiModel.inputFields.isEmpty }
+    var hasInputFields: Bool {
+        !smartSwitch.selected.network.uiModel.inputFieldsByCategory.isEmpty
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
