@@ -21,7 +21,8 @@ extension MockFactory.ListResult {
             TranslatedModel(model: $0, translator: MockFactory.Localization.provider)
         }
 
-        return PaymentSession(operationType: .CHARGE, networks: translatedNetworks, accounts: nil)
+        let context = PaymentContext(operationType: .CHARGE, extraElements: nil)
+        return PaymentSession(networks: translatedNetworks, accounts: nil, context: context)
     }
 
     static var listResultData: Data {
